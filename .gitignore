@@ -1,0 +1,25 @@
+# Environment and secrets
+.env
+awskey.env
+*_key
+*.pem
+*.key
+id_*
+.aws/credentials
+
+# Kubernetes configs
+kubeconfig*
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+terraform.tfvars
+
+# Assistant / generated artifacts
+.kimchi/
+test-results/
+*.zip
+
+# macOS
+.DS_Store

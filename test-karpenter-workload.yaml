@@ -1,0 +1,38 @@
+# Simple test workload to trigger Karpenter node provisioning.
+# The Deployment requests a taint tolerance so pods land on Karpenter nodes.
+# If you removed the taint from the NodePool, delete the tolerance below.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inflate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inflate
+  template:
+    metadata:
+      labels:
+        app: inflate
+    spec:
+      # Force these pods onto Karpenter-provisioned nodes only. Without this,
+      # they can fit on the untainted system-ng node and Karpenter never
+      # triggers scaling.
+      nodeSelector:
+        karpenter.sh/nodepool: lab-nodepool
+
+      tolerations:
+        - key: karpenter-lab/workload
+          operator: Exists
+          effect: NoSchedule
+      containers:
+        - name: inflate
+          image: public.ecr.aws/eks-distro/kubernetes/pause:3.9
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+---
+# Scale the deployment to force Karpenter to provision more nodes.
+# kubectl scale deployment inflate --replicas=5

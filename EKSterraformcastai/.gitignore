@@ -1,0 +1,31 @@
+# Local Terraform directories and state files
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+
+# Terraform variable files that may contain secrets
+terraform.tfvars
+terraform.tfvars.json
+*.auto.tfvars
+*.auto.tfvars.json
+
+# Terraform plan output
+*.tfplan
+*.tfplan.*
+
+# Provider and module lock file backups (do NOT ignore .terraform.lock.hcl itself)
+# .terraform.lock.hcl should be committed for root modules so that all consumers
+# resolve the same provider versions. Backup copies created by some tools are
+# ignored below.
+.terraform.lock.hcl.*
+
+# Editor and OS files
+*.swp
+*.swo
+*~
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,42 @@
+# EC2NodeClass tells Karpenter how to provision EC2 instances for the
+# karpenter-lab cluster. It references the IAM role, subnets, security groups,
+# and AMI that Karpenter-created nodes should use.
+#
+# Apply after the cluster and Karpenter are installed:
+#   kubectl apply -f karpenter-nodeclass.yaml
+
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: lab-nodeclass
+  annotations:
+    kubernetes.io/description: "Lab EC2NodeClass for Karpenter learning"
+spec:
+  # IAM role created by eksctl for Karpenter-managed nodes.
+  # Pattern: eksctl-KarpenterNodeRole-<cluster-name>
+  role: "eksctl-KarpenterNodeRole-karpenter-lab"
+
+  # Discover subnets and security groups using the tag that eksctl applies
+  # automatically to the cluster's shared node security group.
+  subnetSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: "karpenter-lab"
+  securityGroupSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: "karpenter-lab"
+
+  # Use the latest Amazon Linux 2023 EKS-optimized AMI.
+  amiSelectorTerms:
+    - alias: al2023@latest
+
+  # Attach a 30 GB gp3 root volume to every Karpenter-provisioned node.
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 30Gi
+        volumeType: gp3
+        encrypted: true
+        deleteOnTermination: true
+
+  # Enable detailed monitoring for lab visibility (optional; can be removed).
+  detailedMonitoring: false

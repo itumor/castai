@@ -1,0 +1,81 @@
+accessConfig:
+  authenticationMode: API_AND_CONFIG_MAP
+addons:
+- attachPolicyARNs:
+  - arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy
+  name: aws-ebs-csi-driver
+  version: latest
+addonsConfig: {}
+apiVersion: eksctl.io/v1alpha5
+availabilityZones:
+- us-west-2d
+- us-west-2a
+- us-west-2c
+cloudWatch:
+  clusterLogging: {}
+iam:
+  vpcResourceControllerPolicy: true
+  withOIDC: true
+kind: ClusterConfig
+kubernetesNetworkConfig:
+  ipFamily: IPv4
+managedNodeGroups:
+- amiFamily: AmazonLinux2023
+  desiredCapacity: 2
+  disableIMDSv1: true
+  disablePodIMDS: false
+  iam:
+    withAddonPolicies:
+      albIngress: false
+      appMesh: false
+      appMeshPreview: false
+      autoScaler: false
+      awsLoadBalancerController: false
+      certManager: false
+      cloudWatch: false
+      ebs: false
+      efs: false
+      externalDNS: false
+      fsx: false
+      imageBuilder: false
+      xRay: false
+  instanceSelector: {}
+  instanceType: m6i.xlarge
+  labels:
+    alpha.eksctl.io/cluster-name: eks-08181-in
+    alpha.eksctl.io/nodegroup-name: ng-2d5016ca
+  maxSize: 4
+  minSize: 2
+  name: ng-2d5016ca
+  privateNetworking: false
+  releaseVersion: ""
+  securityGroups:
+    withLocal: null
+    withShared: null
+  ssh:
+    allow: false
+    publicKeyPath: ""
+  tags:
+    alpha.eksctl.io/nodegroup-name: ng-2d5016ca
+    alpha.eksctl.io/nodegroup-type: managed
+  volumeIOPS: 3000
+  volumeSize: 80
+  volumeThroughput: 125
+  volumeType: gp3
+metadata:
+  name: eks-08181-in
+  region: us-west-2
+  version: "1.34"
+privateCluster:
+  enabled: false
+  skipEndpointCreation: false
+upgradePolicy: {}
+vpc:
+  autoAllocateIPv6: false
+  cidr: 192.168.0.0/16
+  clusterEndpoints:
+    privateAccess: false
+    publicAccess: true
+  manageSharedNodeSecurityGroupRules: true
+  nat:
+    gateway: Single

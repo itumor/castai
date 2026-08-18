@@ -1,0 +1,20 @@
+# Example Terraform variables for CAST AI read-only EKS onboarding.
+#
+# Copy this file to terraform.tfvars and fill in any values you want to override.
+# DO NOT commit terraform.tfvars to Git.
+#
+# The CAST AI API token must be provided via the TF_VAR_castai_api_token
+# environment variable, not in this file:
+#
+#   export TF_VAR_castai_api_token="REPLACE_ME"
+
+cluster_name = "development"
+aws_region   = "us-west-2"
+# aws_profile  = "default"
+
+# Optional: pin the umbrella chart version. Leave commented to use the latest.
+# castai_chart_version = "0.33.68"
+
+# Optional: override namespace or release name.
+# castai_namespace    = "castai-agent"
+# castai_release_name = "castai"

@@ -1,0 +1,9 @@
+{
+  "name": "castai-eks-utils",
+  "version": "1.0.0",
+  "description": "CAST AI EKS cluster utility scripts",
+  "scripts": {
+    "test": "node --test test/test-cli.js"
+  },
+  "private": true
+}

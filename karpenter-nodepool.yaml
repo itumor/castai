@@ -1,0 +1,70 @@
+# NodePool tells Karpenter what kinds of nodes to create and which
+# EC2NodeClass to use. Workloads that do not fit on the system-ng node group
+# will trigger Karpenter to launch nodes from this pool.
+#
+# Apply after EC2NodeClass exists:
+#   kubectl apply -f karpenter-nodepool.yaml
+
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  name: lab-nodepool
+  annotations:
+    kubernetes.io/description: "Lab NodePool for general workloads"
+spec:
+  template:
+    spec:
+      requirements:
+        # Run Linux on amd64 instances.
+        - key: kubernetes.io/arch
+          operator: In
+          values: ["amd64"]
+        - key: kubernetes.io/os
+          operator: In
+          values: ["linux"]
+
+        # Allow both on-demand and spot capacity. Because the ClusterConfig
+        # enables withSpotInterruptionQueue, Spot interruption handling is
+        # wired up automatically by eksctl.
+        - key: karpenter.sh/capacity-type
+          operator: In
+          values: ["on-demand", "spot"]
+
+        # Limit instance families to general-purpose and memory-optimized.
+        - key: karpenter.k8s.aws/instance-category
+          operator: In
+          values: ["t", "m", "c", "r"]
+
+        # Avoid very old instance generations.
+        - key: karpenter.k8s.aws/instance-generation
+          operator: Gt
+          values: ["2"]
+
+      # Reference the EC2NodeClass that defines networking, IAM, and AMI.
+      nodeClassRef:
+        group: karpenter.k8s.aws
+        kind: EC2NodeClass
+        name: lab-nodeclass
+
+      # Taint Karpenter nodes so only workloads that tolerate this taint
+      # (or have no node selector) run on them. Remove if you want all
+      # schedulable workloads to use Karpenter nodes.
+      taints:
+        - key: karpenter-lab/workload
+          value: "true"
+          effect: NoSchedule
+
+  # Keep the lab cheap: do not provision huge nodes and consolidate when idle.
+  limits:
+    cpu: 20
+    memory: 80Gi
+
+  # Consolidate empty nodes 30 seconds after they become empty.
+  # Karpenter v1 API: WhenEmpty + consolidateAfter are supported;
+  # expireAfter is no longer a valid disruption field in this version.
+  disruption:
+    consolidationPolicy: WhenEmpty
+    consolidateAfter: 30s
+
+  # Weight relative to other NodePools (higher = preferred).
+  weight: 10
