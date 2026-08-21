@@ -1,10 +1,15 @@
 accessConfig:
   authenticationMode: API_AND_CONFIG_MAP
 addons:
-- attachPolicyARNs:
-  - arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy
-  name: aws-ebs-csi-driver
-  version: latest
+  - name: aws-ebs-csi-driver
+    wellKnownPolicies:
+      ebsCSIController: true
+  - name: aws-efs-csi-driver
+    wellKnownPolicies:
+      efsCSIController: true
+  - name: aws-mountpoint-s3-csi-driver
+    wellKnownPolicies:
+      s3CSIController: true
 addonsConfig: {}
 apiVersion: eksctl.io/v1alpha5
 availabilityZones:

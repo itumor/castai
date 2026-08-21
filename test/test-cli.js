@@ -34,7 +34,7 @@ test('stop --dry-run prints delete preview and exits 0', () => {
   assert.strictEqual(r.status, 0, 'expected zero exit');
   assert.match(r.output, /aws sts get-caller-identity/);
   assert.match(r.output, /eksctl delete cluster/);
-  assert.match(r.output, /kubectl config delete-context development/);
+  assert.match(r.output, /kubectl config delete-context eks-08181-in/);
   assert.match(r.output, /stop: would delete cluster/);
 });
 

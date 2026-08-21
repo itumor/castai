@@ -33,6 +33,7 @@ command -v eksctl >/dev/null 2>&1 || fail "eksctl is required but not found in P
 command -v kubectl >/dev/null 2>&1 || fail "kubectl is required but not found in PATH. Install it from https://kubernetes.io/docs/tasks/tools/"
 
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SCRIPT_DIR="${PROJECT_ROOT}/scripts"
 AWSKEY_FILE="${PROJECT_ROOT}/awskey.env"
 DEFAULT_CLUSTER_CONFIG="${PROJECT_ROOT}/generated-cluster.yaml"
 KARPENTER_CLUSTER_CONFIG="${PROJECT_ROOT}/eksctl-karpenter-cluster.yaml"
@@ -47,21 +48,21 @@ RUN_TEST_WORKLOAD=false
 
 function load_credentials() {
   # Prefer AWS credentials already present in the shell environment. If they
-  # are not set, fall back to parsing the credentials file.
+  # are not set, fall back to sourcing the credentials file.
   if [[ -n "${AWS_ACCESS_KEY_ID:-}" && -n "${AWS_SECRET_ACCESS_KEY:-}" ]]; then
     log "Using AWS credentials from environment"
     local cred_source="environment"
   elif [[ -f "${AWSKEY_FILE}" ]]; then
     log "Using AWS credentials from ${AWSKEY_FILE}"
     local cred_source="${AWSKEY_FILE}"
-    AWS_ACCESS_KEY_ID="$(grep -i '^Access key:' "${AWSKEY_FILE}" | head -n1 | cut -d':' -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
-    AWS_SECRET_ACCESS_KEY="$(grep -i '^Secret access key:' "${AWSKEY_FILE}" | head -n1 | cut -d':' -f2- | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+    # shellcheck source=/dev/null
+    source "${AWSKEY_FILE}"
   else
     fail "AWS credentials not found. Set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in your environment, or create ${AWSKEY_FILE}"
   fi
 
-  [[ -n "${AWS_ACCESS_KEY_ID}" ]] || fail "Could not parse Access key from ${cred_source}"
-  [[ -n "${AWS_SECRET_ACCESS_KEY}" ]] || fail "Could not parse Secret access key from ${cred_source}"
+  [[ -n "${AWS_ACCESS_KEY_ID:-}" ]] || fail "Could not parse AWS_ACCESS_KEY_ID from ${cred_source}"
+  [[ -n "${AWS_SECRET_ACCESS_KEY:-}" ]] || fail "Could not parse AWS_SECRET_ACCESS_KEY from ${cred_source}"
 }
 
 function run_aws() {
@@ -198,6 +199,20 @@ else
     fail "kubectl get nodes failed; cannot verify cluster access"
   fi
   log "kubectl verification complete"
+fi
+
+log "Ensuring CSI driver addons are installed (aws-ebs-csi-driver, aws-efs-csi-driver, aws-mountpoint-s3-csi-driver)..."
+if [[ "${DRY_RUN}" == "true" ]]; then
+  log "[DRY-RUN] Would run: ${SCRIPT_DIR}/ensure-ebs-csi-driver.sh"
+  log "[DRY-RUN] Would run: ${SCRIPT_DIR}/ensure-efs-csi-driver.sh"
+  log "[DRY-RUN] Would run: ${SCRIPT_DIR}/ensure-s3-csi-driver.sh"
+else
+  log "Running: ${SCRIPT_DIR}/ensure-ebs-csi-driver.sh"
+  "${SCRIPT_DIR}/ensure-ebs-csi-driver.sh"
+  log "Running: ${SCRIPT_DIR}/ensure-efs-csi-driver.sh"
+  "${SCRIPT_DIR}/ensure-efs-csi-driver.sh"
+  log "Running: ${SCRIPT_DIR}/ensure-s3-csi-driver.sh"
+  "${SCRIPT_DIR}/ensure-s3-csi-driver.sh"
 fi
 
 if [[ "${KARPENTER_MODE}" == "true" ]]; then

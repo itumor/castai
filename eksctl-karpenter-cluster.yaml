@@ -86,3 +86,17 @@ vpc:
     privateAccess: false
   nat:
     gateway: Single
+
+# CSI storage driver add-ons. Each uses the wellKnownPolicies IRSA pattern so
+# eksctl creates the IAM role + ServiceAccount with the AWS-managed policy
+# required for the driver controller to manage the corresponding storage.
+addons:
+  - name: aws-ebs-csi-driver
+    wellKnownPolicies:
+      ebsCSIController: true
+  - name: aws-efs-csi-driver
+    wellKnownPolicies:
+      efsCSIController: true
+  - name: aws-mountpoint-s3-csi-driver
+    wellKnownPolicies:
+      s3CSIController: true

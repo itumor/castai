@@ -29,6 +29,10 @@ NODEPOOL_FILE="karpenter-nodepool.yaml"
 STORAGECLASS_FILE="storageclass-gp3-default.yaml"
 ENSURE_STORAGECLASS_SCRIPT="ensure-default-storageclass.sh"
 ENSURE_CLICKHOUSE_CRD_SCRIPT="ensure-clickhouse-crd.sh"
+# CSI driver helpers for: aws-ebs-csi-driver, aws-efs-csi-driver, aws-mountpoint-s3-csi-driver
+ENSURE_EBS_CSI_SCRIPT="scripts/ensure-ebs-csi-driver.sh"
+ENSURE_EFS_CSI_SCRIPT="scripts/ensure-efs-csi-driver.sh"
+ENSURE_S3_CSI_SCRIPT="scripts/ensure-s3-csi-driver.sh"
 TEST_WORKLOAD_FILE="test-karpenter-workload.yaml"
 RUN_TEST_WORKLOAD=false
 
@@ -108,7 +112,36 @@ echo "==> Current Karpenter pods:"
 kubectl get pods -n karpenter
 
 # ---------------------------------------------------------------------------
-# 3. Ensure a default StorageClass exists (required by CAST AI PVCs).
+# 3. Ensure CSI drivers are installed. These are AWS-managed EKS addons
+#    required by CAST AI PVCs (EBS), shared filesystem workloads (EFS),
+#    and object-storage mounts (S3). Each helper is idempotent: a noop if
+#    the addon is already ACTIVE. Must run before the StorageClass step so
+#    the default StorageClass helper can prefer gp3 + EBS CSI.
+# ---------------------------------------------------------------------------
+echo "==> Ensuring EBS CSI driver is installed..."
+if [ -x "${ENSURE_EBS_CSI_SCRIPT}" ]; then
+  ./"${ENSURE_EBS_CSI_SCRIPT}"
+else
+  echo "[!] ${ENSURE_EBS_CSI_SCRIPT} not found or not executable; skipping EBS CSI driver install."
+  echo "    PVCs backed by EBS may fail to provision on EKS 1.23+."
+fi
+
+echo "==> Ensuring EFS CSI driver is installed..."
+if [ -x "${ENSURE_EFS_CSI_SCRIPT}" ]; then
+  ./"${ENSURE_EFS_CSI_SCRIPT}"
+else
+  echo "[!] ${ENSURE_EFS_CSI_SCRIPT} not found or not executable; skipping EFS CSI driver install."
+fi
+
+echo "==> Ensuring S3 CSI driver is installed..."
+if [ -x "${ENSURE_S3_CSI_SCRIPT}" ]; then
+  ./"${ENSURE_S3_CSI_SCRIPT}"
+else
+  echo "[!] ${ENSURE_S3_CSI_SCRIPT} not found or not executable; skipping S3 CSI driver install."
+fi
+
+# ---------------------------------------------------------------------------
+# 4. Ensure a default StorageClass exists (required by CAST AI PVCs).
 #    The helper prefers gp3 + EBS CSI driver when available, otherwise falls
 #    back to the gp2 in-tree provisioner present on every EKS cluster.
 # ---------------------------------------------------------------------------
@@ -121,7 +154,7 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-# 4. Ensure the ClickHouseInstallation CRD is installed. CAST AI needs this
+# 5. Ensure the ClickHouseInstallation CRD is installed. CAST AI needs this
 #    CRD for its ClickHouse PVC; pre-installing it avoids GitHub HTTP 429
 #    rate limits hit when castctl fetches it at runtime.
 # ---------------------------------------------------------------------------
@@ -134,7 +167,7 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-# 5. Apply EC2NodeClass and NodePool (idempotent).
+# 6. Apply EC2NodeClass and NodePool (idempotent).
 # ---------------------------------------------------------------------------
 echo "==> Applying EC2NodeClass..."
 kubectl apply -f "${NODECLASS_FILE}"
@@ -143,7 +176,7 @@ echo "==> Applying NodePool..."
 kubectl apply -f "${NODEPOOL_FILE}"
 
 # ---------------------------------------------------------------------------
-# 6. Confirm resources exist and are ready.
+# 7. Confirm resources exist and are ready.
 # ---------------------------------------------------------------------------
 echo "==> Verifying Karpenter resources..."
 kubectl get ec2nodeclass
@@ -153,7 +186,7 @@ echo "==> Karpenter pods:"
 kubectl get pods -n karpenter
 
 # ---------------------------------------------------------------------------
-# 7. Optionally deploy a test workload and watch Karpenter scale nodes.
+# 8. Optionally deploy a test workload and watch Karpenter scale nodes.
 # ---------------------------------------------------------------------------
 if [ "${RUN_TEST_WORKLOAD}" = true ]; then
   echo ""

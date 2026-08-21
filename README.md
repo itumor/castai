@@ -166,6 +166,31 @@ After the CRD is installed, rerun `castctl cluster connect`.
 
 ---
 
+## Notification sound tests
+
+The repo includes end-to-end tests for the Kimchi / cmux notification setup configured in `~/.zshrc` and `~/.config/cmux/cmux.json`. The tests verify:
+
+- A `kimchi()` wrapper function is defined in `~/.zshrc` and delegates to the real `kimchi` binary via `command kimchi`.
+- A `notify()` shell function is defined in `~/.zshrc`.
+- `~/.config/cmux/cmux.json` exists and is valid JSONC (parseable after stripping `//` comments and JSONC trailing commas).
+- `cmux.json` configures a `notifications` object with `unreadPaneRing=true` and `paneFlash=true`, and a `customSoundFilePath` that resolves to an existing file.
+- `/System/Library/Sounds/Ping.aiff` and the configured custom sound file both exist and are readable.
+- The `kimchi()` wrapper actually invokes `afplay` and `osascript` after the wrapped command exits. This is checked behaviorally by stubbing all three binaries on a temp `PATH` and running `zsh -i -c 'kimchi'` (macOS only).
+
+Run all tests:
+
+```bash
+npm test
+```
+
+Run only the notification tests:
+
+```bash
+node --test test/test-notifications.js
+```
+
+---
+
 ## Identifying Karpenter-provisioned nodes
 
 After scaling the test workload, you should see new nodes join the cluster. Nodes created by Karpenter are different from managed node group nodes in a few ways.
