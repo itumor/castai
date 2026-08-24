@@ -97,6 +97,3 @@ addons:
   - name: aws-efs-csi-driver
     wellKnownPolicies:
       efsCSIController: true
-  - name: aws-mountpoint-s3-csi-driver
-    wellKnownPolicies:
-      s3CSIController: true

@@ -73,6 +73,7 @@ function run_aws() {
   (
     AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
     AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
+    AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION}" \
     aws "$@"
   )
 }
@@ -109,6 +110,71 @@ function dry_run_guard() {
     return 1
   fi
   return 0
+}
+
+function cf_stack_status() {
+  local stack_name="$1"
+  local status
+  status=$(run_aws cloudformation describe-stacks \
+    --stack-name "${stack_name}" \
+    --region "${AWS_DEFAULT_REGION}" \
+    --query 'Stacks[0].StackStatus' \
+    --output text 2>/dev/null || echo "DOES_NOT_EXIST")
+  log "CloudFormation stack '${stack_name}' status: ${status}"
+  echo "${status}"
+}
+
+function cf_stack_exists() {
+  local status
+  status=$(cf_stack_status "$1")
+  [[ "${status}" != "DOES_NOT_EXIST" && -n "${status}" ]]
+}
+
+function delete_cf_stack() {
+  local stack_name="$1"
+  log "Disabling termination protection on CloudFormation stack '${stack_name}' if enabled..."
+  run_aws cloudformation update-termination-protection \
+    --stack-name "${stack_name}" \
+    --region "${AWS_DEFAULT_REGION}" \
+    --no-enable-termination-protection 2>/dev/null || true
+
+  log "Deleting CloudFormation stack '${stack_name}'..."
+  if ! run_aws cloudformation delete-stack --stack-name "${stack_name}" --region "${AWS_DEFAULT_REGION}"; then
+    log "[WARN] Failed to initiate deletion of CloudFormation stack '${stack_name}'; skipping wait"
+    return 1
+  fi
+
+  log "Waiting for CloudFormation stack '${stack_name}' to finish deleting..."
+  if run_aws cloudformation wait stack-delete-complete --stack-name "${stack_name}" --region "${AWS_DEFAULT_REGION}"; then
+    log "CloudFormation stack '${stack_name}' deleted"
+    return 0
+  else
+    log "[WARN] CloudFormation stack '${stack_name}' did not delete cleanly; check AWS console"
+    return 1
+  fi
+}
+
+function cleanup_orphaned_cluster_stacks() {
+  local cluster_name="$1"
+  local cluster_stack="eksctl-${cluster_name}-cluster"
+
+  log "Checking for orphaned CloudFormation stacks for cluster '${cluster_name}' in region '${AWS_DEFAULT_REGION}'..."
+  if cf_stack_exists "${cluster_stack}"; then
+    log "Found orphaned CloudFormation stack '${cluster_stack}'"
+    delete_cf_stack "${cluster_stack}" || true
+  fi
+
+  local nodegroup_stacks
+  nodegroup_stacks=$(run_aws cloudformation list-stacks \
+    --region "${AWS_DEFAULT_REGION}" \
+    --stack-status-filter CREATE_COMPLETE CREATE_FAILED ROLLBACK_COMPLETE ROLLBACK_FAILED UPDATE_COMPLETE UPDATE_FAILED UPDATE_ROLLBACK_COMPLETE UPDATE_ROLLBACK_FAILED \
+    --query "StackSummaries[?starts_with(StackName, \`eksctl-${cluster_name}-nodegroup-\`)].[StackName]" \
+    --output text 2>/dev/null || true)
+
+  for stack in ${nodegroup_stacks}; do
+    log "Found orphaned nodegroup stack '${stack}'"
+    delete_cf_stack "${stack}" || true
+  done
 }
 
 function inject_kubeconfig_credentials() {
@@ -166,6 +232,7 @@ fi
 
 if [[ "${DRY_RUN}" == "true" ]]; then
   log "[DRY-RUN] Would check: eksctl get cluster --name ${CLUSTER_NAME} --region ${AWS_DEFAULT_REGION}"
+  log "[DRY-RUN] Would check for orphaned CloudFormation stacks for '${CLUSTER_NAME}'"
   log "[DRY-RUN] Would create EKS cluster '${CLUSTER_NAME}' from ${CLUSTER_CONFIG}"
   log "[DRY-RUN] Would run: eksctl create cluster -f $(basename "${CLUSTER_CONFIG}")"
 else
@@ -176,6 +243,7 @@ else
   fi
 
   if [[ "${CLUSTER_EXISTS}" == "false" ]]; then
+    cleanup_orphaned_cluster_stacks "${CLUSTER_NAME}"
     log "Creating EKS cluster '${CLUSTER_NAME}' from ${CLUSTER_CONFIG}..."
     log "Running: eksctl create cluster -f $(basename "${CLUSTER_CONFIG}")"
     START_TIME=$(date +%s)
@@ -299,30 +367,26 @@ function cmd_stop() {
 
   if [[ "${DRY_RUN}" == "true" ]]; then
     log "[DRY-RUN] Would check: eksctl get cluster --name ${CLUSTER_NAME} --region ${AWS_DEFAULT_REGION}"
-    log "[DRY-RUN] Would delete EKS cluster '${CLUSTER_NAME}'..."
+    log "[DRY-RUN] Would delete EKS cluster '${CLUSTER_NAME}' or clean up orphaned CloudFormation stacks"
   else
     CLUSTER_EXISTS=false
     if run_eksctl get cluster --name "${CLUSTER_NAME}" --region "${AWS_DEFAULT_REGION}" >/dev/null 2>&1; then
       CLUSTER_EXISTS=true
     fi
 
-    if [[ "${CLUSTER_EXISTS}" == "false" ]]; then
-      log "Cluster '${CLUSTER_NAME}' does not exist; nothing to stop"
-      exit 0
+    if [[ "${CLUSTER_EXISTS}" == "true" ]]; then
+      log "Deleting EKS cluster '${CLUSTER_NAME}'..."
+      START_TIME=$(date +%s)
+      run_eksctl delete cluster --name "${CLUSTER_NAME}" --region "${AWS_DEFAULT_REGION}"
+      END_TIME=$(date +%s)
+      ELAPSED=$((END_TIME - START_TIME))
+      MINUTES=$((ELAPSED / 60))
+      SECONDS=$((ELAPSED % 60))
+      log "Cluster deletion completed in ${MINUTES}m ${SECONDS}s"
+    else
+      log "Cluster '${CLUSTER_NAME}' does not exist in EKS; checking for leftover CloudFormation stacks"
+      cleanup_orphaned_cluster_stacks "${CLUSTER_NAME}"
     fi
-  fi
-
-  if [[ "${DRY_RUN}" == "true" ]]; then
-    log "[DRY-RUN] Would run: eksctl delete cluster --name ${CLUSTER_NAME} --region ${AWS_DEFAULT_REGION}"
-  else
-    log "Deleting EKS cluster '${CLUSTER_NAME}'..."
-    START_TIME=$(date +%s)
-    run_eksctl delete cluster --name "${CLUSTER_NAME}" --region "${AWS_DEFAULT_REGION}"
-    END_TIME=$(date +%s)
-    ELAPSED=$((END_TIME - START_TIME))
-    MINUTES=$((ELAPSED / 60))
-    SECONDS=$((ELAPSED % 60))
-    log "Cluster deletion completed in ${MINUTES}m ${SECONDS}s"
   fi
 
   if [[ "${DRY_RUN}" == "true" ]]; then

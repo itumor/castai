@@ -164,13 +164,26 @@ function cf_cleanup_failed_stack() {
         --no-enable-termination-protection \
         --region "${AWS_REGION}" 2>/dev/null || true
       aws cloudformation delete-stack --stack-name "${CF_STACK_NAME}" --region "${AWS_REGION}" 2>/dev/null || true
-      if cf_wait_for_delete; then
-        return 0
-      fi
-      # If still stuck in DELETE_FAILED, try retaining the IAM role resource.
+
+      # Poll briefly; if DELETE_FAILED appears, immediately retain the IAM role
+      # rather than waiting the full 5-minute timeout.
+      local attempt
+      for attempt in {1..12}; do
+        sleep 5
+        status="$(cf_stack_status)"
+        if [[ -z "${status}" || "${status}" == "DELETE_COMPLETE" ]]; then
+          log "CloudFormation stack '${CF_STACK_NAME}' deleted."
+          return 0
+        fi
+        if [[ "${status}" == "DELETE_FAILED" ]]; then
+          break
+        fi
+        echo "  Stack status: ${status}; waiting..."
+      done
+
       status="$(cf_stack_status)"
       if [[ "${status}" == "DELETE_FAILED" ]]; then
-        log "Stack delete did not complete cleanly; attempting to retain blocking IAM role..."
+        log "Stack delete failed; attempting to retain blocking IAM role..."
         local role_resource
         # shellcheck disable=SC2016 # Backticks are JMESPath literal syntax inside the AWS query, not shell expansion.
         role_resource="$(aws cloudformation describe-stack-resources \
@@ -186,7 +199,13 @@ function cf_cleanup_failed_stack() {
           cf_wait_for_delete || true
         fi
       fi
-      log "WARNING: Could not fully delete CloudFormation stack '${CF_STACK_NAME}'. Continuing; eksctl may still be able to create a new stack."
+
+      status="$(cf_stack_status)"
+      if [[ -z "${status}" || "${status}" == "DELETE_COMPLETE" ]]; then
+        log "CloudFormation stack '${CF_STACK_NAME}' deleted."
+        return 0
+      fi
+      log "WARNING: Could not fully delete CloudFormation stack '${CF_STACK_NAME}' (status: ${status}). Continuing; eksctl may still be able to create a new stack."
       ;;
     "")
       # No stack exists; nothing to do.
