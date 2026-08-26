@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "CAST AI EKS cluster utility scripts",
   "scripts": {
-    "test": "node --test test/test-cli.js test/test-notifications.js"
+    "test": "node --test test/test-cli.js test/test-notifications.js test/test-ebs-csi-driver.js test/test-default-storageclass.js test/test-install-castai.js"
   },
   "private": true
 }

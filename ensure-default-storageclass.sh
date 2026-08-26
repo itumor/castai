@@ -20,6 +20,13 @@
 
 set -euo pipefail
 
+function fail() {
+  echo "[ERROR] $*" >&2
+  exit 1
+}
+
+command -v kubectl >/dev/null 2>&1 || fail "kubectl is required but not found in PATH. Install from https://kubernetes.io/docs/tasks/tools/"
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 EBS_CSI_SCRIPT="${SCRIPT_DIR}/scripts/ensure-ebs-csi-driver.sh"
 
