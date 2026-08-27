@@ -1,0 +1,35 @@
+# ------------------------------------------------------------------------------
+# CAST AI Read-Only / Savings-Assessment - Example tfvars
+# ------------------------------------------------------------------------------
+# Copy this file to `terraform.tfvars` and fill in your real values:
+#
+#   cp terraform.tfvars.example terraform.tfvars
+#
+# IMPORTANT: never commit `terraform.tfvars`. It is gitignored.
+#
+# Provide the CAST AI API token via the TF_VAR_castai_api_token environment
+# variable rather than storing it in this file. Example:
+#
+#   export TF_VAR_castai_api_token="<your-castai-api-token>"
+#
+# You can still keep the placeholder below so `terraform validate` works on
+# machines that supply the real value through the environment.
+# ------------------------------------------------------------------------------
+
+# Name of the existing EKS cluster to onboard.
+cluster_name = "development"
+
+# AWS region where the existing EKS cluster is located.
+aws_region = "us-west-2"
+
+# Optional AWS CLI profile. Leave commented out to use the default chain.
+aws_profile = "default"
+
+# Placeholder only. Provide the real value via TF_VAR_castai_api_token.
+castai_api_token = "castai-api-token"
+
+# Kubernetes namespace where CAST AI components are installed.
+castai_namespace = "castai-agent"
+
+# Optional: pin the chart version. Leave empty for latest.
+# castai_chart_version = ""

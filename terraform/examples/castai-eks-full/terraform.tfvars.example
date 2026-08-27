@@ -1,0 +1,68 @@
+# ------------------------------------------------------------------------------
+# CAST AI Full-Mode Onboarding for EKS - Example tfvars
+# ------------------------------------------------------------------------------
+# Copy this file to `terraform.tfvars` and fill in your real values:
+#
+#   cp terraform.tfvars.example terraform.tfvars
+#
+# IMPORTANT: never commit `terraform.tfvars`. It is gitignored.
+#
+# Provide the CAST AI API token via the TF_VAR_castai_api_token environment
+# variable rather than storing it in this file. Example:
+#
+#   export TF_VAR_castai_api_token="<your-castai-api-token>"
+#
+# You can still keep the placeholder below so `terraform validate` works on
+# machines that supply the real value through the environment.
+# ------------------------------------------------------------------------------
+
+# Name of the existing EKS cluster to onboard.
+cluster_name = "development"
+
+# AWS region where the existing EKS cluster is located.
+aws_region = "us-west-2"
+
+# Optional AWS CLI profile. Leave commented out to use the default chain.
+# aws_profile = "default"
+
+# ID of the VPC where the existing EKS cluster is deployed.
+vpc_id = "vpc-0123456789abcdef0"
+
+# Subnet IDs that CAST AI may launch nodes into. At least one is required.
+subnets = [
+  "subnet-0123456789abcdef0",
+  "subnet-0123456789abcdef1",
+  "subnet-0123456789abcdef2",
+]
+
+# Security group IDs attached to nodes provisioned by CAST AI.
+node_security_group_ids = ["sg-0123456789abcdef0"]
+
+# Optional additional security group IDs attached to the EKS cluster's ENIs.
+# cluster_security_group_ids = ["sg-0123456789abcdef1"]
+
+# Placeholder only. Provide the real value via TF_VAR_castai_api_token.
+castai_api_token = "castai-api-token"
+
+# CAST AI REST API URL (override for non-production environments).
+api_url = "https://api.cast.ai"
+
+# CAST AI gRPC endpoint (override for non-production environments).
+grpc_url = "https://grpc.cast.ai"
+
+# Optional DNS cluster IP for the EKS cluster's Kubernetes service. Leave
+# commented out to let the module derive it automatically.
+# dns_cluster_ip = "10.100.0.10"
+
+# If true, nodes created by CAST AI are deleted when the cluster
+# disconnects from CAST AI.
+delete_nodes_on_disconnect = false
+
+# Install the CAST AI security agent (kvisor) as part of the umbrella chart.
+install_security_agent = true
+
+# Install the CAST AI workload autoscaler.
+install_workload_autoscaler = true
+
+# Kubernetes namespace where CAST AI components are installed.
+# castai_namespace = "castai-agent"

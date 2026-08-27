@@ -17,9 +17,6 @@ terraform.tfvars.json
 *.tfplan.*
 
 # Provider and module lock file backups (do NOT ignore .terraform.lock.hcl itself)
-# .terraform.lock.hcl should be committed for root modules so that all consumers
-# resolve the same provider versions. Backup copies created by some tools are
-# ignored below.
 .terraform.lock.hcl.*
 
 # Editor and OS files

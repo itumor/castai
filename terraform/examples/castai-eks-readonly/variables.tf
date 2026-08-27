@@ -3,8 +3,7 @@
 # ------------------------------------------------------------------------------
 variable "cluster_name" {
   type        = string
-  description = "Name of the existing EKS cluster created by eksctl."
-  default     = "development"
+  description = "Name of the existing EKS cluster to onboard to CAST AI in read-only / savings-assessment mode."
 
   validation {
     condition     = length(var.cluster_name) > 0
@@ -15,7 +14,6 @@ variable "cluster_name" {
 variable "aws_region" {
   type        = string
   description = "AWS region where the existing EKS cluster is located."
-  default     = "us-west-2"
 
   validation {
     condition     = length(var.aws_region) > 0
@@ -25,7 +23,7 @@ variable "aws_region" {
 
 variable "aws_profile" {
   type        = string
-  description = "Optional AWS CLI profile name. If null, the default credential chain is used."
+  description = "Optional AWS CLI profile name. Leave empty to use the default credential chain."
   default     = null
 }
 
@@ -35,7 +33,8 @@ variable "aws_profile" {
 variable "castai_api_token" {
   type        = string
   sensitive   = true
-  description = "CAST AI organization-level API key used for read-only cluster onboarding. Provide via TF_VAR_castai_api_token environment variable."
+  nullable    = false
+  description = "CAST AI organization-level API key used for read-only cluster onboarding. Required. Provide via the TF_VAR_castai_api_token environment variable or a secrets backend."
 
   validation {
     condition     = length(var.castai_api_token) > 0
@@ -48,7 +47,7 @@ variable "castai_api_token" {
 # ------------------------------------------------------------------------------
 variable "castai_chart_version" {
   type        = string
-  description = "Version of the castai umbrella Helm chart to install. Leave empty to use the latest published version."
+  description = "Optional version of the castai umbrella Helm chart to install. Leave empty to use the latest published version."
   default     = ""
 }
 
