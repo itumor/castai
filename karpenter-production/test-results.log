@@ -1,0 +1,25 @@
+[test] Cluster: karpenter-lab
+[test] Region:  us-west-2
+================================================================
+  step-1-general-scaleup
+================================================================
+[INFO] Scaling api deployment to 10 replicas...
+deployment.apps/api scaled
+deployment.apps/api condition met
+[PASS] api deployment Available with 10 replicas
+deployment.apps/api condition met
+[PASS] api readyReplicas == 10
+[INFO] Waiting up to 7 minutes for Karpenter to launch general nodes...
+[PASS] Found 5 Spot node(s) labeled karpenter.sh/nodepool=general
+[PASS] Found 6 Karpenter-provisioned node(s) for general (Spot=5)
+================================================================
+  step-2-critical-scaleup
+================================================================
+[INFO] Scaling api-critical deployment to 2 replicas...
+[INFO] Cleaning up test workloads (deployments, hpa, service, pdb)...
+deployment.apps/api-critical scaled
+deployment.apps "api" deleted from default namespace
+deployment.apps "api-critical" deleted from default namespace
+horizontalpodautoscaler.autoscaling "api" deleted from default namespace
+service "api" deleted from default namespace
+poddisruptionbudget.policy "api" deleted from default namespace

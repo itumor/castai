@@ -1,0 +1,121 @@
+# ============================================================================
+# Karpenter ALPHA FEATURES - REFERENCE ONLY
+# ============================================================================
+#
+# THIS FILE IS NOT APPLIED BY `deploy.sh` BY DEFAULT.
+#
+# The alpha features referenced below are intentionally DISABLED in
+# `values.yaml` (featureGates.* set to false). They are documented here for
+# future reference / opt-in experimentation.
+#
+# How to opt in:
+#   1. Set the relevant feature gate to `true` in values.yaml
+#      (`controller.settings.featureGates.<gate>: true`).
+#   2. Review the API docs for the specific Kubernetes version + Karpenter
+#      version you are running; alpha APIs may change between minor versions.
+#   3. Apply ONLY the snippets you want manually:
+#        kubectl apply -f alpha-features.yaml
+#      (consider splitting each example into its own file before applying).
+#
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# Example 1: NodeOverlay (karpenter.sh/v1alpha1)
+#
+# NodeOverlay lets you overlay additional requirements / taints on nodes that
+# Karpenter selects for a given NodePool, without modifying the NodePool
+# itself. Useful for cluster-wide configuration like GPU drivers or
+# architecture-specific labels.
+# ----------------------------------------------------------------------------
+---
+apiVersion: karpenter.sh/v1alpha1
+kind: NodeOverlay
+metadata:
+  name: example-overlay
+  annotations:
+    kubernetes.io/description: "Example NodeOverlay (alpha, NOT applied by default)"
+spec:
+  # Select which NodePool this overlay applies to.
+  nodePoolSelector:
+    matchLabels:
+      # Apply only to the general NodePool.
+      karpenter.sh/nodepool: general
+
+  # Add or override capacity requirements.
+  capacity:
+    - capacityType: spot
+      resources:
+        requests:
+          cpu: "1"
+          memory: 1Gi
+
+  # Overlay requirements (ANDed with NodePool requirements).
+  requirements:
+    - key: karpenter.k8s.aws/instance-hypervisor
+      operator: In
+      values: ["nitro"]
+
+  # Add labels that propagate to nodes created by the matched NodePool.
+  labels:
+    team: platform
+    tier: general
+---
+
+# ----------------------------------------------------------------------------
+# Example 2: CapacityBuffer (karpenter.sh/v1beta1)
+#
+# CapacityBuffer pre-warms a buffer of N nodes so that bursty workloads do not
+# have to wait for cold-start. Karpenter will try to keep this many "extra"
+# pods' worth of capacity idle, binpacked into the cheapest matching instance.
+# ----------------------------------------------------------------------------
+apiVersion: karpenter.sh/v1beta1
+kind: CapacityBuffer
+metadata:
+  name: example-buffer
+  annotations:
+    kubernetes.io/description: "Example CapacityBuffer (alpha-bridged, NOT applied by default)"
+spec:
+  # Number of pod slots to keep pre-warmed.
+  replicas: 3
+
+  # Which NodePool to draw capacity from.
+  nodePoolRef:
+    name: general
+
+  # Optional: only buffer for specific namespaces.
+  # podTemplateSelector:
+  #   matchLabels:
+  #     buffer: "true"
+---
+
+# ----------------------------------------------------------------------------
+# Example 3: Spot-to-Spot consolidation feature gate
+#
+# By default, Karpenter consolidates Spot pods onto On-Demand capacity during
+# disruption to avoid losing work. The `SpotToSpotConsolidation` feature gate
+# allows Karpenter to consolidate Spot -> Spot instead, which can keep
+# workloads on cheaper capacity but increases the risk of additional
+# interruption events during consolidation.
+#
+# To enable, add the following to values.yaml under
+# controller.settings.featureGates:
+#
+#   spotToSpotConsolidation: true
+#
+# No additional manifest is required - this is purely a controller-level flag.
+# ----------------------------------------------------------------------------
+# spotToSpotConsolidation: true
+
+# ----------------------------------------------------------------------------
+# Example 4: NodeRepair and StaticCapacity (other alpha feature gates)
+#
+# - nodeRepair: Karpenter actively repairs nodes it determines to be unhealthy.
+# - staticCapacity: provision static (non-autoscaling) NodeClaims via NodePool.
+#
+# To enable, set in values.yaml controller.settings.featureGates:
+#
+#   nodeRepair: true
+#   staticCapacity: true
+# ----------------------------------------------------------------------------
+# nodeRepair: true
+# staticCapacity: true

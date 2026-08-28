@@ -1,0 +1,106 @@
+# Karpenter Helm values for karpenter-lab (EKS test cluster).
+#
+# These values are rendered via `envsubst` from deploy.sh. Placeholders:
+#   karpenter-lab              EKS cluster name (karpenter-lab)
+#   us-west-2                AWS region (eu-central-1)
+#   1.14.1         Karpenter version (1.14.1)
+#   arn:aws:iam::050451381948:role/eksctl-karpenter-lab-karpenter-controller-role  IAM role ARN for Karpenter controller IRSA
+#   karpenter-lab        SQS queue name for Spot interruption handling
+#
+# Run envsubst before `helm upgrade --install`:
+#   envsubst < values.yaml > values.rendered.yaml
+#
+# Production-grade baseline. Alpha features stay DISABLED.
+
+# Service account used by both controller and webhook. IRSA annotation points
+# at the IAM role discovered by deploy.sh.
+serviceAccount:
+  name: karpenter
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::050451381948:role/eksctl-karpenter-lab-karpenter-controller-role
+
+controller:
+  replicas: 2
+  image:
+    repository: public.ecr.aws/karpenter/controller
+    tag: 1.14.1
+
+  resources:
+    requests:
+      cpu: 1
+      memory: 1Gi
+    limits:
+      cpu: 1
+      memory: 1Gi
+
+  # Anti-affinity: do not schedule both replicas on the same node. Combined
+  # with the tolerations below, this keeps Karpenter off Karpenter-managed
+  # nodes where possible.
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            topologyKey: kubernetes.io/hostname
+            labelSelector:
+              matchLabels:
+                app.kubernetes.io/name: karpenter
+                app.kubernetes.io/component: controller
+
+  # Tolerations allow running on system-ng (CriticalAddonsOnly) and tolerate
+  # the karpenter.sh/unregistered taint that Karpenter applies to its own
+  # discovered/disruption-protected nodes.
+  tolerations:
+    - key: CriticalAddonsOnly
+      operator: Exists
+    - key: karpenter.sh/unregistered
+      operator: Exists
+      effect: NoExecute
+
+  # Settings exposed via the karpenter-global-settings ConfigMap.
+  # (NOTE: the Helm chart places `settings` at the chart's top level, not
+  # under `controller`.)
+
+webhook:
+  replicas: 2
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            topologyKey: kubernetes.io/hostname
+            labelSelector:
+              matchLabels:
+                app.kubernetes.io/name: karpenter
+                app.kubernetes.io/component: webhook
+
+logLevel: info
+
+# Settings exposed via the karpenter-global-settings ConfigMap.
+# The Karpenter 1.x chart expects `settings` at the top level of values.yaml.
+settings:
+  clusterName: karpenter-lab
+  interruptionQueue: karpenter-lab
+  vmMemoryOverheadPercent: "0.075"
+  featureGates:
+    # Beta feature enabled by default in this lab.
+    reservedCapacity: true
+    # Alpha features explicitly disabled (intentionally OFF; do not enable
+    # without reading the alpha-features.yaml reference).
+    nodeOverlay: false
+    capacityBuffer: false
+    spotToSpotConsolidation: false
+    nodeRepair: false
+    staticCapacity: false
+
+# Pod disruption budget for the Karpenter controller so upgrades don't kill
+# both replicas at once.
+podDisruptionBudget:
+  maxUnavailable: 1
