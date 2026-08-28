@@ -232,7 +232,7 @@ PY
 
   # Remove the temporary stress sidecar to restore normal workload shape.
   info "Removing temporary CPU stress sidecar from api deployment..."
-  kubectl patch deployment api --type=json -p='[{"op":"remove","path":"/spec/template/spec/containers/-"}]' >/dev/null || true
+  kubectl patch deployment api --type=strategic -p '{"spec":{"template":{"spec":{"containers":[{"name":"stress","$patch":"delete"}]}}}}' >/dev/null || true
   kubectl rollout status deployment/api --timeout=180s || true
 }
 
@@ -327,19 +327,20 @@ main() {
   step_hpa_zones            || true
   step_consolidation        || true
 
+  # Disable EXIT trap so cleanup runs exactly once.
+  trap - EXIT
+  cleanup_workloads
+
   echo "================================================================"
   echo "  SUMMARY"
   echo "================================================================"
   if [[ "${#FAILURES[@]}" -eq 0 ]]; then
     echo "RESULT: PASS"
-    echo "All end-to-end checks completed successfully."
-    cleanup_workloads
     exit 0
   else
     echo "RESULT: FAIL"
     echo "Failed checks:"
     for f in "${FAILURES[@]}"; do echo "  - ${f}"; done
-    cleanup_workloads
     exit 1
   fi
 }
