@@ -94,6 +94,59 @@ spec:
 
     --BOUNDARY--
 ---
+# CLM-specific EC2NodeClass. Restricts provisioning to the private subnet in
+# a single AZ so that all CLM nodes share the same subnet. CLM TCP live
+# migration requires source and destination nodes to be in the same subnet.
+# Private subnets are also preferred for workload nodes.
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: general-live
+  annotations:
+    kubernetes.io/description: "Private-subnet EC2NodeClass for CLM-enabled nodes"
+spec:
+  role: "eksctl-KarpenterNodeRole-${CLUSTER_NAME}"
+
+  subnetSelectorTerms:
+    - id: "${CLM_PRIVATE_SUBNET_ID}"
+  securityGroupSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: "${CLUSTER_NAME}"
+
+  amiFamily: AL2023
+  amiSelectorTerms:
+    - id: "${AL2023_AMI_VERSION}"
+
+  metadataOptions:
+    httpEndpoint: enabled
+    httpProtocolIPv6: disabled
+    httpPutResponseHopLimit: 2
+    httpTokens: required
+
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 30Gi
+        volumeType: gp3
+        iops: 3000
+        throughput: 125
+        encrypted: true
+        deleteOnTermination: true
+
+  detailedMonitoring: false
+
+  userData: |
+    MIME-Version: 1.0
+    Content-Type: multipart/mixed; boundary="BOUNDARY"
+
+    --BOUNDARY
+    Content-Type: text/x-shellscript; charset="us-ascii"
+
+    #!/bin/bash
+    aws configure set default.ec2_metadata_service_imds_version v2 || true
+
+    --BOUNDARY--
+---
 apiVersion: karpenter.sh/v1
 kind: NodePool
 metadata:
@@ -196,7 +249,7 @@ spec:
       nodeClassRef:
         group: karpenter.k8s.aws
         kind: EC2NodeClass
-        name: general
+        name: general-live
 
       # CLM readiness taint: Karpenter waits for CLM signal before scheduling.
       startupTaints:
