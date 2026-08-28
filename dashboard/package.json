@@ -1,0 +1,18 @@
+{
+  "name": "siemens-castai-dashboard",
+  "version": "1.0.0",
+  "description": "CAST AI developer dashboard backend proxy and cache",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/server.test.js test/ui.test.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "jsdom": "^24.1.0"
+  }
+}

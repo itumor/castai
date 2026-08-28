@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Siemens CAST AI cluster dashboard for monitoring Kubernetes clusters, resource utilization, and cost optimization opportunities." />
+  <title>Siemens CAST AI Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-header__brand">
+      <span class="app-header__logo" aria-hidden="true">SI</span>
+      <div class="app-header__titles">
+        <h1 class="app-header__title">Siemens CAST AI Dashboard</h1>
+        <p class="app-header__subtitle">Cluster visibility, utilization and cost optimization</p>
+      </div>
+    </div>
+    <div class="app-header__actions">
+      <span id="last-updated" class="last-updated" aria-live="polite"></span>
+      <button id="refresh-btn" class="btn btn--primary" type="button" aria-label="Refresh cluster data">
+        <span class="btn__icon" aria-hidden="true">&#x21BB;</span>
+        <span class="btn__label">Refresh</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <div id="error-banner" class="error-banner" role="alert" hidden>
+      <span class="error-banner__icon" aria-hidden="true">!</span>
+      <span id="error-banner__message" class="error-banner__message"></span>
+      <button id="error-banner__dismiss" class="error-banner__dismiss" type="button" aria-label="Dismiss error">&times;</button>
+    </div>
+
+    <div id="loading" class="loading" hidden>
+      <div class="loading__spinner" aria-hidden="true"></div>
+      <span class="loading__label">Loading cluster data&hellip;</span>
+    </div>
+
+    <section id="clusters" class="clusters" aria-label="Cluster cards">
+      <!-- Cluster cards rendered by app.js -->
+    </section>
+
+    <div id="empty-state" class="empty-state" hidden>
+      <h2 class="empty-state__title">No clusters available</h2>
+      <p class="empty-state__message">There are no clusters to display right now. Use the Refresh button to check again.</p>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <span>Siemens CAST AI Dashboard</span>
+    <span class="app-footer__sep" aria-hidden="true">&middot;</span>
+    <span>Frontend data is read-only.</span>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
