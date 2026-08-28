@@ -134,6 +134,70 @@ spec:
   weight: 100
   # No taints: general workloads should schedule freely on these nodes.
 ---
+# CLM-enabled NodePool for CAST AI Container Live Migration.
+# - AL2023 EC2NodeClass (already required)
+# - live.cast.ai/install label for CLM daemonset
+# - startupTaint so pods wait until CLM is ready
+# - Single AZ (IPs cannot migrate across AZs)
+# - CLM-compatible instance families selected by user
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  name: general-live
+  annotations:
+    kubernetes.io/description: "CLM-enabled NodePool for live-migratable workloads"
+spec:
+  template:
+    metadata:
+      labels:
+        live.cast.ai/install: "true"
+    spec:
+      requirements:
+        - key: kubernetes.io/arch
+          operator: In
+          values: ["amd64"]
+        - key: kubernetes.io/os
+          operator: In
+          values: ["linux"]
+
+        # Use On-Demand for stable ENIs during live migration.
+        - key: karpenter.sh/capacity-type
+          operator: In
+          values: ["on-demand"]
+
+        # CLM-compatible families selected in the CAST AI UI.
+        - key: karpenter.k8s.aws/instance-family
+          operator: In
+          values: ["c3", "m3", "r3", "i2"]
+
+        # Pin to a single AZ because IPs cannot migrate across AZs.
+        - key: topology.kubernetes.io/zone
+          operator: In
+          values: ["us-west-2a"]
+
+      nodeClassRef:
+        group: karpenter.k8s.aws
+        kind: EC2NodeClass
+        name: general
+
+      # CLM readiness taint: Karpenter waits for CLM signal before scheduling.
+      startupTaints:
+        - key: live.cast.ai/not-ready
+          value: "true"
+          effect: NoSchedule
+
+      expireAfter: 720h
+
+  limits:
+    cpu: "20"
+    memory: 80Gi
+
+  disruption:
+    consolidationPolicy: WhenEmpty
+    consolidateAfter: 5m
+
+  weight: 80
+---
 apiVersion: karpenter.sh/v1
 kind: NodePool
 metadata:
@@ -291,6 +355,58 @@ spec:
         target:
           type: Utilization
           averageUtilization: 50
+---
+# CLM workload example. Schedules on the CLM-enabled NodePool, tolerates the
+# startup taint, and avoids a hard cross-zone topology spread because the
+# NodePool is pinned to a single AZ.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-live
+  labels:
+    app: api-live
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-live
+  template:
+    metadata:
+      labels:
+        app: api-live
+    spec:
+      nodeSelector:
+        karpenter.sh/nodepool: general-live
+      tolerations:
+        - key: live.cast.ai/not-ready
+          operator: Exists
+          effect: NoSchedule
+      # No hard zone spread; NodePool is single-AZ.
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: api-live
+      containers:
+        - name: nginx
+          image: public.ecr.aws/nginx/nginx:1.27-alpine
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 2
+            periodSeconds: 5
 ---
 # Optional critical workload. Tolerates the workload-type=critical:NoSchedule
 # taint so it lands on the critical-on-demand NodePool.
