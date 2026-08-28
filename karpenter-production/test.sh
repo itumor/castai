@@ -184,26 +184,38 @@ step_hpa_zones() {
   kubectl scale deployment/api --replicas=2
   kubectl wait --for=jsonpath='{.status.readyReplicas}'=2 deployment/api --timeout=120s
 
-  info "Starting CPU stress inside api pods to drive HPA above 50% target..."
-  for pod in $(kubectl get pods -l app=api -o name 2>/dev/null); do
-    kubectl exec "${pod}" -- /bin/sh -c 'nohup sh -c "while :; do :; done" >/dev/null 2>&1 &' >/dev/null 2>&1 || true
-  done
-  sleep 90
-  info "Stopping CPU stress inside api pods..."
-  for pod in $(kubectl get pods -l app=api -o name 2>/dev/null); do
-    kubectl exec "${pod}" -- /bin/sh -c 'pkill -f "while :; do :; done" 2>/dev/null || true' >/dev/null 2>&1 || true
+  # Add a temporary stress sidecar to drive CPU above the 50% HPA target.
+  info "Adding temporary CPU stress sidecar to api deployment..."
+  kubectl patch deployment api --type=json -p='[{"op":"add","path":"/spec/template/spec/containers/-","value":{"name":"stress","image":"busybox:1.36","command":["sh","-c","while :; do :; done"],"resources":{"requests":{"cpu":"50m"}}}}]' >/dev/null
+  kubectl rollout status deployment/api --timeout=180s
+
+  info "Waiting for HPA to scale api to >= ${GENERAL_REPLICAS} replicas under load..."
+  local end_ts=$(( $(date +%s) + 180 ))
+  local hpa_current=0
+  while [[ "$(date +%s)" -lt "${end_ts}" ]]; do
+    hpa_current="$(kubectl get hpa/api -o jsonpath='{.status.currentReplicas}' 2>/dev/null || echo 0)"
+    if [[ "${hpa_current}" -ge "${GENERAL_REPLICAS}" ]]; then
+      break
+    fi
+    sleep 10
   done
 
-  # Inspect topology spread by looking at pods' zone labels.
+  # Inspect topology spread using a Python helper to avoid per-node kubectl calls.
   info "Checking zone spread for api pods..."
-  sleep 30
-
   local zones_present
-  zones_present="$(kubectl get pods -l app=api \
-    -o jsonpath='{range .items[*]}{.spec.nodeName}{"\n"}{end}' \
-    2>/dev/null | while read -r node; do
-      kubectl get node "${node}" -o jsonpath='{.metadata.labels.topology\.kubernetes\.io/zone}{"\n"}' 2>/dev/null
-    done | sort -u | wc -l | tr -d ' ')"
+  zones_present="$(python3 - <<'PY'
+import subprocess, json, sys
+try:
+    pods = json.loads(subprocess.check_output(['kubectl','get','pods','-l','app=api','-o','json'], timeout=30))
+    nodes = set(p['spec']['nodeName'] for p in pods['items'])
+    node_json = json.loads(subprocess.check_output(['kubectl','get','nodes','-o','json'], timeout=30))
+    zones = set(n['metadata']['labels'].get('topology.kubernetes.io/zone','') for n in node_json['items'] if n['metadata']['name'] in nodes)
+    zones.discard('')
+    print(len(zones))
+except Exception:
+    print(0)
+PY
+)"
 
   if [[ "${zones_present}" -ge 2 ]]; then
     pass "api pods scheduled across ${zones_present} availability zone(s)"
@@ -211,15 +223,17 @@ step_hpa_zones() {
     fail "api pods not spread across multiple zones (found ${zones_present})"
   fi
 
-  # HPA status check.
-  local hpa_current
-  hpa_current="$(kubectl get hpa/api -o jsonpath='{.status.currentReplicas}' 2>/dev/null || echo "0")"
   info "HPA current replicas after load: ${hpa_current}"
   if [[ "${hpa_current}" -ge "${GENERAL_REPLICAS}" ]]; then
     pass "HPA scaled to >= ${GENERAL_REPLICAS} replicas under load"
   else
     fail "HPA did not scale to >= ${GENERAL_REPLICAS} replicas under load (found ${hpa_current})"
   fi
+
+  # Remove the temporary stress sidecar to restore normal workload shape.
+  info "Removing temporary CPU stress sidecar from api deployment..."
+  kubectl patch deployment api --type=json -p='[{"op":"remove","path":"/spec/template/spec/containers/-"}]' >/dev/null || true
+  kubectl rollout status deployment/api --timeout=180s || true
 }
 
 # ----------------------------------------------------------------------------
