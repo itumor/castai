@@ -8,6 +8,9 @@
 # Apply AFTER the Karpenter Helm release is installed:
 #   kubectl apply -f manifests.rendered.yaml
 #
+# AWS EBS CSI driver addon must already be installed on the cluster (the addon
+# is managed by EKS; this manifest only declares the default StorageClass).
+#
 # Contents:
 #   1. EC2NodeClass `general` - production-grade, IMDSv2, encrypted gp3,
 #      subnet/SG discovery via karpenter.sh/discovery tag.
@@ -17,6 +20,21 @@
 #      workloads that cannot tolerate Spot interruption.
 #   4. api Deployment (nginx), Service, PDB, HPA, topology spread.
 #   5. Optional critical workload (api-critical) using critical-on-demand.
+---
+# Default StorageClass for the cluster. Requires the aws-ebs-csi-driver addon.
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gp3
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: ebs.csi.aws.com
+parameters:
+  type: gp3
+  encrypted: "true"
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
 ---
 apiVersion: karpenter.k8s.aws/v1
 kind: EC2NodeClass
