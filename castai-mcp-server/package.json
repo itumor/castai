@@ -1,0 +1,35 @@
+{
+  "name": "castai-mcp-server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local Node.js MCP server exposing read-only CAST AI tools for Siemens EU org.",
+  "type": "module",
+  "main": "src/server.js",
+  "bin": {
+    "castai-mcp-server": "src/server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "mocha 'test/**/*.test.js'",
+    "lint": "echo 'lint placeholder (no linter configured yet)'"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.8.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "chai": "^5.0.0",
+    "mocha": "^11.0.0",
+    "sinon": "^19.0.0"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "castai",
+    "siemens"
+  ],
+  "license": "UNLICENSED"
+}

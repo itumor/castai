@@ -1,0 +1,29 @@
+# docker-compose snippet for the CAST AI MCP server.
+#
+# The container is stateless and speaks MCP over stdio. Run it from an
+# MCP client (Kimchi / OpenCode) that knows how to attach to a
+# container's stdin/stdout; this compose file is here so operators can
+# smoke-test the image with `docker compose run`.
+#
+# Secrets are loaded from ./castai-mcp-server/.env, which is gitignored.
+# Do not commit real keys.
+
+services:
+  castai-mcp-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: castai-mcp-server:dev
+    container_name: castai-mcp-server
+    stdin_open: true
+    tty: false
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      # Defaults; overridden by .env when present.
+      CASTAI_API_BASE: ${CASTAI_API_BASE:-https://api.eu.cast.ai}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      APPROVAL_MODE: ${APPROVAL_MODE:-block}
+    # No volumes. The server is stateless; only the optional .env mount
+    # is permitted and is provided via `env_file` above.
