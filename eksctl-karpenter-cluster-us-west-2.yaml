@@ -1,0 +1,100 @@
+# EKS cluster configuration for a Karpenter learning/lab environment.
+# Adapted from eksctl-karpenter-cluster.yaml for us-west-2.
+# Creates a minimal EKS cluster with Karpenter installed and a small managed
+# node group that runs only system workloads (Karpenter controller, CoreDNS,
+# kube-proxy, etc.). All dynamic workload scaling is left to Karpenter.
+#
+# Usage:
+#   eksctl create cluster -f eksctl-karpenter-cluster-us-west-2.yaml
+#
+# After the cluster is ready, deploy NodePool and EC2NodeClass resources
+# separately so Karpenter can provision workload nodes.
+
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  # Cluster identity
+  name: karpenter-lab
+  region: us-west-2
+  version: "1.36"
+
+  # This tag is used by Karpenter to discover the cluster's VPC subnets and
+  # security groups. eksctl automatically tags the shared node security group
+  # with the same value when Karpenter is enabled.
+  tags:
+    karpenter.sh/discovery: karpenter-lab
+
+iam:
+  # IAM OIDC provider is required so Karpenter's service account can be
+  # bound to an IAM role via IRSA.
+  withOIDC: true
+
+# Explicitly disable EKS Auto Mode so eksctl continues to create managed
+# node groups and managed networking add-ons (required for this lab).
+autoModeConfig:
+  enabled: false
+
+karpenter:
+  # Exact Karpenter Helm chart version to install. Use a version compatible
+  # with the selected Kubernetes version (see Karpenter compatibility matrix).
+  version: "1.14.0"
+
+  # Let eksctl create the karpenter ServiceAccount; this is the recommended
+  # mode when using the eksctl Karpenter addon.
+  createServiceAccount: true
+
+  # Provision the SQS queue and IAM policies needed for Spot interruption
+  # handling (Spot Instance termination notices, rebalance recommendations).
+  withSpotInterruptionQueue: true
+
+managedNodeGroups:
+  # Small managed node group for cluster system workloads. CAST AI recommends
+  # at least 3 schedulable nodes for its components. Karpenter still provisions
+  # additional workload nodes from NodePools after cluster creation.
+  - name: system-ng
+    instanceType: t3.medium
+    amiFamily: AmazonLinux2023
+    minSize: 1
+    desiredCapacity: 3
+    maxSize: 3
+    volumeSize: 30
+
+    # Label nodes so workloads can be targeted here if desired, while
+    # keeping the group small and stable for system components.
+    # Note: keys with kubernetes.io/ or k8s.io/ prefixes are reserved by
+    # eksctl and cannot be used as custom nodegroup labels.
+    labels:
+      workload-type: system
+
+    # NOTE: A CriticalAddonsOnly taint was removed to avoid blocking
+    # Karpenter's own pods from scheduling on this node group. For a lab
+    # environment this keeps things simple and reliable. The NodePool still
+    # taints its own nodes so user workloads prefer Karpenter-provisioned
+    # capacity.
+
+    tags:
+      alpha.eksctl.io/nodegroup-name: system-ng
+      alpha.eksctl.io/nodegroup-type: managed
+
+# Simple VPC layout suitable for a lab environment. eksctl will create a new
+# VPC with public and private subnets, a single NAT gateway, and the shared
+# node security group (which will be tagged for Karpenter discovery).
+vpc:
+  cidr: 192.168.0.0/16
+  clusterEndpoints:
+    publicAccess: true
+    privateAccess: false
+  nat:
+    gateway: Single
+
+# CSI storage driver add-ons. Each uses the wellKnownPolicies IRSA pattern so
+# eksctl creates the IAM role + ServiceAccount with the AWS-managed policy
+# required for the driver controller to manage the corresponding storage.
+addons:
+  - name: aws-ebs-csi-driver
+    wellKnownPolicies:
+      ebsCSIController: true
+  - name: aws-efs-csi-driver
+    wellKnownPolicies:
+      efsCSIController: true
