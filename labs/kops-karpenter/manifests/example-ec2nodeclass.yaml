@@ -1,0 +1,111 @@
+---
+# labs/kops-karpenter/manifests/example-ec2nodeclass.yaml
+#
+# Example Karpenter EC2NodeClass for the kOps + Karpenter lab cluster
+# (kops-karpenter-lab.k8s.local).
+#
+# IMPORTANT: This manifest is an EXAMPLE for the lab guide and manual
+# exploration. kOps 1.36 generates EC2NodeClass / NodePool manifests
+# automatically from the `karpenter-nodes` InstanceGroup declared in
+# labs/kops-karpenter/cluster-spec.yaml, so applying this file is
+# OPTIONAL. Use this example only when you want to override the
+# kOps-generated defaults (e.g. to add a custom AMI selector or block
+# device mapping).
+#
+# Apply (optional):
+#   kubectl apply -f labs/kops-karpenter/manifests/example-ec2nodeclass.yaml
+#   kubectl apply -f labs/kops-karpenter/manifests/example-nodepool.yaml
+# Or use the helper:
+#   labs/kops-karpenter/bin/apply-karpenter-manifests.sh
+#
+# API: Karpenter AWS provider v1 (kOps 1.36 / Karpenter 1.13.0).
+# ---------------------------------------------------------------------------
+
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  # Name must match the `nodeClassRef.name` field in the NodePool that
+  # references this class (see example-nodepool.yaml).
+  name: lab-example
+  # Labels propagate to the EC2NodeClass object itself (used by
+  # kubectl selectors / dashboards). They are NOT applied to nodes;
+  # use the NodePool for node labels.
+  labels:
+    owner: kops-karpenter-lab
+    lab: "true"
+    cleanup: "true"
+
+spec:
+  # IAM instance profile for Karpenter-launched nodes. kOps creates
+  # an instance profile named `nodes.<cluster-name>` for every
+  # Node-role InstanceGroup. Karpenter needs permission to pass this
+  # role when launching EC2 instances. The kOps-managed Karpenter
+  # addon wires this automatically; this example uses the same
+  # profile so the manifest is valid if applied manually.
+  instanceProfile: nodes.kops-karpenter-lab.k8s.local
+
+  # AMI selector. For this lab example we use the Amazon Linux 2023
+  # EKS-optimized AMI family. In a real kOps-managed setup the
+  # generated EC2NodeClass uses `amiFamily: Custom` and a kOps-built
+  # AMI selector; this example is sufficient for a client-side
+  # dry-run and for the lab guide.
+  amiFamily: AL2023
+
+  # Subnets: Karpenter discovers subnets via tag selectors. The kOps
+  # cluster tags every subnet it creates with
+  # `kops.k8s.io/cluster=<cluster-name>`, so we reuse that tag here.
+  # `type: Private` matches the private subnets declared in
+  # cluster-spec.yaml (`us-west-2a` and `us-west-2b`).
+  subnetSelectorTerms:
+    - tags:
+        kops.k8s.io/cluster: kops-karpenter-lab.k8s.local
+        # `type: Private` is set by kOps on every private subnet. The
+        # utility subnets do NOT carry this tag, so Karpenter will
+        # ignore them.
+        Type: Private
+
+  # Security groups: likewise discovered by tag. kOps tags every SG
+  # it manages with `kops.k8s.io/cluster=<cluster-name>` and the role
+  # (Node / Master). We pick the `Node` role SG; the cluster SG that
+  # the system InstanceGroup uses is sufficient for lab traffic.
+  securityGroupSelectorTerms:
+    - tags:
+        kops.k8s.io/cluster: kops-karpenter-lab.k8s.local
+        # kOps-managed SGs carry `kops.k8s.io/role: node` (lower-case).
+        kops.k8s.io/role: node
+
+  # Block device mappings: every Karpenter-launched node gets a 20 GiB
+  # gp3 root volume. This mirrors the rootVolumeSize / rootVolumeType
+  # values in cluster-spec.yaml so disk behaviour is consistent
+  # across the cluster. The `deleteOnTermination: true` setting
+  # ensures the EBS volume is removed automatically when the node is
+  # terminated (the lab default; do NOT set this to false for a lab
+  # cluster or volumes will leak).
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 20Gi
+        volumeType: gp3
+        deleteOnTermination: true
+        encrypted: true
+
+  # EC2 instance metadata options. `required` forces IMDSv2-only on
+  # every node Karpenter launches, which is the AWS security best
+  # practice. `httpTokens: required` returns `PUT /latest/api/token`
+  # with a session-scoped token; `hopLimit: 1` blocks access from any
+  # container hop other than the host.
+  metadataOptions:
+    httpEndpoint: enabled
+    httpProtocolIPv6: disabled
+    httpPutResponseHopLimit: 1
+    httpTokens: required
+
+  # Tags applied to every EC2 instance Karpenter launches. The
+  # cluster-wide cost-control tags mirror those in cluster-spec.yaml
+  # so cleanup scripts can find lab nodes regardless of who launched
+  # them.
+  tags:
+    owner: kops-karpenter-lab
+    lab: "true"
+    cleanup: "true"
+    karpenter.sh/discovery: kops-karpenter-lab.k8s.local

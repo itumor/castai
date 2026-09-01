@@ -1,0 +1,102 @@
+# labs/kops-karpenter/manifests/impossible-nodepool.yaml
+#
+# A deliberately-broken NodePool used by scenario-f-failure.sh to
+# demonstrate the failure mode Karpenter enters when the requirements
+# of a NodePool can never be satisfied by available EC2 capacity.
+#
+# The `karpenter.k8s.aws/instance-family` well-known label is set to
+# `doesnotexist`, which is not a real EC2 instance family in any AWS
+# region. Karpenter will:
+#
+#   1. Accept the NodePool object on `kubectl apply` (the API server
+#      does not validate the value against the AWS catalogue).
+#   2. Try to launch a NodeClaim that satisfies the requirement.
+#   3. Receive an empty result set from the AWS provider because no
+#      instance in any AZ matches `karpenter.k8s.aws/instance-family=doesnotexist`.
+#   4. Log a `NodeClaimNotLaunched` / `CannotDisrupt` event with a
+#      message along the lines of "launching NodeClaim ... combined
+#      constraints ... filtered 1000+ instance types down to 0".
+#
+# A companion Deployment (`impossible-workload` in
+# scenario-f-failure.sh) requests the same requirement so the operator
+# can see pods stuck in `Pending` with the matching Karpenter event.
+#
+# This NodePool does NOT reference any node selector, taint, or
+# affinity beyond the impossible requirement, so it is independent of
+# the existing example manifests in this directory.
+#
+# API: Karpenter v1 (kOps 1.36 / Karpenter 1.13.0).
+# ---------------------------------------------------------------------------
+
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  name: impossible
+  labels:
+    owner: kops-karpenter-lab
+    lab: "true"
+    cleanup: "true"
+    # Marker so this NodePool is easy to spot in `kubectl get nodepool`
+    # output and easy to filter out of `kubectl delete nodepool`.
+    scenario: impossible-failure
+spec:
+  template:
+    spec:
+      # No taints so any pod can land here in principle; the only
+      # reason pods stay Pending is the impossible instance-family
+      # requirement below.
+      taints: []
+      labels:
+        karpenter-lab/workload: "true"
+
+  requirements:
+    # Restrict to amd64 / linux so the only thing preventing a launch
+    # is the impossible requirement further down. Without these
+    # Karpenter would log additional noise about arch/OS mismatches.
+    - key: kubernetes.io/arch
+      operator: In
+      values: ["amd64"]
+    - key: kubernetes.io/os
+      operator: In
+      values: ["linux"]
+    # THE IMPOSSIBLE REQUIREMENT.
+    # `doesnotexist` is not a real EC2 instance family in any region.
+    # Karpenter applies this requirement when picking an instance and
+    # finds zero candidates, producing a NodeClaim that never launches.
+    - key: karpenter.k8s.aws/instance-family
+      operator: In
+      values: ["doesnotexist"]
+    # Allow spot or on-demand so the failure mode is purely
+    # "no matching instance type", not "no spot capacity".
+    - key: karpenter.sh/capacity-type
+      operator: In
+      values: ["on-demand", "spot"]
+
+  # The EC2NodeClass reference is required for Karpenter to know how
+  # to wire subnet / SG / AMI / instance profile. We point at the
+  # `lab-example` EC2NodeClass from example-ec2nodeclass.yaml so the
+  # manifest is valid in a fully-applied lab cluster. If only this
+  # NodePool is applied (without the example EC2NodeClass), Karpenter
+  # will fail with `NodeClassNotFound` before even reaching the
+  # impossible-requirement check, which is itself a useful signal.
+  nodeClassRef:
+    apiVersion: karpenter.k8s.aws/v1
+    kind: EC2NodeClass
+    name: lab-example
+    controller: karpenter
+
+  # Disable consolidation so Karpenter does not consolidate away a
+  # NodeClaim that managed to come up; for this NodePool nothing
+  # should come up, so the policy is a safety net only.
+  disruption:
+    consolidationPolicy: WhenEmpty
+    expireAfter: 720h
+
+  # Modest upper bound; with the impossible requirement Karpenter
+  # will not get close to this, but the limit is set so a
+  # misconfiguration cannot exhaust the account.
+  limits:
+    cpu: "2"
+    memory: 4Gi
+
+  weight: 0

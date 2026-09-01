@@ -1,0 +1,95 @@
+---
+# labs/kops-karpenter/manifests/inflate-workload.yaml
+#
+# Generic "inflate" workload used by the Phase 3 scenario scripts
+# (scenario-a through scenario-e). The Deployment is deliberately
+# minimal: a small pause image with predictable CPU/memory requests.
+# The lab scripts scale `spec.replicas` to trigger Karpenter
+# provisioning behavior and then scale it back to watch consolidation.
+#
+# Scheduling constraints:
+#   - tolerates the `karpenter-lab/workload=true:NoSchedule` taint that
+#     the example NodePool (manifests/example-nodepool.yaml) applies to
+#     every node it launches. Without this toleration the pods would
+#     stay Pending forever.
+#   - prefers nodes labelled `karpenter-lab/workload=true` (preferred
+#     DuringSchedulingIgnoredDuringExecution) so pods land on the lab
+#     capacity pool when one exists, but the hard requirement is the
+#     toleration above.
+#
+# Resource profile:
+#   - 200m CPU, 256Mi memory per pod. Five replicas fit comfortably on
+#     a t3.small (2 vCPU / 2 GiB); fifteen replicas force Karpenter
+#     to scale out across multiple nodes.
+#
+# Image:
+#   - public.ecr.aws/eks-distro/kubernetes/pause:1.36.0-eks-1-36-1 is a
+#     multi-arch (amd64 / arm64) EKS-Distro pause image. It is small
+#     (~700 KB), public, and pinned to the lab's Kubernetes version.
+# ---------------------------------------------------------------------------
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inflate
+  labels:
+    app: inflate
+    lab: kops-karpenter
+spec:
+  # Single replica by default. The scenario scripts edit
+  # spec.replicas via `kubectl scale` to exercise Karpenter
+  # provisioning (5, 15) and consolidation (1).
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inflate
+  template:
+    metadata:
+      labels:
+        app: inflate
+        lab: kops-karpenter
+    spec:
+      # Tolerate the lab workload taint applied by the example
+      # NodePool. Operator "Exists" matches any value of the taint
+      # key (the NodePool sets it to "true"); a NoSchedule effect
+      # would otherwise block every pod.
+      tolerations:
+        - key: karpenter-lab/workload
+          operator: Exists
+          effect: NoSchedule
+      # Prefer (not require) nodes with the lab workload label.
+      # DuringSchedulingIgnoredDuringExecution means the affinity
+      # rule is only consulted during scheduling; the pod will not
+      # be evicted if the label is removed later.
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: karpenter-lab/workload
+                    operator: In
+                    values: ["true"]
+      # Equivalent of the preferred nodeAffinity above, expressed as
+      # a hard nodeSelector when the operator prefers the stricter
+      # variant. Kept commented so the manifest's primary mechanism
+      # is the soft preferredDuringSchedulingIgnoredDuringExecution
+      # rule above (which is what the scenario scripts rely on).
+      #
+      # nodeSelector:
+      #   karpenter-lab/workload: "true"
+      containers:
+        - name: pause
+          # EKS-Distro pause image, multi-arch (amd64/arm64), pinned
+          # to Kubernetes 1.36 to match the lab cluster.
+          image: public.ecr.aws/eks-distro/kubernetes/pause:1.36.0-eks-1-36-1
+          # Small fixed resource footprint per pod. 200m CPU is well
+          # under t3.small's 2 vCPU baseline; 256Mi memory is well
+          # under the 2 GiB available on t3.small.
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi

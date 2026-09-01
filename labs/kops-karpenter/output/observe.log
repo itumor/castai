@@ -1,0 +1,26 @@
+kOps + Karpenter lab — observability snapshot
+Generated:  2026-09-01T14:16:56Z
+Cluster:    kops-karpenter-lab.k8s.local
+Context:    kops-karpenter-lab.k8s.local
+
+## kops export kubeconfig --name kops-karpenter-lab.k8s.local --admin
+------------------------------------------------------------
+kOps has set your kubectl context to kops-karpenter-lab.k8s.local
+
+## kops get cluster
+------------------------------------------------------------
+NAME				CLOUD	ZONES
+kops-karpenter-lab.k8s.local	aws	us-west-2a,us-west-2b
+
+## kops get instancegroups
+------------------------------------------------------------
+NAME				ROLE		MACHINETYPE	MIN	MAX	ZONES
+control-plane-us-west-2a	ControlPlane	t3.small	1	1	us-west-2a
+karpenter-nodes			Node		t3.small	-	5	us-west-2a,us-west-2b
+system-nodes			Node		t3.small	1	2	us-west-2a,us-west-2b
+
+## kubectl get nodes -o wide
+------------------------------------------------------------
+E0901 17:17:26.407491   13509 memcache.go:265] "Unhandled Error" err="couldn't get current server API group list: Get \"https://api-kops-karpenter-lab-k8-83gssq-9033202e50c92f33.elb.us-west-2.amazonaws.com/api?timeout=32s\": dial tcp 35.163.89.249:443: i/o timeout"
+E0901 17:17:56.409442   13509 memcache.go:265] "Unhandled Error" err="couldn't get current server API group list: Get \"https://api-kops-karpenter-lab-k8-83gssq-9033202e50c92f33.elb.us-west-2.amazonaws.com/api?timeout=32s\": dial tcp 32.187.38.104:443: i/o timeout"
+E0901 17:18:26.411133   13509 memcache.go:265] "Unhandled Error" err="couldn't get current server API group list: Get \"https://api-kops-karpenter-lab-k8-83gssq-9033202e50c92f33.elb.us-west-2.amazonaws.com/api?timeout=32s\": dial tcp 32.187.38.104:443: i/o timeout"

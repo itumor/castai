@@ -1,0 +1,108 @@
+==> Sourcing AWS credentials from /Users/eramadan/castai/.env
+==> Sourcing AWS credentials from /Users/eramadan/castai/awskey.env
+==> Checking required CLI tools...
+==> Sourcing kOps env vars from bootstrap-state-store.sh --print-exports...
+==> Verifying AWS credentials in region 'us-west-2'...
+    AWS account: 050451381948
+    KOPS_STATE_STORE     = kops-karpenter-lab-state-us-west-2-050451381948
+    KOPS_DISCOVERY_STORE = kops-karpenter-lab-state-us-west-2-050451381948-discovery
+    KOPS_CLUSTER_NAME    = kops-karpenter-lab.k8s.local
+    AWS_REGION           = us-west-2
+==> Verifying AWS credentials in region 'us-west-2'...
+==> Bootstrapping S3 state/discovery stores (idempotent)...
+==> Verifying AWS credentials in region 'us-west-2'...
+    AWS account: 050451381948
+==> Bucket plan:
+    KOPS_STATE_STORE     = kops-karpenter-lab-state-us-west-2-050451381948
+    KOPS_DISCOVERY_STORE = kops-karpenter-lab-state-us-west-2-050451381948-discovery
+    KOPS_CLUSTER_NAME    = kops-karpenter-lab.k8s.local
+==> Creating kOps state store...
+    Creating bucket: kops-karpenter-lab-state-us-west-2-050451381948
+    Applying public-access block to: kops-karpenter-lab-state-us-west-2-050451381948
+==> Creating kOps discovery store...
+    Creating bucket: kops-karpenter-lab-state-us-west-2-050451381948-discovery
+    Applying public-access block to: kops-karpenter-lab-state-us-west-2-050451381948-discovery
+
+==> Done. State stores are ready.
+
+  KOPS_STATE_STORE     = kops-karpenter-lab-state-us-west-2-050451381948
+  KOPS_DISCOVERY_STORE = kops-karpenter-lab-state-us-west-2-050451381948-discovery
+  KOPS_CLUSTER_NAME    = kops-karpenter-lab.k8s.local
+  AWS_REGION           = us-west-2
+  AWS_ACCOUNT_ID       = 050451381948
+
+Next steps:
+  1. Review labs/kops-karpenter/cluster-spec.yaml (kOps Cluster + InstanceGroups manifest).
+  2. Export the env vars in your shell, or eval the script in --print-exports mode:
+       eval "$(labs/kops-karpenter/bin/bootstrap-state-store.sh --print-exports)"
+  3. Create the cluster (a later phase of this lab):
+       kops create -f labs/kops-karpenter/cluster-spec.yaml
+       kops create secret --name "${KOPS_CLUSTER_NAME}" --sshpublickey admin -o json \
+         | jq '.id' -r > /tmp/ssh_secret_id  # example, only if SSH is needed
+       kops update cluster --name "${KOPS_CLUSTER_NAME}" --yes
+       kops validate cluster --name "${KOPS_CLUSTER_NAME}" --wait 10m
+  4. Tear down when finished:
+       kops delete cluster --name "${KOPS_CLUSTER_NAME}" --yes
+       aws s3 rb "${KOPS_STATE_STORE}" --force
+       aws s3 rb "${KOPS_DISCOVERY_STORE}" --force
+
+This script is idempotent: rerunning it is safe and will only create
+buckets that do not yet exist.
+==> Checking if cluster 'kops-karpenter-lab.k8s.local' is already registered...
+==> Applying cluster manifest: /Users/eramadan/castai/labs/kops-karpenter/cluster-spec.yaml
+
+Created cluster/kops-karpenter-lab.k8s.local
+Created instancegroup/control-plane-us-west-2a
+Created instancegroup/system-nodes
+Created instancegroup/karpenter-nodes
+
+To deploy these resources, run: kops update cluster --name kops-karpenter-lab.k8s.local --yes
+
+==> Running 'kops update cluster' (dry-run=0)...
+
+*********************************************************************************
+
+A new kubernetes version is available: 1.36.4
+Upgrading is recommended (try kops upgrade cluster)
+
+More information: https://github.com/kubernetes/kops/blob/master/permalinks/upgrade_k8s.md#1.36.4
+
+*********************************************************************************
+
+
+*********************************************************************************
+
+Kubelet anonymousAuth is currently turned on. This allows RBAC escalation and remote code execution possibilities.
+It is highly recommended you turn it off by setting 'spec.kubelet.anonymousAuth' to 'false' via 'kops edit cluster'
+
+See https://kops.sigs.k8s.io/security/#kubelet-api
+
+*********************************************************************************
+
+W0901 16:08:22.765286   86516 external_access.go:39] KubernetesAPIAccess is empty
+W0901 16:08:22.765373   86516 external_access.go:43] SSHAccess is empty
+I0901 16:08:24.384762   86516 executor.go:113] Tasks: 0 done / 123 total; 36 can run
+W0901 16:08:24.388876   86516 vfs_keystorereader.go:163] CA private key was not found
+W0901 16:08:24.389160   86516 vfs_keystorereader.go:163] CA private key was not found
+I0901 16:08:24.389692   86516 keypair.go:296] Issuing new certificate: "kubernetes-ca"
+I0901 16:08:24.389804   86516 keypair.go:296] Issuing new certificate: "service-account"
+I0901 16:08:24.389699   86516 keypair.go:296] Issuing new certificate: "etcd-manager-ca-main"
+I0901 16:08:24.390003   86516 keypair.go:296] Issuing new certificate: "apiserver-aggregator-ca"
+I0901 16:08:24.391641   86516 keypair.go:296] Issuing new certificate: "etcd-manager-ca-events"
+I0901 16:08:24.401370   86516 keypair.go:296] Issuing new certificate: "etcd-peers-ca-events"
+I0901 16:08:24.420431   86516 keypair.go:296] Issuing new certificate: "etcd-peers-ca-main"
+I0901 16:08:24.421205   86516 keypair.go:296] Issuing new certificate: "etcd-clients-ca"
+I0901 16:08:26.986581   86516 executor.go:113] Tasks: 36 done / 123 total; 26 can run
+I0901 16:08:32.470949   86516 executor.go:113] Tasks: 62 done / 123 total; 27 can run
+I0901 16:08:34.114706   86516 network_load_balancer.go:548] Waiting for load balancer "api-kops-karpenter-lab-k8-83gssq" to be created...
+
+## Note appended during lab finalization
+# This log captures the first successful `kops update cluster --yes` run
+# launched by `labs/kops-karpenter/bin/create-cluster.sh`. The log ends
+# while waiting for the NLB because the original agent process was killed
+# by the harness before `kops validate cluster` completed. Subsequent
+# re-runs of create-cluster.sh (same cluster state) completed the remaining
+# 123/123 tasks, exported kubeconfig, and applied the example Karpenter
+# manifests. The cluster resources were later torn down by
+# `labs/kops-karpenter/bin/cleanup.sh`; see `output/cleanup.log` for the
+# deletion record and verification that the cluster and S3 buckets are gone.

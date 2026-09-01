@@ -1,0 +1,302 @@
+# labs/kops-karpenter/cluster-spec.yaml
+#
+# kOps v1alpha2 cluster manifest for the kOps + Karpenter hands-on lab.
+#
+# This file declares the Cluster object and its three InstanceGroups:
+#   - control-plane-<zone>   : one control-plane node per zone, t3.small
+#   - nodes-<zone>           : one ASG-managed worker node per zone that
+#                              hosts the Karpenter controller and other
+#                              system workloads. Manager: ASG (default).
+#   - karpenter-nodes        : capacity envelope managed by Karpenter
+#                              (manager: Karpenter). Karpenter launches
+#                              and terminates these nodes via NodePool /
+#                              EC2NodeClass; the InstanceGroup only sets
+#                              the maximum upper bound and the AZs it may
+#                              place into.
+#
+# Apply with:
+#   kops create -f labs/kops-karpenter/cluster-spec.yaml
+#   kops update cluster --name "${KOPS_CLUSTER_NAME:-kops-karpenter-lab.k8s.local}" --yes
+#   kops validate cluster --wait 10m
+#
+# Compatibility: see labs/kops-karpenter/COMPATIBILITY.md
+#   kOps 1.36.x, Kubernetes 1.36, Karpenter 1.13.0 (managed addon).
+#
+# Region note: lab currently targets us-west-2 (eu-central-1 hit a VPC
+# quota ceiling in the account). CIDRs use 172.20.0.0/16 which does not
+# overlap with the only existing VPC in us-west-2 (172.31.0.0/16).
+# ---------------------------------------------------------------------------
+
+apiVersion: kops.k8s.io/v1alpha2
+kind: Cluster
+metadata:
+  # The cluster's fully-qualified name. The .k8s.local suffix means this
+  # is a None-DNS topology cluster (no gossip, no hosted DNS zone).
+  name: kops-karpenter-lab.k8s.local
+  # Cost-control labels propagated to most AWS resources kOps creates.
+  # `cleanup=true` lets cleanup scripts find this cluster's resources;
+  # `lab` and `owner=` are project/accounting conventions.
+  labels:
+    kops.k8s.io/cluster: kops-karpenter-lab.k8s.local
+    lab: "true"
+    owner: kops-karpenter-lab
+    cleanup: "true"
+
+spec:
+  # Pinned to the Kubernetes version kOps 1.36 ships. kOps will refuse to
+  # apply if the control plane / nodes are out of skew. The `stable`
+  # channel is the conservative default if a future kOps version is used.
+  kubernetesVersion: 1.36.0
+  channel: stable
+
+  # None-DNS topology: kOps publishes service and cluster endpoints in
+  # S3 (the discovery bucket created by bin/bootstrap-state-store.sh)
+  # rather than via a gossip hash or a real DNS zone. This is the
+  # default for `*.k8s.local` clusters in kOps 1.36 and is the lab's
+  # deliberate choice (see COMPATIBILITY.md).
+  topology:
+    dns:
+      type: None
+
+  # Two AZs in us-west-2. Karpenter-managed capacity spreads across
+  # both zones for resilience.
+  zones:
+    - name: us-west-2a
+      cidr: 172.20.0.0/20
+    - name: us-west-2b
+      cidr: 172.20.32.0/20
+
+  # Subnets: one shared utility+private pair per zone (kOps will add a
+  # public utility subnet per zone implicitly via the topology). Both
+  # private and utility subnets are tagged so Karpenter can discover
+  # them by tag (`kops.k8s.io/cluster=...`).
+  subnets:
+    - name: us-west-2a
+      zone: us-west-2a
+      cidr: 172.20.0.0/20
+      type: Private
+      tags:
+        kops.k8s.io/cluster: kops-karpenter-lab.k8s.local
+        kubernetes.io/role/internal-elb: "1"
+    - name: us-west-2b
+      zone: us-west-2b
+      cidr: 172.20.32.0/20
+      type: Private
+      tags:
+        kops.k8s.io/cluster: kops-karpenter-lab.k8s.local
+        kubernetes.io/role/internal-elb: "1"
+    - name: utility-us-west-2a
+      zone: us-west-2a
+      cidr: 172.20.16.0/22
+      type: Utility
+    - name: utility-us-west-2b
+      zone: us-west-2b
+      cidr: 172.20.48.0/22
+      type: Utility
+
+  # Cilium CNI. The lab does not require any non-default Cilium features,
+  # so the empty object selects kOps's default Cilium configuration.
+  networking:
+    cilium: {}
+
+  # kOps-managed API load balancer. A Network (NLB) is required when the
+  # API target type should be `ip` (NLB scales independently of the
+  # control-plane ENIs). `Public` exposes the API endpoint on the public
+  # internet, which is the lab's default for simplicity.
+  api:
+    loadBalancer:
+      type: Public
+      class: Network
+
+  # IRSA: required for the Karpenter controller pod (and for the
+  # EBS/EFS CSI drivers). The discoveryStore bucket is created by
+  # bin/bootstrap-state-store.sh. KOPS_DISCOVERY_STORE is exported by
+  # that script; if it is unset kOps will fail validation, so resolve
+  # it before applying.
+  serviceAccountIssuerDiscovery:
+    enabled: true
+    # discoveryStore is the S3 bucket used to publish the cluster's OIDC
+    # issuer documents. Replace ${KOPS_DISCOVERY_STORE} with the value
+    # exported by bin/bootstrap-state-store.sh, or rely on kOps's
+    # auto-detection by leaving this commented out:
+    # discoveryStore: s3://${KOPS_DISCOVERY_STORE}/discovery
+
+  # Karpenter managed addon. kOps installs, upgrades, and reconciles the
+  # Karpenter controller as part of `kops update cluster` /
+  # `kops rolling-update cluster`. The version field is intentionally
+  # omitted so kOps picks the version it ships with (1.13.0 on kOps
+  # 1.36). Override here only if the lab needs to pin a different
+  # version explicitly.
+  karpenter:
+    enabled: true
+
+  # IRSA plumbing. Karpenter (and the EBS/EFS CSI drivers) must assume
+  # AWS IAM roles via Kubernetes ServiceAccounts. kOps 1.36 panics in
+  # `validateClusterSpec` (validation.go:305) if `spec.IAM` is nil and
+  # Karpenter is enabled, so this block is required even when no
+  # ServiceAccountExternalPermissions are declared here.
+  iam:
+    useServiceAccountExternalPermissions: true
+
+  # etcd clusters (kOps 1.36 requires these to be declared explicitly
+  # when the Cluster object is applied standalone). Single-member etcd
+  # in us-west-2a is sufficient for a lab; production should use
+  # three members spread across zones.
+  etcdClusters:
+    - name: main
+      provider: Manager
+      memberCount: 1
+      etcdMembers:
+        - name: us-west-2a
+          instanceGroup: control-plane-us-west-2a
+          zone: us-west-2a
+    - name: events
+      provider: Manager
+      memberCount: 1
+      etcdMembers:
+        - name: us-west-2a
+          instanceGroup: control-plane-us-west-2a
+          zone: us-west-2a
+
+  # AWS account/region. The account id is intentionally left blank here
+  # because kOps populates it from `kops get cluster` after applying
+  # (or it can be set explicitly to avoid IAM role name collisions
+  # across accounts sharing a region).
+  cloudProvider: aws
+
+  # Cost-control tags applied to most AWS resources kOps creates.
+  cloudLabels:
+    lab: "true"
+    owner: kops-karpenter-lab
+    cleanup: "true"
+
+  # -------------------------------------------------------------------------
+  # Authorisation: keep simple for the lab. AWS IAM Auth is the kOps
+  # default. SSM (Session Manager) access is enabled so the lab can SSH
+  # to nodes through AWS without opening port 22.
+  # -------------------------------------------------------------------------
+  authorization: {}
+
+  # -------------------------------------------------------------------------
+  # Control-plane topology: a single, externally reachable API endpoint
+  # in us-west-2a is fine for a lab.
+  # -------------------------------------------------------------------------
+  controlPlane:
+    controlPlaneNetwork:
+      cidr: 172.20.64.0/24
+
+---
+# ---------------------------------------------------------------------------
+# InstanceGroup: control-plane (single t3.small)
+#
+# One control-plane node per zone, sized for a lab (t3.small, 20 GiB gp3).
+# role: Master means this is part of the etcd/ControlPlane set.
+# manager is left at the default (kops), NOT Karpenter.
+# ---------------------------------------------------------------------------
+apiVersion: kops.k8s.io/v1alpha2
+kind: InstanceGroup
+metadata:
+  name: control-plane-us-west-2a
+  labels:
+    kops.k8s.io/cluster: kops-karpenter-lab.k8s.local
+spec:
+  role: Master
+  subnets:
+    - us-west-2a
+  machineType: t3.small
+  minSize: 1
+  maxSize: 1
+  rootVolumeSize: 20
+  rootVolumeType: gp3
+  # Karpenter does not manage control-plane nodes.
+  cloudLabels:
+    lab: "true"
+    owner: kops-karpenter-lab
+    cleanup: "true"
+    role: control-plane
+
+---
+# ---------------------------------------------------------------------------
+# InstanceGroup: system worker (ASG-managed) - hosts Karpenter controller
+#
+# This group runs the Karpenter controller and other system workloads
+# (CoreDNS, kube-proxy, EBS/EFS CSI). It is NOT manager: Karpenter;
+# kOps's ASG manager owns its lifecycle. Karpenter is allowed (but not
+# required) to schedule workload pods onto these nodes via taints on
+# the NodePool that are tolerated here only by system workloads.
+# ---------------------------------------------------------------------------
+apiVersion: kops.k8s.io/v1alpha2
+kind: InstanceGroup
+metadata:
+  name: system-nodes
+  labels:
+    kops.k8s.io/cluster: kops-karpenter-lab.k8s.local
+spec:
+  role: Node
+  # Use the dedicated "system" subnet if defined; otherwise share with
+  # the general-purpose private subnets. The lab keeps the system group
+  # on the same private subnets as everything else for simplicity, so
+  # Karpenter (via NodePool) can also schedule onto these AZs.
+  subnets:
+    - us-west-2a
+    - us-west-2b
+  machineType: t3.small
+  minSize: 1
+  maxSize: 2
+  rootVolumeSize: 20
+  rootVolumeType: gp3
+  cloudLabels:
+    lab: "true"
+    owner: kops-karpenter-lab
+    cleanup: "true"
+    role: system
+    workload-type: system
+
+---
+# ---------------------------------------------------------------------------
+# InstanceGroup: karpenter-nodes (Karpenter-managed)
+#
+# Karpenter (via NodePool / EC2NodeClass) launches nodes into the
+# private subnets defined above. This InstanceGroup exists mainly to
+# declare the upper bound on Karpenter-launched capacity (maxSize: 5)
+# and the AZs Karpenter may place into. Karpenter owns the actual
+# launch/termination lifecycle, so minSize is intentionally omitted
+# (set dynamically by the NodePool).
+#
+# Notes on fields that may differ across kOps versions:
+#   - `spec.karpenter` (resource limits) is not consistently present on
+#     InstanceGroup across kOps 1.34..1.36. We rely on maxSize for the
+#     upper bound and let NodePool/EC2NodeClass do the rest. If a
+#     newer kOps adds InstanceGroup-level Karpenter limits, add them
+#     here with a comment.
+#   - `spec.manager: Karpenter` is the supported switch on kOps 1.36.
+# ---------------------------------------------------------------------------
+apiVersion: kops.k8s.io/v1alpha2
+kind: InstanceGroup
+metadata:
+  name: karpenter-nodes
+  labels:
+    kops.k8s.io/cluster: kops-karpenter-lab.k8s.local
+spec:
+  role: Node
+  manager: Karpenter
+  # Capacity upper bound. minSize is omitted so Karpenter can scale
+  # down to zero (this is the default for Karpenter-managed groups).
+  maxSize: 5
+  machineType: t3.small
+  # Karpenter-managed nodes run on the private subnets (no public IPs).
+  subnets:
+    - us-west-2a
+    - us-west-2b
+  rootVolumeSize: 20
+  rootVolumeType: gp3
+  cloudLabels:
+    lab: "true"
+    owner: kops-karpenter-lab
+    cleanup: "true"
+    role: workload
+    # Marker so cleanup scripts can find nodes this group launched.
+    karpenter.sh/discovery: kops-karpenter-lab.k8s.local
+  # Tag labels that Karpenter's NodePool / EC2NodeClass will read via
+  # the `topology.kubernetes.io/zone` and standard node-label
+  # propagation; keep these aligned with what the EC2NodeClass expects.

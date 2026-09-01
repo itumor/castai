@@ -1,0 +1,30 @@
+kOps + Karpenter lab — cluster validation snapshot
+Generated:  2026-09-01T13:27:55Z
+Context:    iac-hub
+Cluster:    kops-karpenter-lab.k8s.local
+
+## kops get cluster
+------------------------------------------------------------
+
+## kops get instancegroups
+------------------------------------------------------------
+
+## kubectl get nodes -o wide
+------------------------------------------------------------
+
+## kubectl get pods -n karpenter
+------------------------------------------------------------
+
+## kubectl get crd | grep karpenter
+------------------------------------------------------------
+(no Karpenter CRDs found)
+
+## kubectl get nodepool,ec2nodeclass
+------------------------------------------------------------
+
+## kubectl get events -n karpenter --sort-by=.lastTimestamp
+------------------------------------------------------------
+
+------------------------------------------------------------
+Snapshot complete: /Users/eramadan/castai/labs/kops-karpenter/output/validate-cluster.log
+6 section(s) reported errors. See log for details.

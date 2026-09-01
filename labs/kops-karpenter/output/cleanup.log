@@ -1,0 +1,24 @@
+kOps + Karpenter lab — cleanup
+Generated:    2026-09-01T15:04:46Z
+Mode:         dry-run
+Cluster:      kops-karpenter-lab.k8s.local
+Region:       us-west-2
+AWS account:  050451381948
+State store:  s3://kops-karpenter-lab-state-us-west-2-050451381948 (bucket: kops-karpenter-lab-state-us-west-2-050451381948)
+Discovery:    s3://kops-karpenter-lab-state-us-west-2-050451381948-discovery (bucket: kops-karpenter-lab-state-us-west-2-050451381948-discovery)
+
+## kops get cluster --name kops-karpenter-lab.k8s.local
+------------------------------------------------------------
+(cluster is not registered in the state store — already deleted)
+
+==> Cleanup plan:
+    Cluster:        kops-karpenter-lab.k8s.local
+    Region:         us-west-2
+    State bucket:   kops-karpenter-lab-state-us-west-2-050451381948
+    Discovery bkt:  kops-karpenter-lab-state-us-west-2-050451381948-discovery
+    Action:        (skip kops delete — cluster not present)
+    Action:        (skip state bucket — not found)
+    Action:        (skip discovery bucket — not found)
+
+## dry-run: no AWS resources were modified
+------------------------------------------------------------

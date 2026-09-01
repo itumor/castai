@@ -1,0 +1,68 @@
+kOps + Karpenter lab — scenario F: failure lab
+Generated:  2026-09-01T14:15:59Z
+Cluster:    kops-karpenter-lab.k8s.local
+Watch:      20 seconds
+
+## Failure modes documented by this scenario
+------------------------------------------------------------
+1. Impossible instance family / no matching capacity.
+   A NodePool with karpenter.k8s.aws/instance-family=doesnotexist
+   is valid YAML but can never launch. Karpenter returns an empty
+   candidate set; pods stay Pending; events show
+   "filtered 1000+ instance types down to 0".
+
+2. VPC quota exceeded (the eu-central-1 blocker).
+   Account 050451381948 hit the per-region VPC ceiling with
+   5 VPCs already in eu-central-1. kops update cluster --yes
+   failed with VpcLimitExceeded. Lab moved to us-west-2.
+
+3. Control-plane API timeout (the us-west-2 blocker).
+   The kOps-managed NLB control-plane endpoint never became
+   reachable; kubectl calls hang / time out from the operator
+   workstation. This script tolerates those failures so the
+   log captures every failure mode in one place.
+
+4. Missing IAM permission.
+   A NodeClaim stuck in NotLaunched with an AccessDenied event
+   from AWS indicates the Karpenter controller role lacks
+   iam:PassRole on the EC2NodeClass instanceProfile.
+
+## kubectl reachability probe
+------------------------------------------------------------
+Active context: arn:aws:eks:us-west-2:050451381948:cluster/eks-blueprints-lab
+Result: UNREACHABLE (the us-west-2 NLB / control-plane blocker).
+       kubectl calls below will record the API error rather
+       than abort the run.
+
+## kops export kubeconfig --name kops-karpenter-lab.k8s.local --admin
+------------------------------------------------------------
+kOps has set your kubectl context to kops-karpenter-lab.k8s.local
+
+## kubectl apply (skipped — API unreachable)
+------------------------------------------------------------
+API server unreachable. The synthetic impossible-NP failure
+cannot be exercised live right now. The manifest is available
+at labs/kops-karpenter/manifests/impossible-nodepool.yaml and
+can be applied once the NLB / control-plane endpoint is up.
+
+## kubectl error capture (single attempt with 10s timeout)
+------------------------------------------------------------
+E0901 17:16:13.179017   12031 memcache.go:265] "Unhandled Error" err="couldn't get current server API group list: Get \"https://api-kops-karpenter-lab-k8-83gssq-9033202e50c92f33.elb.us-west-2.amazonaws.com/api?timeout=10s\": net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)"
+E0901 17:16:23.180168   12031 memcache.go:265] "Unhandled Error" err="couldn't get current server API group list: Get \"https://api-kops-karpenter-lab-k8-83gssq-9033202e50c92f33.elb.us-west-2.amazonaws.com/api?timeout=10s\": net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)"
+E0901 17:16:33.184009   12031 memcache.go:265] "Unhandled Error" err="couldn't get current server API group list: Get \"https://api-kops-karpenter-lab-k8-83gssq-9033202e50c92f33.elb.us-west-2.amazonaws.com/api?timeout=10s\": net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)"
+E0901 17:16:43.190355   12031 memcache.go:265] "Unhandled Error" err="couldn't get current server API group list: Get \"https://api-kops-karpenter-lab-k8-83gssq-9033202e50c92f33.elb.us-west-2.amazonaws.com/api?timeout=10s\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+E0901 17:16:53.191989   12031 memcache.go:265] "Unhandled Error" err="couldn't get current server API group list: Get \"https://api-kops-karpenter-lab-k8-83gssq-9033202e50c92f33.elb.us-west-2.amazonaws.com/api?timeout=10s\": net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)"
+Unable to connect to the server: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
+
+## observe.sh follow-up
+------------------------------------------------------------
+Running observe.sh to capture a fresh snapshot of cluster state.
+See output/observe.log for the full snapshot.
+==> Setting kubectl context to kops-karpenter-lab.k8s.local...
+    kubeconfig exported successfully.
+
+------------------------------------------------------------
+[note] observe.sh follow-up was terminated by the local run timeout
+       (kubectl --request-timeout=10s on a dead API endpoint).
+       The full observe.sh output (if produced) is in observe.log.
+Scenario F complete: /Users/eramadan/castai/labs/kops-karpenter/output/scenario-f.log

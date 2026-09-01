@@ -1,0 +1,137 @@
+---
+# labs/kops-karpenter/manifests/example-nodepool.yaml
+#
+# Example Karpenter NodePool for the kOps + Karpenter lab cluster
+# (kops-karpenter-lab.k8s.local).
+#
+# IMPORTANT: This manifest is an EXAMPLE for the lab guide and manual
+# exploration. kOps 1.36 generates NodePool / EC2NodeClass manifests
+# automatically from the `karpenter-nodes` InstanceGroup declared in
+# labs/kops-karpenter/cluster-spec.yaml, so applying this file is
+# OPTIONAL. The generated manifests are kept in sync with kOps state
+# by `kops update cluster`. Use this example only when you want to
+# override Karpenter defaults for experimentation.
+#
+# Apply (optional):
+#   kubectl apply -f labs/kops-karpenter/manifests/example-nodepool.yaml
+#   kubectl apply -f labs/kops-karpenter/manifests/example-ec2nodeclass.yaml
+# Or use the helper:
+#   labs/kops-karpenter/bin/apply-karpenter-manifests.sh
+#
+# API: Karpenter v1 (kOps 1.36 / Karpenter 1.13.0). Older `NodePool`
+# resources (alpha / v1beta1) have been removed upstream.
+# ---------------------------------------------------------------------------
+
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  # Name must be unique within the cluster. The kOps-generated NodePool
+  # uses a kops-specific prefix; pick a different name to avoid
+  # conflicts when applying this example alongside it.
+  name: lab-example
+  # Labels propagate to every node Karpenter launches for this pool.
+  # They show up under `kubectl get nodes --show-labels` and can be
+  # matched in workload pod specs (`nodeSelector`) or affinity rules.
+  labels:
+    # Aligns with cluster-spec.yaml's cloudLabels on the
+    # `karpenter-nodes` InstanceGroup so cleanup scripts can find
+    # these nodes.
+    owner: kops-karpenter-lab
+    lab: "true"
+    cleanup: "true"
+    workload-type: lab
+
+spec:
+  # template is the pod-template equivalent for nodes: Karpenter
+  # populates each node with these taints, labels, and requirements
+  # (requirements come from the `requirements` block below).
+  template:
+    spec:
+      # Taints are applied to every node this pool launches. We add
+      # `karpenter-lab/workload=true:NoSchedule` so that ONLY pods that
+      # explicitly tolerate this taint schedule onto these nodes. This
+      # keeps lab workloads isolated from system workloads (CoreDNS,
+      # kube-proxy, EBS CSI) which run on the ASG-managed `system-nodes`
+      # group and the control-plane nodes.
+      taints:
+        - key: karpenter-lab/workload
+          value: "true"
+          effect: NoSchedule
+      # Labels are merged with the metadata.labels above and applied
+      # to every node this pool launches. The Karpenter well-known
+      # label `karpenter.sh/nodepool` is added automatically.
+      labels:
+        karpenter-lab/workload: "true"
+
+  # requirements constrain the set of instances Karpenter may pick.
+  # Only instances that satisfy ALL listed requirements are eligible.
+  requirements:
+    # Karpenter well-known key. Restrict to amd64 so this lab does not
+    # accidentally launch arm64 (Graviton) nodes, which would require
+    # arm64 container images in the workloads.
+    - key: kubernetes.io/arch
+      operator: In
+      values: ["amd64"]
+    # Restrict to the linux OS family. The lab does not exercise
+    # Windows containers.
+    - key: kubernetes.io/os
+      operator: In
+      values: ["linux"]
+    # Restrict to the two AZs declared in cluster-spec.yaml. Karpenter
+    # picks instances with subnet selectors that match these AZs.
+    - key: topology.kubernetes.io/zone
+      operator: In
+      values: ["us-west-2a", "us-west-2b"]
+    # Restrict to t3.small (2 vCPU / 2 GiB) and t3.medium (2 vCPU / 4
+    # GiB). These are the cheapest general-purpose burstable instances
+    # in us-west-2 and are the same instance types used by the
+    # InstanceGroups in cluster-spec.yaml. Adjust as needed.
+    - key: karpenter.sh/capacity-type
+      operator: In
+      # `on-demand` is required by Karpenter; `spot` lets Karpenter bid
+      # on spare EC2 capacity (much cheaper but interruptible). The
+      # example pool accepts both so the lab exercises spot vs
+      # on-demand behavior end-to-end.
+      values: ["on-demand", "spot"]
+    - key: node.kubernetes.io/instance-type
+      operator: In
+      values: ["t3.small", "t3.medium"]
+
+  # References the EC2NodeClass defined in example-ec2nodeclass.yaml.
+  # Karpenter uses the EC2NodeClass to discover subnets, security
+  # groups, AMI, and block-device mappings. A NodePool must point at
+  # at least one EC2NodeClass; multiple NodeClasses are allowed (Karpenter
+  # uses the union of their constraints).
+  nodeClassRef:
+    # API group of the EC2NodeClass CRD.
+    apiVersion: karpenter.k8s.aws/v1
+    # Kind is fixed by the AWS provider.
+    kind: EC2NodeClass
+    # Name must match metadata.name in the EC2NodeClass manifest.
+    name: lab-example
+    # `karpenter` is the only supported controller identifier for the
+    # AWS provider.
+    controller: karpenter
+
+  # Karpenter 1.13 consolidation policy. `WhenEmptyOrUnderutilized`
+  # removes nodes that are empty OR have pods that could be packed
+  # onto other nodes without violating disruption budgets. This is the
+  # recommended default for cost-conscious labs.
+  disruption:
+    # `expireAfter` is the maximum node lifetime before Karpenter
+    # replaces it regardless of utilization. 720h == 30 days, matching
+    # the upstream Karpenter 1.13 default. Tweak for shorter lab runs.
+    expireAfter: 720h
+    consolidationPolicy: WhenEmptyOrUnderutilized
+
+  # limits caps the maximum number of nodes Karpenter will launch for
+  # THIS pool across the cluster. It does not constrain the wider
+  # InstanceGroup `maxSize` (which is enforced by kOps / ASG). Set
+  # this to keep the lab from scaling beyond the AWS quota.
+  limits:
+    cpu: "20"
+    memory: 40Gi
+
+  # weight orders this pool when multiple pools are eligible. Higher
+  # weight wins. Default 0 is fine for a single-pool lab.
+  weight: 10
