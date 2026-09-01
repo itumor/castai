@@ -1,0 +1,19 @@
+# terraform.tfvars.example
+#
+# Copy this file to terraform.tfvars and adjust the values for your environment.
+# terraform.tfvars is git-ignored; the example file is the source of truth for
+# the variable defaults declared in variables.tf.
+
+# cluster_name = "eks-blueprints-lab"
+
+# region = "us-west-2"
+
+# cluster_version = "1.33"
+
+# vpc_cidr = "10.0.0.0/16"
+
+# managed_node_instance_types = ["t3.medium"]
+
+# tags = {
+#   Environment = "lab"
+# }

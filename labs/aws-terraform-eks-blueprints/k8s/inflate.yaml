@@ -1,0 +1,46 @@
+# inflate.yaml
+#
+# Synthetic workload used to exercise Karpenter autoscaling.
+#
+# Scaled to 0 by default so the cluster starts clean. The E2E phase bumps
+# it up with `kubectl scale deploy/inflate --replicas=10` to force
+# Karpenter to provision new nodes. The pause image keeps the container
+# trivially small while the explicit CPU/memory requests ensure each pod
+# actually consumes enough capacity to drive node provisioning.
+#
+# The matching toleration is required because the default NodePool applies
+# a dedicated `workload=dedicated:NoSchedule` taint to every node it
+# launches. Without this toleration the pods would stay Pending forever
+# and would never trigger Karpenter consolidation either.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inflate
+  namespace: default
+  labels:
+    app: inflate
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: inflate
+  template:
+    metadata:
+      labels:
+        app: inflate
+    spec:
+      # Allow the pods to land on Karpenter-provisioned nodes that carry
+      # the default NodePool's dedicated taint.
+      tolerations:
+        - key: workload
+          operator: Equal
+          value: dedicated
+          effect: NoSchedule
+      containers:
+        - name: pause
+          image: public.ecr.aws/eks-distro/kubernetes/pause:3.7
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "1"
+              memory: "256Mi"

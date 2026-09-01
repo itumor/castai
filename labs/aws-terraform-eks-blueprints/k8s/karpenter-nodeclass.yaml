@@ -1,0 +1,85 @@
+# karpenter-nodeclass.yaml
+#
+# Karpenter v1 EC2NodeClass for the lab cluster.
+# Pairs with the NodePool named "default" (see karpenter-nodepool.yaml),
+# which references this EC2NodeClass via nodeClassRef.name: default.
+#
+# The ${CLUSTER_NAME} and ${KARPENTER_NODE_INSTANCE_PROFILE_NAME} placeholders
+# are rendered at apply time with:
+#   export CLUSTER_NAME=$(terraform output -raw cluster_name)
+#   export KARPENTER_NODE_INSTANCE_PROFILE_NAME=$(terraform output -raw karpenter_node_instance_profile_name)
+#   envsubst < k8s/karpenter-nodeclass.yaml | kubectl apply -f -
+#
+# Design notes:
+#   * role / instanceProfile share the same name (karpenter-<cluster>) so
+#     Karpenter can assume the role on behalf of nodes it launches.
+#   * AMI uses the official Amazon Linux 2023 alias so we always pick up
+#     the latest patched AL2023 image without hard-coding an AMI id.
+#   * Subnets and security groups are discovered via the
+#     karpenter.sh/discovery tag (set on the VPC/cluster SG by the
+#     Terraform module); the cluster SG is also matched by Name as a
+#     fallback for clusters that tag SGs differently.
+#   * IMDSv2 is enforced (httpTokens: required) with hop limit 2, which
+#     is the AWS-recommended setting for EKS nodes (1 is for pods).
+#   * Detailed monitoring is enabled so CloudWatch captures per-minute
+#     CPU/network/disk metrics - useful for a lab to observe node
+#     behaviour without paying for a full observability stack.
+#   * Root volume is gp3, encrypted, and deleted on termination; 100Gi
+#     gives comfortable headroom for container image layers.
+
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: default
+spec:
+  # Instance profile created by the Terraform module.
+  # Rendered from Terraform output via envsubst as:
+  #   export KARPENTER_NODE_INSTANCE_PROFILE_NAME=$(terraform output -raw karpenter_node_instance_profile_name)
+  #   envsubst < k8s/karpenter-nodeclass.yaml | kubectl apply -f -
+  # When `instanceProfile` is set Karpenter uses it directly and does not
+  # attempt to create or modify IAM resources, which keeps us inside the
+  # controller's PassRole permissions.
+  instanceProfile: ${KARPENTER_NODE_INSTANCE_PROFILE_NAME}
+
+  # Use the official Amazon EKS-optimized Amazon Linux 2023 alias.
+  # Karpenter will resolve al2023@latest to the newest patched image
+  # at launch time, so we never pin a stale AMI id.
+  amiSelectorTerms:
+    - alias: al2023@latest
+
+  # Discover subnets tagged by the Terraform module's VPC. The
+  # Terraform locals.tf prefixes the cluster_name with "-lab", so
+  # the actual discovery tag is `<cluster_name>-lab`.
+  subnetSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: ${CLUSTER_NAME}-lab
+
+  # Discover the cluster security group(s) for Karpenter-launched
+  # nodes. Primary path is the karpenter.sh/discovery tag (same
+  # `<cluster_name>-lab` value); the Name tag is included as a
+  # fallback so clusters that only tag SGs by name still resolve.
+  securityGroupSelectorTerms:
+    - tags:
+        karpenter.sh/discovery: ${CLUSTER_NAME}-lab
+    - tags:
+        Name: ${CLUSTER_NAME}
+
+  # Root volume: gp3, encrypted, auto-deleted on termination. 100Gi
+  # is generous for a lab (image layers + container runtime + logs).
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 100Gi
+        volumeType: gp3
+        deleteOnTermination: true
+        encrypted: true
+
+  # IMDSv2 only, hop limit 2 (recommended for EKS nodes).
+  metadataOptions:
+    httpEndpoint: enabled
+    httpProtocolIPv6: disabled
+    httpPutResponseHopLimit: 2
+    httpTokens: required
+
+  # Per-minute CloudWatch metrics - cheap and invaluable in a lab.
+  detailedMonitoring: true

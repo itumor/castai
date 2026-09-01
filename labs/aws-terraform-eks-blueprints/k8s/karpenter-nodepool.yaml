@@ -1,0 +1,78 @@
+# karpenter-nodepool.yaml
+#
+# Karpenter v1 NodePool for the lab cluster.
+# Pairs with the EC2NodeClass named "default" (created in the next step).
+#
+# Design notes:
+#   * Weighted capacity-type preference: spot (80) is preferred over
+#     on-demand (20), but on-demand remains a valid fallback if spot is
+#     unavailable for a given instance shape.
+#   * Instance families are restricted to general-purpose (m, t) and
+#     compute-optimized (c) and capped at 1-8 vCPUs to keep the lab cheap.
+#   * Consolidation runs aggressively (WhenEmptyOrUnderutilized, 1m) and
+#     the disruption budget is set to 100% so Karpenter can reclaim any
+#     node at any time.
+#   * Resource limits cap the pool at 100 CPU / 400Gi to bound cost.
+#   * A NoSchedule taint reserves these nodes for workloads that opt in
+#     via a matching toleration.
+
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  name: default
+  annotations:
+    kubernetes.io/description: "Lab default NodePool - spot-preferred, consolidates aggressively"
+spec:
+  template:
+    spec:
+      requirements:
+        # Linux on amd64.
+        - key: kubernetes.io/arch
+          operator: In
+          values: ["amd64"]
+        - key: kubernetes.io/os
+          operator: In
+          values: ["linux"]
+
+        # Capacity-type preference (Karpenter v1.6 does not support weighted
+        # requirements on individual entries; spot is listed first and the
+        # disruption budget lets Karpenter swap spot -> on-demand).
+        - key: karpenter.sh/capacity-type
+          operator: In
+          values: ["spot", "on-demand"]
+
+        # Restrict to general-purpose and compute-optimized families.
+        - key: karpenter.k8s.aws/instance-category
+          operator: In
+          values: ["m", "c", "t"]
+
+        # Cap vCPU count to keep lab nodes small and cheap.
+        - key: karpenter.k8s.aws/instance-cpu
+          operator: In
+          values: ["1", "2", "4", "8"]
+
+      # Reference the EC2NodeClass that defines networking, IAM, and AMI.
+      nodeClassRef:
+        group: karpenter.k8s.aws
+        kind: EC2NodeClass
+        name: default
+
+      # Reserve these nodes for dedicated workloads; pods must tolerate
+      # this taint to be scheduled onto Karpenter-launched instances.
+      taints:
+        - key: workload
+          value: dedicated
+          effect: NoSchedule
+
+  # Hard cap on aggregate resources provisioned by this NodePool.
+  limits:
+    cpu: "100"
+    memory: 400Gi
+
+  # Aggressive consolidation for the lab. 100% disruption budget means
+  # Karpenter is free to remove any node at any time.
+  disruption:
+    consolidationPolicy: WhenEmptyOrUnderutilized
+    consolidateAfter: 1m
+    budgets:
+      - nodes: "100%"
