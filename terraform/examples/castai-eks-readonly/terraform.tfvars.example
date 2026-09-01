@@ -28,6 +28,12 @@ aws_profile = "default"
 # Placeholder only. Provide the real value via TF_VAR_castai_api_token.
 castai_api_token = "castai-api-token"
 
+# CAST AI API base URL. Required for EU-based organizations or region-scoped keys.
+# Leave empty/null to use the provider default (https://api.cast.ai).
+# Example EU endpoint:
+# castai_api_url = "https://api.eu.cast.ai"
+castai_api_url = ""
+
 # Kubernetes namespace where CAST AI components are installed.
 castai_namespace = "castai-agent"
 

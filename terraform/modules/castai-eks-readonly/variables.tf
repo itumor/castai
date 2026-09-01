@@ -42,6 +42,12 @@ variable "castai_api_token" {
   }
 }
 
+variable "castai_api_url" {
+  type        = string
+  default     = ""
+  description = "CAST AI API base URL. Required for region-scoped tokens (e.g. EU: https://api.eu.cast.ai). Leave empty to use the chart default (https://api.cast.ai)."
+}
+
 # ------------------------------------------------------------------------------
 # Helm Configuration
 # ------------------------------------------------------------------------------

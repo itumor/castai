@@ -31,6 +31,7 @@ module "castai_eks_readonly" {
 
   # CAST AI authentication (token is sensitive; never echo in plan output)
   castai_api_token = var.castai_api_token
+  castai_api_url   = var.castai_api_url
 
   # Helm configuration
   castai_chart_version = var.castai_chart_version

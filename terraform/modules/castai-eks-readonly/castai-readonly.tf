@@ -44,26 +44,34 @@ resource "helm_release" "castai" {
   ]
 
   # Mode selection: read-only only. Explicitly disable all automation tags.
-  set = [
-    {
-      name  = "global.castai.provider"
-      value = "eks"
-    },
-    {
-      name  = "tags.readonly"
-      value = "true"
-    },
-    {
-      name  = "tags.full"
-      value = "false"
-    },
-    {
-      name  = "tags.node-autoscaler"
-      value = "false"
-    },
-    {
-      name  = "tags.workload-autoscaler"
-      value = "false"
-    }
-  ]
+  set = concat(
+    [
+      {
+        name  = "global.castai.provider"
+        value = "eks"
+      },
+      {
+        name  = "tags.readonly"
+        value = "true"
+      },
+      {
+        name  = "tags.full"
+        value = "false"
+      },
+      {
+        name  = "tags.node-autoscaler"
+        value = "false"
+      },
+      {
+        name  = "tags.workload-autoscaler"
+        value = "false"
+      },
+    ],
+    var.castai_api_url != "" ? [
+      {
+        name  = "global.castai.apiURL"
+        value = var.castai_api_url
+      }
+    ] : []
+  )
 }
