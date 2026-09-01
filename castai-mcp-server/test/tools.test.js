@@ -120,9 +120,9 @@ function makeStubClient(responses) {
 // ---------- handlers ----------
 
 describe('tool handlers', () => {
-  it('list_clusters calls GET /v1/kubernetes/clusters with no query', async () => {
+  it('list_clusters calls GET /v1/kubernetes/external-clusters with no query', async () => {
     const { get, calls } = makeStubClient([
-      { path: '/v1/kubernetes/clusters', result: { items: [] } }
+      { path: '/v1/kubernetes/external-clusters', result: { items: [] } }
     ]);
     const res = await handlers.list_clusters({}, { client: { get } });
     expect(calls).to.have.lengthOf(1);
@@ -138,32 +138,32 @@ describe('tool handlers', () => {
   const perClusterCases = [
     {
       name: 'get_cluster_details',
-      path: `/v1/kubernetes/clusters/${CLUSTER}`,
+      path: `/v1/kubernetes/external-clusters/${CLUSTER}`,
       args: { clusterId: CLUSTER }
     },
     {
       name: 'get_cluster_savings',
-      path: `/v1/kubernetes/clusters/${CLUSTER}/savings`,
+      path: `/v1/cost-reports/clusters/${CLUSTER}/savings`,
       args: { clusterId: CLUSTER }
     },
     {
       name: 'get_cluster_nodes',
-      path: `/v1/kubernetes/clusters/${CLUSTER}/nodes`,
+      path: `/v1/kubernetes/external-clusters/${CLUSTER}/nodes`,
       args: { clusterId: CLUSTER }
     },
     {
       name: 'get_cluster_utilization',
-      path: `/v1/kubernetes/clusters/${CLUSTER}/utilization`,
+      path: `/v1/cost-reports/clusters/${CLUSTER}/overview`,
       args: { clusterId: CLUSTER }
     },
     {
       name: 'get_workload_recommendations',
-      path: `/v1/kubernetes/clusters/${CLUSTER}/workload-recommendations`,
+      path: `/v1/workload-autoscaling/clusters/${CLUSTER}/workloads-summary`,
       args: { clusterId: CLUSTER }
     },
     {
       name: 'get_workload_autoscaler_status',
-      path: `/v1/kubernetes/clusters/${CLUSTER}/autoscaler`,
+      path: `/v1/workload-autoscaling/clusters/${CLUSTER}/components/workload-autoscaler`,
       args: { clusterId: CLUSTER }
     }
   ];
@@ -180,10 +180,10 @@ describe('tool handlers', () => {
     });
   }
 
-  it('get_cluster_cost hits /v1/cost-management/.../cost and forwards range=7d', async () => {
+  it('get_cluster_cost hits /v1/cost-reports/.../cost and forwards range=7d', async () => {
     const { get, calls } = makeStubClient([
       {
-        path: `/v1/cost-management/clusters/${CLUSTER}/cost`,
+        path: `/v1/cost-reports/clusters/${CLUSTER}/cost`,
         query: { range: '7d' },
         result: { total: 12.34 }
       }
@@ -200,7 +200,7 @@ describe('tool handlers', () => {
   it('get_cluster_cost defaults range to 7d when not supplied', async () => {
     const { get, calls } = makeStubClient([
       {
-        path: `/v1/cost-management/clusters/${CLUSTER}/cost`,
+        path: `/v1/cost-reports/clusters/${CLUSTER}/cost`,
         query: { range: '7d' },
         result: { total: 0 }
       }
@@ -209,13 +209,13 @@ describe('tool handlers', () => {
     expect(calls[0].query).to.deep.equal({ range: '7d' });
   });
 
-  it('get_available_savings hits /v1/savings', async () => {
+  it('get_available_savings hits /v1/cost-reports/organization/clusters/summary', async () => {
     const { get, calls } = makeStubClient([
-      { path: '/v1/savings', result: { potential: 100 } }
+      { path: '/v1/cost-reports/organization/clusters/summary', result: { potential: 100 } }
     ]);
     const res = await handlers.get_available_savings({}, { client: { get } });
     expect(calls).to.have.lengthOf(1);
-    expect(calls[0].path).to.equal('/v1/savings');
+    expect(calls[0].path).to.equal('/v1/cost-reports/organization/clusters/summary');
     expect(JSON.parse(res.content[0].text)).to.deep.equal({ potential: 100 });
   });
 
@@ -236,25 +236,18 @@ describe('tool handlers', () => {
     expect(JSON.parse(res.content[0].text)).to.deep.equal({ items: [] });
   });
 
-  it('get_recent_optimization_actions falls back to /v1/kubernetes/actions without clusterId', async () => {
-    const { get, calls } = makeStubClient([
-      {
-        path: '/v1/kubernetes/actions',
-        query: { limit: 50 },
-        result: { items: ['a', 'b'] }
-      }
-    ]);
+  it('get_recent_optimization_actions requires clusterId', async () => {
+    const { get } = makeStubClient([]);
     const res = await handlers.get_recent_optimization_actions({}, { client: { get } });
-    expect(calls[0].path).to.equal('/v1/kubernetes/actions');
-    expect(calls[0].query).to.deep.equal({ limit: 50 });
-    expect(JSON.parse(res.content[0].text)).to.deep.equal({ items: ['a', 'b'] });
+    expect(res.isError).to.equal(true);
+    expect(res.content[0].text).to.match(/clusterId is required/);
   });
 
   it('handlers return isError=true when client.get throws, and redact secrets', async () => {
     const sentinelErr = new Error(
-      'CAST AI GET /v1/kubernetes/clusters failed: 401 — Token castai_v1_supersecret'
+      'CAST AI GET /v1/kubernetes/external-clusters failed: 401 — Token castai_v1_supersecret'
     );
-    const { get } = makeStubClient([{ path: '/v1/kubernetes/clusters', error: sentinelErr }]);
+    const { get } = makeStubClient([{ path: '/v1/kubernetes/external-clusters', error: sentinelErr }]);
     const res = await handlers.list_clusters({}, { client: { get } });
     expect(res.isError).to.equal(true);
     expect(res.content[0].type).to.equal('text');

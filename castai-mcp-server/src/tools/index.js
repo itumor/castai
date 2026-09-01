@@ -126,14 +126,14 @@ export const toolDefinitions = {
       'List Kubernetes clusters visible to the bound CAST AI organization.',
     mutating: false,
     method: 'GET',
-    pathTemplate: '/v1/kubernetes/clusters',
+    pathTemplate: '/v1/kubernetes/external-clusters',
     inputSchema: {
       ...READ_ONLY_PROPS,
       properties: {}
     },
     handler: async (_args, { client }) => {
       try {
-        const data = await client.get('/v1/kubernetes/clusters');
+        const data = await client.get('/v1/kubernetes/external-clusters');
         return formatSuccess(data);
       } catch (err) {
         return formatError(err);
@@ -147,7 +147,7 @@ export const toolDefinitions = {
       'Get detailed information about a specific CAST AI Kubernetes cluster.',
     mutating: false,
     method: 'GET',
-    pathTemplate: '/v1/kubernetes/clusters/{clusterId}',
+    pathTemplate: '/v1/kubernetes/external-clusters/{clusterId}',
     inputSchema: {
       ...READ_ONLY_PROPS,
       properties: {
@@ -165,7 +165,7 @@ export const toolDefinitions = {
           return formatError(new Error('clusterId is required'));
         }
         const data = await client.get(
-          `/v1/kubernetes/clusters/${encodeURIComponent(clusterId)}`
+          `/v1/kubernetes/external-clusters/${encodeURIComponent(clusterId)}`
         );
         return formatSuccess(data);
       } catch (err) {
@@ -180,7 +180,7 @@ export const toolDefinitions = {
       'Get cumulative cost savings reported by CAST AI for a specific cluster.',
     mutating: false,
     method: 'GET',
-    pathTemplate: '/v1/kubernetes/clusters/{clusterId}/savings',
+    pathTemplate: '/v1/cost-reports/clusters/{clusterId}/savings',
     inputSchema: {
       ...READ_ONLY_PROPS,
       properties: {
@@ -198,7 +198,7 @@ export const toolDefinitions = {
           return formatError(new Error('clusterId is required'));
         }
         const data = await client.get(
-          `/v1/kubernetes/clusters/${encodeURIComponent(clusterId)}/savings`
+          `/v1/cost-reports/clusters/${encodeURIComponent(clusterId)}/savings`
         );
         return formatSuccess(data);
       } catch (err) {
@@ -213,7 +213,7 @@ export const toolDefinitions = {
       'Get recent cost / spend breakdown reported by CAST AI for a specific cluster.',
     mutating: false,
     method: 'GET',
-    pathTemplate: '/v1/cost-management/clusters/{clusterId}/cost',
+    pathTemplate: '/v1/cost-reports/clusters/{clusterId}/cost',
     inputSchema: {
       ...READ_ONLY_PROPS,
       properties: {
@@ -236,7 +236,7 @@ export const toolDefinitions = {
           return formatError(new Error('clusterId is required'));
         }
         const data = await client.get(
-          `/v1/cost-management/clusters/${encodeURIComponent(clusterId)}/cost`,
+          `/v1/cost-reports/clusters/${encodeURIComponent(clusterId)}/cost`,
           { query: { range: range || '7d' } }
         );
         return formatSuccess(data);
@@ -252,7 +252,7 @@ export const toolDefinitions = {
       'List the worker nodes tracked by CAST AI for a specific cluster.',
     mutating: false,
     method: 'GET',
-    pathTemplate: '/v1/kubernetes/clusters/{clusterId}/nodes',
+    pathTemplate: '/v1/kubernetes/external-clusters/{clusterId}/nodes',
     inputSchema: {
       ...READ_ONLY_PROPS,
       properties: {
@@ -270,7 +270,7 @@ export const toolDefinitions = {
           return formatError(new Error('clusterId is required'));
         }
         const data = await client.get(
-          `/v1/kubernetes/clusters/${encodeURIComponent(clusterId)}/nodes`
+          `/v1/kubernetes/external-clusters/${encodeURIComponent(clusterId)}/nodes`
         );
         return formatSuccess(data);
       } catch (err) {
@@ -285,25 +285,45 @@ export const toolDefinitions = {
       'Get CPU / memory utilization statistics for a specific cluster.',
     mutating: false,
     method: 'GET',
-    pathTemplate: '/v1/kubernetes/clusters/{clusterId}/utilization',
+    pathTemplate: '/v1/cost-reports/clusters/{clusterId}/overview',
     inputSchema: {
       ...READ_ONLY_PROPS,
       properties: {
         clusterId: {
           type: 'string',
           description: 'CAST AI cluster ID (UUID).'
+        },
+        startTime: {
+          type: 'string',
+          format: 'date-time',
+          description:
+            'Start of the utilization window (ISO 8601). Defaults to 24 hours ago.'
+        },
+        endTime: {
+          type: 'string',
+          format: 'date-time',
+          description:
+            'End of the utilization window (ISO 8601). Defaults to now.'
         }
       },
       required: ['clusterId']
     },
     handler: async (args, { client }) => {
       try {
-        const { clusterId } = args || {};
+        const { clusterId, startTime, endTime } = args || {};
         if (!clusterId) {
           return formatError(new Error('clusterId is required'));
         }
+        const now = new Date();
+        const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
         const data = await client.get(
-          `/v1/kubernetes/clusters/${encodeURIComponent(clusterId)}/utilization`
+          `/v1/cost-reports/clusters/${encodeURIComponent(clusterId)}/overview`,
+          {
+            query: {
+              startTime: startTime || yesterday.toISOString(),
+              endTime: endTime || now.toISOString()
+            }
+          }
         );
         return formatSuccess(data);
       } catch (err) {
@@ -318,7 +338,7 @@ export const toolDefinitions = {
       'Get workload right-sizing and consolidation recommendations for a specific cluster.',
     mutating: false,
     method: 'GET',
-    pathTemplate: '/v1/kubernetes/clusters/{clusterId}/workload-recommendations',
+    pathTemplate: '/v1/workload-autoscaling/clusters/{clusterId}/workloads-summary',
     inputSchema: {
       ...READ_ONLY_PROPS,
       properties: {
@@ -336,7 +356,7 @@ export const toolDefinitions = {
           return formatError(new Error('clusterId is required'));
         }
         const data = await client.get(
-          `/v1/kubernetes/clusters/${encodeURIComponent(clusterId)}/workload-recommendations`
+          `/v1/workload-autoscaling/clusters/${encodeURIComponent(clusterId)}/workloads-summary`
         );
         return formatSuccess(data);
       } catch (err) {
@@ -351,7 +371,7 @@ export const toolDefinitions = {
       'Get the current status of CAST AI workload autoscaler for a specific cluster.',
     mutating: false,
     method: 'GET',
-    pathTemplate: '/v1/kubernetes/clusters/{clusterId}/autoscaler',
+    pathTemplate: '/v1/workload-autoscaling/clusters/{clusterId}/components/workload-autoscaler',
     inputSchema: {
       ...READ_ONLY_PROPS,
       properties: {
@@ -369,7 +389,7 @@ export const toolDefinitions = {
           return formatError(new Error('clusterId is required'));
         }
         const data = await client.get(
-          `/v1/kubernetes/clusters/${encodeURIComponent(clusterId)}/autoscaler`
+          `/v1/workload-autoscaling/clusters/${encodeURIComponent(clusterId)}/components/workload-autoscaler`
         );
         return formatSuccess(data);
       } catch (err) {
@@ -384,14 +404,14 @@ export const toolDefinitions = {
       'Get the current estimated savings opportunity across clusters visible to the bound org.',
     mutating: false,
     method: 'GET',
-    pathTemplate: '/v1/savings',
+    pathTemplate: '/v1/cost-reports/organization/clusters/summary',
     inputSchema: {
       ...READ_ONLY_PROPS,
       properties: {}
     },
     handler: async (_args, { client }) => {
       try {
-        const data = await client.get('/v1/savings');
+        const data = await client.get('/v1/cost-reports/organization/clusters/summary');
         return formatSuccess(data);
       } catch (err) {
         return formatError(err);
@@ -405,15 +425,13 @@ export const toolDefinitions = {
       'Get the recent optimization actions (rebalances, spot migrations, etc.) executed by CAST AI.',
     mutating: false,
     method: 'GET',
-    pathTemplate:
-      '/v1/kubernetes/clusters/{clusterId}/actions OR /v1/kubernetes/actions',
+    pathTemplate: '/v1/kubernetes/clusters/{clusterId}/actions',
     inputSchema: {
       ...READ_ONLY_PROPS,
       properties: {
         clusterId: {
           type: 'string',
-          description:
-            'Optional CAST AI cluster ID (UUID). If omitted, returns actions across the bound org.'
+          description: 'CAST AI cluster ID (UUID).'
         },
         limit: {
           type: 'integer',
@@ -421,16 +439,20 @@ export const toolDefinitions = {
           maximum: 200,
           description: 'Maximum number of actions to return. Defaults to 50.'
         }
-      }
+      },
+      required: ['clusterId']
     },
     handler: async (args, { client }) => {
       try {
         const { clusterId, limit } = args || {};
+        if (!clusterId) {
+          return formatError(new Error('clusterId is required'));
+        }
         const query = { limit: limit == null ? 50 : limit };
-        const path = clusterId
-          ? `/v1/kubernetes/clusters/${encodeURIComponent(clusterId)}/actions`
-          : '/v1/kubernetes/actions';
-        const data = await client.get(path, { query });
+        const data = await client.get(
+          `/v1/kubernetes/clusters/${encodeURIComponent(clusterId)}/actions`,
+          { query }
+        );
         return formatSuccess(data);
       } catch (err) {
         return formatError(err);

@@ -18,13 +18,28 @@ function makeFetchStub(responses) {
   return { fn, calls };
 }
 
-function jsonResponse(status, body, statusText) {
+function jsonResponse(status, body, statusText, headers = {}) {
   return {
     ok: status >= 200 && status < 300,
     status,
     statusText: statusText || (status >= 200 && status < 300 ? 'OK' : 'Error'),
+    headers: {
+      get: (key) => headers[key] || null
+    },
     text: async () => (typeof body === 'string' ? body : JSON.stringify(body))
   };
+}
+
+function networkError(message, code) {
+  const err = new Error(message);
+  err.name = 'TypeError';
+  err.code = code;
+  return err;
+}
+
+function stubDelay(client) {
+  // Eliminate real sleeps in retry tests so they remain fast and deterministic.
+  client._delay = () => Promise.resolve();
 }
 
 describe('CastaiClient', () => {
@@ -116,5 +131,108 @@ describe('CastaiClient', () => {
     expect(u.searchParams.get('limit')).to.equal('5');
     expect(u.searchParams.has('cursor')).to.equal(false);
     expect(u.searchParams.has('prev')).to.equal(false);
+  });
+
+  it('retries on 429 and honors Retry-After', async () => {
+    const { fn, calls } = makeFetchStub([
+      jsonResponse(429, { error: 'rate limited' }, 'Too Many Requests', { 'Retry-After': '1' }),
+      jsonResponse(200, { ok: true })
+    ]);
+    const c = new CastaiClient({ apiKey: 'k', fetchImpl: fn, maxRetries: 3 });
+    stubDelay(c);
+    const res = await c.get('/v1/things');
+    expect(calls).to.have.lengthOf(2);
+    expect(res).to.deep.equal({ ok: true });
+  });
+
+  it('retries on 5xx responses and succeeds when upstream recovers', async () => {
+    const { fn, calls } = makeFetchStub([
+      jsonResponse(502, { error: 'bad gateway' }, 'Bad Gateway'),
+      jsonResponse(503, { error: 'unavailable' }, 'Service Unavailable'),
+      jsonResponse(200, { recovered: true })
+    ]);
+    const c = new CastaiClient({ apiKey: 'k', fetchImpl: fn, maxRetries: 3 });
+    stubDelay(c);
+    const res = await c.get('/v1/things');
+    expect(calls).to.have.lengthOf(3);
+    expect(res).to.deep.equal({ recovered: true });
+  });
+
+  it('does not retry non-retryable 4xx errors', async () => {
+    const { fn, calls } = makeFetchStub([
+      jsonResponse(404, { error: 'not found' }, 'Not Found')
+    ]);
+    const c = new CastaiClient({ apiKey: 'k', fetchImpl: fn, maxRetries: 3 });
+    let caught = null;
+    try {
+      await c.get('/v1/things');
+    } catch (err) {
+      caught = err;
+    }
+    expect(caught).to.be.instanceOf(CastaiApiError);
+    expect(caught.status).to.equal(404);
+    expect(calls).to.have.lengthOf(1);
+  });
+
+  it('retries transient network errors', async () => {
+    let calls = 0;
+    const fn = async (url, init) => {
+      calls += 1;
+      if (calls === 1) {
+        throw networkError('fetch failed', 'ECONNRESET');
+      }
+      return jsonResponse(200, { ok: true });
+    };
+    const c = new CastaiClient({ apiKey: 'k', fetchImpl: fn, maxRetries: 3 });
+    stubDelay(c);
+    const res = await c.get('/v1/things');
+    expect(calls).to.equal(2);
+    expect(res).to.deep.equal({ ok: true });
+  });
+
+  it('gives up after exhausting maxRetries', async () => {
+    const { fn, calls } = makeFetchStub([
+      jsonResponse(504, { error: 'timeout' }, 'Gateway Timeout'),
+      jsonResponse(504, { error: 'timeout' }, 'Gateway Timeout'),
+      jsonResponse(504, { error: 'timeout' }, 'Gateway Timeout'),
+      jsonResponse(504, { error: 'timeout' }, 'Gateway Timeout')
+    ]);
+    const c = new CastaiClient({ apiKey: 'k', fetchImpl: fn, maxRetries: 3 });
+    stubDelay(c);
+    let caught = null;
+    try {
+      await c.get('/v1/things');
+    } catch (err) {
+      caught = err;
+    }
+    expect(caught).to.be.instanceOf(CastaiApiError);
+    expect(caught.status).to.equal(504);
+    expect(calls).to.have.lengthOf(4);
+  });
+
+  it('aborts requests that exceed timeoutMs', async () => {
+    const responses = [];
+    const fn = async (url, init) => {
+      responses.push({ url, init });
+      return new Promise((_resolve, reject) => {
+        const onAbort = () => reject(new Error('AbortError'));
+        if (init.signal && init.signal.aborted) {
+          onAbort();
+          return;
+        }
+        if (init.signal) {
+          init.signal.addEventListener('abort', onAbort, { once: true });
+        }
+      });
+    };
+    const c = new CastaiClient({ apiKey: 'k', fetchImpl: fn, timeoutMs: 50, maxRetries: 0 });
+    let caught = null;
+    try {
+      await c.get('/v1/things');
+    } catch (err) {
+      caught = err;
+    }
+    expect(caught).to.not.equal(null);
+    expect(caught.name === 'AbortError' || /AbortError|timeout/i.test(caught.message)).to.equal(true);
   });
 });

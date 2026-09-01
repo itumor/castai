@@ -16,7 +16,11 @@ The server is built around three defensive layers:
   `get_cluster_nodes`, `get_cluster_utilization`,
   `get_workload_recommendations`, `get_workload_autoscaler_status`,
   `get_available_savings`, `get_recent_optimization_actions`) issue only
-  `GET` against `api.eu.cast.ai`. Any non-`GET` call is rejected by the
+  `GET` against `api.eu.cast.ai`. The mapped endpoints are validated
+  against the official CAST AI OpenAPI spec; for example,
+  `list_clusters` calls `/v1/kubernetes/external-clusters`, cost tools
+  call `/v1/cost-reports/...`, and workload tools call
+  `/v1/workload-autoscaling/.... Any non-`GET` call is rejected by the
   policy gate unless `APPROVAL_MODE=approve` is set and a valid approval
   token is presented. The HTTP client itself refuses to send `POST`,
   `PUT`, `PATCH`, or `DELETE`.
@@ -32,6 +36,12 @@ The server is built around three defensive layers:
   `X-API-Key` headers, and any JSON field named `apiKey`, `api_key`,
   `token`, `password`, `secret`, etc., before the value is sent to the
   LLM. Logs go to stderr; stdout is reserved for MCP frames.
+- **Resilient HTTP client.** The CAST AI client is configured with a
+  30-second request timeout, exponential-backoff retries, and explicit
+  handling of HTTP 429 rate-limit responses (honoring the
+  `Retry-After` header when present). Only transient errors (network
+  failures, 5xx, 429) are retried; 4xx client errors are surfaced
+  immediately.
 
 See `.kimchi/docs/castai-mcp-architecture.md` and
 `.kimchi/docs/castai-mcp-security.md` for the full design.
@@ -52,6 +62,7 @@ See `.kimchi/docs/castai-mcp-architecture.md` and
    - Create a new key with the minimum read scopes listed in
      `.kimchi/docs/castai-mcp-security.md` §2
      (`organizations:read`, `kubernetes/external-clusters:read`,
+     `cost-reports:read`, `workload-autoscaling:read`,
      `inventory:read`, `recommendations:read`). Do **not** grant any
      write, admin, billing, or cluster-connect scopes.
    - Set an expiry (90 days) and a label such as `kimchi-mcp-readonly`.
@@ -106,8 +117,8 @@ OpenCode. Replace `<id>` with the actual CAST AI cluster UUID.
 
 - **Get recent optimization actions.**
 
-  > Use `get_recent_optimization_actions` (no arguments) to fetch the
-  > most recent 50 optimization actions across our org. Group them by
+  > Use `get_recent_optimization_actions` with `clusterId` to fetch the
+  > most recent 50 optimization actions for that cluster. Group them by
   > action type and call out anything unusual.
 
 - **What workload recommendations exist for cluster `<id>`?**
@@ -122,7 +133,7 @@ OpenCode. Replace `<id>` with the actual CAST AI cluster UUID.
   >    in `.env`.
   > 2. Call the meta-tool `approve_operation` with
   >    `toolName="delete_cluster"`, `method="DELETE"`,
-  >    `path="/v1/kubernetes/clusters/<id>"`. The server returns a
+  >    `path="/v1/kubernetes/external-clusters/<id>"`. The server returns a
   >    single-use, 5-minute `token`.
   > 3. Call `invoke_approved_operation` with the same `toolName`,
   >    `method`, `path`, the returned `token`, and `clusterId=<id>`.
@@ -142,7 +153,22 @@ npm test
 ```
 
 The suite uses Mocha and covers the policy gate, the HTTP client, the
-redactor, the approval gate, the server wiring, and the tool registry.
+redactor, the approval gate, the server wiring, the tool registry, an
+end-to-end stdio MCP test with a mocked CAST AI upstream, and the
+validated endpoint mappings.
+
+### Real API smoke test
+
+After configuring `.env`, you can verify connectivity against the live
+CAST AI API without exposing credentials:
+
+```sh
+node scripts/real-castai-smoke.js
+```
+
+The script loads `.env`, calls `/v1/kubernetes/external-clusters`, and
+writes a redacted report to
+`.kimchi/docs/castai-mcp-smoke-report.md`.
 
 ## End-to-end test (stdio)
 

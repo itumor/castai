@@ -94,14 +94,33 @@ export class CastaiApiError extends Error {
   }
 }
 
+// Helper to create an AbortSignal that fires after `ms` milliseconds.
+function timeoutSignal(ms) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), ms);
+  // Deno/Node expose different shapes; returning the signal is enough for fetch.
+  const signal = controller.signal;
+  signal.__cleanup = () => clearTimeout(id);
+  return signal;
+}
+
 export class CastaiClient {
-  constructor({ apiKey, baseUrl, orgId, fetchImpl } = {}) {
+  constructor({
+    apiKey,
+    baseUrl,
+    orgId,
+    fetchImpl,
+    timeoutMs = 30000,
+    maxRetries = 3
+  } = {}) {
     if (!apiKey || typeof apiKey !== 'string') {
       throw new Error('CastaiClient: apiKey is required');
     }
     this.apiKey = apiKey;
     this.baseUrl = (baseUrl || 'https://api.eu.cast.ai').replace(/\/+$/, '');
     this.orgId = orgId || null;
+    this.timeoutMs = Number.isFinite(timeoutMs) && timeoutMs > 0 ? timeoutMs : 30000;
+    this.maxRetries = Number.isFinite(maxRetries) && maxRetries >= 0 ? maxRetries : 3;
     // Allow injection for tests; Node 18+ ships a global fetch.
     this.fetchImpl = fetchImpl || (typeof fetch === 'function' ? fetch : null);
     if (typeof this.fetchImpl !== 'function') {
@@ -159,29 +178,102 @@ export class CastaiClient {
       }
     }
 
-    const init = {
-      method,
-      headers: this._headers(),
-      // No body for GET.
-    };
+    let lastError = null;
+    for (let attempt = 0; attempt <= this.maxRetries; attempt++) {
+      const signal = timeoutSignal(this.timeoutMs);
+      const init = {
+        method,
+        headers: this._headers(),
+        signal
+        // No body for GET.
+      };
 
-    const res = await this.fetchImpl(url.toString(), init);
-    const text = await res.text();
-    let parsed = null;
-    if (text) {
+      let res;
       try {
-        parsed = JSON.parse(text);
+        res = await this.fetchImpl(url.toString(), init);
+      } catch (err) {
+        lastError = err;
+        if (attempt === this.maxRetries) break;
+        if (!this._isRetryableNetworkError(err)) {
+          break;
+        }
+        await this._delay(attempt, err);
+        continue;
+      } finally {
+        if (signal.__cleanup) signal.__cleanup();
+      }
+
+      if (res.ok) {
+        const text = await res.text();
+        let parsed = null;
+        if (text) {
+          try {
+            parsed = JSON.parse(text);
+          } catch (_) {
+            parsed = text;
+          }
+        }
+        return parsed;
+      }
+
+      lastError = new CastaiApiError(
+        `CAST AI ${method} ${path} failed: ${res.status} ${res.statusText}`,
+        { status: res.status, body: await this._safeText(res), url: url.toString(), method }
+      );
+
+      if (!this._isRetryableStatus(res.status) || attempt === this.maxRetries) {
+        break;
+      }
+
+      await this._delay(attempt, lastError, res);
+    }
+
+    throw lastError;
+  }
+
+  _isRetryableStatus(status) {
+    // 429 Too Many Requests and 5xx server errors are retryable.
+    return status === 429 || (status >= 500 && status < 600);
+  }
+
+  _isRetryableNetworkError(err) {
+    if (!err) return false;
+    if (err.name === 'AbortError' || err.code === 'ABORT_ERR') return true;
+    if (err.code === 'ECONNRESET' || err.code === 'ETIMEDOUT' || err.code === 'ECONNREFUSED') {
+      return true;
+    }
+    if (err.message && /timeout|abort|network/i.test(err.message)) return true;
+    return false;
+  }
+
+  async _safeText(res) {
+    try {
+      const text = await res.text();
+      if (!text) return null;
+      try {
+        return JSON.parse(text);
       } catch (_) {
-        parsed = text;
+        return text;
+      }
+    } catch (_) {
+      return null;
+    }
+  }
+
+  async _delay(attempt, error, res) {
+    let delayMs = Math.min(1000 * 2 ** attempt, 30000);
+    // Honor Retry-After for 429 responses, clamped to 60s max.
+    if (res && res.status === 429) {
+      const retryAfter = res.headers.get('Retry-After');
+      if (retryAfter) {
+        const parsed = parseInt(retryAfter, 10);
+        if (!Number.isNaN(parsed)) {
+          delayMs = Math.min(parsed * 1000, 60000);
+        }
       }
     }
-
-    if (!res.ok) {
-      throw new CastaiApiError(
-        `CAST AI ${method} ${path} failed: ${res.status} ${res.statusText}`,
-        { status: res.status, body: parsed, url: url.toString(), method }
-      );
-    }
-    return parsed;
+    // Add small jitter to avoid thundering herd.
+    delayMs += Math.floor(Math.random() * 250);
+    return new Promise((resolve) => setTimeout(resolve, delayMs));
   }
 }
