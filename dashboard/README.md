@@ -250,6 +250,73 @@ npm test
 external services are required: the backend tests stub the upstream CAST
 AI calls, and the UI tests load `public/app.js` into jsdom.
 
+## End-to-end validation
+
+To verify the dashboard against live CAST AI data:
+
+1. Ensure `dashboard/.env` contains a valid, read-only `CASTAI_API_KEY`
+   and the matching `CASTAI_REGION` (default `api.cast.ai`).
+2. Start the server on a non-default port so it does not collide with
+   other local services:
+
+   ```bash
+   cd dashboard
+   PORT=3456 npm start
+   ```
+
+3. In another terminal, probe the backend:
+
+   ```bash
+   curl -s http://localhost:3456/api/health
+   # expected: {"status":"ok"}
+
+   curl -s http://localhost:3456/api/clusters | jq length
+   # expected: a non-negative integer
+   ```
+
+4. Open `http://localhost:3456/` in a browser. The page should show the
+   dashboard title and one card per cluster returned by CAST AI.
+5. Click the refresh button and confirm the cards reload without a full
+   page refresh.
+6. Verify that the API key is not present in the HTML, `app.js`, or the
+   `/api/clusters` response body.
+
+A jsdom-driven E2E helper exists at `test/dashboard-e2e.js` for
+automated validation without installing a browser framework. Run it
+while the server is live on `PORT=3456`:
+
+```bash
+cd dashboard
+node test/dashboard-e2e.js
+```
+
+The script loads the real HTML and JavaScript, stubs `window.fetch`
+with the live `/api/clusters` payload, and asserts that cards render,
+loading/error/empty states transition correctly, and no console errors
+occur.
+
+## Dev workflow
+
+1. Install dependencies: `cd dashboard && npm install`.
+2. Copy `.env.example` to `.env` and set `CASTAI_API_KEY`.
+3. Start the server: `npm start` (or `PORT=3456 npm start`).
+4. Edit `public/app.js` or `server.js`; refresh the browser to see
+   changes (no build step).
+5. Run tests before committing: `npm test`.
+6. Keep `.env` out of git. The file is already git-ignored; never stage
+   it.
+
+## Troubleshooting
+
+| Symptom | Likely cause | Fix |
+| --- | --- | --- |
+| `GET /api/clusters` returns `502` | CAST AI rejected the API key or the region is wrong | Check `CASTAI_API_KEY` and `CASTAI_REGION` in `.env`; verify the key with a direct `curl -H "X-API-Key: $CASTAI_API_KEY" https://$CASTAI_REGION/v1/kubernetes/external-clusters`. |
+| `GET /api/clusters` returns `503` | `CASTAI_API_KEY` is missing or empty | Set a valid key in `.env` or in the process environment. |
+| Region cell shows `[object Object]` (fixed) | Real CAST AI API returns `region` as `{name, displayName}` | Already handled in `public/app.js`; if it reappears, coerce the field to `region.displayName \|\| region.name`. |
+| UI tests fail with `loadServer` dotenv leak | A `.env` file is present and `process.env.CASTAI_API_KEY` was deleted rather than blanked | Fixed in `test/server.test.js`; isolated env vars are set to `''` before re-requiring `server.js`. |
+| Browser shows an error banner | `/api/clusters` returned a non-2xx status | Check the server logs; the response body is intentionally sanitized and never contains the API key. |
+| `npm test` hangs | A previous `node server.js` may still be running | Find and kill the process (`lsof -iTCP:3000` or the port you chose). |
+
 ## CAST AI documentation links
 
 - CAST AI REST API reference:

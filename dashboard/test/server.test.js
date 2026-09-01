@@ -10,8 +10,11 @@ const http = require('node:http');
 function loadServer(env) {
   const prevEnv = { ...process.env };
   // Wipe relevant variables first, then apply the test's env.
+  // Set removed keys to an empty string rather than deleting them so that a
+  // re-required server.js does not re-populate them from `dashboard/.env`
+  // via dotenv.config().
   for (const key of ['CASTAI_API_KEY', 'CASTAI_REGION', 'PORT', 'DASHBOARD_API_TOKEN', 'DASHBOARD_CACHE_TTL_MS']) {
-    delete process.env[key];
+    process.env[key] = '';
   }
   Object.assign(process.env, env);
 

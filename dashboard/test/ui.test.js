@@ -365,3 +365,77 @@ test('error banner dismiss button hides the error', async () => {
     dom.window.close();
   }
 });
+
+test('Region renders displayName when API returns region as an object {name, displayName}', async () => {
+  // Real CAST AI /v1/kubernetes/external-clusters returns region as an object
+  // `{ name, displayName }`. The frontend must coerce that to a string and
+  // never produce "[object Object]" in the rendered Region cell.
+  const clusters = [
+    {
+      id: 'cls-region-obj',
+      name: 'region-obj-cluster',
+      status: 'ready',
+      providerType: 'eks',
+      region: { name: 'us-west-2', displayName: 'US West (Oregon)' },
+      agentStatus: 'connected',
+      nodeCount: 2,
+      resources: {
+        cpuRequested: 4,
+        cpuUsed: 1,
+        cpuUtilization: 0.25,
+        memoryRequested: 8,
+        memoryUsed: 2,
+        memoryUtilization: 0.25,
+      },
+      savings: {
+        currentMonthlyCost: 100,
+        optimizedMonthlyCost: 60,
+        monthlySavings: 40,
+        savingsPercentage: 0.4,
+      },
+      workloadOptimizationOpportunities: 0,
+    },
+    {
+      // Belt-and-braces: only `name`, no `displayName` — must fall back to `name`.
+      id: 'cls-region-name-only',
+      name: 'region-name-only-cluster',
+      status: 'ready',
+      providerType: 'gke',
+      region: { name: 'europe-west1' },
+      agentStatus: 'connected',
+      nodeCount: 1,
+      resources: {},
+      savings: {},
+      workloadOptimizationOpportunities: 0,
+    },
+  ];
+
+  const fetchImpl = () => Promise.resolve(
+    makeResponse({ ok: true, status: 200, body: clusters })
+  );
+
+  const dom = setupDom(fetchImpl);
+  try {
+    await flushAsync();
+    const { document } = dom.window;
+
+    const card1 = getCard(document, 'cls-region-obj');
+    assert.ok(card1, 'first card present');
+    assert.ok(!card1.textContent.includes('[object Object]'),
+      'card 1 must not render "[object Object]" anywhere');
+    assert.ok(card1.textContent.includes('US West (Oregon)'),
+      'card 1 renders region.displayName');
+    // The raw object fields must not leak either.
+    assert.ok(!card1.textContent.includes('us-west-2'),
+      'card 1 prefers displayName over name when both are present');
+
+    const card2 = getCard(document, 'cls-region-name-only');
+    assert.ok(card2, 'second card present');
+    assert.ok(!card2.textContent.includes('[object Object]'),
+      'card 2 must not render "[object Object]" anywhere');
+    assert.ok(card2.textContent.includes('europe-west1'),
+      'card 2 falls back to region.name when displayName is absent');
+  } finally {
+    dom.window.close();
+  }
+});

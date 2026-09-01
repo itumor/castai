@@ -195,7 +195,12 @@
     const name = safe(cluster && cluster.name, 'Unnamed cluster');
     const id = safe(cluster && cluster.id, '');
     const provider = safe(cluster && cluster.providerType, 'N/A');
-    const region = safe(cluster && cluster.region, 'N/A');
+    const rawRegion = cluster && cluster.region;
+    const region = typeof rawRegion === 'string'
+      ? rawRegion
+      : (rawRegion && typeof rawRegion === 'object'
+          ? (rawRegion.displayName || rawRegion.name || 'N/A')
+          : safe(rawRegion, 'N/A'));
     const statusClass = classifyStatus(cluster && cluster.status);
     const agentClass = classifyAgentStatus(cluster && cluster.agentStatus);
     const nodeCount = safe(cluster && cluster.nodeCount, null);
