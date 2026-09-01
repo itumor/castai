@@ -1,0 +1,28 @@
+# Read-only RBAC for the Karpenter Visualizer MVP
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: karpenter-visualizer-read-only
+rules:
+  - apiGroups: ["karpenter.sh"]
+    resources: ["nodepools", "nodeclaims"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["karpenter.k8s.aws"]
+    resources: ["ec2nodeclasses"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["nodes", "pods", "events"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: karpenter-visualizer-read-only
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: karpenter-visualizer-read-only
+subjects:
+  - kind: ServiceAccount
+    name: karpenter-visualizer
+    namespace: karpenter-visualizer

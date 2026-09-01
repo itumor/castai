@@ -1,0 +1,20 @@
+# Kustomization for the Karpenter Visualizer.
+#
+# Apply with:  kubectl apply -k k8s/
+#
+# Order is preserved by kustomize; namespace and ServiceAccount must exist
+# before RBAC and the Deployment can be applied.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: karpenter-visualizer
+
+commonLabels:
+  app.kubernetes.io/part-of: karpenter-visualizer
+
+resources:
+  - namespace.yaml
+  - serviceaccount.yaml
+  - rbac.yaml
+  - deployment.yaml
+  - service.yaml

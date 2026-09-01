@@ -1,0 +1,43 @@
+{
+  "name": "karpenter-visualizer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Read-only web visualizer for the Karpenter object graph",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n backend,frontend -c blue,green \"npm:dev:backend\" \"npm:dev:frontend\"",
+    "dev:backend": "tsx watch src/backend/server.ts",
+    "dev:frontend": "vite",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "tsc -p tsconfig.backend.json",
+    "build:frontend": "vite build",
+    "start": "node dist/backend/backend/server.js",
+    "test": "npm run test:api && npm run test:ui",
+    "test:api": "vitest run --config vitest.config.ts",
+    "test:ui": "vitest run --config vitest.frontend.config.ts --passWithNoTests",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@kubernetes/client-node": "^0.21.0",
+    "express": "^4.19.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/supertest": "^6.0.2",
+    "@vitejs/plugin-react": "^4.3.1",
+    "concurrently": "^8.2.2",
+    "jsdom": "^24.1.0",
+    "supertest": "^7.0.0",
+    "tsx": "^4.15.7",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11",
+    "vitest": "^1.6.0"
+  }
+}

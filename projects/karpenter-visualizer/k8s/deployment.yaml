@@ -1,0 +1,129 @@
+# Karpenter Visualizer — production Deployment.
+#
+# Security posture:
+#   - Uses the read-only ServiceAccount defined in serviceaccount.yaml.
+#   - Runs as non-root with a read-only root filesystem.
+#   - Drops all Linux capabilities and disallows privilege escalation.
+#   - No secrets, no write permissions, no privileged mounts.
+#
+# Configuration is via environment variables only. The container reads
+# `PORT` (default 3000) at startup; the readiness/liveness probes hit
+# `/api/healthz` on the same port.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karpenter-visualizer
+  namespace: karpenter-visualizer
+  labels:
+    app.kubernetes.io/name: karpenter-visualizer
+    app.kubernetes.io/part-of: karpenter-visualizer
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: karpenter-visualizer
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: karpenter-visualizer
+        app.kubernetes.io/part-of: karpenter-visualizer
+      annotations:
+        # Refresh pods whenever the ConfigMap digest changes. Even though
+        # we do not mount any ConfigMap today, keeping the annotation in
+        # place makes future config rollout trivial and is free.
+        # configmap.reloader.stakater.com/reload: "karpenter-visualizer-config"
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "3000"
+        prometheus.io/path: "/api/healthz"
+    spec:
+      serviceAccountName: karpenter-visualizer
+      automountServiceAccountToken: true
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: karpenter-visualizer
+          image: karpenter-visualizer:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          env:
+            # Backend port. The Express server reads PORT directly; we set
+            # the explicit default of 3000 so the value is visible from
+            # `kubectl describe`.
+            - name: PORT
+              value: "3000"
+            # Production mode causes the server to also serve the built
+            # frontend from dist/frontend.
+            - name: NODE_ENV
+              value: "production"
+            - name: FRONTEND_DIST_DIR
+              value: "dist/frontend"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          startupProbe:
+            httpGet:
+              path: /api/healthz
+              port: http
+            initialDelaySeconds: 2
+            periodSeconds: 3
+            failureThreshold: 20
+          livenessProbe:
+            httpGet:
+              path: /api/healthz
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/healthz
+              port: http
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
+            successThreshold: 1
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            runAsGroup: 10001
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            privileged: false
+            capabilities:
+              drop:
+                - ALL
+          # tmpfs mounts satisfy the read-only root filesystem requirement
+          # for paths Node writes to at runtime (e.g. /tmp for caches).
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: cache
+              mountPath: /app/.cache
+      volumes:
+        - name: tmp
+          emptyDir:
+            medium: Memory
+            sizeLimit: 64Mi
+        - name: cache
+          emptyDir:
+            medium: Memory
+            sizeLimit: 32Mi

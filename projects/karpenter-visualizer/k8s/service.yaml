@@ -1,0 +1,25 @@
+# Karpenter Visualizer — ClusterIP Service.
+#
+# ClusterIP is intentional: the visualizer has no built-in authentication,
+# so it should be reached through a trusted network path (Ingress, VPN,
+# bastion, port-forward). Expose it externally only after putting an
+# authenticating reverse proxy in front.
+apiVersion: v1
+kind: Service
+metadata:
+  name: karpenter-visualizer
+  namespace: karpenter-visualizer
+  labels:
+    app.kubernetes.io/name: karpenter-visualizer
+    app.kubernetes.io/part-of: karpenter-visualizer
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: karpenter-visualizer
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: http
+      # `targetPort: http` resolves to the named container port `http`
+      # (3000) defined in the Deployment.
