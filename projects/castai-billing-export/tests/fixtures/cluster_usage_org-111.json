@@ -1,0 +1,24 @@
+{
+  "detail": {
+    "entities": [
+      {
+        "entityId": "cluster-aaa",
+        "entityName": "alpha-prod",
+        "usage": 12.5,
+        "unit": "CPU_HOURS"
+      },
+      {
+        "entityId": "cluster-bbb",
+        "entityName": "beta-prod",
+        "usage": 7.25,
+        "unit": "CPU_HOURS"
+      },
+      {
+        "entityId": "cluster-orphan",
+        "entityName": "orphan-cluster",
+        "usage": 3.0,
+        "unit": "CPU_HOURS"
+      }
+    ]
+  }
+}

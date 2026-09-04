@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "id": "cluster-ccc",
+      "name": "gamma-prod",
+      "provider": "gke",
+      "gke": {
+        "projectId": "my-gcp-project-123"
+      }
+    },
+    {
+      "id": "cluster-ddd",
+      "name": "delta-prod",
+      "provider": "aks",
+      "aks": {
+        "subscriptionId": "sub-abcdef-1234"
+      }
+    }
+  ]
+}

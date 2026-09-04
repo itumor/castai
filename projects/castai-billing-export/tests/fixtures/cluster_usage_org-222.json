@@ -1,0 +1,18 @@
+{
+  "detail": {
+    "entities": [
+      {
+        "entityId": "cluster-ccc",
+        "entityName": "gamma-prod",
+        "usage": 5.5,
+        "unit": "CPU_HOURS"
+      },
+      {
+        "entityId": "cluster-ddd",
+        "entityName": "delta-prod",
+        "usage": 9.75,
+        "unit": "CPU_HOURS"
+      }
+    ]
+  }
+}

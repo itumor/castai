@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "id": "cluster-aaa",
+      "name": "alpha-prod",
+      "provider": "eks",
+      "providerNamespaceId": "111111111111"
+    },
+    {
+      "id": "cluster-bbb",
+      "name": "beta-prod",
+      "provider": "eks",
+      "eks": {
+        "accountId": "222222222222"
+      }
+    }
+  ]
+}

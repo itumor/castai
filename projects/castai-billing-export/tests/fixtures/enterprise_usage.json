@@ -1,0 +1,14 @@
+{
+  "detail": {
+    "entities": [
+      {
+        "entityId": "org-111",
+        "entityName": "Customer A"
+      },
+      {
+        "entityId": "org-222",
+        "entityName": "Customer B"
+      }
+    ]
+  }
+}
