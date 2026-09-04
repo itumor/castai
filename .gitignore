@@ -21,5 +21,10 @@ terraform.tfvars
 test-results/
 *.zip
 
+# Cluster readiness generated outputs
+cluster-readiness-outputs/*.xlsx
+cluster-readiness-outputs/reports/
+cluster-readiness-outputs/**/*.pdf
+
 # macOS
 .DS_Store
