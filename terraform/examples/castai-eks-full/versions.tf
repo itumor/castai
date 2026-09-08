@@ -13,7 +13,7 @@ terraform {
     # node configurations / templates in full mode.
     castai = {
       source  = "castai/castai"
-      version = "~> 8.58.0"
+      version = "~> 9.2.1"
     }
 
     # Helm provider installs the CAST AI umbrella chart on the existing

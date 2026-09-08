@@ -21,9 +21,9 @@ terraform {
       version = "~> 3.2"
     }
 
-    # NOTE: The castai/castai provider is intentionally omitted.
-    # It is only required for node-autoscaler / full modes that provision nodes
-    # and create cloud IAM resources. Read-only mode does not register the cluster
-    # with CAST AI via Terraform and does not need node-provisioning permissions.
+    castai = {
+      source  = "castai/castai"
+      version = "~> 9.2.1"
+    }
   }
 }

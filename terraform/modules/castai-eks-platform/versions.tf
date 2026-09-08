@@ -10,7 +10,7 @@ terraform {
       version = ">= 6.23.0, < 7.0.0"
     }
 
-    # CAST AI provider is required in full mode so that the module can
+    # CAST AI provider is required in platform mode so that the module can
     # register the cluster, install node configurations / templates and
     # manage CAST AI-side resources.
     castai = {
@@ -19,7 +19,7 @@ terraform {
     }
 
     # Helm provider installs the CAST AI umbrella chart on the existing
-    # cluster as part of the full mode onboarding.
+    # cluster as part of the platform mode onboarding.
     helm = {
       source  = "hashicorp/helm"
       version = "~> 3.1"
