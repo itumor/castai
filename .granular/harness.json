@@ -1,0 +1,43 @@
+{
+  "name": "siemens-castai",
+  "description": "Siemens CAST AI support and integration workspace",
+  "defaultCwd": "/Users/eramadan/castai",
+  "envFiles": [
+    "awskey.env",
+    ".env"
+  ],
+  "mcpServers": [
+    {
+      "name": "castai-mcp-server",
+      "command": "node",
+      "args": [
+        "/Users/eramadan/castai/castai-mcp-server/src/server.js"
+      ],
+      "transport": "stdio",
+      "envFile": "/Users/eramadan/castai/castai-mcp-server/.env"
+    }
+  ],
+  "previewUrls": [
+    {
+      "name": "CAST AI Dashboard",
+      "url": "http://localhost:3000"
+    },
+    {
+      "name": "Karpenter Visualizer",
+      "url": "http://localhost:5173"
+    },
+    {
+      "name": "Karpenter Visualizer Backend",
+      "url": "http://localhost:3001"
+    },
+    {
+      "name": "Dashboard Dev Port",
+      "url": "http://localhost:3456"
+    }
+  ],
+  "skillsDirectory": "brain/skills/",
+  "docs": {
+    "contracts": "/Users/eramadan/castai/CONTRACTS.md",
+    "agents": "/Users/eramadan/castai/AGENTS.md"
+  }
+}
