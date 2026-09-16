@@ -51,22 +51,15 @@ module "castai-eks-role-iam" {
 }
 
 # ------------------------------------------------------------------------------
-# AWS: Allow the CAST AI node instance profile role to access the EKS cluster
+# AWS: Allow the CAST AI node instance profile role to access the EKS cluster.
+# EC2_LINUX access entries automatically receive the AmazonEKSWorkerNodePolicy
+# permissions; an explicit aws_eks_access_policy_association is invalid for
+# this entry type and causes InvalidParameterException.
 # ------------------------------------------------------------------------------
 resource "aws_eks_access_entry" "castai_nodes" {
   cluster_name  = var.cluster_name
   principal_arn = module.castai-eks-role-iam.instance_profile_role_arn
   type          = "EC2_LINUX"
-}
-
-resource "aws_eks_access_policy_association" "castai_nodes_worker" {
-  cluster_name  = var.cluster_name
-  policy_arn    = "arn:aws:eks::aws:policy/AmazonEKSWorkerNodePolicy"
-  principal_arn = module.castai-eks-role-iam.instance_profile_role_arn
-
-  access_scope {
-    type = "cluster"
-  }
 }
 
 # ------------------------------------------------------------------------------
@@ -105,10 +98,11 @@ module "castai-eks-cluster" {
   }
 
   # Default node template CAST AI will assign to newly reconciled nodes.
+  # The name must be exactly "default-by-castai" for CAST AI to derive
+  # is_default = true automatically.
   node_templates = {
-    default_by_castai = {
+    "default-by-castai" = {
       configuration_id = module.castai-eks-cluster.castai_node_configurations["default"]
-      is_default       = true
       is_enabled       = true
       should_taint     = false
     }

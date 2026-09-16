@@ -1,0 +1,99 @@
+# eksctl ClusterConfig for the CAST AI token rotation E2E harness.
+#
+# Creates a minimal EKS cluster in eu-north-1 with a small managed node
+# group. IRSA (OIDC) is enabled because the CAST AI components
+# installed in Chunk 3 (cluster-controller, spot-handler, evictor,
+# workload-autoscaler) each assume an IAM role via IRSA.
+#
+# Size rationale: CAST AI umbrella chart v0.43.x in full mode (tags.full=true)
+# schedules agent, cluster-controller, evictor, kvisor, live-controller,
+# pod-mutator, pod-pinner, workload-autoscaler, and more. A single
+# t3.medium (2 vCPU / 4 GiB) cannot fit all of these. We run two
+# t3.xlarge nodes (4 vCPU / 16 GiB each) to give full mode enough room
+# to schedule every component plus headroom for the EBS CSI driver and
+# kube-system pods. minSize=2 / maxSize=4 allows eksctl to replace an
+# unhealthy node without dropping below the minimum needed for full mode.
+#
+# This cluster is disposable. The lifecycle wrapper in lib/cluster.sh
+# deletes it via `eksctl delete cluster` and scrubs any orphaned
+# CloudFormation stacks, ELBs, EBS volumes, and IAM roles.
+#
+# Usage:
+#   eksctl create cluster -f e2e/token-rotation/configs/e2e-token-rotation.yaml
+
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  # Cluster identity. The name is prefixed `16926-` (a per-run suffix to
+  # avoid cached AWS state from previous runs) and continues with
+  # `castai-token-rotation-` so the safety guard in
+  # lib/cluster.sh::cluster::stop recognizes it as a disposable E2E
+  # cluster and never accidentally targets production.
+  name: 16926-castai-token-rotation-e2e
+  region: eu-north-1
+  version: "1.36"
+
+  # Tags applied to all cluster resources.
+  # - purpose: identifies this as a CAST AI token rotation E2E cluster.
+  # - persist: "false" flags it as disposable so external tooling (or
+  #   humans) never mistake it for long-lived infrastructure.
+  tags:
+    purpose: castai-token-rotation-e2e-test
+    persist: "false"
+
+iam:
+  # OIDC is required so CAST AI components can assume IAM roles via IRSA.
+  # Without this, the Helm install in Chunk 3 cannot wire up the
+  # per-component service accounts.
+  withOIDC: true
+
+# Explicitly disable EKS Auto Mode. The test only needs a single managed
+# node group; Auto Mode would add ManagedNodeGroups-style behaviour we do
+# not want for a token-rotation smoke test.
+autoModeConfig:
+  enabled: false
+
+managedNodeGroups:
+  # Managed node group sized for CAST AI umbrella chart full mode.
+  # desiredCapacity=2 gives full mode two nodes to spread components
+  # across; minSize=2 / maxSize=4 lets eksctl replace an unhealthy node
+  # without dropping below the minimum needed for full mode.
+  - name: system-ng
+    instanceType: t3.xlarge
+    amiFamily: AmazonLinux2023
+    minSize: 2
+    desiredCapacity: 2
+    maxSize: 4
+    volumeSize: 30
+
+    # Label nodes so CAST AI components can be targeted here if desired,
+    # while keeping the group small and stable for system components.
+    labels:
+      workload-type: system
+
+    tags:
+      alpha.eksctl.io/nodegroup-name: system-ng
+      alpha.eksctl.io/nodegroup-type: managed
+      purpose: castai-token-rotation-e2e-test
+      persist: "false"
+
+# Simple VPC layout suitable for a disposable test cluster. eksctl will
+# create a new VPC with public and private subnets and a single NAT
+# gateway. Public endpoint access is fine for a lab cluster.
+vpc:
+  cidr: 192.168.0.0/16
+  clusterEndpoints:
+    publicAccess: true
+    privateAccess: false
+  nat:
+    gateway: Single
+
+# CSI storage driver add-on. The CAST AI components do not strictly
+# require EBS, but installing the driver keeps the cluster closer to a
+# production shape and avoids surprises if a CAST AI component
+# dynamically provisions PersistentVolumes during the test.
+addons:
+  - name: aws-ebs-csi-driver
+    wellKnownPolicies:
+      ebsCSIController: true

@@ -1,5 +1,9 @@
 # Environment and secrets
-.env
+*.env
+.env.*
+!*.env.example
+!*.env-example
+!.env.example
 awskey.env
 *_key
 *.pem
@@ -13,8 +17,16 @@ kubeconfig*
 # Terraform
 *.tfstate
 *.tfstate.*
+**/*.tfstate
+**/*.tfstate.*
 .terraform/
+**/.terraform/
 terraform.tfvars
+**/*.tfvars
+!**/*.tfvars.example
+!terraform.tfvars.example
+*.tfplan
+tfplan*
 
 # Assistant / generated artifacts
 .kimchi/

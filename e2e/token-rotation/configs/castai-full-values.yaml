@@ -1,0 +1,102 @@
+# configs/castai-full-values.yaml
+#
+# Helm values for installing the castai/castai umbrella chart.
+#
+# Scope: the token-rotation E2E harness only needs castai-agent and
+# castai-cluster-controller running in the cluster. Everything else
+# (spot-handler, evictor, kvisor, workload-autoscaler, pod-mutator,
+# pod-pinner, live) is disabled explicitly so the install fits a 2-node
+# t3.xlarge cluster. The umbrella chart still requires a Secret name
+# under global.castai.apiKeySecretRef, so we point it at the
+# castai-agent secret.
+#
+# The harness still creates FIVE per-component secrets in the
+# castai-agent namespace (castai-agent-token, castai-cluster-controller-
+# token, castai-spot-handler-token, castai-evictor-token,
+# castai-workload-autoscaler-token). The unused secrets document the
+# production topology and stay in scope for the rotation step, which
+# patches every secret in place to reproduce the multi-secret rotation
+# surface. Only the two installed components get a running Deployment;
+# the rotation code does not try to restart absent deployments.
+#
+# Per-component secret resolution for the two installed components:
+#   - castai-agent                 -> autoscaler.castai-agent.apiKeySecretRef
+#   - castai-cluster-controller    -> autoscaler.castai-cluster-controller.castai.apiKeySecretRef
+#
+# Mode selection: tags.full is intentionally NOT set. Setting it would
+# pull in every subchart and trigger hooks (e.g. castai-evictor's
+# castai-evictor-crd-upgrade pre-install Job) that the small test
+# cluster cannot schedule. Each deployed subchart is enabled directly
+# under autoscaler.<name>.enabled.
+#
+# Schema verified against `helm show values castai/castai --version
+# 0.43.224` and `helm template ...` output.
+
+global:
+  castai:
+    # Name of the umbrella-level Secret with the CAST AI token. Used as
+    # the global default that the agent and cluster-controller fall back
+    # to when their own apiKeySecretRef is empty.
+    apiKeySecretRef: castai-agent-token
+    # CAST AI API endpoint. This harness targets the EU region only.
+    apiURL: https://api.eu.cast.ai
+    # Provider identifier expected by CAST AI for EKS clusters.
+    provider: eks
+
+# Mode tags are intentionally all false / unset. We do NOT use
+# tags.full=true because that would activate every subchart (and the
+# castai-evictor pre-install CRD upgrade hook that hangs on a 2-node
+# t3.xlarge EKS cluster). Components are enabled individually below.
+tags:
+  full: false
+  readonly: false
+  node-autoscaler: false
+  workload-autoscaler: false
+
+autoscaler:
+  # Only the two components the rotation test actually exercises.
+  # Everything else is explicitly disabled.
+  castai-agent:
+    # Required so the umbrella chart activates this subchart without
+    # tags.full=true.
+    enabled: true
+    # Per-component override pointing at the dedicated castai-agent
+    # secret. The umbrella subchart reads this at the top level (not
+    # under a castai.* subkey).
+    apiKeySecretRef: castai-agent-token
+  castai-cluster-controller:
+    # Required so the umbrella chart activates this subchart without
+    # tags.full=true.
+    enabled: true
+    # Run a single replica. The default (2) causes rollout restarts to
+    # hang on a 2-node t3.xlarge cluster because the subchart's pod
+    # anti-affinity cannot place a second pod until an old one is
+    # terminated, and Kubernetes rolling-update waits for the new pod
+    # to become ready first.
+    replicas: 1
+    castai:
+      apiKeySecretRef: castai-cluster-controller-token
+  # Disabled components. Each enabled: false prevents the umbrella
+  # chart from rendering any resources for the matching subchart
+  # (Deployment, DaemonSet, ClusterRole, hook Jobs, ...). The
+  # castai-evictor block also explicitly turns off crdUpgrade so that
+  # even if a future chart release re-enables the subchart by default
+  # the pre-install CRD upgrade Job will not run.
+  castai-spot-handler:
+    enabled: false
+  castai-evictor:
+    enabled: false
+    crdUpgrade:
+      enabled: false
+  castai-kvisor:
+    enabled: false
+  castai-pod-mutator:
+    enabled: false
+  castai-pod-pinner:
+    enabled: false
+  castai-live:
+    enabled: false
+  castai-workload-autoscaler:
+    enabled: false
+  castai-workload-autoscaler-exporter:
+    enabled: false

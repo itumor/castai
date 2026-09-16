@@ -1,0 +1,22 @@
+# Local artifacts, secrets, and runtime state for the token rotation E2E harness.
+# Anything that contains credentials, kubeconfig, or cluster-specific output
+# must never be committed.
+
+artifacts/
+logs/
+
+# Secrets / kubeconfig / terraform state
+.env
+.env.*
+*.env
+awskey.env
+kubeconfig
+kubeconfig.*
+*.kubeconfig
+*.tfstate
+*.tfstate.*
+
+# Temporary / downloaded artifacts
+e2e-preflight-resp.json
+*.log
+*.pid

@@ -1,0 +1,100 @@
+# configs/castai-agent-values-schema.yaml
+#
+# Minimal values-schema snapshot extracted from
+# `helm show values castai/castai --version 0.43.224`.
+#
+# This file is the offline source of truth for the value paths the E2E
+# harness relies on. When the chart is upgraded, refresh this file with
+# the output of `helm show values` and verify the paths below still
+# exist. If any of these paths is removed by an upstream chart release,
+# the harness's secret topology will silently degrade --
+# castai::verify_values would no longer detect a missing per-component
+# secret.
+#
+# Placeholder values only. DO NOT pass this file to `helm install/upgrade`
+# -- use configs/castai-full-values.yaml for that.
+#
+# Scope: only castai-agent and castai-cluster-controller are installed.
+# The remaining subcharts are documented here so verify_values can
+# confirm they are disabled in the values file.
+
+global:
+  castai:
+    # apiKeySecretRef -- name of the umbrella-level Secret with the
+    # CAST AI token. Acts as the global default for every component
+    # whose own apiKeySecretRef is empty.
+    apiKeySecretRef: ""
+    # apiURL -- CAST AI API endpoint. Set to the EU endpoint for this
+    # harness (https://api.eu.cast.ai).
+    apiURL: ""
+    # provider -- cluster provider identifier; must be "eks" for EKS
+    # clusters.
+    provider: ""
+
+# Mode flags. The umbrella chart treats the mode tags as mutually
+# exclusive. None of them must be true for this harness because each
+# deployed component is enabled directly under autoscaler.<name>.enabled.
+tags:
+  # full -- enables every CAST AI component. Intentionally false.
+  full: false
+  # readonly -- disables write-scope components. Must be false here.
+  readonly: false
+  # node-autoscaler -- sub-mode that enables cluster-controller and
+  # spot-handler (but not workload-autoscaler). Intentionally false.
+  node-autoscaler: false
+  # workload-autoscaler -- sub-mode that enables workload-autoscaler.
+  # Intentionally false.
+  workload-autoscaler: false
+
+autoscaler:
+  # Installed components.
+  castai-agent:
+    # enabled -- must be true to activate this subchart without
+    # setting tags.full=true.
+    enabled: true
+    # apiKeySecretRef -- per-component override of the agent token
+    # secret. Read at the top level of the component (NOT under a
+    # castai.* subkey).
+    apiKeySecretRef: ""
+  castai-cluster-controller:
+    # enabled -- must be true to activate this subchart without
+    # setting tags.full=true.
+    enabled: true
+    # replicas -- pinned to 1 for the E2E harness. The chart
+    # default of 2 causes rollout restarts to hang on a 2-node t3.xlarge
+    # cluster because the subchart's pod anti-affinity cannot place a
+    # second pod until an old one terminates, and the Kubernetes
+    # rolling-update strategy waits for the new pod to become ready
+    # first. With replicas: 1 the Deployment rolls in-place and
+    # the rotation test does not stall waiting for a second replica.
+    replicas: 1
+    castai:
+      # apiKeySecretRef -- token used by castai-cluster-controller. If
+      # rotation misses this secret, the controller logs "401
+      # Authorization Required" after restart -- the exact symptom
+      # observed on ngm-sim2-eks.
+      apiKeySecretRef: ""
+  # Disabled components. Each must have enabled: false so the umbrella
+  # chart does not render any resources for them (Daemonsets, Deployments,
+  # ClusterRoles, hook Jobs, ...).
+  castai-spot-handler:
+    enabled: false
+  castai-evictor:
+    enabled: false
+    # crdUpgrade must also be disabled so the pre-install CRD upgrade
+    # hook Job is never rendered. This is the Job that hung the live
+    # run with "no nodes available to schedule pods".
+    crdUpgrade:
+      enabled: false
+  castai-kvisor:
+    enabled: false
+  castai-pod-mutator:
+    enabled: false
+  castai-pod-pinner:
+    enabled: false
+  castai-live:
+    enabled: false
+  castai-workload-autoscaler:
+    enabled: false
+  castai-workload-autoscaler-exporter:
+    enabled: false

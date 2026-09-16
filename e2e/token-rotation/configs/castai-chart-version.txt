@@ -1,0 +1,7 @@
+# Pinned version of the castai/castai umbrella chart used by the token
+# rotation E2E harness. Update this file (not the install command) when
+# upgrading; castai::install_chart reads it via castai::_chart_version.
+#
+# Verified available in the castai Helm repo:
+#   helm search repo castai/castai --versions
+0.43.224

@@ -140,3 +140,20 @@ If reproduction requires a write action, stop after step 3 and escalate.
 | 8 | Never leave a long-running server or port-forward open after a session ends. | Clean up background processes. |
 | 9 | Never disable the MCP redactor or set `APPROVAL_MODE=approve` by default. | Weakens defense-in-depth. |
 | 10 | Never guess an org id, account id, or cluster id when scope is ambiguous. | Confirm before acting. |
+
+---
+
+## 6. Known runbooks
+
+When a case involves CAST AI cluster token rotation or `401 Authorization Required` after rotation, load the project skill `castai-token-rotation` and read the runbooks in `.kimchi/docs/`:
+
+- `token-rotation-e2e-status.md` — what was tested and the key findings.
+- `reply-glejn-token-rotation.md` — reviewed customer reply template.
+- `rotate-token-manual-commands.md` — manual rotation commands per install topology.
+
+Key facts:
+
+- The cluster token endpoint is `POST /v1/kubernetes/external-clusters/{clusterId}/token`; there is no public revoke endpoint.
+- The previous token stays valid for an extended period (observed ≥60 minutes).
+- Update every secret used by the topology, then restart every component.
+- Organization API keys are for management-API automation only, not as a replacement for the cluster token.
