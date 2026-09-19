@@ -1,0 +1,33 @@
+# Terraform working directory and local state
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.tfstate.lock.info
+
+# Local configuration and secrets
+terraform.tfvars
+*.auto.tfvars
+!terraform.tfvars.example
+backend.hcl
+backend.*.hcl
+!backend.hcl.example
+
+# Plans, crash logs, and local overrides
+*.tfplan
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Support email exports contain API tokens; keep local only
+ec2createtags_emails/
+
+# Assistant memory and logs
+.remember/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+

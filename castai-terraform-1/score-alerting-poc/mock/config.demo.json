@@ -1,0 +1,25 @@
+{
+  "base_url": "http://127.0.0.1:4015",
+  "state_file": ".demo-state.json",
+  "console_scores": {
+    "siemens-teamcenter-prod-eks": 1.0,
+    "siemens-teamcenter-dev-eks": 8.9
+  },
+  "owners": [
+    {
+      "pattern": "*teamcenter-prod*",
+      "emails": ["platform-team@siemens.example"],
+      "slack_webhook_env": "SLACK_WEBHOOK_TEAMCENTER"
+    },
+    {
+      "pattern": "*teamcenter-dev*",
+      "emails": ["dev-platform@siemens.example"]
+    }
+  ],
+  "default_recipients": { "emails": ["cs@cast.ai"] },
+  "smtp": {
+    "host": "smtp.siemens.example",
+    "port": 587,
+    "from": "castai-score-alerts@cast.ai"
+  }
+}

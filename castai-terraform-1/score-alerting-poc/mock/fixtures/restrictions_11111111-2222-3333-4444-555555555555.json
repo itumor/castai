@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "resource": {
+        "resourceName": "web-tier",
+        "resourceKind": "Deployment",
+        "resourceNamespace": "shop"
+      },
+      "restrictionIds": [
+        "missing-readiness-probe"
+      ]
+    },
+    {
+      "resource": {
+        "resourceName": "payments-pdb",
+        "resourceKind": "PodDisruptionBudget",
+        "resourceNamespace": "shop"
+      },
+      "restrictionIds": [
+        "pdb-too-strict"
+      ]
+    }
+  ],
+  "totalCount": 2
+}

@@ -1,0 +1,12 @@
+{
+  "rebalancingPlans": [
+    {
+      "id": "rb-2026-09-13-dev-01",
+      "clusterId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+      "status": "Completed",
+      "createdAt": "2026-09-13T08:00:00Z",
+      "updatedAt": "2026-09-13T08:37:00Z"
+    }
+  ],
+  "totalCount": 1
+}

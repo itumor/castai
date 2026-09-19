@@ -1,0 +1,37 @@
+{
+  "base_url": "https://api.eu.cast.ai",
+  "enterprise_id": null,
+  "organization_ids": [],
+  "cluster_name_filter": null,
+  "console_scores": {},
+  "thresholds": {
+    "cpu_overprov_pct": 20,
+    "ram_overprov_pct": 35,
+    "rebalancing_warn_days": 14,
+    "rebalancing_poor_days": 30,
+    "min_savings_pct": 10
+  },
+  "cooldown_hours": 24,
+  "state_file": ".score-alert-state.json",
+  "lookback_days": 31,
+  "owners": [
+    {
+      "pattern": "*teamcenter-prod*",
+      "emails": ["platform-team@customer.example"],
+      "slack_webhook_env": "SLACK_WEBHOOK_TEAMCENTER"
+    },
+    {
+      "pattern": "*dev*",
+      "emails": ["dev-platform@customer.example"]
+    }
+  ],
+  "default_recipients": { "emails": ["cs@cast.ai"] },
+  "smtp": {
+    "host": "smtp.customer.example",
+    "port": 587,
+    "starttls": true,
+    "from": "castai-score-alerts@cast.ai",
+    "username_env": "SMTP_USER",
+    "password_env": "SMTP_PASS"
+  }
+}

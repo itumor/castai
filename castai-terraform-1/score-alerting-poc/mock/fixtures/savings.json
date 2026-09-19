@@ -1,0 +1,15 @@
+{
+  "recommendations": {
+    "spotInstances": {
+      "hourlyPriceBefore": "0.45",
+      "hourlyPriceAfter": "0.13",
+      "savingsPercentage": "71"
+    },
+    "rightsizing": {
+      "hourlyPriceBefore": "0.45",
+      "hourlyPriceAfter": "0.31",
+      "savingsPercentage": "31"
+    }
+  },
+  "isRebalancingRecommended": true
+}

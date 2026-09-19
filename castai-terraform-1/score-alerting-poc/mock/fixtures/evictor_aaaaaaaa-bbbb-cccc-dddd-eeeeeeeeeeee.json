@@ -1,0 +1,11 @@
+{
+  "evictor": {
+    "enabled": true,
+    "dryRun": false,
+    "aggressiveMode": false,
+    "scopedMode": false,
+    "nodeGracePeriodMinutes": 5,
+    "podGracePeriodSeconds": 30,
+    "cycleInterval": 60
+  }
+}

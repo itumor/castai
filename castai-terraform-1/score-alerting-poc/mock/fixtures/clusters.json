@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "id": "11111111-2222-3333-4444-555555555555",
+      "name": "siemens-teamcenter-prod-eks",
+      "organizationId": "org-child-1",
+      "status": "connected",
+      "region": {
+        "name": "eu-west-1"
+      },
+      "providerType": "eks",
+      "agentType": "full",
+      "createdAt": "2026-01-15T09:30:00Z",
+      "rebalance": null
+    },
+    {
+      "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+      "name": "siemens-teamcenter-dev-eks",
+      "organizationId": "org-child-1",
+      "status": "connected",
+      "region": {
+        "name": "eu-west-1"
+      },
+      "providerType": "eks",
+      "agentType": "full",
+      "createdAt": "2026-02-02T14:05:00Z",
+      "rebalance": null
+    }
+  ],
+  "totalCount": 2
+}

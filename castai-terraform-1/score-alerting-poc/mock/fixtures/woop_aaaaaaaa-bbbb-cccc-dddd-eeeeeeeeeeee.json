@@ -1,0 +1,10 @@
+{
+  "policies": [
+    {
+      "id": "wp1",
+      "name": "dev-autoscale",
+      "enabled": true
+    }
+  ],
+  "totalCount": 1
+}

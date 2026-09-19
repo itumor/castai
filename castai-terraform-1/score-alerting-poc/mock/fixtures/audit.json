@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "eventType": "rebalancePlanExecution",
+      "initiatedBy": {
+        "id": "u1",
+        "name": "Guy Siemens",
+        "email": "guy@siemens.example"
+      },
+      "time": "2026-09-10T12:00:00Z",
+      "labels": {
+        "clusterId": "11111111-2222-3333-4444-555555555555"
+      },
+      "operation": {
+        "type": "rebalance",
+        "text": "Rebalance plan executed"
+      }
+    }
+  ],
+  "totalCount": 1
+}

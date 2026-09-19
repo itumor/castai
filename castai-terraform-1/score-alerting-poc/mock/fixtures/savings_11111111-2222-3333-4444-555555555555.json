@@ -1,0 +1,20 @@
+{
+  "recommendations": {
+    "spotInstances": {
+      "hourlyPriceBefore": "2.85",
+      "hourlyPriceAfter": "1.05",
+      "savingsPercentage": "63"
+    },
+    "rightsizing": {
+      "hourlyPriceBefore": "2.85",
+      "hourlyPriceAfter": "1.62",
+      "savingsPercentage": "43"
+    },
+    "reservedInstances": {
+      "hourlyPriceBefore": "2.85",
+      "hourlyPriceAfter": "1.99",
+      "savingsPercentage": "30"
+    }
+  },
+  "isRebalancingRecommended": true
+}

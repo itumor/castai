@@ -1,0 +1,12 @@
+{
+  "stepSeconds": "3600",
+  "cpuOverallProvisionedCores": "64",
+  "ramOverallProvisionedGib": "256",
+  "cpuOverallRequestedCores": "32",
+  "ramOverallRequestedGib": "128",
+  "cpuOverprovisioningPercent": 50.0,
+  "ramOverprovisioningPercent": 50.0,
+  "costPerProvisionedCpu": "0.031",
+  "costPerProvisionedRam": "0.0041",
+  "noDataReason": "NO_DATA_REASON_UNSPECIFIED"
+}

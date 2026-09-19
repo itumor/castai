@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "id": "org-child-1",
+      "name": "siemens-teamcenter",
+      "createTime": "2026-01-01T00:00:00Z",
+      "type": "ORGANIZATION_TYPE_CHILD",
+      "counters": {
+        "users": 3,
+        "groups": 1,
+        "roleBindings": 2,
+        "clusters": 2
+      },
+      "childOrderId": 1
+    }
+  ],
+  "totalSize": 1
+}

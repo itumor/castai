@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "CAST AI One-Apply EKS Onboarding",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "apply-scope",
+        "label": "What one apply runs",
+        "focus": [
+          "operator",
+          "stack",
+          "preflight",
+          "onboarding",
+          "iam"
+        ],
+        "note": "A single terraform apply drives preflight checks and both CAST AI registry modules."
+      },
+      {
+        "id": "cluster-registration",
+        "label": "Registration and trust",
+        "focus": [
+          "stack",
+          "saas",
+          "onboarding",
+          "iam",
+          "eks"
+        ],
+        "note": "The cluster registers with CAST AI; the onboarding module receives the assume-role ARN and an Access Entry."
+      },
+      {
+        "id": "autoscaling-capacity",
+        "label": "Autoscaling capacity",
+        "focus": [
+          "saas",
+          "onboarding",
+          "nodes",
+          "eks"
+        ],
+        "note": "CAST AI manages Spot-first EC2 capacity that joins the existing EKS cluster."
+      }
+    ]
+  },
+  "layout": {
+    "mode": "grid",
+    "origin": [
+      48,
+      64
+    ],
+    "cols": 4,
+    "gapX": 64,
+    "gapY": 96,
+    "cellW": 236,
+    "cellH": 104
+  },
+  "components": [
+    {
+      "id": "operator",
+      "type": "external",
+      "label": "Operator / CI",
+      "sublabel": "TF_VAR_castai_api_token",
+      "row": 1,
+      "col": 0,
+      "size": [
+        160,
+        64
+      ]
+    },
+    {
+      "id": "stack",
+      "type": "backend",
+      "label": "Root Terraform module",
+      "sublabel": "providers: AWS \u00b7 CAST AI \u00b7 Helm",
+      "row": 1,
+      "col": 1,
+      "size": [
+        200,
+        64
+      ]
+    },
+    {
+      "id": "preflight",
+      "type": "security",
+      "label": "Preflight guard (data.tf)",
+      "sublabel": "auth mode \u00b7 private subnets \u00b7 SGs in VPC",
+      "row": 2,
+      "col": 1,
+      "size": [
+        210,
+        68
+      ]
+    },
+    {
+      "id": "onboarding",
+      "type": "backend",
+      "label": "eks-cluster module",
+      "sublabel": "castai-agent \u00b7 evictor \u00b7 autoscaler policy",
+      "tag": "castai v14.6.1",
+      "row": 1,
+      "col": 2,
+      "size": [
+        220,
+        68
+      ]
+    },
+    {
+      "id": "iam",
+      "type": "security",
+      "label": "eks-role-iam module",
+      "sublabel": "assume role + node instance profile",
+      "tag": "castai v2.0.4",
+      "row": 2,
+      "col": 2,
+      "size": [
+        210,
+        68
+      ]
+    },
+    {
+      "id": "saas",
+      "type": "external",
+      "label": "CAST AI control plane",
+      "sublabel": "console.cast.ai \u2014 SaaS",
+      "row": 0,
+      "col": 2,
+      "size": [
+        200,
+        64
+      ]
+    },
+    {
+      "id": "eks",
+      "type": "cloud",
+      "label": "Target EKS cluster",
+      "sublabel": "existing cluster \u00b7 Access Entry",
+      "row": 1,
+      "col": 3,
+      "size": [
+        200,
+        68
+      ]
+    },
+    {
+      "id": "nodes",
+      "type": "cloud",
+      "label": "CAST AI-managed nodes",
+      "sublabel": "Spot-first EC2 \u00b7 gp3 \u00b7 private subnets",
+      "row": 2,
+      "col": 3,
+      "size": [
+        210,
+        68
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Terraform stack \u2014 this repo + registry modules",
+      "wraps": [
+        "stack",
+        "preflight",
+        "onboarding",
+        "iam"
+      ]
+    },
+    {
+      "kind": "security-group",
+      "label": "AWS account \u2014 EKS cluster VPC",
+      "wraps": [
+        "eks",
+        "nodes"
+      ]
+    },
+    {
+      "kind": "region",
+      "label": "CAST AI SaaS",
+      "wraps": [
+        "saas"
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "from": "operator",
+      "to": "stack",
+      "label": "terraform apply",
+      "variant": "emphasis"
+    },
+    {
+      "from": "stack",
+      "to": "onboarding"
+    },
+    {
+      "from": "stack",
+      "to": "preflight",
+      "label": "preflight checks",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "stack",
+      "to": "saas",
+      "label": "register: clusterid + user ARN",
+      "fromSide": "top",
+      "toSide": "left"
+    },
+    {
+      "from": "preflight",
+      "to": "iam",
+      "label": "depends_on"
+    },
+    {
+      "from": "iam",
+      "to": "onboarding",
+      "label": "assume-role ARN",
+      "variant": "security",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "from": "onboarding",
+      "to": "eks",
+      "label": "helm: castai-agent, evictor",
+      "variant": "emphasis",
+      "labelAt": [
+        908,
+        260
+      ]
+    },
+    {
+      "from": "onboarding",
+      "to": "saas",
+      "label": "node config \u00b7 template \u00b7 autoscaler",
+      "variant": "dashed",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "from": "iam",
+      "to": "eks",
+      "label": "Access Entry (EC2_LINUX)",
+      "variant": "security"
+    },
+    {
+      "from": "saas",
+      "to": "nodes",
+      "label": "manages EC2 capacity (Spot-first)",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "right",
+      "labelAt": [
+        1182,
+        346
+      ]
+    },
+    {
+      "from": "nodes",
+      "to": "eks",
+      "label": "join cluster",
+      "fromSide": "top",
+      "toSide": "bottom"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "One-Apply Flow",
+      "items": [
+        "Preflight preconditions fail fast on auth mode, subnets, and security groups",
+        "IAM role and instance profile are created before onboarding starts",
+        "The Helm provider authenticates with aws eks get-token"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Default Autoscaling Policy",
+      "items": [
+        "Spot-first node template with on-demand fallbacks enabled",
+        "Evictor removes eligible nodes on a 60s cycle with a 10-minute grace period",
+        "Empty nodes are removed after a 300s delay; CPU stays within min/max core limits"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Safe Teardown",
+      "items": [
+        "delete_nodes_on_disconnect defaults to false so destroy keeps EC2 nodes",
+        "API token enters only through TF_VAR_castai_api_token",
+        "State, plans, tfvars, and backend config stay out of version control"
+      ]
+    }
+  ]
+}

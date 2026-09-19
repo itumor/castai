@@ -1,0 +1,45 @@
+{
+  "enabled": true,
+  "isScopedMode": false,
+  "nodeDownscaler": {
+    "emptyNodes": {
+      "enabled": true,
+      "delaySeconds": 300
+    },
+    "evictor": {
+      "enabled": false,
+      "dryRun": true,
+      "aggressiveMode": false
+    }
+  },
+  "unschedulablePods": {
+    "enabled": true,
+    "nodeConstraints": {
+      "enabled": true,
+      "minCpuCores": 2,
+      "maxCpuCores": 32,
+      "minRamMib": 4096,
+      "maxRamMib": 131072
+    }
+  },
+  "clusterLimits": {
+    "enabled": true,
+    "cpu": {
+      "minCores": 2,
+      "maxCores": 100
+    }
+  },
+  "spotInstances": {
+    "enabled": true,
+    "clouds": [
+      "aws"
+    ],
+    "spotBackups": {
+      "enabled": true
+    }
+  },
+  "spotDiversity": {
+    "enabled": false,
+    "diversityGroups": []
+  }
+}

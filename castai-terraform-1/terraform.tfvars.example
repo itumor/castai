@@ -1,0 +1,25 @@
+cluster_name = "my-eks-cluster"
+aws_region   = "eu-central-1"
+
+node_subnet_ids = [
+  "subnet-0123456789abcdef0",
+  "subnet-0fedcba9876543210",
+]
+
+node_security_group_ids = [
+  "sg-0123456789abcdef0",
+]
+
+max_cluster_cpu_cores = 100
+
+# Optional. Omit to use the standard AWS credential chain.
+# aws_profile = "default"
+
+# Optional safe defaults.
+# min_cluster_cpu_cores      = 1
+# delete_nodes_on_disconnect = false
+
+node_tags = {
+  managed-by = "castai"
+}
+
