@@ -1,0 +1,112 @@
+# Disposable EKS cluster configuration for CAST AI Terraform E2E testing
+# using a Karpenter-style setup.
+#
+# PURPOSE: Throwaway cluster used to exercise both CAST AI Terraform examples
+# (the cluster module and the Karpenter/CLM module) end-to-end. This cluster
+# is intended to be created on demand, targeted by Terraform, then torn down.
+#
+# ACCOUNT: 050451381948 only. Do not run this in any other AWS account.
+#
+# REGION: Default is eu-west-1. The region can be overridden via the AWS_REGION
+# environment variable when deploying (eksctl honours AWS_REGION when no
+# explicit --region flag is given and metadata.region is also overridable).
+#
+# TRANSIENT: Do NOT enable persistence on this cluster. The `persist: "false"`
+# tag below is the signal to the cluster lifecycle tooling that this cluster
+# is disposable and safe to delete at the end of a test run.
+#
+# Usage:
+#   eksctl create cluster -f eksctl-castai-test-cluster.yaml
+
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  # Cluster identity
+  name: castai-terraform-e2e
+  region: eu-west-1
+  version: "1.36"
+
+  # Transient tags. `purpose` identifies this as a CAST AI Terraform E2E test
+  # cluster; `persist: "false"` flags it as disposable. Do NOT flip this to a
+  # true value - this cluster exists only for the duration of a test run.
+  # `karpenter.sh/discovery` lets Karpenter find subnets/security groups if
+  # NodeClasses are applied later.
+  tags:
+    purpose: castai-terraform-e2e-test
+    persist: "false"
+    karpenter.sh/discovery: castai-terraform-e2e
+
+iam:
+  # IAM OIDC provider is required so Karpenter's service account (and the
+  # EBS/EFS CSI driver add-ons) can be bound to IAM roles via IRSA.
+  withOIDC: true
+
+# Explicitly disable EKS Auto Mode so eksctl continues to create the managed
+# node group and managed networking add-ons (needed for CAST AI Terraform
+# and for the eksctl-managed Karpenter addon path).
+autoModeConfig:
+  enabled: false
+
+karpenter:
+  # Exact Karpenter Helm chart version to install. Use a version compatible
+  # with the selected Kubernetes version (see Karpenter compatibility matrix).
+  version: "1.14.0"
+
+  # Let eksctl create the karpenter ServiceAccount; this is the recommended
+  # mode when using the eksctl Karpenter addon.
+  createServiceAccount: true
+
+  # Provision the SQS queue and IAM policies needed for Spot interruption
+  # handling (Spot Instance termination notices, rebalance recommendations).
+  withSpotInterruptionQueue: true
+
+managedNodeGroups:
+  # Small managed node group for cluster system workloads (Karpenter
+  # controller, CoreDNS, kube-proxy, etc.). CAST AI recommends at least 3
+  # schedulable nodes for its components. Karpenter still provisions
+  # additional workload nodes from NodePools after cluster creation.
+  - name: system-ng
+    instanceType: t3.medium
+    amiFamily: AmazonLinux2023
+    minSize: 1
+    desiredCapacity: 3
+    maxSize: 3
+    volumeSize: 30
+
+    # Label nodes so workloads can be targeted here if desired, while
+    # keeping the group small and stable for system components.
+    # Note: keys with kubernetes.io/ or k8s.io/ prefixes are reserved by
+    # eksctl and cannot be used as custom nodegroup labels.
+    labels:
+      workload-type: system
+
+    # Propagate the same transient tags onto the managed node group resources
+    # so the nodegroup is consistently marked as disposable.
+    tags:
+      alpha.eksctl.io/nodegroup-name: system-ng
+      alpha.eksctl.io/nodegroup-type: managed
+      purpose: castai-terraform-e2e-test
+      persist: "false"
+
+# Simple VPC layout suitable for a disposable test cluster. eksctl will create
+# a new VPC with public and private subnets, a single NAT gateway, and the
+# shared node security group (which will be tagged for Karpenter discovery).
+vpc:
+  cidr: 192.168.0.0/16
+  clusterEndpoints:
+    publicAccess: true
+    privateAccess: false
+  nat:
+    gateway: Single
+
+# CSI storage driver add-ons. Each uses the wellKnownPolicies IRSA pattern so
+# eksctl creates the IAM role + ServiceAccount with the AWS-managed policy
+# required for the driver controller to manage the corresponding storage.
+addons:
+  - name: aws-ebs-csi-driver
+    wellKnownPolicies:
+      ebsCSIController: true
+  - name: aws-efs-csi-driver
+    wellKnownPolicies:
+      efsCSIController: true

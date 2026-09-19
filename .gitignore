@@ -33,6 +33,10 @@ tfplan*
 test-results/
 *.zip
 
+# Python bytecode
+__pycache__/
+*.py[cod]
+
 # Cluster readiness generated outputs
 cluster-readiness-outputs/*.xlsx
 cluster-readiness-outputs/reports/
