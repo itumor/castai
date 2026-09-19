@@ -1,0 +1,3 @@
+# Ignore false-positive test key in E2E docs.
+# The value is `invalid_key_12345`, not a real CAST AI token.
+64d3de38d4a3273a9160c7fe9180292f94a915bf:.ai/agents/castai-dev-dashboard-e2e.md:generic-api-key:33
