@@ -21,8 +21,10 @@ override.tf.json
 *_override.tf
 *_override.tf.json
 
-# Support email exports contain API tokens; keep local only
-ec2createtags_emails/
+# Support email exports contain API tokens; keep local only.
+# Track only the README so the directory purpose is documented.
+ec2createtags_emails/*
+!ec2createtags_emails/README.md
 
 # Assistant memory and logs
 .remember/
@@ -30,4 +32,24 @@ ec2createtags_emails/
 # Python bytecode
 __pycache__/
 *.py[cod]
+
+# Generic secrets / credentials
+*.pem
+*.key
+*_key
+id_*
+*.env
+.env.*
+!*.env.example
+!*.env-example
+!.env.example
+awskey.env
+.aws/credentials
+kubeconfig*
+*.p12
+*.pfx
+*.keystore
+*.jks
+secrets/
+!secrets/.gitkeep
 
