@@ -1,0 +1,17 @@
+# CAST AI Enterprise Dashboard — pinned direct dependencies.
+# python_requires >= 3.11 (3.12+ recommended; docs/security-requirements.md SEC-6.5).
+# Run `pip-audit --strict` before each release (SEC-6.3): any CRITICAL/HIGH CVE in a
+# pinned dependency blocks release until bumped or a documented waiver is attached.
+# Exact pins taken from the project venv (`pip freeze`). Direct dependencies only —
+# no transitive pins (SEC-6.1/6.2: exact `==` pinning is the blocking minimum;
+# hash pinning via pip-compile --generate-hashes is the SHOULD-level upgrade).
+# SEC-6.4: minimal dependency set — one-line justification per dependency below.
+
+streamlit==1.64.0       # dashboard framework (@st.fragment, st.dataframe row selection — see ux-design.md appendix A)
+pandas==3.0.6           # fleet table normalization, filtering, ratio-of-sums aggregation
+plotly==7.1.0           # cost/savings/drill-down charts
+httpx==0.28.1           # sync HTTP client for the CAST AI API (thread-pool fan-out)
+pydantic==2.13.5        # typed settings and wire-payload models (fail-closed config)
+python-dotenv==1.2.3    # local .env loading (env vars remain the production source)
+pytest==9.1.1           # test runner
+respx==0.23.1           # httpx mock transport — tests run fully without credentials

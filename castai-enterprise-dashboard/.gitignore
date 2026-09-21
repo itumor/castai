@@ -1,0 +1,20 @@
+# Secrets — must never be committed (docs/security-requirements.md SEC-1.2; CHK-01/CHK-02).
+.streamlit/secrets.toml
+.env
+awskey.env
+*.pem
+*.key
+*.p12
+*.kubeconfig
+
+# Python caches, virtualenvs, OS cruft.
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.DS_Store
+
+# NOTE: docs/openapi/castai-openapi.json is intentionally NOT ignored —
+# the 2.2MB pinned spec snapshot is committed for reproducibility (see README).
+*.csv
+tmp_agent*/

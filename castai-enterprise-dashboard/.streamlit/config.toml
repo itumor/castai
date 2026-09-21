@@ -1,0 +1,22 @@
+# CAST AI Enterprise Dashboard — committed Streamlit configuration.
+# NEVER commit .streamlit/secrets.toml (git-ignored; security-requirements.md SEC-1.2).
+# NEVER set [logger] level = "debug" or "trace" in shared deployments (SEC-5.2, CHK-20).
+
+[theme]
+# Minimal, professional. Restrained enterprise blue (ux-design.md "savings" token).
+base = "light"
+primaryColor = "#1565C0"
+
+[server]
+# SEC-5.2 / CHK-20: headless is the committed default (no auto-opened browser).
+# For local browser auto-open during development, launch with:
+#   streamlit run app.py --server.headless=false
+headless = true
+
+[browser]
+# No telemetry — mandatory (SEC-5.2 / SEC-7.2; the app adds no analytics whatsoever).
+gatherUsageStats = false
+
+[runner]
+# Deterministic rendering; no magic command rewriting (SEC-5.2).
+magicEnabled = false
