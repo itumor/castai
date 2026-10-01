@@ -90,6 +90,14 @@ npm test
 PORT=3456 npm start      # http://localhost:3456
 ```
 
+### castai-support-swarm
+
+```bash
+cd castai-support-swarm
+npm install
+npm test
+```
+
 ### Karpenter visualizer
 
 ```bash
@@ -105,6 +113,30 @@ MOCK_K8S=true npm run dev # http://localhost:5173, backend :3001
 cd projects/castai-billing-export
 ./tests/run_tests.sh
 ```
+
+### Support swarm (13-agent support pilot)
+
+```bash
+cd projects/castai-support-swarm
+npm test            # node --test, offline, no credentials needed
+npm run eval        # 7-case evaluation, writes evals/EVALUATION.md
+npm run demo        # offline answer to fixtures/thread-pdb-scaledown.md
+```
+
+Drafts are written to `outbox/` and are draft-only; a human sends. The CAST AI
+client inside is GET-only; keep `--live` mode (LLM provider + real read-only API
+client) behind the same preflight checks as section 1.
+
+Inside the DeepSeek Harness the swarm runs as the agent preset
+**CAST AI Support Swarm**; install it with
+`cd projects/castai-support-swarm && npm run install:dsh` (idempotent; writes
+`$DSH_HOME/.agent-presets/castai-support-swarm/`):
+select it when starting a session, then paste a customer thread — the session
+calls `support_swarm_answer` (offline engine: verdict, confidence, draft reply)
+or `support_swarm_eval`. In-session runs are offline only; `--live` stays a
+CLI decision. The workplace skill `.agents/skills/castai-support-swarm/`
+routes any pasted customer thread through the swarm in ANY session whose
+preset discovers workspace skills: load it before answering.
 
 ---
 

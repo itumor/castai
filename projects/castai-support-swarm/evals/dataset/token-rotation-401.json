@@ -1,0 +1,33 @@
+{
+  "id": "token-rotation-401",
+  "thread": {
+    "from": "Glejn Tamm <glejn.tamm@siemens.example.com>",
+    "subject": "401 Authorization Required after cluster token rotation",
+    "messages": [
+      {
+        "from": "Glejn Tamm <glejn.tamm@siemens.example.com>",
+        "date": "2026-09-28",
+        "body": "We rotated the CAST AI cluster token for our EKS cluster ngm-sim2-eks through the API.\nAbout an hour later the cluster-controller started logging 401 Authorization Required and\nthe console says \"Cluster controller not responding\". Our four concrete questions:\n\n401 after rotation — expected?\nOld token validity — how long?\nWhich secrets to update and restart?\nOrg API key usable instead of the cluster token?"
+      }
+    ]
+  },
+  "grounding": ".kimchi/docs/reply-glejn-token-rotation.md + token-rotation-e2e-status.md: endpoint is POST /v1/kubernetes/external-clusters/{clusterId}/token; the old token stays valid (observed at least 60 minutes); the fix is to update EVERY secret that holds the token and restart every component; an organization API key is NOT a substitute for the cluster token.",
+  "expect": {
+    "category": "token_rotation",
+    "planIncludes": ["researcher", "sre", "verifier", "writer"],
+    "verdict": "PASS",
+    "replyMustInclude": [
+      "external-clusters.{0,40}token|/token",
+      "(old|previous) cluster? ?token",
+      "stay|still|remain|valid",
+      "every (api[- ]key )?secret|all (of the )?(api[- ]key )?secrets",
+      "restart",
+      "organi[sz]ation[ -]api[ -]key|organi[sz]ation[ -]level api key|organization api key",
+      "not (a )?(substitute|replacement)|not recommend replacing|cannot be replaced|no substitute"
+    ],
+    "replyMustExclude": [
+      "token is revoked immediately",
+      "revok(ed|es) (the old token )?right away"
+    ]
+  }
+}

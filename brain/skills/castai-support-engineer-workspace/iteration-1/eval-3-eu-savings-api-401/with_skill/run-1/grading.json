@@ -1,0 +1,131 @@
+{
+  "expectations": [
+    {
+      "text": "Diagnoses the 401 as using an EU-org API key against the wrong (US/global) API base URL",
+      "passed": true,
+      "evidence": "answer.md lines 3-15: heading \"What's going on: you're calling the wrong region\"; \"Your org (Siemens EU) lives in the **EU region**, so your org API key is registered only with the EU deployment. Your script is pointing at `https://api.cast.ai` (the US/default endpoint), which has never heard of that key — so every call returns **401**. The key is fine; the base URL is wrong.\" Explains why the key works in the EU console but not the script. Genuine region-mismatch diagnosis, not surface compliance."
+    },
+    {
+      "text": "States the correct base URL is https://api.eu.cast.ai",
+      "passed": true,
+      "evidence": "answer.md line 8 lists \"EU region: `https://api.eu.cast.ai`\" and lines 17-21 have an explicit \"Fix: use the EU base URL\" block with `https://api.eu.cast.ai`; both curl examples (lines 26, 41) use it. Verified against live spec servers list (US `https://api.cast.ai/`, EU `https://api.eu.cast.ai/`) and docs.cast.ai/docs/api-access."
+    },
+    {
+      "text": "Provides a concrete, spec-accurate endpoint path under /v1/cost-reports/ for savings/cost data (verified against OpenAPI spec or local endpoint notes)",
+      "passed": true,
+      "evidence": "answer.md line 35: `GET /v1/cost-reports/clusters/{clusterId}/savings`. Verified against the full live spec at https://api.cast.ai/v1/spec/openapi.json (downloaded and queried): path exists, operationId ClusterReportAPI_GetClusterSavingsReport, required query params startTime and endTime (date-time), optional stepSeconds (int32) and useListingPrices (bool) — exactly matching the answer's parameter table. The answer's claimed response shape (items[{timestamp, downscalingSavings, spotSavings}] + summary{totalCost, totalSavings}, all strings) also matches the spec schema costreport.v1beta1.GetClusterSavingsReportResponse field-for-field."
+    },
+    {
+      "text": "Shows correct authentication via the X-API-Key header (e.g., in an example curl)",
+      "passed": true,
+      "evidence": "answer.md line 23 instructs to send the key in the `X-API-Key` header; line 26-28 shows `curl -sS \"https://api.eu.cast.ai/v1/organizations\" -H \"X-API-Key: $CASTAI_API_KEY\"`; line 41-43 shows a second curl with the same header against the savings endpoint. Confirmed official: docs.cast.ai/docs/api-access states \"To authenticate, provide the key in the `X-API-Key` HTTP header\", and the spec's global security schemes are BearerAuth + ApiKeyAuth (answer correctly notes Bearer JWT is the only other accepted scheme)."
+    },
+    {
+      "text": "Cites at least one official CAST AI source (docs.cast.ai, api.cast.ai spec, changelog, or github.com/castai)",
+      "passed": true,
+      "evidence": "answer.md Sources section (lines 66-70) cites three official sources: https://docs.cast.ai/docs/api-access, https://docs.cast.ai/reference/clusterreportapi_getclustersavingsreport, and https://api.cast.ai/v1/spec/openapi.json. All three verified live during grading: api-access.md HTTP 200, reference page HTTP 200, spec HTTP 200."
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 0,
+    "total": 5,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "total_tokens": null,
+    "duration_ms": 40228,
+    "total_duration_seconds": 40.2,
+    "note": "Wall-clock approximated from file mtimes; token counts not exposed by this harness"
+  },
+  "claims": [
+    {
+      "claim": "India region base URL is https://api.india.cast.ai (this run) vs https://api.in.cast.ai (without_skill run)",
+      "type": "factual",
+      "verified": true,
+      "evidence": "THIS RUN (with_skill, \"api.india.cast.ai\") IS CORRECT; the without_skill run's \"api.in.cast.ai\" is wrong. Note: the servers list in https://api.cast.ai/v1/spec/openapi.json contains ONLY US (https://api.cast.ai/) and EU (https://api.eu.cast.ai/) — no India server appears anywhere in the spec (case-insensitive search for \"india\" across the full downloaded spec returned zero hits). The authoritative documented India URL comes from the official docs page https://docs.cast.ai/docs/api-access.md (updatedAt 2026-08-11), which states verbatim: \"India region: `https://api.india.cast.ai`\". So the docs, not the spec servers list, settle it — and they confirm api.india.cast.ai."
+    },
+    {
+      "claim": "EU region base URL is https://api.eu.cast.ai and US is https://api.cast.ai",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Confirmed in the spec servers list: [{\"url\": \"https://api.cast.ai/\", \"description\": \"US endpoint\"}, {\"url\": \"https://api.eu.cast.ai/\", \"description\": \"EU endpoint\"}], and in docs.cast.ai/docs/api-access."
+    },
+    {
+      "claim": "GET /v1/cost-reports/clusters/{clusterId}/savings exists with required startTime/endTime query params (optional stepSeconds, useListingPrices)",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Verified directly in the downloaded live spec: operationId ClusterReportAPI_GetClusterSavingsReport; clusterId (path, required), startTime (query, required, date-time), endTime (query, required, date-time), stepSeconds (query, optional, int32), useListingPrices (query, optional, boolean)."
+    },
+    {
+      "claim": "Savings response is items[] with {timestamp, downscalingSavings, spotSavings} plus summary{totalCost, totalSavings}, decimals as strings",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Spec schema costreport.v1beta1.GetClusterSavingsReportResponse: clusterId (string), items[] -> {timestamp: string, downscalingSavings: string, spotSavings: string}, summary -> {totalCost: string, totalSavings: string}. Matches answer exactly, including the strings-holding-decimals note."
+    },
+    {
+      "claim": "X-API-Key is the documented auth header; Bearer JWT is the only other accepted scheme",
+      "type": "factual",
+      "verified": true,
+      "evidence": "docs.cast.ai/docs/api-access: \"provide the key in the `X-API-Key` HTTP header\"; spec global security: [{BearerAuth: []}, {ApiKeyAuth: []}] — exactly two schemes, consistent with the answer."
+    },
+    {
+      "claim": "Enterprise keys targeting child orgs use header X-CastAI-Organization-Id",
+      "type": "factual",
+      "verified": true,
+      "evidence": "docs.cast.ai/docs/api-access Enterprise API keys section: \"you need to include the `X-CastAI-Organization-Id` header with the target child organization ID\"."
+    },
+    {
+      "claim": "The similarly spelled X-Organization-Id header is silently ignored",
+      "type": "factual",
+      "verified": false,
+      "evidence": "Not stated in any official source fetched (docs page only documents X-CastAI-Organization-Id); notes.md attributes it to local live verification (siemens-savings-methodology.md, 2026-09-25). Plausible and internally sourced, but unverifiable against official documentation."
+    },
+    {
+      "claim": "Authorization: Token <key> still works in some deployments but is undocumented",
+      "type": "factual",
+      "verified": false,
+      "evidence": "\"Undocumented\" is consistent with the spec (only BearerAuth JWT and ApiKeyAuth are declared), but \"still works in some deployments\" cannot be verified from official sources without a live negative test."
+    },
+    {
+      "claim": "Newer value-realization endpoint: POST /reporting/v1beta/organizations/{orgId}:runValueRealizationTimelineReport with start_time/end_time/step query params",
+      "type": "factual",
+      "verified": false,
+      "evidence": "No \"reporting\" or \"timeline\" value-realization path found in the public spec (only /v1/cost-reports/clusters/{clusterId}/reporting-capabilities matched a case-insensitive search). It may exist on a different/undocumented surface — the answer presents it as an optional aside (\"If you want CAST AI's newer value-realization savings model...\"), clearly separated from the primary recommendation, so it does not undermine the graded core."
+    },
+    {
+      "claim": "Cost-report endpoints have no orgId path/query param; the org is implied by the key",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Spec parameters for the savings endpoint are only clusterId/startTime/endTime/stepSeconds/useListingPrices — no orgId. The sibling /v1/cost-reports/clusters/{clusterId}/cost endpoint is the same."
+    },
+    {
+      "claim": "Sources were actually consulted this session, including live fetches of docs.cast.ai and the OpenAPI spec (process claim in notes.md)",
+      "type": "process",
+      "verified": true,
+      "evidence": "No execution transcript exists, but notes.md records specific verifiable details (docs page updatedAt 2026-08-11, spec security schemes, a guessed reference slug that 404'd) that match what I independently observed live, and every factual claim in the answer traces to those sources accurately."
+    },
+    {
+      "claim": "Answer quality: missing startTime/endTime yields a 400, not 401; region-mismatch yields 401 indistinguishable from a bad key",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Consistent with the spec (startTime/endTime are required query params, so omission is a client error) and with the region-key isolation model documented in the answer; these explain-the-error-shape statements are accurate and genuinely useful for the user's debugging."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Provides a concrete, spec-accurate endpoint path under /v1/cost-reports/ for savings/cost data (verified against OpenAPI spec or local endpoint notes)",
+        "reason": "This is the strongest assertion in the set and the only one that checks spec-level correctness (path + required params). Consider extending the same rigor to response-shape: an answer could give the right path but hallucinate the response fields and still pass today."
+      },
+      {
+        "reason": "No assertion guards accuracy of auxiliary region URLs. The paired without_skill run passed all five assertions while stating the India base URL as https://api.in.cast.ai, which is not the documented form (docs.cast.ai/docs/api-access says https://api.india.cast.ai). If region-table accuracy matters for this support-persona skill, add an assertion like \"If an India region URL is mentioned, it matches the official docs form (api.india.cast.ai)\" — or require that any regional URL beyond US/EU be verified against an official source before inclusion."
+      },
+      {
+        "assertion": "Cites at least one official CAST AI source (docs.cast.ai, api.cast.ai spec, changelog, or github.com/castai)",
+        "reason": "Citing a URL is cheap — a hallucinated docs URL would pass. Consider requiring that the cited source actually supports the claim made (URL resolves and contains the referenced fact). In this run all three cited URLs resolve and do support the claims, but the assertion itself does not demand that."
+      }
+    ],
+    "overall": "Passing 5/5 is genuinely earned for this run: the answer is spec-accurate on the core ask (401 diagnosis, EU base URL, savings endpoint with correct required params, X-API-Key auth) and every graded fact was verified live against the OpenAPI spec and docs. The one factual soft spot is the unverifiable runValueRealizationTimelineReport aside, which the answer properly hedges as optional. The main eval gap is that nothing checks the accuracy of extra region URLs — a gap the without_skill sibling run exposed by stating a wrong India URL while still passing."
+  }
+}

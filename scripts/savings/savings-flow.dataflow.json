@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "CAST AI Savings Calculation \u2014 Siemens (Node Autoscaler + WOOP)",
+    "output": "scripts/savings/savings-flow.html",
+    "viewBox": [
+      1500,
+      735
+    ],
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "baseline-path",
+        "label": "Frozen baseline",
+        "focus": [
+          "timeline",
+          "baselinep",
+          "freeze"
+        ],
+        "note": "Switch date + read-only-era unit prices, measured once."
+      },
+      {
+        "id": "daily-path",
+        "label": "Daily evaluation",
+        "focus": [
+          "costapi",
+          "series",
+          "cfcalc",
+          "layers"
+        ],
+        "note": "Counterfactual minus actual, split into three value layers."
+      },
+      {
+        "id": "report-path",
+        "label": "Reconcile and report",
+        "focus": [
+          "billing",
+          "recon",
+          "csv",
+          "board"
+        ],
+        "note": "CAST AI numbers are a band, never blended; fee is contract logic."
+      }
+    ]
+  },
+  "stages": [
+    {
+      "label": "CAST AI API (read-only)"
+    },
+    {
+      "label": "Collect + freeze"
+    },
+    {
+      "label": "Evaluate"
+    },
+    {
+      "label": "Attribution"
+    },
+    {
+      "label": "Reconcile + report"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "timeline",
+      "type": "cloud",
+      "label": "Value-realization",
+      "sublabel": "timeline report (query)",
+      "stage": 0,
+      "row": 0,
+      "width": 152,
+      "tag": "org-level"
+    },
+    {
+      "id": "baselinep",
+      "type": "external",
+      "label": "Baseline params",
+      "sublabel": "GET .../baseline-params",
+      "stage": 0,
+      "row": 1,
+      "width": 152,
+      "tag": "switch date"
+    },
+    {
+      "id": "costapi",
+      "type": "cloud",
+      "label": "Cluster cost report",
+      "sublabel": "GET .../{id}/cost daily",
+      "stage": 0,
+      "row": 2,
+      "width": 152,
+      "tag": "per cluster"
+    },
+    {
+      "id": "billing",
+      "type": "cloud",
+      "label": "Billing usage",
+      "sublabel": "platform-usage-detail",
+      "stage": 0,
+      "row": 3,
+      "width": 150,
+      "tag": "fee base"
+    },
+    {
+      "id": "freeze",
+      "type": "backend",
+      "label": "Freeze baseline (gated)",
+      "sublabel": "p_cpu - p_ram - c_other",
+      "stage": 1,
+      "row": 0,
+      "width": 190,
+      "tag": "frozen"
+    },
+    {
+      "id": "series",
+      "type": "backend",
+      "label": "Chunked daily series",
+      "sublabel": "C(t), V(t), M(t) validated",
+      "stage": 1,
+      "row": 1,
+      "width": 175,
+      "tag": "eval window"
+    },
+    {
+      "id": "cfcalc",
+      "type": "backend",
+      "label": "Adjusted baseline",
+      "sublabel": "p_cpu*V + p_ram*M + c_other",
+      "stage": 2,
+      "row": 1,
+      "width": 180,
+      "tag": "counterfactual"
+    },
+    {
+      "id": "layers",
+      "type": "messagebus",
+      "label": "Three value layers",
+      "sublabel": "WOOP + node-eff + price",
+      "stage": 3,
+      "row": 1,
+      "width": 175,
+      "tag": "daily split"
+    },
+    {
+      "id": "board",
+      "type": "frontend",
+      "label": "Management view",
+      "sublabel": "net = gross - 5% fee",
+      "stage": 4,
+      "row": 0,
+      "width": 165,
+      "tag": "IT board"
+    },
+    {
+      "id": "recon",
+      "type": "security",
+      "label": "Reconcile & flag",
+      "sublabel": "+/-30% band; never blend",
+      "stage": 4,
+      "row": 1,
+      "width": 170,
+      "tag": "cross-check"
+    },
+    {
+      "id": "csv",
+      "type": "database",
+      "label": "Cluster x month CSV",
+      "sublabel": "rows incl. flags",
+      "stage": 4,
+      "row": 2,
+      "width": 160,
+      "tag": "auditable"
+    }
+  ],
+  "flows": [
+    {
+      "id": "f1",
+      "from": "timeline",
+      "to": "freeze",
+      "label": "baseline-era series",
+      "classification": "org aggregate",
+      "variant": "emphasis",
+      "fromSide": "right",
+      "toSide": "top",
+      "labelDy": -24
+    },
+    {
+      "id": "f2",
+      "from": "baselinep",
+      "to": "freeze",
+      "label": "window B before s",
+      "classification": "config",
+      "variant": "default"
+    },
+    {
+      "id": "f3",
+      "from": "costapi",
+      "to": "series",
+      "label": "eval days (t >= s)",
+      "classification": "per cluster",
+      "variant": "emphasis"
+    },
+    {
+      "id": "f4",
+      "from": "series",
+      "to": "cfcalc",
+      "label": "daily V, M",
+      "classification": "eval data",
+      "variant": "emphasis",
+      "labelDy": 49
+    },
+    {
+      "id": "f5",
+      "from": "freeze",
+      "to": "cfcalc",
+      "label": "frozen prices",
+      "classification": "validated",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "f6",
+      "from": "cfcalc",
+      "to": "layers",
+      "label": "gap = adj - actual",
+      "classification": "daily delta",
+      "variant": "emphasis",
+      "labelDy": 53
+    },
+    {
+      "id": "f7",
+      "from": "layers",
+      "to": "recon",
+      "label": "monthly layer sums",
+      "classification": "verify",
+      "variant": "default",
+      "labelDy": 53
+    },
+    {
+      "id": "f8",
+      "from": "billing",
+      "to": "recon",
+      "label": "billable vCPU (fee base)",
+      "classification": "cross-check",
+      "variant": "dashed",
+      "route": "bottom-channel",
+      "fromSide": "bottom",
+      "toSide": "right"
+    },
+    {
+      "id": "f9",
+      "from": "recon",
+      "to": "board",
+      "label": "net layer chart",
+      "classification": "presentation",
+      "variant": "default"
+    },
+    {
+      "id": "f10",
+      "from": "recon",
+      "to": "csv",
+      "label": "verified rows",
+      "classification": "audited",
+      "variant": "emphasis",
+      "labelDx": 40
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Frozen-baseline rule",
+      "items": [
+        "Unit prices measured once in the read-only era",
+        "Adjusted = frozen price x today's actual vCPU/RAM",
+        "Family/EDP price moves become their own layer"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Three value layers",
+      "items": [
+        "WOOP: demand right-sized, at frozen prices",
+        "Node: binpacking gain at frozen prices",
+        "Price: family/spot movement; negatives shown"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Reconciliation discipline",
+      "items": [
+        "CAST AI savings = +/-30% band, never averaged in",
+        "Accenture API number = one reconciliation row",
+        "5% fee on positive gross months only (contract)"
+      ]
+    }
+  ]
+}

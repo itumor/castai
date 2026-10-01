@@ -1,0 +1,19 @@
+{
+  "name": "castai-support-swarm",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CAST AI Autonomous Support Engineering System — 13-agent support swarm with evidence ledger, verification gate and human-grade reply drafting.",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "node --test tests/",
+    "test:unit": "node --test tests/core/ tests/tools/ tests/agents/",
+    "test:e2e": "node --test tests/pipeline/",
+    "eval": "node evals/run.js",
+    "demo": "node bin/support-swarm.mjs answer fixtures/thread-pdb-scaledown.md",
+    "install:dsh": "node scripts/install-dsh-preset.mjs"
+  },
+  "license": "UNLICENSED"
+}

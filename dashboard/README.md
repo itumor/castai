@@ -10,6 +10,55 @@ workloads, policies, or any other CAST AI resource. All CAST AI API calls happen
 server-side through an Express backend that caches responses, normalizes the
 schema, and forwards a safe aggregated payload to the browser.
 
+## Savings Explorer
+
+A second view at `public/savings.html` surfaces CAST AI's **estimated savings
+potential** for read-only clusters — the data that backs the "Available Savings"
+console report and answers the question "what could this cluster save once
+Autoscaler is enabled?":
+
+- An **Organization selector** (`GET /api/orgs`) lists every Siemens sub-org the
+  master key can see (~129). All cluster-scoped proxy routes accept
+  `?orgId=<uuid>`; the id is validated against the fetched organization list
+  before use (unknown ids get a 400 and never reach CAST AI). `CASTAI_ORG_ID`
+  remains as the server-side default. The selector state lives in the URL hash
+  (`#org=<id>&cluster=<id>`) for shareable links. Cluster dropdowns use the
+  lightweight `GET /api/clusters?basic=true` listing (no per-cluster probes).
+- Scenario cards from `GET /api/clusters/:id/estimated-savings`, one per
+  optimization scenario CAST AI currently recommends (e.g. rightsizing,
+  Spot Instances, Spot Only), with monthly/hourly optimized cost, savings
+  percentage, and a summary of the recommended node mix.
+- Forecast constraints: **Spot allowed** / **ARM allowed** toggles exclude
+  scenarios that are not realistic for a cluster, and the forecast is compared
+  against the flat 40% fallback assumption (delta in percentage points).
+- History chart and per-scenario **median daily savings** from
+  `GET /api/clusters/:id/estimated-savings-history` (7/14/30-day windows or
+  custom dates), so a forecast can be built from an average rather than a
+  single point-in-time snapshot.
+
+Fleet-wide **Excel export**: the **Export Excel** button downloads
+`GET /api/export/savings-potential.xlsx` — one row per **cluster x scenario**
+for every visible org (~239 clusters in ~40 s), with sheets
+*Savings Potential* (pct, before/after monthly+hourly, node mix, spot-node
+count, rebalancing flag, **median daily savings over the history window**),
+*Cluster Summary*, *Errors*, and *Meta* (scope + disclaimers: potential, not
+realized; CUDs excluded). Params: `historyDays` (0..90, default 14; 0 =
+snapshot-only) and `orgId` (single-org export). Snapshot scenario keys
+(`SpotOnly`) are normalized against history keys (`optimizedSpotOnly`) before
+medians are joined.
+
+Backend proxy notes (verified live 2026-09-27):
+
+- The upstream history endpoint requires **RFC3339** date-times; plain
+  `YYYY-MM-DD` is rejected with a 400. The proxy expands plain dates
+  (fromDate -> `T00:00:00.000Z`, toDate -> `T23:59:59.999Z`) so the UI can use
+  native date inputs.
+- Snapshot costs arrive as string pairs (`monthly/hourly: {priceBefore,
+  priceAfter}`), `savingsPercentage` is a percent string, and the current cost
+  lives at `currentConfiguration.totalPrice.{hourly,monthly}`.
+- Enterprise master keys require `CASTAI_ORG_ID` (sent as
+  `X-CastAI-Organization-Id`); without it they silently see empty lists.
+
 ## Architecture
 
 The dashboard has four logical layers:

@@ -1,0 +1,25 @@
+{
+  "id": "workload-autoscaler-not-applying",
+  "thread": {
+    "from": "Maria Vogel <maria.vogel@siemens.example.com>",
+    "subject": "Workload autoscaler recommendations not applying",
+    "messages": [
+      {
+        "from": "Maria Vogel <maria.vogel@siemens.example.com>",
+        "date": "2026-09-28",
+        "body": "The workload autoscaler on our GKE cluster keeps recommending different CPU and memory\nrequests for several deployments, but the pod requests never actually change. The\nrecommendations are visible in the console and look sensible.\n\nAre we missing a switch so the workload autoscaler applies the recommendations?\nWhich components should we check first?"
+      }
+    ]
+  },
+  "grounding": "A correct support reply addresses the workload-autoscaler apply behavior (recommendations vs. automated apply) grounded in documentation/source evidence.",
+  "expect": {
+    "category": "workload_autoscaling",
+    "planIncludes": ["researcher", "sre", "product", "verifier", "writer"],
+    "verdict": "PASS",
+    "replyMustInclude": [
+      "workload[ -]autoscal",
+      "recommend"
+    ],
+    "replyMustExclude": []
+  }
+}

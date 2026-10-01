@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CAST AI savings-potential explorer for read-only clusters: scenario-based estimated savings and history, replacing the flat 40% forecast assumption." />
+  <title>Savings Explorer — Siemens CAST AI Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-header__brand">
+      <span class="app-header__logo" aria-hidden="true">SI</span>
+      <div class="app-header__titles">
+        <h1 class="app-header__title">Siemens CAST AI Dashboard</h1>
+        <p class="app-header__subtitle">Savings potential for read-only clusters</p>
+      </div>
+    </div>
+    <nav class="app-nav" aria-label="Views">
+      <a class="app-nav__link" href="index.html">Fleet</a>
+      <a class="app-nav__link app-nav__link--active" href="savings.html" aria-current="page">Savings Explorer</a>
+    </nav>
+    <div class="app-header__actions">
+      <span id="last-updated" class="last-updated" aria-live="polite"></span>
+      <button id="export-btn" class="btn btn--primary" type="button"
+              aria-label="Download Excel export of savings potential for all organizations and clusters"
+              title="All orgs & clusters — can take a few minutes">
+        <span class="btn__icon" aria-hidden="true">&#x2B07;</span>
+        <span class="btn__label" id="export-btn-label">Export Excel</span>
+      </button>
+      <button id="refresh-btn" class="btn btn--primary" type="button" aria-label="Reload savings data">
+        <span class="btn__icon" aria-hidden="true">&#x21BB;</span>
+        <span class="btn__label">Refresh</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <div id="error-banner" class="error-banner" role="alert" hidden>
+      <span class="error-banner__icon" aria-hidden="true">!</span>
+      <span id="error-banner__message" class="error-banner__message"></span>
+      <button id="error-banner__dismiss" class="error-banner__dismiss" type="button" aria-label="Dismiss error">&times;</button>
+    </div>
+
+    <section class="panel controls" aria-label="Controls">
+      <div class="controls__row">
+        <label class="controls__field">
+          <span class="controls__label">Organization</span>
+          <select id="org-select" class="controls__select controls__select--wide"></select>
+        </label>
+
+        <label class="controls__field">
+          <span class="controls__label">Cluster</span>
+          <select id="cluster-select" class="controls__select"></select>
+        </label>
+
+        <fieldset class="controls__field controls__field--range">
+          <legend class="controls__label">History window</legend>
+          <div class="controls__range-row">
+            <input id="date-from" class="controls__date" type="date" aria-label="From date" />
+            <span class="controls__range-sep" aria-hidden="true">&rarr;</span>
+            <input id="date-to" class="controls__date" type="date" aria-label="To date" />
+            <div class="controls__presets" role="group" aria-label="Window presets">
+              <button type="button" class="chip" data-days="7">7d</button>
+              <button type="button" class="chip chip--active" data-days="14">14d</button>
+              <button type="button" class="chip" data-days="30">30d</button>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="controls__field">
+          <legend class="controls__label">Forecast constraints</legend>
+          <div class="controls__toggles">
+            <label class="toggle">
+              <input id="spot-toggle" type="checkbox" />
+              <span class="toggle__track" aria-hidden="true"></span>
+              <span class="toggle__label">Spot allowed</span>
+            </label>
+            <label class="toggle">
+              <input id="arm-toggle" type="checkbox" />
+              <span class="toggle__track" aria-hidden="true"></span>
+              <span class="toggle__label">ARM allowed</span>
+            </label>
+          </div>
+        </fieldset>
+      </div>
+    </section>
+
+    <div id="loading" class="loading" hidden>
+      <div class="loading__spinner" aria-hidden="true"></div>
+      <span class="loading__label">Loading savings potential&hellip;</span>
+    </div>
+
+    <div id="content" hidden>
+      <section class="stat-strip" aria-label="Forecast summary">
+        <div class="stat">
+          <span class="stat__label">Current monthly cost</span>
+          <span id="stat-current" class="stat__value">&mdash;</span>
+        </div>
+        <div class="stat">
+          <span class="stat__label">Realistic scenario monthly cost</span>
+          <span id="stat-scenario-cost" class="stat__value">&mdash;</span>
+        </div>
+        <div class="stat stat--accent">
+          <span class="stat__label">Forecast savings</span>
+          <span class="stat__value">
+            <span id="stat-forecast-pct">&mdash;</span>
+            <span id="stat-forecast-scenario" class="stat__note">&nbsp;</span>
+          </span>
+        </div>
+        <div class="stat">
+          <span class="stat__label">vs. flat 40% assumption</span>
+          <span class="stat__value">
+            <span id="stat-delta" class="stat__delta">&mdash;</span>
+          </span>
+        </div>
+        <div class="stat">
+          <span class="stat__label">Estimate updated</span>
+          <span id="stat-updated" class="stat__value stat__value--small">&mdash;</span>
+        </div>
+      </section>
+
+      <p id="rebalance-note" class="note" hidden>
+        Rebalancing is recommended for this cluster: savings depend on accepting node replacements.
+      </p>
+
+      <section class="panel" aria-label="Optimization scenarios">
+        <h2 class="panel__title">Recommendation scenarios <span class="panel__hint">click a card to pin it as the forecast scenario</span></h2>
+        <div id="scenario-grid" class="scenario-grid"></div>
+        <p id="scenario-empty" class="panel__empty" hidden>No recommendation scenarios returned for this cluster.</p>
+      </section>
+
+      <section class="panel" aria-label="Estimated savings history">
+        <h2 class="panel__title">Actual vs. optimized cost over time</h2>
+        <div id="history-chart" class="history-chart" role="img" aria-label="Line chart of current and optimized hourly cost"></div>
+        <div id="history-legend" class="history-legend"></div>
+        <table class="median-table" aria-label="Median daily savings by scenario">
+          <thead>
+            <tr><th scope="col">Scenario</th><th scope="col">Median daily savings</th><th scope="col">Days with data</th></tr>
+          </thead>
+          <tbody id="median-body"></tbody>
+        </table>
+        <p id="history-empty" class="panel__empty" hidden>No history returned for this window.</p>
+      </section>
+
+      <p class="footnote">
+        Figures are CAST AI potential-savings estimates computed from the current cluster snapshot
+        (<code>GET /v1/cost-reports/clusters/{id}/estimated-savings</code> and
+        <code>&hellip;/estimated-savings-history</code>), not realized savings. Committed-use discounts are
+        not included. Scenarios involving Spot or ARM are excluded from the forecast unless allowed above.
+      </p>
+    </div>
+
+    <div id="empty-state" class="empty-state" hidden>
+      <h2 class="empty-state__title">No clusters available</h2>
+      <p class="empty-state__message">No clusters were returned for this API key. Use Refresh to try again.</p>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <span>Siemens CAST AI Dashboard</span>
+    <span class="app-footer__sep" aria-hidden="true">&middot;</span>
+    <span>Frontend data is read-only.</span>
+  </footer>
+
+  <script src="savings.js" defer></script>
+</body>
+</html>

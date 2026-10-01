@@ -5,8 +5,10 @@ Rerun invariants:
   I1 table interactions (sort/filter/search/paginate/picker) → 0 API calls
      (fleet frame comes solely from cached org-level loaders; all filtering
      is in-memory pandas).
-  I2 cluster row selection → the two Tier-1 loaders (Overview, Resources)
-     only, each @st.cache_data-keyed by (org, cluster, range, refresh_token).
+  I2 cluster row selection → the Tier-1 auto loaders (Overview, Resources,
+     overprovision-absolutes) only, each @st.cache_data-keyed by (org, cluster,
+     range, refresh_token) — the Resources tab fires summary+usage+efficiency
+     (3 GETs; R11 amendment, overprovision is a conditional N/A section).
   I3 Tier-2 tabs (Cost, Savings, Workload Autoscaler, Node Autoscaler, Nodes,
      Workloads, Issues, History — 12 armable loader ids: Wave-C tab families
      cost/pricing, savings/savings_est, issues/notifications/oom share one
@@ -66,12 +68,15 @@ from services.optimization_service import (
     load_cluster_nodes,
     load_cluster_notifications,
     load_cluster_oom_events,
+    load_cluster_overprovision,
     load_cluster_overview,
     load_cluster_realized_savings,
+    load_cluster_rebalance,
     load_cluster_resources,
     load_cluster_wa,
     load_cluster_workload_costs,
     trend_from_cluster_savings,
+    wa_estimated_monthly_savings,
 )
 from services.organization_service import discover_enterprise_hierarchy
 from ui.cards import (
@@ -140,6 +145,7 @@ def cached_fleet(
     max_workers: int,
     refresh_token: int,
     enable_org_efficiency: bool = True,
+    enable_rebalance_schedules: bool = True,
 ):
     hierarchy = cached_hierarchy(base_url, enterprise_id, refresh_token)
     return build_fleet_dataframe(
@@ -151,6 +157,9 @@ def cached_fleet(
         # The flag participates in the cache key so env flips invalidate
         # correctly (Wave-A audit gap; ADR v2 R2 1+6N budget).
         include_org_efficiency=bool(enable_org_efficiency),
+        # ADR v2 R11: the 7th-call flag rides the cache key the same way
+        # (1+7N when ON, 1+6N when OFF) — a flip never serves a stale frame.
+        include_rebalance_schedules=bool(enable_rebalance_schedules),
     )
 
 
@@ -266,6 +275,22 @@ def cached_drilldown_wa(base_url, org_id, cluster_id, start, end, refresh_token)
 def cached_drilldown_na(base_url, org_id, cluster_id, start, end, refresh_token):
     del start, end, refresh_token
     return load_cluster_na_policies(build_client(base_url), org_id, cluster_id)
+
+
+@st.cache_data(ttl=900, max_entries=128, show_spinner=False)
+def cached_drilldown_rebalance(base_url, org_id, cluster_id, start, end, refresh_token):
+    """NA-tab Rebalancing section — 2 GETs (org schedules + cluster jobs),
+    15-min cache; armed with the "na" gate family (R11/perf budget)."""
+    del start, end, refresh_token
+    return load_cluster_rebalance(build_client(base_url), org_id, cluster_id)
+
+
+@st.cache_data(ttl=900, max_entries=128, show_spinner=False)
+def cached_drilldown_overprovision(base_url, org_id, cluster_id, start, end, refresh_token):
+    """Resources-tab overprovisioned absolutes (per-cluster efficiency report,
+    latest item) — 1 GET, 15-min cache; Tier-1 auto-load family (I2)."""
+    del refresh_token
+    return load_cluster_overprovision(build_client(base_url), org_id, cluster_id, start, end)
 
 
 @st.cache_data(ttl=900, max_entries=128, show_spinner=False)
@@ -987,6 +1012,36 @@ def _resources_tab(base_url: str, org_id: str, cluster_id: str, start: str, end:
     if not gauges:
         st.caption("Request-efficiency gauges show N/A until usage metrics arrive for this cluster.")
 
+    # v2-OPS overprovisioned ABSOLUTES (per-cluster efficiency report, latest
+    # window item = "current"). conditional section: a missing/failing endpoint
+    # renders a skip caption, never an error (spec-verified absolutes exist
+    # ONLY on this per-cluster endpoint — never derived from Tier-1 percents).
+    overprov = _guard_loader(
+        cached_drilldown_overprovision, base_url, org_id, cluster_id,
+        start, end, st.session_state.get("refresh_token", 0),
+    )
+    if isinstance(overprov, dict) and overprov.get("available") is True:
+        any_value = any(
+            _present(overprov.get(key))
+            for key in ("cpu_overprovisioned_cores", "ram_overprovisioned_gib",
+                        "storage_overprovisioned_gib")
+        )
+        if any_value:
+            st.markdown("**Overprovisioned (absolutes, latest window)**")
+            trio = st.columns(3)
+            trio[0].metric("CPU", fmt_na(overprov.get("cpu_overprovisioned_cores")), border=True)
+            trio[1].metric("Memory", fmt_gib(overprov.get("ram_overprovisioned_gib")), border=True)
+            trio[2].metric("Storage", fmt_gib(overprov.get("storage_overprovisioned_gib")), border=True)
+            st.caption(
+                f"Source: clusters/{cluster_id}/efficiency latest report item "
+                f"(timestamp {overprov.get('timestamp') or 'unknown'}; Σ over lifecycle siblings)."
+            )
+        else:
+            st.caption("Overprovisioned absolutes: skipped — latest report item carries no absolute fields.")
+    else:
+        reason = (overprov or {}).get("reason") if isinstance(overprov, dict) else None
+        st.caption(f"Overprovisioned absolutes: skipped — {reason or 'endpoint unavailable'}.")
+
     if isinstance(usage, dict):
         with st.expander("Resource usage over the selected window", expanded=False):
             ts = _find_timeseries(usage)
@@ -1131,14 +1186,74 @@ def _wa_tab(base_url: str, org_id: str, cluster_id: str, start: str, end: str) -
 
     # Coverage banner (workloads-summary with includeCosts=true).
     kpis = payload.get("wa_kpis") or {}
-    cols = st.columns(5)
+
+    # v2-OPS tile row 1: totals + VPA/HPA optimization split + management split.
+    cols = st.columns(6)
     cols[0].metric("Workloads", fmt_count(kpis.get("total")), border=True)
     cols[1].metric("Optimized", fmt_count(kpis.get("optimized")), border=True)
-    cols[2].metric("Coverage", fmt_pct(kpis.get("coverage"), scale="fraction"), border=True)
-    cols[3].metric("Requested $/h",
+    cols[2].metric("VPA-only", fmt_count(kpis.get("optimized_vpa_count")), border=True)
+    cols[3].metric("HPA-only", fmt_count(kpis.get("optimized_hpa_count")), border=True)
+    cols[4].metric("V+H", fmt_count(kpis.get("optimized_both_count")), border=True)
+    api_managed = kpis.get("api_managed_count")
+    annotation_managed = kpis.get("annotation_managed_count")
+    managed_split = (
+        f"API {fmt_count(api_managed)} · Ann {fmt_count(annotation_managed)}"
+        if (_present(api_managed) or _present(annotation_managed))
+        else "N/A"
+    )
+    cols[5].metric("Managed by", managed_split, help="API-managed vs annotation-managed", border=True)
+
+    # v2-OPS tile row 2: rightsizing deltas + estimated monthly savings +
+    # original-requested baselines (autoscaler-model: the pre-WA template).
+    row2 = st.columns(5)
+    req_rec_cpu = (
+        f"{fmt_na(kpis.get('requested_cpu_cores'))} → {fmt_na(kpis.get('recommended_cpu_cores'))}"
+        if _present(kpis.get("requested_cpu_cores")) and _present(kpis.get("recommended_cpu_cores"))
+        else None
+    )
+    row2[0].metric("CPU Δ cores", fmt_na(kpis.get("cpu_cores_difference")),
+                   delta=req_rec_cpu, delta_color="off",
+                   help="requested → recommended (both shown when present)", border=True)
+    req_rec_mem = (
+        f"{fmt_gib(kpis.get('requested_memory_gib'))} → {fmt_gib(kpis.get('recommended_memory_gib'))}"
+        if _present(kpis.get("requested_memory_gib")) and _present(kpis.get("recommended_memory_gib"))
+        else None
+    )
+    row2[1].metric("Memory Δ GiB", fmt_gib(kpis.get("memory_difference")),
+                   delta=req_rec_mem, delta_color="off",
+                   help="requested → recommended GiB", border=True)
+    monthly = wa_estimated_monthly_savings(
+        kpis.get("cost_requested_hourly"), kpis.get("cost_recommended_hourly")
+    )
+    if monthly is None:
+        row2[2].metric("Est. monthly savings", "N/A",
+                       delta="includeCosts absent", delta_color="off", border=True)
+    else:
+        row2[2].metric("Est. monthly savings", fmt_money_compact(monthly),
+                       help="(costsPerHour.requested − recommended) × 730 — estimated, never realized",
+                       border=True)
+    orig_cpu = kpis.get("original_requested_cpu")
+    row2[3].metric("Original requested CPU", fmt_na(orig_cpu),
+                   delta=(f"now {fmt_na(kpis.get('requested_cpu_cores'))}" if _present(kpis.get("requested_cpu_cores")) else None),
+                   delta_color="off",
+                   help="original template requests (pre-WA) vs current", border=True)
+    orig_mem = kpis.get("original_requested_memory_gib")
+    row2[4].metric("Original requested RAM", fmt_gib(orig_mem),
+                   delta=(f"now {fmt_gib(kpis.get('requested_memory_gib'))}" if _present(kpis.get("requested_memory_gib")) else None),
+                   delta_color="off",
+                   help="original template requests (pre-WA) vs current", border=True)
+    if _present(kpis.get("usage_cpu_cores")) or _present(kpis.get("usage_memory_gib")):
+        st.caption(
+            f"Actual usage: **{fmt_na(kpis.get('usage_cpu_cores'))} vCPU** · "
+            f"**{fmt_gib(kpis.get('usage_memory_gib'))} RAM** (workloads-summary usage fields)."
+        )
+
+    cols = st.columns(3)
+    cols[0].metric("Coverage", fmt_pct(kpis.get("coverage"), scale="fraction"), border=True)
+    cols[1].metric("Requested $/h",
                    fmt_money_compact(kpis.get("cost_requested_hourly")) if _present(kpis.get("cost_requested_hourly")) else "N/A",
                    border=True)
-    cols[4].metric("Recommended $/h",
+    cols[2].metric("Recommended $/h",
                    fmt_money_compact(kpis.get("cost_recommended_hourly")) if _present(kpis.get("cost_recommended_hourly")) else "N/A",
                    border=True)
     if not _present(kpis.get("cost_requested_hourly")):
@@ -1157,48 +1272,104 @@ def _wa_tab(base_url: str, org_id: str, cluster_id: str, start: str, end: str) -
 def _na_tab(base_url: str, org_id: str, cluster_id: str, start: str, end: str,
             fleet_row: dict | None = None) -> None:
     if not _arm_gate(cluster_id, "na", "Load Node Autoscaler data",
-                     "Node-autoscaler policies load on demand.", ("na",)):
+                     "Node-autoscaler policies & rebalancing load on demand.",
+                     ("na", "rebalance")):
         return
+    token = st.session_state.get("refresh_token", 0)
     payload = _guard_loader(cached_drilldown_na, base_url, org_id, cluster_id,
-                            start, end, st.session_state.get("refresh_token", 0))
-    if payload is None or _availability(payload) is None:
+                            start, end, token)
+    if payload is not None and _availability(payload) is not None:
+        policies = payload.get("policies") or {}
+
+        cols = st.columns(6)
+        cols[0].metric("Node autoscaler", _bool_text(policies.get("enabled")), border=True)
+        cols[1].metric("Spot instances", _bool_text(policies.get("spot_instances_enabled")), border=True)
+        cols[2].metric("Downscaler", _bool_text(policies.get("node_downscaler_enabled")), border=True)
+        cols[3].metric("Scoped mode", _bool_text(policies.get("is_scoped_mode")), border=True)
+        evictor = policies.get("evictor") or {}
+        cols[4].metric("Evictor", _bool_text(evictor.get("enabled")), border=True)
+        cols[5].metric("Evictor dry-run", _bool_text(evictor.get("dry_run")), border=True)
+        if _present(evictor.get("status")):
+            st.caption(f"Evictor status: **{evictor.get('status')}**")
+        if _present(policies.get("default_node_template_version")):
+            st.caption(f"Default node template version: **{policies.get('default_node_template_version')}**")
+
+        # Managed coverage from the T1 org summary (ADR R6 — 0 extra calls).
+        row = fleet_row or {}
+        managed = row.get("na_managed_nodes")
+        total = row.get("nodes_total")
+        if _present(managed) and _present(total):
+            st.metric(
+                "NA-managed nodes",
+                f"{fmt_count(managed)} / {fmt_count(total)}",
+                delta=fmt_pct(row.get("na_coverage_pct")) if _present(row.get("na_coverage_pct")) else None,
+                delta_color="off",
+                border=True,
+            )
+            st.caption("Managed counts from the organization clusters/summary payload "
+                       "(nodeCount*Castai counters) — computed at the fleet sweep.")
+        else:
+            st.caption("NA-managed coverage: N/A — org summary counters absent for this cluster.")
+
+        badge = _enr_batch_badge("na_policies", org_id, cluster_id)
+        if badge:
+            st.caption(f"🔄 This cluster's policies are also covered by the session "
+                       f"enrichment batch ({badge}).")
+
+    # Rebalancing section renders even when the policies call failed (its own
+    # 2 GETs are failure-isolated inside the loader).
+    _render_rebalance_section(base_url, org_id, cluster_id, token)
+
+
+def _render_rebalance_section(base_url: str, org_id: str, cluster_id: str, token: int) -> None:
+    """NA-tab Rebalancing section (v2-OPS, ADR R11): org schedule inventory +
+    this cluster's rebalancing jobs. 2 cached GETs (ttl 900); failed/absent
+    sides render N/A captions, never fabricated rows."""
+    st.markdown("**Rebalancing** — `rebalancing-schedules` (org) + `rebalancing-jobs` (this cluster)")
+    rebalance = _guard_loader(cached_drilldown_rebalance, base_url, org_id, cluster_id,
+                              "", "", token)
+    if rebalance is None:
+        st.caption("Rebalancing: N/A — loader failed (see warning above).")
         return
-    policies = payload.get("policies") or {}
+    if rebalance.get("available") is False:
+        st.caption(f"Rebalancing: N/A — {rebalance.get('reason') or 'no data returned'}.")
+        return
+    errors = rebalance.get("errors") or {}
+    if errors:
+        joined = "; ".join(f"{op}: {msg}" for op, msg in list(errors.items())[:5])
+        st.caption(f"Rebalancing: some endpoints failed — {joined}")
 
-    cols = st.columns(6)
-    cols[0].metric("Node autoscaler", _bool_text(policies.get("enabled")), border=True)
-    cols[1].metric("Spot instances", _bool_text(policies.get("spot_instances_enabled")), border=True)
-    cols[2].metric("Downscaler", _bool_text(policies.get("node_downscaler_enabled")), border=True)
-    cols[3].metric("Scoped mode", _bool_text(policies.get("is_scoped_mode")), border=True)
-    evictor = policies.get("evictor") or {}
-    cols[4].metric("Evictor", _bool_text(evictor.get("enabled")), border=True)
-    cols[5].metric("Evictor dry-run", _bool_text(evictor.get("dry_run")), border=True)
-    if _present(evictor.get("status")):
-        st.caption(f"Evictor status: **{evictor.get('status')}**")
-    if _present(policies.get("default_node_template_version")):
-        st.caption(f"Default node template version: **{policies.get('default_node_template_version')}**")
+    schedules = rebalance.get("schedules") or []
+    if schedules:
+        rows = []
+        for schedule in schedules:
+            rows.append(
+                {
+                    "name": schedule.get("name"),
+                    "cron": schedule.get("cron"),
+                    "last_trigger": schedule.get("last_trigger_at"),
+                    "next_trigger": schedule.get("next_trigger_at"),
+                }
+            )
+        st.dataframe(pd.DataFrame(rows), width="stretch", hide_index=True)
+        st.caption(f"{len(schedules)} rebalancing schedule(s) on this organization "
+                   "(schedule↔cluster linkage comes from the jobs payload only — "
+                   "embedded schedule jobs are opaque; NodeSelectors carry no cluster id).")
+    else:
+        st.caption("Org rebalancing schedules: N/A — none returned (or the call failed above).")
 
-    # Managed coverage from the T1 org summary (ADR R6 — 0 extra calls).
-    row = fleet_row or {}
-    managed = row.get("na_managed_nodes")
-    total = row.get("nodes_total")
-    if _present(managed) and _present(total):
-        st.metric(
-            "NA-managed nodes",
-            f"{fmt_count(managed)} / {fmt_count(total)}",
-            delta=fmt_pct(row.get("na_coverage_pct")) if _present(row.get("na_coverage_pct")) else None,
-            delta_color="off",
+    latest = rebalance.get("latest_job")
+    if isinstance(latest, dict):
+        cols = st.columns(3)
+        cols[0].metric("Latest job status", fmt_na(latest.get("status")), border=True)
+        cols[1].metric(
+            "Schedule",
+            fmt_na(latest.get("schedule_name") if _present(latest.get("schedule_name")) else latest.get("schedule_id")),
             border=True,
         )
-        st.caption("Managed counts from the organization clusters/summary payload "
-                   "(nodeCount*Castai counters) — computed at the fleet sweep.")
+        cols[2].metric("Last triggered", fmt_na(latest.get("last_trigger_at")), border=True)
     else:
-        st.caption("NA-managed coverage: N/A — org summary counters absent for this cluster.")
-
-    badge = _enr_batch_badge("na_policies", org_id, cluster_id)
-    if badge:
-        st.caption(f"🔄 This cluster's policies are also covered by the session "
-                   f"enrichment batch ({badge}).")
+        st.caption("Cluster rebalancing jobs: N/A — none returned for this cluster.")
 
 
 @st.fragment
@@ -1581,6 +1752,7 @@ def main() -> None:
             settings.max_workers,
             token,
             settings.enable_org_efficiency,
+            settings.enable_rebalance_schedules,
         )
     except Exception as exc:  # noqa: BLE001 - UI boundary
         st.error("Could not load CAST AI cluster data. Nothing was rendered from partial state.")

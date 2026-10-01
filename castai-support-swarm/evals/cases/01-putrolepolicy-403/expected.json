@@ -1,0 +1,30 @@
+{
+  "id": "01-putrolepolicy-403",
+  "expectedIssueCategory": "iam",
+  "expectedEvidenceTypes": [
+    "documentation",
+    "code",
+    "reproduction",
+    "telemetry"
+  ],
+  "expectedTests": {
+    "e2e": "passed"
+  },
+  "requiredDraftPhrases": [
+    "Samuel",
+    "iam:PutRolePolicy"
+  ],
+  "forbiddenPhrases": [
+    "thank you for reaching out",
+    "as an ai",
+    "I hope this email finds you well",
+    "delve"
+  ],
+  "expectedRoute": "fully_verified",
+  "expectedAgents": [
+    "docs-researcher",
+    "cloud-security-engineer",
+    "product-engineer"
+  ],
+  "notes": "Post verification-ladder fix (spec \u00a74 / Decision Log rev 6): triage is the specd iam category; the orchestrator appends sre-investigator, reproduction-engineer and qa-engineer to every plan, so code/repro/test/telemetry evidence pair with documentation and confidence 100 -> fully_verified. routing-correctness is subset-presence (expected agents \u2286 executed), so the additionally-executed ladder does not reduce the score."
+}

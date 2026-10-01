@@ -1,0 +1,351 @@
+{
+  "metadata": {
+    "skill_name": "castai-support-engineer",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-09-25T17:19:13Z",
+    "evals_run": [
+      1,
+      2,
+      3
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 72.6,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "States that no public endpoint exists to revoke/invalidate a cluster token immediately",
+          "passed": true,
+          "evidence": "answer.md section (b) opens: \"Can the old token be revoked immediately via an endpoint? No \u2014 there is no public revoke endpoint for cluster tokens.\" and adds \"There is no DELETE/revoke method on that path, and no revoke endpoint anywhere else in the public API.\" Also states the only guaranteed server-side invalidation is deleting/disconnecting the cluster. Independently verified: live OpenAPI spec has zero 'revoke'/'invalidate' occurrences and no DELETE method on the cluster-token path."
+        },
+        {
+          "text": "States the old token remains valid for a period after rotation (grace period / extended validity), addressing the zero-downtime question",
+          "passed": true,
+          "evidence": "answer.md: \"issues a new token but does **not** synchronously invalidate the previous one. Both tokens authenticate during an overlap window\" and \"the previous token kept authenticating successfully for **at least 60 minutes** after rotation\". Zero-downtime is explicitly addressed: \"What this means for your zero-downtime requirement: the overlap window is on your side. The safe procedure is rotate \u2192 update every secret \u2192 roll-restart the components\" plus reassurance that component auth failures do not affect running workloads."
+        },
+        {
+          "text": "Distinguishes officially documented behavior from locally observed/inferred behavior rather than asserting undocumented facts as certain",
+          "passed": true,
+          "evidence": "answer.md: \"CAST AI does **not document a fixed TTL** for the old token. There is no contractual 'it works for N minutes' value we can point you at\" and \"in our own end-to-end testing, the previous token kept authenticating successfully for at least 60 minutes... Treat that as an observed lower bound from our testing, not a guaranteed window, and don't build runbooks around a specific number.\" Spec-verified claims (endpoint existence, no revoke endpoint) are presented as verified against the live spec, while the 60-minute figure is scoped to local observation. Supporting: CreateClusterTokenResponse schema documents only a 'token' field \u2014 no TTL \u2014 consistent with the answer's framing."
+        },
+        {
+          "text": "Explains the post-rotation 401 means a component is still authenticating with an outdated token copy, and gives the fix: update every secret holding the token and restart all components (agent etc.)",
+          "passed": true,
+          "evidence": "answer.md explains the symptom: \"The `401 Authorization Required` lines only started once the old token finally stopped being accepted \u2014 at which point the components whose Kubernetes secrets were never updated had no valid credential left.\" The fix is explicit and ordered: update ALL five secrets (castai-agent, castai-cluster-controller, castai-kvisor, castai-pod-pinner, live-api-key via kubectl create secret --dry-run | apply loop) BEFORE restarting, then \"kubectl rollout restart\" of every deployment and daemonset, with the rule \"never restart a component before its secret has been updated\", plus a post-check grepping agent logs for 401 count = 0."
+        },
+        {
+          "text": "Notes that an organization API key cannot be used as a substitute for the cluster token for agent authentication",
+          "passed": true,
+          "evidence": "answer.md: \"**Organization API access keys** (`/v1/auth/tokens`) are a different credential type and *can* be deleted (`DELETE /v1/auth/tokens/{id}`), but they are for management-API automation only \u2014 the agent and cluster controller cannot use them as a substitute for the cluster token.\""
+        },
+        {
+          "text": "Cites at least one official CAST AI source (docs.cast.ai, api.cast.ai spec, changelog, or github.com/castai)",
+          "passed": true,
+          "evidence": "answer.md cites three official sources: https://api.cast.ai/v1/spec/openapi.json (live spec, verified during execution), https://docs.cast.ai/reference/externalclusterapi_createclustertoken (API reference for the token endpoint), and https://docs.cast.ai/docs/api-access (API access keys guide). I re-fetched both docs URLs during grading: both return HTTP 200."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 61.3,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Identifies agentpool and/or kubernetes.azure.com/agentpool as CAST AI reserved labels whose values are overwritten",
+          "passed": true,
+          "evidence": "answer.md section 1: '`agentpool` (and its successor `kubernetes.azure.com/agentpool`) are on CAST AI's **reserved labels** list' and quotes the official docs verbatim: 'If you configure any of these in a Node Template, Cast AI will overwrite your values with the ones it determines... Do not configure these reserved labels or taints in Node Templates.' Verified against live https://docs.cast.ai/docs/autoscaler-reference-node-labels-and-taints: the AKS table lists both keys and the page carries exactly this reserved-labels warning."
+        },
+        {
+          "text": "Explains that AKS requires every node to carry a pool identity label, which is why CAST AI stamps its own value and cannot honor custom ones",
+          "passed": true,
+          "evidence": "answer.md section 1: 'On AKS every node must carry a pool identity \u2014 that is how AKS tracks node pool membership \u2014 so CAST AI cannot remove, rename, or delegate this label, and no Node Template value for it will ever survive. This is an AKS platform requirement, not something a template can opt out of.' Also cites the docs' AKS entry: 'Set to `castai` for Cast AI provisioned nodes. Required by AKS for node pool membership.'"
+        },
+        {
+          "text": "Does NOT claim that a node template can set a custom agentpool value or that CAST nodes can join a customer-named Azure agent pool",
+          "passed": true,
+          "evidence": "Full read of answer.md found no such claim. It consistently asserts the opposite: 'no Node Template value for it will ever survive' (sec. 1), 'setting `agentpool` in a node template silently does nothing' (sec. 1), 'they cannot rename or alias CAST AI's keys' (sec. 2), and the only feature-request offered (sec. 4) is for a configurable label VALUE derived from the node configuration name, labeled low-odds \u2014 it never suggests CAST nodes can join a customer-named Azure agent pool."
+        },
+        {
+          "text": "Gives the supported alternative: one node template per pool, targeted with the scheduling.cast.ai/node-template label (and/or template custom labels)",
+          "passed": true,
+          "evidence": "answer.md section 2: 'One template per former `agentpool` value... \"the supported way to target CAST node pools\" = `nodeSelector: scheduling.cast.ai/node-template: <pool>` (plus template custom labels if desired).' It also covers arbitrary template custom labels (console/Terraform `custom_labels`/API) and the recommended explicit-selection semantics, matching the live Node Templates doc."
+        },
+        {
+          "text": "Offers a migration path for existing workloads (e.g., PodMutation to rewrite legacy selectors, or updating manifests to the new label)",
+          "passed": true,
+          "evidence": "answer.md provides both paths: section 3 ships a complete value-agnostic PodMutation YAML (CEL filter matching pods with an `agentpool` nodeSelector; copy agentpool -> scheduling.cast.ai~1node-template, remove agentpool, add a value-agnostic Exists toleration; podEviction.enabled to migrate running pods), and section 5 rollout step 4 directs teams to 'replace `agentpool` selectors with `scheduling.cast.ai/node-template` natively' in manifests and retire the mutation over time."
+        },
+        {
+          "text": "Cites at least one official CAST AI source (docs.cast.ai, api.cast.ai spec, changelog, or github.com/castai)",
+          "passed": true,
+          "evidence": "answer.md's Sources section cites three official docs.cast.ai pages (autoscaler-reference-node-labels-and-taints, node-templates, pod-mutations-reference), and notes.md additionally records a docs.cast.ai/changelog scan. All three docs URLs were re-verified live by the grader with HTTP 200 and content matching the quotes in answer.md."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 40.2,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Diagnoses the 401 as using an EU-org API key against the wrong (US/global) API base URL",
+          "passed": true,
+          "evidence": "answer.md lines 3-15: heading \"What's going on: you're calling the wrong region\"; \"Your org (Siemens EU) lives in the **EU region**, so your org API key is registered only with the EU deployment. Your script is pointing at `https://api.cast.ai` (the US/default endpoint), which has never heard of that key \u2014 so every call returns **401**. The key is fine; the base URL is wrong.\" Explains why the key works in the EU console but not the script. Genuine region-mismatch diagnosis, not surface compliance."
+        },
+        {
+          "text": "States the correct base URL is https://api.eu.cast.ai",
+          "passed": true,
+          "evidence": "answer.md line 8 lists \"EU region: `https://api.eu.cast.ai`\" and lines 17-21 have an explicit \"Fix: use the EU base URL\" block with `https://api.eu.cast.ai`; both curl examples (lines 26, 41) use it. Verified against live spec servers list (US `https://api.cast.ai/`, EU `https://api.eu.cast.ai/`) and docs.cast.ai/docs/api-access."
+        },
+        {
+          "text": "Provides a concrete, spec-accurate endpoint path under /v1/cost-reports/ for savings/cost data (verified against OpenAPI spec or local endpoint notes)",
+          "passed": true,
+          "evidence": "answer.md line 35: `GET /v1/cost-reports/clusters/{clusterId}/savings`. Verified against the full live spec at https://api.cast.ai/v1/spec/openapi.json (downloaded and queried): path exists, operationId ClusterReportAPI_GetClusterSavingsReport, required query params startTime and endTime (date-time), optional stepSeconds (int32) and useListingPrices (bool) \u2014 exactly matching the answer's parameter table. The answer's claimed response shape (items[{timestamp, downscalingSavings, spotSavings}] + summary{totalCost, totalSavings}, all strings) also matches the spec schema costreport.v1beta1.GetClusterSavingsReportResponse field-for-field."
+        },
+        {
+          "text": "Shows correct authentication via the X-API-Key header (e.g., in an example curl)",
+          "passed": true,
+          "evidence": "answer.md line 23 instructs to send the key in the `X-API-Key` header; line 26-28 shows `curl -sS \"https://api.eu.cast.ai/v1/organizations\" -H \"X-API-Key: $CASTAI_API_KEY\"`; line 41-43 shows a second curl with the same header against the savings endpoint. Confirmed official: docs.cast.ai/docs/api-access states \"To authenticate, provide the key in the `X-API-Key` HTTP header\", and the spec's global security schemes are BearerAuth + ApiKeyAuth (answer correctly notes Bearer JWT is the only other accepted scheme)."
+        },
+        {
+          "text": "Cites at least one official CAST AI source (docs.cast.ai, api.cast.ai spec, changelog, or github.com/castai)",
+          "passed": true,
+          "evidence": "answer.md Sources section (lines 66-70) cites three official sources: https://docs.cast.ai/docs/api-access, https://docs.cast.ai/reference/clusterreportapi_getclustersavingsreport, and https://api.cast.ai/v1/spec/openapi.json. All three verified live during grading: api-access.md HTTP 200, reference page HTTP 200, spec HTTP 200."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 5.8,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "States that no public endpoint exists to revoke/invalidate a cluster token immediately",
+          "passed": true,
+          "evidence": "answer.md (a): 'Is there an endpoint to revoke the old token immediately? **No.** The CAST AI public API exposes exactly one operation for cluster tokens: POST /v1/kubernetes/external-clusters/{clusterId}/token. There is no `DELETE` or revoke method for cluster tokens.' Verified accurate against live spec: only token paths are /v1/auth/tokens{,/{id}} (AuthTokenAPI, org/user API keys), partner tokens, and the single cluster-token POST; no 'revoke'/'invalidate' anywhere in path summaries, descriptions, or operationIds."
+        },
+        {
+          "text": "States the old token remains valid for a period after rotation (grace period / extended validity), addressing the zero-downtime question",
+          "passed": true,
+          "evidence": "answer.md: 'issues a new token but does **not synchronously revoke the previous one**. Both tokens authenticate in parallel for an overlap period... we observed the old token returning HTTP 200 for at least 60 minutes after rotation.' And: 'On zero downtime: this overlap actually works in your favor. Rotation is not a hard cutover, so the correct procedure causes no downtime at all... At no point is a component left without a valid credential.'"
+        },
+        {
+          "text": "Distinguishes officially documented behavior from locally observed/inferred behavior rather than asserting undocumented facts as certain",
+          "passed": true,
+          "evidence": "answer.md: '**There is no documented TTL for the overlap.** CAST AI does not publish how long the old token remains accepted.' / '**Empirically, we observed** ... treat 60 minutes as a lower bound from our testing, not a guarantee.' / 'because the overlap duration is undocumented, don't design around a specific grace period.' notes.md also lists this framing as an explicit assumption ('presented as an empirical lower bound, not a CAST AI guarantee')."
+        },
+        {
+          "text": "Explains the post-rotation 401 means a component is still authenticating with an outdated token copy, and gives the fix: update every secret holding the token and restart all components (agent etc.)",
+          "passed": true,
+          "evidence": "answer.md: 'The `401 Authorization Required` errors you saw previously were not caused by the rotation itself \u2014 they were caused by a component still holding the old token **after the overlap window closed** (in your case, a missed `castai-cluster-controller` secret).' Fix given: '2. Update **every** Kubernetes secret that holds the cluster token. 3. Rolling-restart all CAST AI components so they pick up the new token', plus verification step: 'verify with a log scan (0 occurrences of `401 Authorization Required` across all CAST AI components)'."
+        },
+        {
+          "text": "Notes that an organization API key cannot be used as a substitute for the cluster token for agent authentication",
+          "passed": true,
+          "evidence": "answer.md: 'organization-level API keys ... are a *different* credential ... Just don't use them as a substitute for the cluster token in the agent/controller components.' Consistent with spec summary for the cluster-token POST: 'Returns cluster token that is used for agent and cluster controller.'"
+        },
+        {
+          "text": "Cites at least one official CAST AI source (docs.cast.ai, api.cast.ai spec, changelog, or github.com/castai)",
+          "passed": true,
+          "evidence": "answer.md cites 'Details: https://docs.cast.ai/docs/api-access' \u2014 verified live (HTTP 200, official docs.cast.ai 'API access / API Access Keys' guide). Caveat: notes.md admits the URL was 'Not fetched directly during this session; carried over from the reviewed runbooks', so the citation is presence-only, not source-anchored."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 6,
+        "failed": 0,
+        "total": 6,
+        "time_seconds": 31.3,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Identifies agentpool and/or kubernetes.azure.com/agentpool as CAST AI reserved labels whose values are overwritten",
+          "passed": true,
+          "evidence": "answer.md section 1: \"`agentpool` \u2014 and its modern, qualified successor `kubernetes.azure.com/agentpool` \u2014 are on CAST AI's **reserved labels** list for AKS\", quoting the official doc \"Cast AI reserves the labels and taints listed in this document. If you configure any of these in a Node Template, Cast AI will **overwrite your values**\", and states \"Anything a node template sets for these keys is silently overwritten with `castai`\". Verified accurate against the live page https://docs.cast.ai/docs/autoscaler-reference-node-labels-and-taints, whose AKS table lists both keys and whose header carries the overwrite warning."
+        },
+        {
+          "text": "Explains that AKS requires every node to carry a pool identity label, which is why CAST AI stamps its own value and cannot honor custom ones",
+          "passed": true,
+          "evidence": "answer.md: \"On AKS specifically, **every node must carry a pool identity** \u2014 it is how AKS tracks node pool membership... Because AKS itself requires the label, CAST AI **cannot remove it, delegate it, or let customers set its value**.\" This matches the live official doc almost verbatim: \"kubernetes.azure.com/agentpool | pool name | Set to `castai` for Cast AI provisioned nodes. Required by AKS for node pool membership.\""
+        },
+        {
+          "text": "Does NOT claim that a node template can set a custom agentpool value or that CAST nodes can join a customer-named Azure agent pool",
+          "passed": true,
+          "evidence": "Full read of answer.md finds no such false promise; it explicitly denies the possibility: header \"No \u2014 CAST nodes cannot carry a custom `agentpool` value, and that is by design, not a bug\", \"There is no configuration, alias, or override\", and \"**Do not propose** post-hoc relabeling (Kyverno/DaemonSet rewriting `agentpool` on nodes)\". The section-4 feature-request paragraph (\"file an ask to make the AKS pool-label *value* configurable... Odds are low... Do not gate the fix on it\") is carefully hedged and does not promise the capability."
+        },
+        {
+          "text": "Gives the supported alternative: one node template per pool, targeted with the scheduling.cast.ai/node-template label (and/or template custom labels)",
+          "passed": true,
+          "evidence": "answer.md section 2: \"**Recommended end state:** create **one node template per former `agentpool` value, named identically to the old pool value**... workloads select: `nodeSelector: scheduling.cast.ai/node-template: <their-old-pool-name>`\"; also documents template custom labels (\"Templates also accept arbitrary **custom labels** via the console, Terraform (`custom_labels`), or the API\"). The `scheduling.cast.ai/node-template` auto-label is confirmed by the live reserved-labels reference (\"Set when the node is provisioned using a specific node template\")."
+        },
+        {
+          "text": "Offers a migration path for existing workloads (e.g., PodMutation to rewrite legacy selectors, or updating manifests to the new label)",
+          "passed": true,
+          "evidence": "answer.md section 3 provides a complete value-agnostic PodMutation manifest (`filterV2.pod.celExpression` matching `agentpool` in nodeSelector, `patchesV2` copy+remove ops rewriting it to `scheduling.cast.ai/node-template`, `podEviction.enabled: true`) plus a 4-step rollout order ending with team-by-team manifest rewrites (\"replace `agentpool` selectors in manifests with `scheduling.cast.ai/node-template`; shrink/retire the mutation as adoption completes\"). All CRD fields used check out against the live pod-mutations reference, which even ships an official \"Azure agentpool migration\" patch example."
+        },
+        {
+          "text": "Cites at least one official CAST AI source (docs.cast.ai, api.cast.ai spec, changelog, or github.com/castai)",
+          "passed": true,
+          "evidence": "answer.md cites two official docs.cast.ai pages inline: https://docs.cast.ai/docs/autoscaler-reference-node-labels-and-taints and https://docs.cast.ai/docs/pod-mutations-reference. notes.md additionally lists docs.cast.ai/docs/node-templates, docs.cast.ai/docs/nodetemplates-nodeconfiguration-and-labels, and docs.cast.ai/docs/business-continuity. Both cited URLs were fetched live during grading and resolve with the expected content."
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 46.6,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Diagnoses the 401 as using an EU-org API key against the wrong (US/global) API base URL",
+          "passed": true,
+          "evidence": "answer.md lines 5 and 16-24: 'Your key is fine \u2014 you're calling the wrong regional API endpoint... Your key belongs to the Siemens EU org, so it exists only in the EU control plane. When your script sends it to https://api.cast.ai (the US endpoint), that endpoint has no record of the key and rejects every call with 401 Authorization Required \u2014 even though the key is valid.' The diagnosis mechanism (region-scoped key stores, wrong endpoint => 401 despite valid key) matches official docs' regional-endpoint model and the repo's token-rotation runbook (e2e/token-rotation/README.md lines 259-260 confirms the same failure mode)."
+        },
+        {
+          "text": "States the correct base URL is https://api.eu.cast.ai",
+          "passed": true,
+          "evidence": "answer.md lines 28-32: 'Use the EU endpoint for everything Siemens: https://api.eu.cast.ai', used again in both curl examples. Verified against the live official spec https://api.cast.ai/v1/spec/openapi.json whose servers list includes {\"url\": \"https://api.eu.cast.ai/\", \"description\": \"EU endpoint\"}."
+        },
+        {
+          "text": "Provides a concrete, spec-accurate endpoint path under /v1/cost-reports/ for savings/cost data (verified against OpenAPI spec or local endpoint notes)",
+          "passed": true,
+          "evidence": "answer.md lines 50-59: 'GET /v1/cost-reports/clusters/{clusterId}/savings', operationId ClusterReportAPI_GetClusterSavingsReport (ClusterReportAPI), required query params startTime/endTime (RFC 3339), optional stepSeconds (int32) and useListingPrices (bool). Verified field-for-field against the live spec: path exists with exactly that operationId, required startTime/endTime (date-time), optional stepSeconds (int32) and useListingPrices (bool). Claimed response shape {clusterId, items[{timestamp, downscalingSavings, spotSavings}], summary{totalCost, totalSavings}} also matches costreport.v1beta1.GetClusterSavingsReportResponse exactly. Related paths cited (estimated-savings, /v1/cost-reports/organization/clusters/summary, /v1/kubernetes/external-clusters) all exist in the live spec."
+        },
+        {
+          "text": "Shows correct authentication via the X-API-Key header (e.g., in an example curl)",
+          "passed": true,
+          "evidence": "answer.md lines 37-39 and 64-66 show two curl examples using '-H \"X-API-Key: $CASTAI_API_KEY\"'; line 57 states 'Auth: X-API-Key header (or Bearer JWT)'. Verified against the live spec: components.securitySchemes.ApiKeyAuth = {type: apiKey, name: X-API-Key, in: header}; BearerAuth (http) is the only other scheme."
+        },
+        {
+          "text": "Cites at least one official CAST AI source (docs.cast.ai, api.cast.ai spec, changelog, or github.com/castai)",
+          "passed": true,
+          "evidence": "answer.md Sources section cites the official API reference page https://docs.cast.ai/reference/clusterreportapi_getclustersavingsreport (verified live: HTTP 200, official 'Gets cluster savings report' page) and the official OpenAPI spec as a local snapshot at castai-enterprise-dashboard/docs/openapi/castai-openapi.json (verified: file exists, its servers list and savings path match the live api.cast.ai spec)."
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 58.0333,
+        "stddev": 16.4452,
+        "min": 40.2,
+        "max": 72.6
+      },
+      "tokens": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 27.9,
+        "stddev": 20.6114,
+        "min": 5.8,
+        "max": 46.6
+      },
+      "tokens": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.00",
+      "time_seconds": "+30.1",
+      "tokens": "+0"
+    }
+  },
+  "notes": [
+    "INTERPRET WITH CARE \u2014 baseline contamination: the skill and its lookup/knowledge-index.json live inside the searched repo, so every baseline agent discovered and used the same verified runbooks (one even read knowledge-index.json directly). Pass-rate deltas understate the skill's value in this setup.",
+    "All 17 assertions passed in BOTH configurations (100% vs 100%) \u2014 the assertion set saturates and cannot discriminate. The real signal is in the graders' fact-checks of claims[], not pass_rate.",
+    "FACT-CHECK (the meaningful delta): with_skill runs produced ZERO false claims across all 3 evals; every run live-fetched official sources (OpenAPI spec, docs pages, changelog) to verify claims. Baselines produced 2 confirmed false/unsubstantiated claims: (a) eval-3 stated the India region base URL as https://api.in.cast.ai \u2014 no official source supports it; docs.cast.ai/docs/api-access documents https://api.india.cast.ai, which the with_skill run used; (b) eval-2 claimed the root cause was 'confirmed against the changelog' despite having no live web access \u2014 an overstated verification claim. Baseline eval-1 also cited a docs URL it never fetched.",
+    "Verification behavior diverged sharply: with_skill runs fetched live official sources in 3/3 cases (spec downloads + jq, docs .md endpoints); baselines relied on repo-local snapshots and notes in 3/3 cases. Since the question set touches things that drift (APIs, labels), this is the behavior the skill is designed to force.",
+    "Timing/tokens are unreliable in this harness (no token counts exposed; wall-clock approximated from file mtimes, which batch oddly). Directionally, with_skill runs took longer (40-73s vs 6-47s) \u2014 the cost of live verification. Treat these columns as noise.",
+    "Grader-suggested eval improvements for iteration 2 (consistent across all 6 graders): (1) citation assertion should require the cited URL to resolve AND support the specific claim (a fabricated-but-plausible URL currently passes); (2) add accuracy assertions pinning exact facts \u2014 region URLs, exact endpoint paths, DELETE /v1/auth/tokens/{id} semantics; (3) add negative assertions against harmful advice (e.g., proposing node-level relabeling of agentpool); (4) eval-2 migration-path assertion should check PodMutation YAML field validity, not just presence.",
+    "Non-discriminating assertions (pass 100% both sides, by design or by contamination): reserved-label identification, 401-region diagnosis, EU base URL, X-API-Key header, old-token validity window. Keep them as regression guards, not as value signals."
+  ]
+}

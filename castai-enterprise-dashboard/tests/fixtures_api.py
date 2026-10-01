@@ -542,24 +542,88 @@ EFFICIENCY_SUMMARY_EMPTY: dict = {
 # above remain the drill-down cross-check (cost_service.waste_by_organization).
 EFFICIENCY_A: dict = {
     "items": [
-        {"clusterId": C1_ID, "wasted": {"cpu": 40.0, "ram": 30.0, "storage": 10.0}},
+        # v2-OPS: FLAT overprovisioned*Percent doubles (0–100 scale) join the
+        # row as overprovisioned_*_pct; inline-zero-storage stays measured 0.
+        {
+            "clusterId": C1_ID,
+            "wasted": {"cpu": 40.0, "ram": 30.0, "storage": 10.0},
+            "cpuOverprovisionedPercent": 52.5,
+            "ramOverprovisionedPercent": 48.0,
+            "storageOverprovisionedPercent": 33.3,
+        },
         # C2 is DISCOVERED-only: absent from the efficiency payload -> waste NA.
     ]
 }
 
 EFFICIENCY_B: dict = {
     "items": [
-        {"clusterId": C3_ID, "wasted": {"cpu": 2.5, "ram": 1.5, "storage": 0.0}},
+        {
+            "clusterId": C3_ID,
+            "wasted": {"cpu": 2.5, "ram": 1.5, "storage": 0.0},
+            "cpuOverprovisionedPercent": 25.0,
+            "ramOverprovisionedPercent": 12.5,
+            "storageOverprovisionedPercent": 0.0,
+        },
     ]
 }
 
 EFFICIENCY_PARTIAL: dict = {
     "items": [
+        # No overprovisioned* fields here -> the trio stays NA (never 0).
         {"clusterId": P1_ID, "wasted": {"cpu": 1.0, "ram": 0.5, "storage": 0.25}},
     ]
 }
 
 EFFICIENCY_EMPTY: dict = {"items": []}
+
+# ----------------------- /v1/rebalancing-schedules (ADR v2 R11, 7th call) ----
+# Org-scoped, NOT windowed. Embedded jobs[] are treated as OPAQUE by all
+# consumers (never read); launchConfiguration NodeSelectors are label
+# selectors with NO cluster linkage field (spec-verified), so rows stay NA
+# and the payload surfaces org-level (NA drill-down tab) only.
+REBALANCE_A: dict = {
+    "schedules": [
+        {
+            "id": "sch-0001",
+            "name": "nightly-binpack",
+            "schedule": {"cron": "0 3 * * *"},
+            "nextTriggerAt": "2026-09-22T03:00:00Z",
+            "lastTriggerAt": "2026-09-21T03:00:00Z",
+            "jobs": [{"opaque": True}],  # contract: never read
+            "launchConfiguration": {"selector": {"nodeSelectorTerms": []}},
+            "triggerConditions": {"savingsThreshold": 10.0},
+        },
+        {
+            "id": "sch-0002",
+            "name": "weekly-evict",
+            "schedule": {"cron": "0 6 * * 0"},
+            "nextTriggerAt": "2026-09-28T06:00:00Z",
+            # lastTriggerAt absent (never triggered) -> NaT downstream
+            "jobs": [],
+            "launchConfiguration": {"selector": {"nodeSelectorTerms": []}},
+            "triggerConditions": {"savingsThreshold": 5.0},
+        },
+    ]
+}
+
+REBALANCE_B: dict = {"schedules": []}
+
+REBALANCE_PARTIAL: dict = {
+    "schedules": [
+        {
+            "id": "sch-9001",
+            "name": "legacy-daily",
+            "schedule": {"cron": "0 1 * * *"},
+            "nextTriggerAt": "2026-09-22T01:00:00Z",
+            "lastTriggerAt": "2026-09-21T01:00:00Z",
+            "jobs": [],
+            "launchConfiguration": {},
+            "triggerConditions": {},
+        },
+    ]
+}
+
+REBALANCE_EMPTY: dict = {"schedules": []}
 
 # Client method-name -> (method, org_id) key used by tests' FakeClient.
 GET_CLUSTERS = "get_clusters"
@@ -569,6 +633,7 @@ GET_REPORT = "get_org_clusters_report"
 GET_WA = "get_org_wa_agent_statuses"
 GET_EFFICIENCY = "get_org_cluster_efficiency"  # ADR v2 R2 Tier-1 6th call (items[])
 GET_EFFICIENCY_SUMMARY = "get_org_efficiency_summary"  # drill-down cross-check only
+GET_REBALANCE = "get_rebalancing_schedules"  # ADR v2 R11 Tier-1 7th call (org-level)
 
 
 def fleet_payload_map() -> dict:
@@ -585,21 +650,25 @@ def fleet_payload_map() -> dict:
         (GET_REPORT, ORG_A_ID): REPORT_A,
         (GET_WA, ORG_A_ID): WA_A,
         (GET_EFFICIENCY, ORG_A_ID): EFFICIENCY_A,
+        (GET_REBALANCE, ORG_A_ID): REBALANCE_A,
         (GET_CLUSTERS, ORG_B_ID): CLUSTERS_B,
         (GET_SUMMARY, ORG_B_ID): SUMMARY_B,
         (GET_OVERVIEW, ORG_B_ID): OVERVIEW_B,
         (GET_REPORT, ORG_B_ID): REPORT_B,
         (GET_WA, ORG_B_ID): WA_B,
         (GET_EFFICIENCY, ORG_B_ID): EFFICIENCY_B,
+        (GET_REBALANCE, ORG_B_ID): REBALANCE_B,
         (GET_CLUSTERS, ORG_EMPTY_ID): CLUSTERS_EMPTY,
         (GET_SUMMARY, ORG_EMPTY_ID): {"items": []},
         (GET_OVERVIEW, ORG_EMPTY_ID): OVERVIEW_EMPTY,
         (GET_REPORT, ORG_EMPTY_ID): REPORT_EMPTY,
         (GET_WA, ORG_EMPTY_ID): WA_EMPTY,
         (GET_EFFICIENCY, ORG_EMPTY_ID): EFFICIENCY_EMPTY,
+        (GET_REBALANCE, ORG_EMPTY_ID): REBALANCE_EMPTY,
         (GET_SUMMARY, ORG_PARTIAL_ID): SUMMARY_PARTIAL,
         (GET_OVERVIEW, ORG_PARTIAL_ID): OVERVIEW_PARTIAL,
         (GET_REPORT, ORG_PARTIAL_ID): REPORT_PARTIAL,
         (GET_WA, ORG_PARTIAL_ID): WA_PARTIAL,
         (GET_EFFICIENCY, ORG_PARTIAL_ID): EFFICIENCY_PARTIAL,
+        (GET_REBALANCE, ORG_PARTIAL_ID): REBALANCE_PARTIAL,
     }

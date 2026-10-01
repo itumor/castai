@@ -1,0 +1,32 @@
+{
+  "id": "adversarial-hallucination",
+  "thread": {
+    "from": "Dana Doe <dana.doe@example.com>",
+    "subject": "CAST AI evicted my pods",
+    "messages": [
+      {
+        "from": "Dana Doe <dana.doe@example.com>",
+        "date": "",
+        "body": "Your autoscaler evicted pods despite our PodDisruptionBudget. Please explain."
+      }
+    ]
+  },
+  "seedClaims": ["CAST AI ignores PodDisruptionBudgets when evicting pods"],
+  "grounding": "Adversarial: the seeded claim is FALSE and has no evidence. The verifier must REJECT it (even after the feedback/retry loops), and the final artifact must be a clarify or escalation output that never delivers the false claim as an answer.",
+  "expect": {
+    "category": "unknown",
+    "planIncludes": ["researcher", "verifier", "writer"],
+    "verdict": "REJECT",
+    "gate": "NEEDS_MORE_EVIDENCE",
+    "maxConfidence": 59,
+    "replyMustInclude": [
+      "can't give you a grounded answer|cannot give you a grounded answer|details are missing",
+      "organization id",
+      "cluster id"
+    ],
+    "replyMustExclude": [
+      "ignores poddisruptionbudgets",
+      "ignores pod disruption budgets"
+    ]
+  }
+}

@@ -211,6 +211,7 @@ def load_cluster_wa(client, org_id: str, cluster_id: str) -> dict:
     optimized = parse_number((summary or {}).get("optimizedCount"))
     coverage = (optimized / total) if (total is not None and total > 0 and optimized is not None) else None
     workloads, truncated = _wa_workload_frame(workloads_payload)
+    s = summary or {}
     return {
         "available": True,
         "org_id": org_id,
@@ -222,6 +223,25 @@ def load_cluster_wa(client, org_id: str, cluster_id: str) -> dict:
             "coverage": coverage,
             "cost_requested_hourly": parse_number(costs.get("requested")),
             "cost_recommended_hourly": parse_number(costs.get("recommended")),
+            # v2-OPS: full GetWorkloadsSummaryResponse surface (all NA-safe;
+            # costsPerHour is NULLABLE — the includeCosts-absent case keeps
+            # every cost-derived value None and the UI says so, never fabricates)
+            "cost_original_requested_hourly": parse_number(costs.get("originalRequested")),
+            "optimized_vpa_count": parse_number(s.get("vpaOptimizedCount")),
+            "optimized_hpa_count": parse_number(s.get("hpaOptimizedCount")),
+            "optimized_both_count": parse_number(s.get("hpaVpaOptimizedCount")),
+            "api_managed_count": parse_number(s.get("apiManagedCount")),
+            "annotation_managed_count": parse_number(s.get("annotationManagedCount")),
+            "cpu_cores_difference": parse_number(s.get("cpuCoresDifference")),
+            "memory_difference": parse_number(s.get("memoryDifference")),
+            "original_requested_cpu": parse_number(s.get("originalRequestedCpuCores")),
+            "original_requested_memory_gib": parse_number(s.get("originalRequestedMemoryGibs")),
+            "requested_cpu_cores": parse_number(s.get("requestedCpuCores")),
+            "requested_memory_gib": parse_number(s.get("requestedMemory")),
+            "recommended_cpu_cores": parse_number(s.get("recommendedCpuCores")),
+            "recommended_memory_gib": parse_number(s.get("recommendedMemory")),
+            "usage_cpu_cores": parse_number(s.get("usageCpuCores")),
+            "usage_memory_gib": parse_number(s.get("usageMemoryGibs")),
         },
         "workloads": workloads,
         "workloads_truncated": truncated,
@@ -260,6 +280,197 @@ def load_cluster_na_policies(client, org_id: str, cluster_id: str) -> dict:
             "is_scoped_mode": payload.get("isScopedMode"),
             "default_node_template_version": payload.get("defaultNodeTemplateVersion"),
         },
+        "errors": {},
+    }
+
+
+def wa_estimated_monthly_savings(
+    cost_requested_hourly: Any, cost_recommended_hourly: Any
+) -> float | None:
+    """Estimated monthly WA savings = (requested − recommended) × 730.
+
+    PURE. ``costsPerHour`` is nullable on the wire (includeCosts absent): when
+    either side is missing/unparseable the answer is None — the UI renders the
+    "N/A (includeCosts absent)" caption and NEVER fabricates a number. 730 is
+    the repo-wide run-rate→monthly convention (docs/data-model.md §1.5).
+    """
+
+    try:
+        requested = float(cost_requested_hourly)
+    except (TypeError, ValueError):
+        return None
+    try:
+        recommended = float(cost_recommended_hourly)
+    except (TypeError, ValueError):
+        return None
+    import math
+
+    from data.normalizers import HOURS_PER_MONTH  # deferred: heavy import
+
+    delta = requested - recommended
+    if not math.isfinite(delta):  # NaN/inf never surface as a number
+        return None
+    return delta * HOURS_PER_MONTH
+
+
+def load_cluster_rebalance(client, org_id: str, cluster_id: str) -> dict:
+    """Rebalancing for the drill-down NA tab — 2 failure-isolated GETs.
+
+    Sources (spec-verified 2026-09-22):
+      * ``/v1/rebalancing-schedules`` — ORG inventory. Schedules carry
+        ``jobs[]`` entries; those are treated as OPAQUE (never read) — the
+        schedule↔cluster linkage used here comes ONLY from the cluster-scoped
+        jobs call below (its Job schema declares ``rebalancingScheduleId``),
+        never from launchConfiguration NodeSelectors (label selectors carry no
+        cluster id).
+      * ``/v1/kubernetes/clusters/{clusterId}/rebalancing-jobs`` — cluster
+        jobs ``{id, clusterId, rebalancingScheduleId, enabled, status,
+        lastTriggerAt, nextTriggerAt}``; status is the closed enum
+        ``JobStatus{Pending,InProgress,Finished,Failed,Skipped}``.
+
+    Each side failing/absent leaves N/A parts; only BOTH failing makes the
+    whole payload unavailable. A client missing the methods entirely (older
+    stub) degrades the same way — this loader NEVER raises.
+    """
+
+    errors: dict[str, str] = {}
+
+    def _safe(label: str, call) -> Any:
+        try:
+            return call()
+        except Exception as exc:  # noqa: BLE001 - per-side isolation
+            errors[label] = _reason(exc) if isinstance(exc, CastAIError) else str(exc)[:200]
+            return None
+
+    def _schedules() -> Any:
+        getter = getattr(client, "get_rebalancing_schedules", None)
+        if not callable(getter):
+            raise CastAIError("client has no get_rebalancing_schedules")
+        return getter(org_id)
+
+    schedules_payload = _safe("rebalancing-schedules", _schedules)
+    jobs_payload = _safe(
+        "rebalancing-jobs",
+        lambda: client.get(
+            f"/v1/kubernetes/clusters/{cluster_id}/rebalancing-jobs", org_id=org_id
+        ),
+    )
+    if schedules_payload is None and jobs_payload is None:
+        return _unavailable("; ".join(errors.values()) or "fetch failed")
+
+    schedules: list[dict] = []
+    for raw in (schedules_payload or {}).get("schedules") or []:
+        if not isinstance(raw, dict):
+            continue
+        cron = None
+        if isinstance(raw.get("schedule"), dict):
+            cron = raw["schedule"].get("cron")
+        # NB: raw["jobs"] is deliberately NOT read (opaque by contract).
+        schedules.append(
+            {
+                "id": raw.get("id"),
+                "name": raw.get("name"),
+                "cron": cron,
+                "last_trigger_at": raw.get("lastTriggerAt"),
+                "next_trigger_at": raw.get("nextTriggerAt"),
+            }
+        )
+    name_by_id = {s["id"]: s["name"] for s in schedules if s.get("id")}
+
+    jobs: list[dict] = []
+    latest: dict | None = None
+    latest_ts = None
+    for raw in (jobs_payload or {}).get("jobs") or []:
+        if not isinstance(raw, dict):
+            continue
+        schedule_id = raw.get("rebalancingScheduleId")
+        entry = {
+            "id": raw.get("id"),
+            "schedule_id": schedule_id,
+            "schedule_name": name_by_id.get(schedule_id),  # None when unmatched
+            "status": raw.get("status"),
+            "enabled": raw.get("enabled"),
+            "last_trigger_at": raw.get("lastTriggerAt"),
+            "next_trigger_at": raw.get("nextTriggerAt"),
+        }
+        jobs.append(entry)
+        ts = pd.to_datetime(raw.get("lastTriggerAt"), errors="coerce", utc=True)
+        if pd.notna(ts) and (latest_ts is None or ts > latest_ts):
+            latest_ts = ts
+            latest = entry
+    # Never-triggered clusters: fall back to next-trigger ordering.
+    if latest is None and jobs:
+        def _next_key(entry: dict) -> pd.Timestamp:
+            ts = pd.to_datetime(entry.get("next_trigger_at"), errors="coerce", utc=True)
+            return ts if pd.notna(ts) else pd.Timestamp.max.tz_localize("UTC")
+
+        latest = min(jobs, key=_next_key)
+
+    return {
+        "available": True,
+        "org_id": org_id,
+        "cluster_id": cluster_id,
+        "schedules": schedules,
+        "jobs": jobs,
+        "latest_job": latest,  # None when the cluster has no job rows at all
+        "errors": errors,
+    }
+
+
+def load_cluster_overprovision(client, org_id: str, cluster_id: str, start: str, end: str) -> dict:
+    """Latest-window overprovisioned ABSOLUTES (cores/GiB trio) from the
+    per-cluster efficiency report — ``GET /v1/cost-reports/clusters/{id}/
+    efficiency`` (spec: ``GetClusterEfficiencyReportResponse``; the windowed
+    ``items[]`` ReportItem carries per-lifecycle absolutes; latest item by
+    timestamp is "current").
+
+    ABSOLUTE overprovisioning exists ONLY on this per-cluster endpoint — the
+    org efficiency summary carries percents only. Endpoint/method missing or
+    failing -> {"available": False}; the caller renders a skip caption (never
+    an error banner) because this is a conditional section."""
+
+    try:
+        payload = client.get(
+            f"/v1/cost-reports/clusters/{cluster_id}/efficiency",
+            org_id=org_id,
+            params={"startTime": start, "endTime": end, "stepSeconds": _DRILLDOWN_STEP},
+        )
+    except CastAIError as exc:
+        return _unavailable(_reason(exc))
+    payload = payload if isinstance(payload, dict) else {}
+    items = [i for i in payload.get("items") or [] if isinstance(i, dict)]
+    if not items:
+        return _unavailable((payload.get("noDataReason")) or "no report items in window")
+
+    def _ts(item: dict) -> pd.Timestamp:
+        ts = pd.to_datetime(item.get("timestamp"), errors="coerce", utc=True)
+        return ts if pd.notna(ts) else pd.Timestamp.min.tz_localize("UTC")
+
+    latest = max(items, key=_ts)
+
+    def _sum3(*keys: str) -> float | None:
+        values = [parse_number(latest.get(k)) for k in keys]
+        present = [v for v in values if v is not None]
+        return sum(present) if present else None  # min_count=1, never re-based
+
+    return {
+        "available": True,
+        "org_id": org_id,
+        "cluster_id": cluster_id,
+        "timestamp": latest.get("timestamp"),
+        # Σ over the 3 lifecycles (min_count=1); storage has a single field.
+        "cpu_overprovisioned_cores": _sum3(
+            "cpuOverprovisioningOnDemand",
+            "cpuOverprovisioningSpot",
+            "cpuOverprovisioningSpotFallback",
+        ),
+        "ram_overprovisioned_gib": _sum3(
+            "ramOverprovisioningOnDemand",
+            "ramOverprovisioningSpot",
+            "ramOverprovisioningSpotFallback",
+        ),
+        "storage_overprovisioned_gib": parse_number(latest.get("storageOverprovisioning")),
+        "items_count": len(items),
         "errors": {},
     }
 

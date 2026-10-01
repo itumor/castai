@@ -335,14 +335,18 @@ def build_display_columns(df: pd.DataFrame) -> dict[str, pd.Series]:
 
     # --- Nodes
     for key in ("nodes_total", "nodes_spot", "nodes_unknown", "na_managed_nodes",
-                "na_coverage_pct"):
+                "na_coverage_pct", "nodes_provider_managed"):
         if key in df.columns:
             out[key] = df[key]
 
     # --- FinOps
     for key in ("monthly_cost", "potential_savings", "report_period_cost",
                 "report_cost_pct_change", "waste_cpu_usd", "waste_ram_usd",
-                "waste_storage_usd", "waste_total_usd"):
+                "waste_storage_usd", "waste_total_usd",
+                # v2-OPS overprovisioning trio: ALREADY 0–100-scale payload
+                # doubles (not 0–1 ratios) — pass through, no ×100.
+                "overprovisioned_cpu_pct", "overprovisioned_ram_pct",
+                "overprovisioned_storage_pct"):
         if key in df.columns:
             out[key] = df[key]
     savings = _col(df, "potential_savings")
@@ -351,7 +355,11 @@ def build_display_columns(df: pd.DataFrame) -> dict[str, pd.Series]:
         index=df.index,
     )
 
-    # --- Autoscaling chips
+    # --- Autoscaling chips (v2-OPS: rebalance trio passes through — org-level
+    # at Tier 1, so rows stay NA until a cluster-resolved match exists)
+    for key in ("rebalance_schedule_name", "rebalance_last_trigger", "rebalance_next_trigger"):
+        if key in df.columns:
+            out[key] = df[key]
     wa_source = _coalesce(df, "wa_display", "workload_autoscaler_status")
     out["wa_status"] = pd.Series(
         [_wa_chip(v) for v in (wa_source.tolist() if wa_source is not None else [None] * n)],
@@ -443,6 +451,7 @@ _DISPLAY_LABELS = {
     "nodes_unknown": ("Nodes", "Unknown nodes"),
     "na_managed_nodes": ("Nodes", "NA managed nodes"),
     "na_coverage_pct": ("Nodes", "NA coverage"),
+    "nodes_provider_managed": ("Nodes", "Provider-managed #"),
     "monthly_cost": ("FinOps", "Cost/mo"),
     "savings_display": ("FinOps", "Savings/mo"),
     "potential_savings": ("FinOps", "Savings/mo (numeric)"),
@@ -452,9 +461,15 @@ _DISPLAY_LABELS = {
     "waste_ram_usd": ("FinOps", "Waste RAM $"),
     "waste_storage_usd": ("FinOps", "Waste storage $"),
     "waste_total_usd": ("FinOps", "Waste total $"),
+    "overprovisioned_cpu_pct": ("FinOps", "Overprov CPU %"),
+    "overprovisioned_ram_pct": ("FinOps", "Overprov RAM %"),
+    "overprovisioned_storage_pct": ("FinOps", "Overprov storage %"),
     "realized_display": ("FinOps", "Realized (batch)"),
     "wa_status": ("Autoscaling", "WA"),
     "na_display": ("Autoscaling", "NA"),
+    "rebalance_schedule_name": ("Autoscaling", "Rebalance schedule"),
+    "rebalance_last_trigger": ("Autoscaling", "Rebalance last"),
+    "rebalance_next_trigger": ("Autoscaling", "Rebalance next"),
     "problematic_display": ("Health", "Problematic nodes"),
     "enr_health_problematic_nodes_count": ("Health", "Problematic (numeric)"),
     "enr_health_problematic_workloads_count": ("Health", "Problematic workloads"),
@@ -562,6 +577,29 @@ def _build_column_config(columns: list[str]) -> dict:
         cfg["na_managed_nodes"] = st.column_config.NumberColumn("NA nodes", format="%d")
     if "na_coverage_pct" in columns:
         cfg["na_coverage_pct"] = st.column_config.NumberColumn("NA cov.", format="%.0f%%")
+    if "nodes_provider_managed" in columns:
+        cfg["nodes_provider_managed"] = st.column_config.NumberColumn(
+            "Prov-managed", format="%d",
+            help="nodes_total − CAST-managed counters; N/A when either side missing or inverted")
+    if "overprovisioned_cpu_pct" in columns:
+        cfg["overprovisioned_cpu_pct"] = st.column_config.NumberColumn(
+            "Overprov CPU", format="%.1f%%",
+            help="Efficiency report CPU overprovisioned percent (0–100 payload scale)")
+    if "overprovisioned_ram_pct" in columns:
+        cfg["overprovisioned_ram_pct"] = st.column_config.NumberColumn(
+            "Overprov RAM", format="%.1f%%",
+            help="Efficiency report RAM overprovisioned percent (0–100 payload scale)")
+    if "overprovisioned_storage_pct" in columns:
+        cfg["overprovisioned_storage_pct"] = st.column_config.NumberColumn(
+            "Overprov stor", format="%.1f%%",
+            help="Efficiency report storage overprovisioned percent (0–100 payload scale)")
+    if "rebalance_schedule_name" in columns:
+        cfg["rebalance_schedule_name"] = st.column_config.TextColumn(
+            "Rebalance", help="Org-level at Tier 1 — N/A until a cluster-resolved match exists")
+    if "rebalance_last_trigger" in columns:
+        cfg["rebalance_last_trigger"] = st.column_config.TextColumn("Reb last")
+    if "rebalance_next_trigger" in columns:
+        cfg["rebalance_next_trigger"] = st.column_config.TextColumn("Reb next")
     if "monthly_cost" in columns:
         cfg["monthly_cost"] = st.column_config.NumberColumn(
             "Cost/mo", format="$%d", help="Run-rate: costHourly × 730 h")

@@ -1,0 +1,32 @@
+{
+  "eval_id": 3,
+  "eval_name": "eu-savings-api-401",
+  "prompt": "i'm scripting a savings pull for the fleet. my script calls https://api.cast.ai/v1/cost-reports/... with an org API key i KNOW is valid, but every call 401s. all our clusters are in the Siemens EU org and the same key works fine for the EU console. what's going on, which base URL should i use, and what's the endpoint path for per-cluster savings?",
+  "assertions": [
+    {
+      "id": "identifies-region-mismatch",
+      "text": "Diagnoses the 401 as using an EU-org API key against the wrong (US/global) API base URL",
+      "type": "contains_behavior"
+    },
+    {
+      "id": "gives-eu-base-url",
+      "text": "States the correct base URL is https://api.eu.cast.ai",
+      "type": "contains_behavior"
+    },
+    {
+      "id": "gives-cost-reports-endpoint",
+      "text": "Provides a concrete, spec-accurate endpoint path under /v1/cost-reports/ for savings/cost data (verified against OpenAPI spec or local endpoint notes)",
+      "type": "contains_behavior"
+    },
+    {
+      "id": "gives-auth-header",
+      "text": "Shows correct authentication via the X-API-Key header (e.g., in an example curl)",
+      "type": "contains_behavior"
+    },
+    {
+      "id": "cites-official-source",
+      "text": "Cites at least one official CAST AI source (docs.cast.ai, api.cast.ai spec, changelog, or github.com/castai)",
+      "type": "contains_behavior"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "eval_id": 2,
+  "eval_name": "aks-agentpool-label",
+  "prompt": "new ticket from the sieportal team on AKS: their workloads select nodes with nodeSelector agentpool=<poolname> and they've noticed nodes CAST provisions get stamped agentpool=castai no matter what they put in the node template, so their pods never land on CAST nodes. they're asking if there's a way to make CAST nodes carry their own agentpool value, or barring that, what the supported way to target CAST node pools is. what do i tell them?",
+  "assertions": [
+    {
+      "id": "identifies-reserved-label",
+      "text": "Identifies agentpool and/or kubernetes.azure.com/agentpool as CAST AI reserved labels whose values are overwritten",
+      "type": "contains_behavior"
+    },
+    {
+      "id": "explains-aks-platform-requirement",
+      "text": "Explains that AKS requires every node to carry a pool identity label, which is why CAST AI stamps its own value and cannot honor custom ones",
+      "type": "contains_behavior"
+    },
+    {
+      "id": "no-false-promise",
+      "text": "Does NOT claim that a node template can set a custom agentpool value or that CAST nodes can join a customer-named Azure agent pool",
+      "type": "absent_behavior"
+    },
+    {
+      "id": "gives-node-template-alternative",
+      "text": "Gives the supported alternative: one node template per pool, targeted with the scheduling.cast.ai/node-template label (and/or template custom labels)",
+      "type": "contains_behavior"
+    },
+    {
+      "id": "offers-migration-path",
+      "text": "Offers a migration path for existing workloads (e.g., PodMutation to rewrite legacy selectors, or updating manifests to the new label)",
+      "type": "contains_behavior"
+    },
+    {
+      "id": "cites-official-source",
+      "text": "Cites at least one official CAST AI source (docs.cast.ai, api.cast.ai spec, changelog, or github.com/castai)",
+      "type": "contains_behavior"
+    }
+  ]
+}

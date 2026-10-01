@@ -1,0 +1,6 @@
+{
+  "total_tokens": null,
+  "duration_ms": 61265,
+  "total_duration_seconds": 61.3,
+  "note": "Wall-clock approximated from file mtimes; token counts not exposed by this harness"
+}

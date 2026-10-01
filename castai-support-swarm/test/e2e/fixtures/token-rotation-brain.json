@@ -1,0 +1,64 @@
+{
+  "steps": [
+    {
+      "match": "Classify this support case",
+      "response": "{\"orgId\":null,\"clusterId\":\"0858ecb1-9624-4669-b8d9-b08cba6f2ce6\",\"provider\":\"eks\",\"castaiMode\":\"full\",\"components\":[\"castai-agent\"],\"issueCategory\":\"security\",\"severity\":\"P2\",\"expected\":\"components authenticate with the rotated cluster token\",\"actual\":\"401 Authorization Required from castai-agent after token rotation\",\"missingInfo\":[]}"
+    },
+    {
+      "match": "Analyze the reported permission issue",
+      "response": "{\"analysis\": \"The 401s are not an IAM/permission problem: the cluster token itself was rotated and a component still holds the previous secret value.\", \"requiredPermissions\": [], \"fixStatement\": \"Update the component secrets for the install topology and restart every component.\", \"confirmed\": false}"
+    },
+    {
+      "match": "Answer each implementation question",
+      "response": "{\"answers\": []}"
+    },
+    {
+      "tag": "seed-hypotheses",
+      "response": "[\"a component kept a stale cluster token secret after the rotation\"]"
+    },
+    {
+      "match": "Seed 1-3 investigation hypotheses",
+      "response": "[\"a component kept a stale cluster token secret after the rotation\"]"
+    },
+    {
+      "match": "Vote on each hypothesis",
+      "response": "{\"votes\":[{\"id\":\"H1\",\"vote\":\"confirmed\",\"reason\":\"Cluster telemetry shows castai-agent running while the 401s persist, and the KB material confirms a missed component secret produces exactly this signature after rotation.\",\"evidenceIds\":[\"E1\",\"E2\",\"E3\",\"E4\",\"E5\",\"E6\",\"E7\",\"E8\",\"E9\",\"E10\",\"E11\",\"E12\",\"E13\",\"E14\",\"E15\",\"E16\",\"E17\",\"E18\",\"E19\",\"E20\",\"E21\",\"E22\",\"E23\",\"E24\",\"E25\",\"E26\",\"E27\",\"E28\",\"E29\",\"E30\",\"E31\",\"E32\",\"E33\",\"E34\",\"E35\",\"E36\",\"E37\",\"E38\",\"E39\",\"E40\"]}]}"
+    },
+    {
+      "match": "candidate claims",
+      "response": "{\"claims\":[\"after token rotation the secret is updated and the component restarts; the old token stays valid for at least 60 minutes\"]}"
+    },
+    {
+      "match": "Summarize the sandbox reproduction run",
+      "response": "{\"summary\":\"Sandbox reproduced the 401 Authorization Required with one stale component secret; updating the secret and restarting the component cleared it.\"}"
+    },
+    {
+      "tag": "propose-solution",
+      "response": "A component kept a stale cluster token secret after the rotation. Update the component secrets (castai-credentials in the castctl topology, or the per-component secrets in Helm and Terraform installs) and restart every component; the old token stays valid for about 60 minutes, so the 401s persist until each component restarts with the updated secret."
+    },
+    {
+      "match": "Propose the solution for the customer",
+      "response": "Update every component secret for the install topology \u2014 the single castai-credentials secret for castctl installs, or the per-component secrets (castai-agent, castai-cluster-controller, castai-spot-handler, castai-evictor, castai-workload-autoscaler) for Helm and Terraform installs \u2014 and then restart every component. The old token stays valid for at least 60 minutes after rotation, so the 401 Authorization Required entries persist until each component has restarted with the updated secret."
+    },
+    {
+      "tag": "verifier:claims",
+      "response": "{\"claims\":[{\"claim\":\"The old cluster token stays valid for about 60 minutes after rotation\",\"evidenceIds\":[]}]}"
+    },
+    {
+      "match": "Extract the atomic claims",
+      "response": "{\"claims\":[{\"claim\":\"Rotating the cluster token requires updating the component secrets and restarting every component\",\"evidenceIds\":[\"E1\",\"E2\",\"E3\",\"E4\",\"E5\",\"E6\",\"E7\",\"E8\",\"E9\",\"E10\",\"E11\",\"E12\",\"E13\",\"E14\",\"E15\",\"E16\",\"E17\",\"E18\",\"E19\",\"E20\",\"E21\",\"E22\",\"E23\",\"E24\",\"E25\",\"E26\",\"E27\",\"E28\",\"E29\",\"E30\",\"E31\",\"E32\",\"E33\",\"E34\",\"E35\",\"E36\",\"E37\",\"E38\",\"E39\",\"E40\"]},{\"claim\":\"The old cluster token stays valid for at least 60 minutes after rotation\",\"evidenceIds\":[\"E1\",\"E2\",\"E3\",\"E4\",\"E5\",\"E6\",\"E7\",\"E8\",\"E9\",\"E10\",\"E11\",\"E12\",\"E13\",\"E14\",\"E15\",\"E16\",\"E17\",\"E18\",\"E19\",\"E20\",\"E21\",\"E22\",\"E23\",\"E24\",\"E25\",\"E26\",\"E27\",\"E28\",\"E29\",\"E30\",\"E31\",\"E32\",\"E33\",\"E34\",\"E35\",\"E36\",\"E37\",\"E38\",\"E39\",\"E40\"]}]}"
+    },
+    {
+      "tag": "support-writer:draft",
+      "response": "{\"body\":\"Hi Glejn,\\n\\nI checked the cluster: the castai-agent pod itself is running, so the 401 Authorization Required entries are coming from a component that still holds the previous secret value from before the rotation. We reproduced the same signature in a sandbox by leaving one component secret stale while the others were updated.\\n\\nPer the documentation from our token rotation test runs, which secrets need updating depends on the install topology. With the standard castctl cluster connect install there is one shared secret, castai-credentials in the castai-agent namespace, so updating that single secret is enough. Helm and Terraform installs use per-component secrets (castai-agent, castai-cluster-controller, castai-spot-handler, castai-evictor, castai-workload-autoscaler), so every component secret must be updated. Afterwards, restart every component so it picks up the new value.\\n\\nThe old cluster token stays valid for at least 60 minutes after rotation \u2014 we measured this empirically and there is no revoke endpoint \u2014 which is why the 401s continue until each component has been restarted with the updated secret.\\n\\n\u2014 CAST AI Support\"}"
+    },
+    {
+      "tag": "knowledge-agent:proposals",
+      "response": "{\"proposals\":[{\"title\":\"Cluster token rotation runbook\",\"text\":\"After rotating a cluster token, update the component secrets for the install topology (castai-credentials for castctl installs; per-component secrets for Helm/Terraform installs) and restart every component. The old token stays valid for at least 60 minutes and there is no revoke endpoint, so stale components keep returning 401 Authorization Required until restarted.\",\"targetPath\":\"brain/notes/runbooks/cluster-token-rotation.md\"}]}"
+    },
+    {
+      "tag": "solution-architect:review",
+      "response": "{\"fit\":\"ok\",\"notes\":\"Secret update plus component restarts only; no cluster mutations. Restart components one at a time to keep availability.\"}"
+    }
+  ]
+}

@@ -130,6 +130,19 @@ EXTRA_COLUMNS: list[str] = [
     # --- v2 k8s version normalization (audit #4) -----------------------------
     "kubernetes_version_short",  # major.minor from kubernetes_version ('v1.34.9' -> '1.34')
     "kubernetes_version_known",  # bool: the raw version string parsed (False, never NA)
+    # --- v2-OPS overprovisioning (efficiency item FLAT doubles, 0–100 scale) -
+    "overprovisioned_cpu_pct",      # items[].cpuOverprovisionedPercent (JSON double)
+    "overprovisioned_ram_pct",      # items[].ramOverprovisionedPercent
+    "overprovisioned_storage_pct",  # items[].storageOverprovisionedPercent
+    # --- v2-OPS provider coverage (derived from the SAME summary item; +0 calls)
+    "nodes_provider_managed",  # nodes_total − na_managed_nodes; NA on either NA or total<managed
+    # --- v2-OPS rebalancing (ADR v2 R11) — org-level only at Tier 1 ----------
+    # Linkage is NOT resolvable from /v1/rebalancing-schedules (embedded jobs[]
+    # opaque; launchConfiguration NodeSelectors carry no cluster field), so
+    # these stay NA unless a caller passes a cluster-resolved rebalance_item.
+    "rebalance_schedule_name",  # schedule name (first match) — NA when unresolved
+    "rebalance_last_trigger",   # schedules[].lastTriggerAt (tz-aware; NaT)
+    "rebalance_next_trigger",   # schedules[].nextTriggerAt (tz-aware; NaT)
 ]
 
 __all__ = [
@@ -353,6 +366,7 @@ def build_fleet_row(
     wa_available: bool = True,
     wa_entry: dict | None = None,
     efficiency_item: dict | None = None,
+    rebalance_item: dict | None = None,
     fetched_at: object = None,
 ) -> dict:
     """Join one cluster's Tier-1 payloads into a FLEET_COLUMNS row dict.
@@ -370,7 +384,13 @@ def build_fleet_row(
     callers passing only ``wa_status`` keep working unchanged.
     ``efficiency_item`` (v2, ADR R2): the matched ``clusters/efficiency``
     ``items[]`` record — the waste-column source (NEVER summed with spend or
-    savings, resource-metrics §7).
+    savings, resource-metrics §7); its FLAT ``*OverprovisionedPercent`` doubles
+    (0–100 scale) pass through as the ``overprovisioned_*_pct`` trio.
+    ``rebalance_item`` (v2-OPS, ADR R11): a CLUSTER-RESOLVED schedule match
+    ``{name, lastTriggerAt, nextTriggerAt}``. The Tier-1 schedule inventory is
+    org-level only (embedded jobs[] opaque, NodeSelectors carry no cluster id),
+    so the fleet sweep never passes it and the rebalance trio stays NA/NaT —
+    never invented.
     """
     cluster_item = cluster_item if isinstance(cluster_item, dict) else None
     summary_item = summary_item if isinstance(summary_item, dict) else None
@@ -417,6 +437,17 @@ def build_fleet_row(
         si, "nodeCountOnDemandCastai", "nodeCountSpotCastai", "nodeCountSpotFallbackCastai"
     )
     na_coverage = _safe_ratio_pos(na_managed_nodes, nodes_total)
+    # v2-OPS: provider-managed = nodes NOT CLAIMED by CASTer's node counters —
+    # same summary item, +0 calls. NA when either side is NA; NA (never
+    # negative-garbage) when total < managed (counter family mismatch).
+    if (
+        nodes_total is not None
+        and na_managed_nodes is not None
+        and na_managed_nodes <= nodes_total
+    ):
+        nodes_provider_managed = nodes_total - na_managed_nodes
+    else:
+        nodes_provider_managed = None
     # Storage (resource-metrics §3). TRAP: storageRequested is ACTIVE claims;
     # storage_commit_pct is "commit" (claims/provisioned), never "utilization".
     storage_provisioned = parse_number(si.get("storageProvisioned"))
@@ -451,6 +482,15 @@ def build_fleet_row(
     waste_ram = parse_number(wasted.get("ram"))
     waste_storage = parse_number(wasted.get("storage"))
     waste_total = _sum_present(waste_cpu, waste_ram, waste_storage)
+    # --- v2-OPS overprovisioning trio: the SAME efficiency item's FLAT JSON
+    # doubles (0–100 scale, spec: format double type number — NOT 0–1 ratios).
+    # ABSOLUTE cores/GiB live only on the per-cluster efficiency report (Tier
+    # 2), never back-filled here. Pass-through; absent -> NA, never 0.
+    overprov_cpu = parse_number(ei.get("cpuOverprovisionedPercent") if ei is not None else None)
+    overprov_ram = parse_number(ei.get("ramOverprovisionedPercent") if ei is not None else None)
+    overprov_storage = parse_number(
+        ei.get("storageOverprovisionedPercent") if ei is not None else None
+    )
 
     # --- v2 WA display family (autoscaler-model §2.2; MAJOR-3 pd.NA stands).
     # The display helper needs the payload-arrived-vs-failed distinction
@@ -503,6 +543,22 @@ def build_fleet_row(
     # --- v2 k8s version normalization (audit #4) ------------------------------
     version_raw = ci.get("kubernetesVersion")
     version_short, version_known = kubernetes_version_short(version_raw)
+
+    # --- v2-OPS rebalancing trio (ADR R11): populated ONLY when a caller hands
+    # a cluster-resolved match; the fleet sweep cannot resolve linkage from the
+    # org-level schedules payload, so these stay NA/NaT there — never invented.
+    ri = rebalance_item if isinstance(rebalance_item, dict) else None
+    rebalance_name = ri.get("name") if ri is not None else None
+    rebalance_last = (
+        pd.to_datetime(ri.get("lastTriggerAt"), errors="coerce", utc=True)
+        if ri is not None
+        else pd.NaT
+    )
+    rebalance_next = (
+        pd.to_datetime(ri.get("nextTriggerAt"), errors="coerce", utc=True)
+        if ri is not None
+        else pd.NaT
+    )
 
     # --- resilience marker ---
     if summary_item is not None:
@@ -614,6 +670,16 @@ def build_fleet_row(
         "has_negative_savings": has_negative_savings,
         "kubernetes_version_short": version_short,
         "kubernetes_version_known": version_known,
+        # v2-OPS overprovisioning (efficiency item flat doubles, 0–100 scale)
+        "overprovisioned_cpu_pct": _na(overprov_cpu),
+        "overprovisioned_ram_pct": _na(overprov_ram),
+        "overprovisioned_storage_pct": _na(overprov_storage),
+        # v2-OPS provider coverage (negative-guarded; NA on either NA)
+        "nodes_provider_managed": _na(nodes_provider_managed),
+        # v2-OPS rebalancing (org-level at Tier 1; NA/NaT unless cluster-resolved)
+        "rebalance_schedule_name": _na_text(rebalance_name),
+        "rebalance_last_trigger": rebalance_last,
+        "rebalance_next_trigger": rebalance_next,
     }
 
     # Contract guard: exact FLEET_COLUMNS key set/order first, extras appended after.

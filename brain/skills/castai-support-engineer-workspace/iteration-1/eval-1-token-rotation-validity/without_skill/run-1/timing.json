@@ -1,0 +1,6 @@
+{
+  "total_tokens": null,
+  "duration_ms": 5834,
+  "total_duration_seconds": 5.8,
+  "note": "Wall-clock approximated from file mtimes (spawn ~= metadata write, end ~= answer.md write); token counts not exposed by this harness"
+}

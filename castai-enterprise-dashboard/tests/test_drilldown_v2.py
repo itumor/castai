@@ -704,7 +704,31 @@ class DrillClient:
             return self._rec("workload_costs", {"items": [{
                 "namespace": "billing", "workloadName": "api", "workloadType": "Deployment",
                 "summary": {"totalCost": "90.0", "avgCost": "2.0"}}]})
+        if path.endswith("/rebalancing-jobs"):
+            return self._rec("rebalance_jobs", {"jobs": [{
+                "id": "j1", "clusterId": "org-a-web-1",
+                "rebalancingScheduleId": "sch-1", "enabled": True,
+                "status": "JobStatusFinished",
+                "lastTriggerAt": "2026-09-23T03:00:00Z",
+                "nextTriggerAt": "2026-09-24T03:00:00Z"}]})
+        if path.endswith("/efficiency"):
+            return self._rec("overprovision", {"items": [{
+                "timestamp": "2026-09-23T00:00:00Z",
+                "cpuOverprovisioningOnDemand": "2.0",
+                "cpuOverprovisioningSpot": "1.5",
+                "ramOverprovisioningOnDemand": "4.0",
+                "storageOverprovisioning": "10.0"}]})
         raise KeyError(path)
+
+    def get_rebalancing_schedules(self, org_id):
+        return self._rec("rebalance_schedules", {"schedules": [{
+            "id": "sch-1", "name": "nightly-binpack",
+            "schedule": {"cron": "0 3 * * *"},
+            "nextTriggerAt": "2026-09-24T03:00:00Z",
+            "lastTriggerAt": "2026-09-23T03:00:00Z",
+            "jobs": [{"opaque": True}],  # contract: never read by any consumer
+            "launchConfiguration": {"selector": {"nodeSelectorTerms": []}},
+            "triggerConditions": {}}]})
 
     def get_problematic_nodes(self, org, cid):
         return self._rec("p_nodes", {"nodes": [{"name": "node-1",
@@ -765,19 +789,25 @@ app.cached_fleet = lambda *a, **k: FleetResult(
 
 
 # Expected fully-armed drill-down call map (client method name -> #GETs).
+# v2-OPS (ADR R11): the na gate's "rebalance" arm adds exactly 2 GETs
+# (org schedules + cluster jobs, ttl 900) -> the fully-armed total lands at
+# EXACTLY the perf-v2 §4 hard budget of 18 (shared wrappers still dedupe the
+# History tab's cost/savings/est-history reads).
 _EXPECTED_ARMED_CALLS = {
     "cost": 1, "pricing": 1, "savings": 1, "est_history": 1,
     "wa_summary": 1, "wa_workloads": 1, "policies": 1, "nodes_page": 1,
     "workload_costs": 1,
     "p_nodes": 1, "p_workloads": 1, "pods": 1, "agent_status": 1,
     "notifications": 1, "oom": 1, "node_history": 1,
+    "rebalance_schedules": 1, "rebalance_jobs": 1,
 }
 
 
 def test_apptest_select_arm_all_12_ids_zero_exceptions_and_budget():
-    """Select a cluster, arm every one of the 12 ids, assert zero uncaught
-    exceptions AND the fully-armed drill-down GET count ≤ 18 (shared wrappers
-    dedupe the History tab's cost/savings/est-history reads)."""
+    """Select a cluster, arm every one of the 12 ids (plus the na-family
+    "rebalance" sibling), assert zero uncaught exceptions AND the fully-armed
+    drill-down GET count ≤ 18 (shared wrappers dedupe the History tab's
+    cost/savings/est-history reads)."""
 
     body = (
         _ROW_DD_SRC
@@ -787,6 +817,7 @@ def test_apptest_select_arm_all_12_ids_zero_exceptions_and_budget():
 st.session_state["selected"] = ("org-a", "org-a-web-1")
 for _t in app._TAB_IDS:
     st.session_state[f"tab_armed_org-a-web-1_{_t}"] = True
+st.session_state["tab_armed_org-a-web-1_rebalance"] = True  # na-family sibling (R11)
 app.main()
 """
     )
@@ -804,12 +835,14 @@ app.main()
     for name, expected in _EXPECTED_ARMED_CALLS.items():
         assert counts.get(name, 0) == expected, f"{name}: {counts.get(name, 0)} != {expected}"
     armed_total = sum(counts[n] for n in _EXPECTED_ARMED_CALLS)
-    assert armed_total == 16
+    assert armed_total == 18
     assert armed_total <= 18  # perf-v2 §4 hard budget, all tabs armed
-    # T1 auto set stays at exactly 3 (I2 intact)
+    # T1 auto set: overview + resources pair + overprovision absolutes
+    # (I2 as amended by R11 — the Resources tab fires 3 GETs).
     assert counts.get("overview", 0) == 1
     assert counts.get("resources_summary", 0) == 1 and counts.get("resources_usage", 0) == 1
-    # shared wrappers deduped across Savings/History tabs is implicit in ==16.
+    assert counts.get("overprovision", 0) == 1
+    # shared wrappers deduped across Savings/History tabs is implicit in ==18.
 
 
 def test_apptest_buttons_arm_their_tabs():
@@ -834,11 +867,66 @@ app.main()
     assert all(
         at.session_state.get(f"tab_armed_{cluster}_{t}") for t in app_module._TAB_IDS
     )
+    # the na gate also arms its "rebalance" sibling (R11 na-family)
+    assert at.session_state.get(f"tab_armed_{cluster}_rebalance")
     client = at.session_state["__client__"]
     assert set(_EXPECTED_ARMED_CALLS) <= set(client.dd_calls)  # every loader fired
     # short node-history series (<14 buckets) renders the N/A caption
     captions = " ".join(c.value for c in at.caption)
     assert "<14" in captions
+
+
+def test_apptest_arm_na_family_zero_raise():
+    """v2-OPS (ADR R11): the na gate arms BOTH its ids (na + rebalance — the
+    "na-family"); the issues gate arms its 3 ids (issues + notifications +
+    oom). One AppTest run clicks both gates; zero uncaught exceptions; the
+    Rebalancing section renders its schedule table + latest job status; the
+    Resources-tab overprovision section renders its absolutes trio."""
+
+    body = (
+        _ROW_DD_SRC
+        + _FRAME_PATCH
+        + _DD_CLIENT_SRC
+        + """
+st.session_state["selected"] = ("org-a", "org-a-web-1")
+app.main()
+"""
+    )
+    at = _run_apptest(body)
+    assert not at.exception, [getattr(e, "value", e) for e in at.exception]
+    cluster = "org-a-web-1"
+
+    na_btn = at.button(key=f"btn_load_na_{cluster}")
+    na_btn.click().run()
+    assert not at.exception, [getattr(e, "value", e) for e in at.exception]
+    # na-family: both ids armed by the ONE button
+    assert at.session_state.get(f"tab_armed_{cluster}_na")
+    assert at.session_state.get(f"tab_armed_{cluster}_rebalance")
+
+    issues_btn = at.button(key=f"btn_load_issues_{cluster}")
+    issues_btn.click().run()
+    assert not at.exception, [getattr(e, "value", e) for e in at.exception]
+    # issues-family: exactly 3 ids
+    for tab_id in ("issues", "notifications", "oom"):
+        assert at.session_state.get(f"tab_armed_{cluster}_{tab_id}"), tab_id
+
+    # Rebalancing section wired from the stub payloads
+    markdown = " ".join(m.value for m in at.markdown)
+    assert "Rebalancing" in markdown
+    dataframes = [d for d in at.dataframe]
+    found_schedule = any(
+        "nightly-binpack" in df.to_string() for df in (frame.value for frame in dataframes)
+    )
+    assert found_schedule, "org schedule table not rendered"
+    metrics = {m.label: m.value for m in at.metric}
+    assert metrics.get("Latest job status") == "JobStatusFinished"
+    assert metrics.get("Schedule") == "nightly-binpack"
+    assert metrics.get("Last triggered") == "2026-09-23T03:00:00Z"
+    # Resources-tab overprovision absolutes (latest item, Σ lifecycles:
+    # CPU 2.0+1.5 = 3.5, RAM 4.0, storage single-field 10.0)
+    assert metrics.get("CPU") == "3.5"
+    assert metrics.get("Memory") == "4.0 GiB"
+    assert metrics.get("Storage") == "10.0 GiB"
 
 
 def test_apptest_negative_savings_callout():
@@ -924,8 +1012,10 @@ app.main()
     assert not at.exception, [getattr(e, "value", e) for e in at.exception]
     client = at.session_state["__client__"]
     # Only the T1 auto-loaders may have fired (selection), nothing armed.
-    assert set(client.dd_calls) <= {"overview", "resources_summary", "resources_usage"}
-    assert len(client.dd_calls) == 3
+    # I2 as amended by R11: the Resources tab fires 3 GETs (incl. the
+    # overprovision-absolutes efficiency call) -> 4 auto calls in total.
+    assert set(client.dd_calls) <= {"overview", "resources_summary", "resources_usage", "overprovision"}
+    assert len(client.dd_calls) == 4
     texts = " ".join(c.value for c in at.markdown)
     assert "Sentinel legend" in texts
 
@@ -946,6 +1036,7 @@ st.session_state["_enr_stats"] = {"na_policies": {"attempted": 1, "succeeded": 1
                                                   "failed": 0, "caps": {}, "messages": [],
                                                   "fetched_at": time.time() - 60}}
 st.session_state["tab_armed_org-a-web-1_na"] = True
+st.session_state["tab_armed_org-a-web-1_rebalance"] = True  # na-family sibling (R11)
 app.main()
 """
     at = _run_apptest(body)

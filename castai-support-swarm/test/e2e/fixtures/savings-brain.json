@@ -1,0 +1,32 @@
+{
+  "steps": [
+    {
+      "match": "Classify this support case",
+      "response": "{\"orgId\":null,\"clusterId\":null,\"provider\":\"eks\",\"castaiMode\":\"unknown\",\"components\":[],\"issueCategory\":\"cost_reporting\",\"severity\":\"P4\",\"expected\":\"realized savings match the customer dashboard\",\"actual\":\"realized savings in the report do not match the dashboard\",\"missingInfo\":[\"cluster id\",\"numbers\",\"period\"]}"
+    },
+    {
+      "tag": "seed-hypotheses",
+      "response": "[\"insufficient information to diagnose\"]"
+    },
+    {
+      "match": "Seed 1-3 investigation hypotheses",
+      "response": "[\"insufficient information to diagnose\"]"
+    },
+    {
+      "match": "candidate claims",
+      "response": "{\"claims\":[\"the dashboard number mismatch stems from an unsynchronized refresh schedule\"]}"
+    },
+    {
+      "match": "Vote on each hypothesis",
+      "response": "{\"votes\":[{\"id\":\"H1\",\"vote\":\"rejected\",\"reason\":\"No cluster id, no numbers and no period were provided, so telemetry cannot tie the report to a cluster and the hypothesis cannot be confirmed.\"}]}"
+    },
+    {
+      "match": "Answer each implementation question",
+      "response": "{\"answers\":[]}"
+    },
+    {
+      "tag": "escalation-agent:steps",
+      "response": "{\"suggestedNextSteps\":[\"Ask the customer for the cluster id, the exact realized-savings numbers and the reporting period\",\"Reconcile the report against the dashboard export for the same period once received\"]}"
+    }
+  ]
+}

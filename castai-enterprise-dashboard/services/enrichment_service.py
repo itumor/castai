@@ -201,7 +201,15 @@ def _health(client: Any, org_id: str, cluster_id: str, row: Any) -> dict:
 
 
 def _wa_coverage(client: Any, org_id: str, cluster_id: str, row: Any) -> dict:
-    """1 call: WA workloads-summary (includeCosts=true) coverage extraction."""
+    """1 call: WA workloads-summary (includeCosts=true) coverage extraction.
+
+    v2-OPS extension: the full ``GetWorkloadsSummaryResponse`` surface joins
+    as 11 extra keys (VPA/HPA optimized split, API/annotation managed split,
+    core/memory deltas, original-requested + actual-usage baselines) — every
+    one NA-safe (absent -> None, NEVER 0-fabricated); the generic
+    ``merge_enrichment`` renames them ``enr_wa_coverage_<key>`` — no clashes
+    with the pre-existing 4 keys by construction.
+    """
 
     payload = client.get_wa_workloads_summary(org_id, cluster_id)
     payload = payload if isinstance(payload, dict) else {}
@@ -223,6 +231,18 @@ def _wa_coverage(client: Any, org_id: str, cluster_id: str, row: Any) -> dict:
         "wa_optimized_workloads": optimized,
         "wa_coverage_pct": coverage,
         "wa_estimated_savings_hourly": savings,
+        # --- v2-OPS: full summary enrichment (all NA-safe via parse_number) --
+        "wa_optimized_vpa_count": parse_number(payload.get("vpaOptimizedCount")),
+        "wa_optimized_hpa_count": parse_number(payload.get("hpaOptimizedCount")),
+        "wa_optimized_both_count": parse_number(payload.get("hpaVpaOptimizedCount")),
+        "wa_api_managed_count": parse_number(payload.get("apiManagedCount")),
+        "wa_annotation_managed_count": parse_number(payload.get("annotationManagedCount")),
+        "wa_cpu_cores_difference": parse_number(payload.get("cpuCoresDifference")),
+        "wa_memory_difference": parse_number(payload.get("memoryDifference")),
+        "wa_original_requested_cpu": parse_number(payload.get("originalRequestedCpuCores")),
+        "wa_original_requested_ram_gib": parse_number(payload.get("originalRequestedMemoryGibs")),
+        "wa_usage_cpu_cores": parse_number(payload.get("usageCpuCores")),
+        "wa_usage_memory_gib": parse_number(payload.get("usageMemoryGibs")),
     }
 
 

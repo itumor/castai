@@ -479,6 +479,22 @@ class CastAIClient:
             org_id=org_id,
         )
 
+    def get_rebalancing_schedules(self, org_id: str) -> dict:
+        """GET /v1/rebalancing-schedules — org-scoped schedule inventory.
+
+        Envelope: ``schedules[]{id, name, schedule{cron}, nextTriggerAt,
+        lastTriggerAt, jobs[], launchConfiguration, triggerConditions}``
+        (spec: ``scheduledrebalancing.v1.ListRebalancingSchedulesResponse``).
+        The payload is returned verbatim (parsing belongs to the normalizers);
+        the embedded ``jobs[]`` entries are treated as OPAQUE by every
+        consumer — schedule↔cluster linkage is resolved ONLY through the
+        per-cluster ``/kubernetes/clusters/{id}/rebalancing-jobs`` endpoint
+        (cluster-scoped Job schema carries the declared schedule id), never
+        through launchConfiguration NodeSelectors (label selectors carry no
+        cluster field — spec-verified 2026-09-22)."""
+
+        return self.get("/v1/rebalancing-schedules", org_id=org_id)
+
     def get_notifications(
         self,
         org_id: str,

@@ -425,6 +425,11 @@ EXPECTED_EXTRA_COLUMNS = [
     "is_ghost",
     "has_positive_savings_opportunity", "has_negative_savings",
     "kubernetes_version_short", "kubernetes_version_known",
+    # v2-OPS wave (ADR v2 R11): overprovisioning trio, provider coverage,
+    # org-level rebalancing (NA at row level until cluster-resolved).
+    "overprovisioned_cpu_pct", "overprovisioned_ram_pct", "overprovisioned_storage_pct",
+    "nodes_provider_managed",
+    "rebalance_schedule_name", "rebalance_last_trigger", "rebalance_next_trigger",
 ]
 
 NOW = datetime(2026, 9, 21, 12, 0, 0, tzinfo=timezone.utc)  # pinned wall clock
@@ -854,3 +859,163 @@ def test_cluster_score_absent_stays_na(pin_now):
     row = build_fleet_row(organization_id="o1", organization_name="Org One",
                           summary_item={"clusterId": "c1"})
     assert pd.isna(row["cluster_score"])  # missing -> N/A, never 0
+
+
+# --------------------------------------------- v2-OPS overprovisioning trio
+def _efficiency_item(**overrides):
+    item = {
+        "clusterId": "c-1",
+        "wasted": {"cpu": 10.0, "ram": 5.0, "storage": 1.0},
+        "cpuOverprovisionedPercent": 42.5,
+        "ramOverprovisionedPercent": 31.0,
+        "storageOverprovisionedPercent": 0.0,
+    }
+    item.update(overrides)
+    return item
+
+
+def test_overprovisioned_trio_percent_passthrough(pin_now):
+    """FLAT JSON doubles ride the wire on the 0–100 scale — passed through
+    verbatim (NOT converted to a 0–1 ratio); measured-zero stays 0."""
+    row = build_fleet_row(
+        **ORG, cluster_item=make_cluster_item(),
+        efficiency_item=_efficiency_item(), fetched_at=FETCHED,
+    )
+    assert row["overprovisioned_cpu_pct"] == pytest.approx(42.5)
+    assert row["overprovisioned_ram_pct"] == pytest.approx(31.0)
+    assert row["overprovisioned_storage_pct"] == pytest.approx(0.0)  # zero is data
+    # waste join untouched
+    assert row["waste_total_usd"] == pytest.approx(16.0)
+
+
+def test_overprovisioned_trio_absent_stays_na(pin_now):
+    """Efficiency row present but percent fields missing -> NA, never 0;
+    no efficiency row at all -> NA too."""
+    row = build_fleet_row(
+        **ORG, cluster_item=make_cluster_item(),
+        efficiency_item={"clusterId": "c-1", "wasted": {"cpu": 1.0}},
+        fetched_at=FETCHED,
+    )
+    assert pd.isna(row["overprovisioned_cpu_pct"])
+    assert pd.isna(row["overprovisioned_ram_pct"])
+    assert pd.isna(row["overprovisioned_storage_pct"])
+    row_none = build_fleet_row(**ORG, cluster_item=make_cluster_item(), fetched_at=FETCHED)
+    assert pd.isna(row_none["overprovisioned_cpu_pct"])
+
+
+def test_overprovisioned_trio_string_and_garbage_tolerance(pin_now):
+    """Defensive: string numerics parse; garbage/non-finite -> NA."""
+    row = build_fleet_row(
+        **ORG, cluster_item=make_cluster_item(),
+        efficiency_item=_efficiency_item(
+            cpuOverprovisionedPercent="12.5",
+            ramOverprovisionedPercent="not-a-number",
+        ),
+        fetched_at=FETCHED,
+    )
+    assert row["overprovisioned_cpu_pct"] == pytest.approx(12.5)
+    assert pd.isna(row["overprovisioned_ram_pct"])
+
+
+# --------------------------------------------------- v2-OPS provider coverage
+def test_nodes_provider_managed_derivation(pin_now):
+    """nodes_total=10 (2+8), na_managed=8 (1+6+1) -> provider-managed 2."""
+    row = build_fleet_row(
+        **ORG, cluster_item=make_cluster_item(), summary_item=make_summary_item(),
+        fetched_at=FETCHED,
+    )
+    assert row["nodes_total"] == pytest.approx(10.0)
+    assert row["na_managed_nodes"] == pytest.approx(8.0)
+    assert row["nodes_provider_managed"] == pytest.approx(2.0)
+
+
+def test_nodes_provider_managed_measured_zero_stays_zero(pin_now):
+    """nodes_total == na_managed -> provider-managed is a measured 0."""
+    row = build_fleet_row(
+        **ORG, cluster_item=make_cluster_item(),
+        summary_item=make_summary_item(
+            nodeCountOnDemand="2", nodeCountSpot="0",
+            nodeCountOnDemandCastai="2", nodeCountSpotCastai="0",
+            nodeCountSpotFallbackCastai="0",
+        ),
+        fetched_at=FETCHED,
+    )
+    assert row["nodes_provider_managed"] == pytest.approx(0.0)
+
+
+def test_nodes_provider_managed_negative_guard_is_na(pin_now):
+    """total < managed (counter-family mismatch, e.g. fallback counted in
+    managed but excluded from total) -> NA, NEVER negative-garbage."""
+    row = build_fleet_row(
+        **ORG, cluster_item=make_cluster_item(),
+        summary_item=make_summary_item(
+            nodeCountOnDemand="1", nodeCountSpot="0",
+            nodeCountOnDemandCastai="1", nodeCountSpotCastai="0",
+            nodeCountSpotFallbackCastai="5",
+        ),
+        fetched_at=FETCHED,
+    )
+    assert row["nodes_total"] == pytest.approx(1.0)
+    assert row["na_managed_nodes"] == pytest.approx(6.0)
+    assert pd.isna(row["nodes_provider_managed"])
+
+
+def test_nodes_provider_managed_na_when_either_side_na(pin_now):
+    row_no_total = build_fleet_row(
+        **ORG, cluster_item=make_cluster_item(),
+        summary_item=make_summary_item(nodeCountOnDemand=None, nodeCountSpot=None),
+        fetched_at=FETCHED,
+    )
+    assert pd.isna(row_no_total["nodes_total"])
+    assert pd.isna(row_no_total["nodes_provider_managed"])
+    row_no_managed = build_fleet_row(
+        **ORG, cluster_item=make_cluster_item(),
+        summary_item=make_summary_item(
+            nodeCountOnDemandCastai=None, nodeCountSpotCastai=None,
+            nodeCountSpotFallbackCastai=None,
+        ),
+        fetched_at=FETCHED,
+    )
+    assert pd.isna(row_no_managed["na_managed_nodes"])
+    assert pd.isna(row_no_managed["nodes_provider_managed"])
+
+
+# ------------------------------------------------------- v2-OPS rebalancing
+def test_rebalance_trio_na_without_cluster_match(pin_now):
+    """ADR R11: the fleet sweep cannot resolve schedule linkage (org-level
+    payload only) — the trio stays NA/NaT, never invented."""
+    row = build_fleet_row(
+        **ORG, cluster_item=make_cluster_item(), fetched_at=FETCHED,
+    )
+    assert pd.isna(row["rebalance_schedule_name"])
+    assert row["rebalance_last_trigger"] is pd.NaT
+    assert row["rebalance_next_trigger"] is pd.NaT
+
+
+def test_rebalance_trio_passthrough_when_cluster_resolved(pin_now):
+    """A caller WITH a cluster-resolved match (drill-down): name passes
+    through, RFC-3339 strings parse tz-aware; a missing lastTriggerAt -> NaT."""
+    row = build_fleet_row(
+        **ORG, cluster_item=make_cluster_item(),
+        rebalance_item={
+            "name": "nightly-binpack",
+            "nextTriggerAt": "2026-09-22T03:00:00Z",
+            # lastTriggerAt absent (never triggered)
+        },
+        fetched_at=FETCHED,
+    )
+    assert row["rebalance_schedule_name"] == "nightly-binpack"
+    assert row["rebalance_next_trigger"] == pd.Timestamp("2026-09-22T03:00:00Z")
+    assert row["rebalance_next_trigger"].tzinfo is not None
+    assert row["rebalance_last_trigger"] is pd.NaT
+
+
+def test_rebalance_trio_garbage_timestamp_is_nat_never_raises(pin_now):
+    row = build_fleet_row(
+        **ORG, cluster_item=make_cluster_item(),
+        rebalance_item={"name": "", "lastTriggerAt": "not-a-date", "nextTriggerAt": None},
+        fetched_at=FETCHED,
+    )
+    assert pd.isna(row["rebalance_schedule_name"])   # blank name -> NA
+    assert row["rebalance_last_trigger"] is pd.NaT   # garbage coerced
+    assert row["rebalance_next_trigger"] is pd.NaT

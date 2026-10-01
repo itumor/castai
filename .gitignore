@@ -44,3 +44,18 @@ cluster-readiness-outputs/**/*.pdf
 
 # macOS
 .DS_Store
+
+# Local scratch / tooling caches (never push)
+.npm-cache/
+.woop-probe/
+brain/dist/
+
+# Customer-identifying material - never push (raw threads, live exports, browser profiles)
+/threads/
+/support/
+castai-savings-potential-live.xlsx
+
+# Raw CAST AI fleet pulls: org/cluster ids, user emails in audit logs, per-cluster costs
+projects/castai-cost-timeline-dashboard/data/
+projects/castai-cost-timeline-dashboard/public/data/
+projects/castai-cost-timeline-dashboard/scripts/_tier*

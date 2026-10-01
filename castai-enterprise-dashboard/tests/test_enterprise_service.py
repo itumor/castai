@@ -99,6 +99,9 @@ class FakeClient:
     def get_org_efficiency_summary(self, org_id, start, end):
         return self._call(fx.GET_EFFICIENCY_SUMMARY, org_id)
 
+    def get_rebalancing_schedules(self, org_id):
+        return self._call(fx.GET_REBALANCE, org_id)
+
 
 # ------------------------------------------------------------------- helpers
 def _client(**overrides) -> FakeClient:
@@ -194,21 +197,22 @@ class TestFleetBuild:
         counts = result.df["organization_id"].value_counts().to_dict()
         assert counts == {fx.ORG_A_ID: 2, fx.ORG_B_ID: 2}
 
-        # Exactly the 6-call bundle per org (ADR v2 R2 / perf-v2 §1.1: the
-        # per-cluster clusters/efficiency items call joins Tier-1 by default
-        # -> budget 1 + 6×N).
+        # Exactly the 7-call bundle per org (ADR v2 R2 + R11 / perf-v2 §1.1:
+        # the per-cluster clusters/efficiency items call and the org-level
+        # rebalancing-schedules inventory join Tier-1 by default
+        # -> budget 1 + 7×N).
         fleet_calls = [c for c in client.calls if c[0] != "get_organizations"]
-        assert len(fleet_calls) == 6 * 3
+        assert len(fleet_calls) == 7 * 3
         assert set(fleet_calls) == {
             (fx.GET_CLUSTERS, fx.ORG_A_ID), (fx.GET_SUMMARY, fx.ORG_A_ID),
             (fx.GET_OVERVIEW, fx.ORG_A_ID), (fx.GET_REPORT, fx.ORG_A_ID), (fx.GET_WA, fx.ORG_A_ID),
-            (fx.GET_EFFICIENCY, fx.ORG_A_ID),
+            (fx.GET_EFFICIENCY, fx.ORG_A_ID), (fx.GET_REBALANCE, fx.ORG_A_ID),
             (fx.GET_CLUSTERS, fx.ORG_B_ID), (fx.GET_SUMMARY, fx.ORG_B_ID),
             (fx.GET_OVERVIEW, fx.ORG_B_ID), (fx.GET_REPORT, fx.ORG_B_ID), (fx.GET_WA, fx.ORG_B_ID),
-            (fx.GET_EFFICIENCY, fx.ORG_B_ID),
+            (fx.GET_EFFICIENCY, fx.ORG_B_ID), (fx.GET_REBALANCE, fx.ORG_B_ID),
             (fx.GET_CLUSTERS, fx.ORG_EMPTY_ID), (fx.GET_SUMMARY, fx.ORG_EMPTY_ID),
             (fx.GET_OVERVIEW, fx.ORG_EMPTY_ID), (fx.GET_REPORT, fx.ORG_EMPTY_ID), (fx.GET_WA, fx.ORG_EMPTY_ID),
-            (fx.GET_EFFICIENCY, fx.ORG_EMPTY_ID),
+            (fx.GET_EFFICIENCY, fx.ORG_EMPTY_ID), (fx.GET_REBALANCE, fx.ORG_EMPTY_ID),
         }
 
         # fetched_at: UTC, second precision, Z suffix
@@ -235,11 +239,12 @@ class TestFleetBuild:
 
         assert len(result.df) == 2
         assert set(result.df["organization_id"]) == {fx.ORG_A_ID}
-        assert len(result.errors) == 6  # every endpoint of the failing org recorded
+        assert len(result.errors) == 7  # every endpoint of the failing org recorded
         assert {e.organization_id for e in result.errors} == {fx.ORG_FAIL_ID}
         assert {e.organization_name for e in result.errors} == {fx.ORG_FAIL_NAME}
         assert {e.operation for e in result.errors} == {
             "clusters", "summary", "overview", "report", "woa", "org_efficiency",
+            "rebalance_schedules",
         }
         for err in result.errors:
             assert "testsecret123" not in err.message  # sanitized (SEC-2.7)
@@ -382,12 +387,12 @@ class TestFleetBuild:
         assert pd.isna(df.loc[fx.C2_ID, "waste_total_usd"])
         assert pd.isna(df.loc[fx.C4_ID, "waste_total_usd"])
 
-    def test_org_efficiency_flag_off_restores_5_call_bundle(self):
+    def test_org_efficiency_flag_off_keeps_6_call_bundle(self):
         client = _client()
         orgs = _select(client, fx.ORG_A_ID, fx.ORG_B_ID, fx.ORG_EMPTY_ID)
         result = _fleet(client, orgs, include_org_efficiency=False)
         fleet_calls = [c for c in client.calls if c[0] != "get_organizations"]
-        assert len(fleet_calls) == 5 * 3  # v1 budget back: 1 + 5×N
+        assert len(fleet_calls) == 6 * 3  # 5 base + rebalance: budget 1 + 6×N
         assert all(c[0] != fx.GET_EFFICIENCY for c in fleet_calls)
         assert result.org_efficiency == {}
         assert result.errors == []
@@ -401,7 +406,7 @@ class TestFleetBuild:
         orgs = _select(client, fx.ORG_A_ID)
         result = _fleet(client, orgs)
         fleet_calls = [c for c in client.calls if c[0] != "get_organizations"]
-        assert len(fleet_calls) == 5
+        assert len(fleet_calls) == 6  # 5 base + rebalance schedules (R11 default ON)
         assert result.org_efficiency == {}
 
     def test_org_efficiency_failure_is_isolated_from_rows(self):
@@ -417,6 +422,103 @@ class TestFleetBuild:
         assert len(result.errors) == 1
         assert result.errors[0].operation == "org_efficiency"
         assert result.errors[0].kind == "ServerError"  # GAP-B tag set here too
+
+    # ------------------------------------------- rebalancing-schedules flag
+    def test_rebalance_default_on_carries_org_payloads_no_row_join(self):
+        """ADR v2 R11: schedules ride FleetResult.rebalance_schedules at ORG
+        level; the fleet row's rebalance_* columns stay NA (linkage is NOT
+        resolvable from this payload — never invented)."""
+        client = _client()
+        orgs = _select(client, fx.ORG_A_ID, fx.ORG_B_ID)
+        result = _fleet(client, orgs)
+        assert set(result.rebalance_schedules) == {fx.ORG_A_ID, fx.ORG_B_ID}
+        assert result.rebalance_schedules[fx.ORG_A_ID]["schedules"][0]["name"] == "nightly-binpack"
+        assert result.rebalance_schedules[fx.ORG_B_ID]["schedules"] == []
+        for column in ("rebalance_schedule_name", "rebalance_last_trigger", "rebalance_next_trigger"):
+            assert result.df[column].isna().all(), column
+
+    def test_rebalance_flag_off_restores_6_call_bundle(self):
+        """Rebalance flag OFF alone -> 6 calls (5 base + efficiency)."""
+        client = _client()
+        orgs = _select(client, fx.ORG_A_ID, fx.ORG_B_ID)
+        result = _fleet(client, orgs, include_rebalance_schedules=False)
+        fleet_calls = [c for c in client.calls if c[0] != "get_organizations"]
+        assert len(fleet_calls) == 6 * 2  # budget 1 + 6×N (efficiency stays ON)
+        assert all(c[0] != fx.GET_REBALANCE for c in fleet_calls)
+        assert result.rebalance_schedules == {}
+        assert result.errors == []
+
+    def test_both_optional_slots_off_restore_v1_budget(self):
+        client = _client()
+        orgs = _select(client, fx.ORG_A_ID)
+        result = _fleet(
+            client, orgs,
+            include_org_efficiency=False, include_rebalance_schedules=False,
+        )
+        fleet_calls = [c for c in client.calls if c[0] != "get_organizations"]
+        assert len(fleet_calls) == 5  # v1 budget back: 1 + 5×N
+        assert result.org_efficiency == {} and result.rebalance_schedules == {}
+
+    def test_rebalance_env_override_off(self, monkeypatch):
+        """Env-first: CASTAI_ENABLE_REBALANCE_SCHEDULES=false disables only the
+        7th call; unknown values stay ON (fail-visible, mirrors settings)."""
+        monkeypatch.setenv("CASTAI_ENABLE_REBALANCE_SCHEDULES", "off")
+        client = _client()
+        result = _fleet(client, _select(client, fx.ORG_A_ID))
+        fleet_calls = [c for c in client.calls if c[0] != "get_organizations"]
+        assert len(fleet_calls) == 6
+        assert result.rebalance_schedules == {}
+        monkeypatch.setenv("CASTAI_ENABLE_REBALANCE_SCHEDULES", "not-a-bool")
+        client2 = _client()
+        result2 = _fleet(client2, _select(client2, fx.ORG_A_ID))
+        fleet_calls2 = [c for c in client2.calls if c[0] != "get_organizations"]
+        assert len(fleet_calls2) == 7  # unknown -> ON (never silently drop data)
+        assert set(result2.rebalance_schedules) == {fx.ORG_A_ID}
+
+    def test_rebalance_failure_is_isolated_from_rows(self):
+        """A failing schedules call never costs fleet rows (optional slot)."""
+        client = _client(
+            fail_methods={(fx.GET_REBALANCE, fx.ORG_A_ID): ServerError("synthetic 500.")}
+        )
+        orgs = _select(client, fx.ORG_A_ID)
+        result = _fleet(client, orgs)
+        assert len(result.df) == 2  # rows intact
+        assert result.rebalance_schedules == {}
+        assert len(result.errors) == 1
+        assert result.errors[0].operation == "rebalance_schedules"
+        assert result.errors[0].kind == "ServerError"
+
+    def test_overprovisioned_percents_feed_fleet_columns(self):
+        """v2-OPS: the efficiency item's FLAT doubles pass through 0–100-scale;
+        absent fields stay NA (never 0)."""
+        client = _client()
+        orgs = _select(client, fx.ORG_A_ID, fx.ORG_B_ID, fx.ORG_PARTIAL_ID)
+        df = _by_cluster_id(_fleet(client, orgs).df)
+        assert df.loc[fx.C1_ID, "overprovisioned_cpu_pct"] == pytest.approx(52.5)
+        assert df.loc[fx.C1_ID, "overprovisioned_ram_pct"] == pytest.approx(48.0)
+        assert df.loc[fx.C1_ID, "overprovisioned_storage_pct"] == pytest.approx(33.3)
+        assert df.loc[fx.C3_ID, "overprovisioned_cpu_pct"] == pytest.approx(25.0)
+        # measured zero stays a zero (it is data, not missing)
+        assert df.loc[fx.C3_ID, "overprovisioned_storage_pct"] == pytest.approx(0.0)
+        # P1 has an efficiency row WITHOUT the percent fields -> NA, never 0
+        assert pd.isna(df.loc[fx.P1_ID, "overprovisioned_cpu_pct"])
+        # C2/C4 have no efficiency row at all -> NA
+        assert pd.isna(df.loc[fx.C2_ID, "overprovisioned_cpu_pct"])
+        assert pd.isna(df.loc[fx.C4_ID, "overprovisioned_storage_pct"])
+
+    def test_nodes_provider_managed_derived_and_negative_guarded(self):
+        """nodes_provider_managed = nodes_total − na_managed_nodes (row-level)."""
+        client = _client()
+        orgs = _select(client, fx.ORG_A_ID, fx.ORG_B_ID)
+        df = _by_cluster_id(_fleet(client, orgs).df)
+        # C1: nodes_total = 4+6 = 10; na_managed = 4+6+1 = 11 -> total<managed -> NA
+        assert df.loc[fx.C1_ID, "nodes_total"] == pytest.approx(10.0)
+        assert df.loc[fx.C1_ID, "na_managed_nodes"] == pytest.approx(11.0)
+        assert pd.isna(df.loc[fx.C1_ID, "nodes_provider_managed"])
+        # C3: nodes_total = 2+0 = 2; na_managed = 2 -> 0 (measured zero stays 0)
+        assert df.loc[fx.C3_ID, "nodes_provider_managed"] == pytest.approx(0.0)
+        # C2 (no summary) -> both sides NA -> NA
+        assert pd.isna(df.loc[fx.C2_ID, "nodes_provider_managed"])
 
 
 # ------------------------------------------------------------------ cost svc

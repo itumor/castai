@@ -1,0 +1,151 @@
+# ----------------------------------------------------------------------------
+# CLM demo workloads for the Siemens CPS Container Live Migration + Rebalancing
+# demo. Companion to ../04-clm-rebalancing-demo-runbook.md (section 2).
+#
+# Names match the runbook: clm-test-deployment, clm-test-single-replica,
+# clm-test-statefulset, service clm-test-svc.
+#
+# Apply:   kubectl apply -f manifests/clm-demo-apps.yaml
+# Cleanup: kubectl delete -f manifests/clm-demo-apps.yaml
+# ----------------------------------------------------------------------------
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: clm-demo
+  labels:
+    app.kubernetes.io/part-of: clm-demo
+---
+# Stateless multi-replica web tier. During the rebalance these pods (and their
+# TCP connections) are live-migrated node-to-node. Service fronts port 80.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clm-test-deployment
+  namespace: clm-demo
+  labels:
+    app: clm-test-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: clm-test-deployment
+  template:
+    metadata:
+      labels:
+        app: clm-test-deployment
+    spec:
+      containers:
+        - name: web
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80
+          resources:
+            # Resource requests are required for CLM/rebalancing eligibility.
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clm-test-svc
+  namespace: clm-demo
+spec:
+  selector:
+    app: clm-test-deployment
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+---
+# Single-replica deployment: the classic "downtime on drain" shape. With CLM it
+# is migrated without a restart; that contrast is a talking point.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clm-test-single-replica
+  namespace: clm-demo
+  labels:
+    app: clm-test-single-replica
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate # would normally guarantee a gap on eviction — CLM avoids it
+  selector:
+    matchLabels:
+      app: clm-test-single-replica
+  template:
+    metadata:
+      labels:
+        app: clm-test-single-replica
+    spec:
+      containers:
+        - name: web
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+---
+# Stateful single-replica workload with an in-memory cache (Redis). The demo
+# client writes keys and holds a persistent TCP connection; after live
+# migration both the connection and the in-memory data survive.
+#
+# Optional safety labels from the runbook label matrix (uncomment to demo):
+#   autoscaling.cast.ai/removal-disabled: "true"
+#       -> CLM migrates; if migration fails, pod recovers on the source node.
+#   autoscaling.cast.ai/disposable: "true"
+#       -> allows eviction fallback if the migration fails.
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: clm-test-statefulset
+  namespace: clm-demo
+  labels:
+    app: clm-test-statefulset
+spec:
+  serviceName: clm-test-redis
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clm-test-statefulset
+  template:
+    metadata:
+      labels:
+        app: clm-test-statefulset
+        # autoscaling.cast.ai/removal-disabled: "true"
+    spec:
+      containers:
+        - name: redis
+          image: redis:7-alpine
+          args: ["redis-server", "--save", "", "--appendonly", "no"] # in-memory only
+          ports:
+            - containerPort: 6379
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: clm-test-redis
+  namespace: clm-demo
+spec:
+  selector:
+    app: clm-test-statefulset
+  ports:
+    - name: redis
+      port: 6379
+      targetPort: 6379

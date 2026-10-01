@@ -1,0 +1,52 @@
+{
+  "skill_name": "castai-support-engineer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "glejn is hitting us again about the token rotation. after we rotated the cluster token through the console, the CAST AI agent started logging 401 Authorization Required and they're asking (a) how long the OLD token keeps working after a rotation — they want zero downtime — and (b) is there an endpoint to revoke the old token immediately. draft a reply i can send.",
+      "expected_output": "A send-ready customer reply stating: no public revoke endpoint exists; rotation endpoint is POST /v1/kubernetes/external-clusters/{clusterId}/token; old token stays valid for an extended period (locally observed >=60 min, documented vs observed distinguished); 401 means some component still runs the old secret but was restarted or uses a stale copy — update every secret per topology and restart all components; org API keys are NOT a substitute for the cluster token. Cites official docs.",
+      "files": [],
+      "expectations": [
+        "States that no public endpoint exists to revoke/invalidate a cluster token immediately",
+        "States the old token remains valid for a period after rotation (grace period / extended validity), addressing the zero-downtime question",
+        "Distinguishes officially documented behavior from locally observed/inferred behavior rather than asserting undocumented facts as certain",
+        "Explains the post-rotation 401 means a component is still authenticating with an outdated token copy, and gives the fix: update every secret holding the token and restart all components (agent etc.)",
+        "Notes that an organization API key cannot be used as a substitute for the cluster token for agent authentication",
+        "Cites at least one official CAST AI source whose content was actually retrieved in-session AND which supports the specific claim it is attached to (a plausible-looking but unfetched URL does not count)",
+        "If the rotation endpoint is named, it is exactly POST /v1/kubernetes/external-clusters/{clusterId}/token; if token deletion is discussed, DELETE /v1/auth/tokens/{id} is described as managing org/management API auth tokens, NOT cluster tokens"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "new ticket from the sieportal team on AKS: their workloads select nodes with nodeSelector agentpool=<poolname> and they've noticed nodes CAST provisions get stamped agentpool=castai no matter what they put in the node template, so their pods never land on CAST nodes. they're asking if there's a way to make CAST nodes carry their own agentpool value, or barring that, what the supported way to target CAST node pools is. what do i tell them?",
+      "expected_output": "Explains agentpool and kubernetes.azure.com/agentpool are CAST AI reserved labels (overwritten; AKS requires a pool identity on every node), so node templates cannot set them. Supported contract: target node templates via scheduling.cast.ai/node-template label (and custom labels); optionally a PodMutation to rewrite legacy agentpool selectors value-agnostically. Cites the reserved labels/taints doc.",
+      "files": [],
+      "expectations": [
+        "Identifies agentpool and/or kubernetes.azure.com/agentpool as CAST AI reserved labels whose values are overwritten",
+        "Explains that AKS requires every node to carry a pool identity label, which is why CAST AI stamps its own value and cannot honor custom ones",
+        "Does NOT claim that a node template can set a custom agentpool value or that CAST nodes can join a customer-named Azure agent pool",
+        "Gives the supported alternative: one node template per pool, targeted with the scheduling.cast.ai/node-template label (and/or template custom labels)",
+        "Offers a migration path for existing workloads (e.g., PodMutation to rewrite legacy selectors, or updating manifests to the new label)",
+        "Cites at least one official CAST AI source whose content was actually retrieved in-session AND which supports the specific claim it is attached to (a plausible-looking but unfetched URL does not count)",
+        "Does NOT recommend post-hoc node relabeling, manual kubectl label edits, or other workarounds that fight the AKS control plane's ownership of the pool label",
+        "If a PodMutation manifest is included, it uses valid CRD fields per the official reference (filterV2/pod.celExpression, patchesV2 operations, podEviction) rather than invented field names",
+        "Does not claim verification the run did not perform (e.g., saying 'confirmed against the changelog/API' when no live fetch happened)"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "i'm scripting a savings pull for the fleet. my script calls https://api.cast.ai/v1/cost-reports/... with an org API key i KNOW is valid, but every call 401s. all our clusters are in the Siemens EU org and the same key works fine for the EU console. what's going on, which base URL should i use, and what's the endpoint path for per-cluster savings?",
+      "expected_output": "Diagnoses wrong-region base URL: EU orgs must use https://api.eu.cast.ai; a valid key against the wrong region returns 401. Gives the correct per-cluster savings endpoint path from the cost-reports API (verified against local endpoint notes and/or OpenAPI spec) with an example curl using X-API-Key. Cites official spec/reference.",
+      "files": [],
+      "expectations": [
+        "Diagnoses the 401 as using an EU-org API key against the wrong (US/global) API base URL",
+        "States the correct base URL is https://api.eu.cast.ai",
+        "Provides a concrete, spec-accurate endpoint path under /v1/cost-reports/ for savings/cost data (verified against OpenAPI spec or local endpoint notes)",
+        "Shows correct authentication via the X-API-Key header (e.g., in an example curl)",
+        "Cites at least one official CAST AI source whose content was actually retrieved in-session AND which supports the specific claim it is attached to (a plausible-looking but unfetched URL does not count)",
+        "Every regional base URL mentioned matches official documentation: US https://api.cast.ai, EU https://api.eu.cast.ai, India https://api.india.cast.ai (any other form, e.g. api.in.cast.ai, is a fail)",
+        "Does not claim verification the run did not perform (e.g., saying 'confirmed against the changelog/API' when no live fetch happened)"
+      ]
+    }
+  ]
+}

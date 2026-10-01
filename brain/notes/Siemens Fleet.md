@@ -7,6 +7,7 @@ Live snapshot from `cluster-readiness-outputs/castai_cluster_inventory.xlsx`
 
 - **111 organizations** in the Siemens AG enterprise tree
 - **230 clusters** visible to the enterprise API key
+- 2026-09-24: `/v1/organizations` now returns **129 orgs** (fleet still growing; refresh the xlsx before next report)
 - **41** in Phase 2 / autoscaler mode
 - **189** read-only / monitoring only
 

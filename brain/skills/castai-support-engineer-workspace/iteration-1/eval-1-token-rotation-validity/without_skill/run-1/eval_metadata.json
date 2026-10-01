@@ -1,0 +1,37 @@
+{
+  "eval_id": 1,
+  "eval_name": "token-rotation-validity",
+  "prompt": "glejn is hitting us again about the token rotation. after we rotated the cluster token through the console, the CAST AI agent started logging 401 Authorization Required and they're asking (a) how long the OLD token keeps working after a rotation — they want zero downtime — and (b) is there an endpoint to revoke the old token immediately. draft a reply i can send.",
+  "assertions": [
+    {
+      "id": "states-no-revoke-endpoint",
+      "text": "States that no public endpoint exists to revoke/invalidate a cluster token immediately",
+      "type": "contains_behavior"
+    },
+    {
+      "id": "states-old-token-stays-valid",
+      "text": "States the old token remains valid for a period after rotation (grace period / extended validity), addressing the zero-downtime question",
+      "type": "contains_behavior"
+    },
+    {
+      "id": "distinguishes-observed-vs-documented",
+      "text": "Distinguishes officially documented behavior from locally observed/inferred behavior rather than asserting undocumented facts as certain",
+      "type": "contains_behavior"
+    },
+    {
+      "id": "explains-401-cause-and-fix",
+      "text": "Explains the post-rotation 401 means a component is still authenticating with an outdated token copy, and gives the fix: update every secret holding the token and restart all components (agent etc.)",
+      "type": "contains_behavior"
+    },
+    {
+      "id": "warns-org-key-not-substitute",
+      "text": "Notes that an organization API key cannot be used as a substitute for the cluster token for agent authentication",
+      "type": "contains_behavior"
+    },
+    {
+      "id": "cites-official-source",
+      "text": "Cites at least one official CAST AI source (docs.cast.ai, api.cast.ai spec, changelog, or github.com/castai)",
+      "type": "contains_behavior"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "steps": [
+    {
+      "match": "Classify this support case",
+      "response": "{\"orgId\":null,\"clusterId\":\"22222222-2222-4222-8222-222222222222\",\"provider\":\"eks\",\"castaiMode\":\"unknown\",\"components\":[],\"issueCategory\":\"cost_reporting\",\"severity\":\"P3\",\"expected\":\"realized savings match the dashboard totals\",\"actual\":\"realized savings in the report do not match the customer dashboard\",\"missingInfo\":[\"realized savings values\",\"report period\"]}"
+    },
+    {
+      "tag": "seed-hypotheses",
+      "response": "[\"savings report aggregation counts net savings differently than the customer dashboard\"]"
+    },
+    {
+      "match": "Vote on each hypothesis",
+      "response": "{\"votes\":[{\"id\":\"H1\",\"vote\":\"confirmed\",\"reason\":\"Product documentation confirms the report and the dashboard can use different net/gross aggregation bases.\",\"evidenceIds\":[\"E1\",\"E2\",\"E3\",\"E4\",\"E5\",\"E6\",\"E7\",\"E8\",\"E9\",\"E10\",\"E11\",\"E12\",\"E13\",\"E14\",\"E15\",\"E16\",\"E17\",\"E18\",\"E19\",\"E20\",\"E21\",\"E22\",\"E23\",\"E24\",\"E25\",\"E26\",\"E27\",\"E28\",\"E29\",\"E30\",\"E31\",\"E32\",\"E33\",\"E34\",\"E35\",\"E36\",\"E37\",\"E38\",\"E39\",\"E40\"]}]}"
+    },
+    {
+      "match": "candidate claims",
+      "response": "{\"claims\":[\"the dashboard number mismatch stems from an unsynchronized refresh schedule\"]}"
+    },
+    {
+      "match": "Answer each implementation question",
+      "response": "{\"answers\":[{\"question\":\"Explain the product/implementation behavior behind the cost_reporting issue (provider eks): expected: realized savings match the dashboard totals; actual: realized savings in the report do not match the customer dashboard\",\"answer\":\"The report counts net savings after CAST AI fees while the dashboard widget shows gross savings, so the aggregation basis differs between the two views.\",\"confirmed\":true,\"path\":\".kimchi/docs/castai-vcpu-and-net-gross-savings-research.md\"}]}"
+    },
+    {
+      "tag": "propose-solution",
+      "response": "The mismatch comes from the aggregation basis: the report counts net savings after CAST AI fees while the dashboard shows gross savings, so the two views disagree for the same period."
+    },
+    {
+      "tag": "verifier:claims",
+      "response": "{\"claims\":[{\"claim\":\"The report and the dashboard use different net/gross savings aggregation bases\",\"evidenceIds\":[\"E1\",\"E2\",\"E3\",\"E4\",\"E5\",\"E6\",\"E7\",\"E8\",\"E9\",\"E10\",\"E11\",\"E12\",\"E13\",\"E14\",\"E15\",\"E16\",\"E17\",\"E18\",\"E19\",\"E20\",\"E21\",\"E22\",\"E23\",\"E24\",\"E25\",\"E26\",\"E27\",\"E28\",\"E29\",\"E30\",\"E31\",\"E32\",\"E33\",\"E34\",\"E35\",\"E36\",\"E37\",\"E38\",\"E39\",\"E40\"]}]}"
+    },
+    {
+      "tag": "escalation-agent:steps",
+      "response": "{\"suggestedNextSteps\":[\"Ask the customer which dashboard widget and period they compared\",\"Re-run the reconciliation on the net versus gross basis for the same period\"]}"
+    }
+  ]
+}

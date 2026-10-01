@@ -34,6 +34,7 @@ _ENV_ENTERPRISE_ID = "CASTAI_ENTERPRISE_ID"
 _ENV_MAX_WORKERS = "CASTAI_MAX_WORKERS"
 _ENV_FLAG_NOTIFICATIONS = "CASTAI_ENABLE_NOTIFICATIONS"
 _ENV_FLAG_ORG_EFFICIENCY = "CASTAI_ENABLE_ORG_EFFICIENCY"
+_ENV_FLAG_REBALANCE_SCHEDULES = "CASTAI_ENABLE_REBALANCE_SCHEDULES"
 _ENV_FLAG_ACTIVE_PROBE = "CASTAI_ENABLE_ACTIVE_PROBE"
 
 _MAX_WORKERS_MIN = 4
@@ -136,6 +137,7 @@ class Settings:
     max_workers: int = 8
     enable_notifications: bool = False
     enable_org_efficiency: bool = True
+    enable_rebalance_schedules: bool = True
     enable_active_probe: bool = False
     _api_key: str = field(default="", repr=False, compare=False)
 
@@ -153,6 +155,7 @@ class Settings:
             f"max_workers={self.max_workers}, "
             f"enable_notifications={self.enable_notifications}, "
             f"enable_org_efficiency={self.enable_org_efficiency}, "
+            f"enable_rebalance_schedules={self.enable_rebalance_schedules}, "
             f"enable_active_probe={self.enable_active_probe}, "
             "api_key='***')"
         )
@@ -182,6 +185,11 @@ def load_settings() -> Settings:
         _resolve(_ENV_FLAG_ORG_EFFICIENCY, "castai.enable_org_efficiency"),
         True,
     )
+    enable_rebalance_schedules = _parse_bool(
+        _ENV_FLAG_REBALANCE_SCHEDULES,
+        _resolve(_ENV_FLAG_REBALANCE_SCHEDULES, "castai.enable_rebalance_schedules"),
+        True,
+    )
     enable_active_probe = _parse_bool(
         _ENV_FLAG_ACTIVE_PROBE, _resolve(_ENV_FLAG_ACTIVE_PROBE, "castai.enable_active_probe"), False
     )
@@ -196,6 +204,7 @@ def load_settings() -> Settings:
         max_workers=max_workers,
         enable_notifications=enable_notifications,
         enable_org_efficiency=enable_org_efficiency,
+        enable_rebalance_schedules=enable_rebalance_schedules,
         enable_active_probe=enable_active_probe,
         _api_key=api_key,
     )

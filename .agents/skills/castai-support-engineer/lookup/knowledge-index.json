@@ -1,0 +1,167 @@
+{
+  "version": 1,
+  "updated": "2026-09-25",
+  "purpose": "Routing index for CAST AI support answers. Match the case topic, then (1) read any matching local_knowledge entry before answering — these contain verified facts and human-reviewed reply templates — and (2) confirm current behavior against the official_sources in priority order when features, APIs, limits, or setup steps may have changed. Paths are relative to the repository root unless absolute.",
+  "official_sources": [
+    {
+      "id": "docs",
+      "url": "https://docs.cast.ai/",
+      "priority": 1,
+      "use_for": "Product behavior, features, limits, setup steps. Key page: https://docs.cast.ai/docs/autoscaler-reference-node-labels-and-taints (reserved labels/taints). Fetch tip: every docs page is also served as clean Markdown by appending .md to the URL, and https://docs.cast.ai/llms.txt is a full page index — both verified working 2026-09."
+    },
+    {
+      "id": "api_reference",
+      "url": "https://docs.cast.ai/reference/mcp",
+      "priority": 2,
+      "use_for": "CAST AI API / MCP reference."
+    },
+    {
+      "id": "openapi_spec",
+      "url": "https://api.cast.ai/v1/spec/openapi.json",
+      "alt_url": "https://api.cast.ai/v1/spec/",
+      "priority": 3,
+      "use_for": "Exact endpoint paths, request/response fields, auth requirements."
+    },
+    {
+      "id": "changelog",
+      "url": "https://docs.cast.ai/changelog",
+      "priority": 4,
+      "use_for": "Recent behavior changes and deprecations."
+    },
+    {
+      "id": "website",
+      "url": "https://cast.ai/",
+      "priority": 5,
+      "use_for": "Positioning and public pricing pages."
+    },
+    {
+      "id": "github_org",
+      "url": "https://github.com/castai",
+      "priority": 6,
+      "use_for": "Helm charts, Terraform provider, castctl, agent source, examples, releases. If the user pastes a GitHub URL with a typo, resolve it against this org instead of trusting the malformed URL."
+    },
+    {
+      "id": "api_base_regions",
+      "url": "https://api.eu.cast.ai",
+      "priority": 0,
+      "use_for": "EU orgs (all Siemens orgs) must use the EU base URL, not https://api.cast.ai. A valid key against the wrong region is a common cause of unexplained 401s."
+    }
+  ],
+  "local_knowledge": [
+    {
+      "path": ".kimchi/docs/token-rotation-e2e-status.md",
+      "topics": ["cluster token rotation", "401 after rotation", "revoke token", "old token validity"],
+      "verified_facts": "Old cluster token stays valid for an extended period after rotation (observed >= 60 minutes, E2E-tested). No public revoke endpoint exists. Rotation endpoint: POST /v1/kubernetes/external-clusters/{clusterId}/token. Organization API keys are management-API only, NOT a substitute for the cluster token."
+    },
+    {
+      "path": ".kimchi/docs/reply-glejn-token-rotation.md",
+      "topics": ["cluster token rotation", "customer reply template"],
+      "verified_facts": "Human-reviewed customer reply for the token rotation case; reuse tone and structure."
+    },
+    {
+      "path": ".kimchi/docs/rotate-token-manual-commands.md",
+      "topics": ["cluster token rotation", "manual rotation", "helm", "operator", "terraform"],
+      "verified_facts": "Manual rotation commands per install topology; every secret and every component must be updated and restarted."
+    },
+    {
+      "path": ".kimchi/docs/sieportal-agent-pool-label-conflict.md",
+      "topics": ["AKS", "agentpool label", "reserved labels", "node template labels", "pod mutation"],
+      "verified_facts": "agentpool and kubernetes.azure.com/agentpool are CAST AI reserved labels (overwritten; AKS requires pool identity). Supported contract: node templates expose scheduling.cast.ai/node-template label; pod mutations can rewrite legacy selectors value-agnostically."
+    },
+    {
+      "path": ".kimchi/docs/castai-api-savings-endpoints.md",
+      "topics": ["savings API", "cost reports", "per-cluster savings", "billing export"],
+      "verified_facts": "Endpoint paths and gotchas for savings/cost data."
+    },
+    {
+      "path": ".kimchi/docs/siemens-savings-methodology.md",
+      "topics": ["savings methodology", "vcpu savings", "net vs gross"],
+      "verified_facts": "How Siemens savings numbers are computed and reconciled."
+    },
+    {
+      "path": ".kimchi/docs/castai-pricing-model-factcheck.md",
+      "topics": ["pricing", "CAST AI fees", "billing model"],
+      "verified_facts": "Fact-checked pricing model statements."
+    },
+    {
+      "path": ".kimchi/docs/castai-feature-claims-verification.md",
+      "topics": ["feature claims", "marketing claims verification"],
+      "verified_facts": "Which CAST AI feature claims were verified against docs and which were not."
+    },
+    {
+      "path": ".kimchi/docs/siemens-karpenter-vs-castai-claim-check.md",
+      "topics": ["Karpenter comparison", "Karpenter vs CAST AI"],
+      "verified_facts": "Verified comparison claims for Karpenter-vs-CAST AI questions."
+    },
+    {
+      "path": ".kimchi/docs/karpenter-castai-clm-learnings.md",
+      "topics": ["Karpenter", "Container Live Migration", "CLM", "coexistence"],
+      "verified_facts": "Lab-verified behavior of Karpenter alongside CAST AI CLM."
+    },
+    {
+      "path": "brain/notes/API Keys & Regions.md",
+      "topics": ["API keys", "regions", "which key to use", "EU vs US"],
+      "verified_facts": "Which CAST AI key serves which purpose and which region each lives in."
+    },
+    {
+      "path": "brain/notes/Siemens Fleet.md",
+      "topics": ["fleet inventory", "cluster list", "org ids"],
+      "verified_facts": "Known Siemens clusters, org IDs, accounts."
+    },
+    {
+      "path": "brain/notes/CreateTags Case.md",
+      "topics": ["IAM", "CreateTags", "permission errors"],
+      "verified_facts": "Case history: CreateTags-related IAM failure."
+    },
+    {
+      "path": "brain/notes/PutRolePolicy 403 Case.md",
+      "topics": ["IAM", "PutRolePolicy", "403"],
+      "verified_facts": "Case history: PutRolePolicy 403 during onboarding."
+    },
+    {
+      "path": "brain/notes/Karpenter + CAST AI Coexistence.md",
+      "topics": ["Karpenter", "coexistence", "mixed provisioners"],
+      "verified_facts": "Case history and notes on running Karpenter next to CAST AI."
+    },
+    {
+      "path": "castai-terraform-1/brain/notes/aks-agentpool-reserved-label.md",
+      "topics": ["AKS", "agentpool label", "reserved labels", "node template labels"],
+      "verified_facts": "Docs-verified research note on the AKS agentpool reserved-label behavior (the repo has a SECOND brain under castai-terraform-1/brain/ — check it when repo-root brain/ has nothing on the topic)."
+    },
+    {
+      "path": "castai-terraform-1/brain/notes/cast-ai-product-map.md",
+      "topics": ["product overview", "components", "terraform install flags", "EKS stack"],
+      "verified_facts": "Map of core vs optional CAST AI products and the Terraform flags that install them in this stack."
+    },
+    {
+      "path": "castai-terraform-1/brain/notes/support-runbook.md",
+      "topics": ["EKS onboarding", "troubleshooting", "terraform init", "CONFIG_MAP auth", "common errors"],
+      "verified_facts": "Quick-diagnostics runbook for CAST AI EKS onboarding failures with fix commands."
+    },
+    {
+      "path": "castai-terraform-1/brain/notes/castai-optimization-quality-metrics-and-notifications.md",
+      "topics": ["optimization quality metrics", "cluster score", "optimization health notifications"],
+      "verified_facts": "Docs-extracted research on optimization-quality metrics and health notifications."
+    }
+  ],
+  "reply_exemplars": [
+    {
+      "path": "castai-terraform-1/support/siemens-aks-agentpool-label-conflict.md",
+      "use_for": "Gold-standard customer reply structure: lead with confirmed root cause + doc citation, state the supported contract, give a concrete migration path with YAML, list caveats, propose rollout order, end with verify commands."
+    },
+    {
+      "path": "castai-terraform-1/support/draft-response-token-rotation.md",
+      "use_for": "Customer-facing draft style for rotation/incident topics."
+    }
+  ],
+  "related_guidance": [
+    {
+      "path": "brain/skills/siemens-castai-support/SKILL.md",
+      "use_for": "Ops workflow, credentials, approvals, and hard boundaries for this repo. Read it when a case needs cluster or API actions rather than a written answer."
+    },
+    {
+      "path": "AGENTS.md",
+      "use_for": "Repo-wide read-only posture, approval rules, and the canonical case workflow (receive -> check brain -> reproduce -> document -> reply)."
+    }
+  ]
+}

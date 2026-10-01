@@ -2,6 +2,8 @@
 
 **Status:** Verified against CAST AI docs (2026). Siemens escalation — see `support/siemens-aks-agentpool-label-conflict.md` for the customer draft.
 
+**Recurrence:** SiePortal (AKS, Sep 2026) confirmed the same collision — see `../../.kimchi/docs/sieportal-agent-pool-label-conflict.md`; platform confirmed AKS 2026-09-22, fix = this note's template + single value-agnostic PodMutation path.
+
 ## Root cause (documented, not a bug)
 
 CAST AI's [Autoscaler Node Labels and Taints reference](https://docs.cast.ai/docs/autoscaler-reference-node-labels-and-taints) states:

@@ -1,0 +1,112 @@
+{
+  "expectations": [
+    {
+      "text": "Identifies agentpool and/or kubernetes.azure.com/agentpool as CAST AI reserved labels whose values are overwritten",
+      "passed": true,
+      "evidence": "answer.md section 1: \"`agentpool` — and its modern, qualified successor `kubernetes.azure.com/agentpool` — are on CAST AI's **reserved labels** list for AKS\", quoting the official doc \"Cast AI reserves the labels and taints listed in this document. If you configure any of these in a Node Template, Cast AI will **overwrite your values**\", and states \"Anything a node template sets for these keys is silently overwritten with `castai`\". Verified accurate against the live page https://docs.cast.ai/docs/autoscaler-reference-node-labels-and-taints, whose AKS table lists both keys and whose header carries the overwrite warning."
+    },
+    {
+      "text": "Explains that AKS requires every node to carry a pool identity label, which is why CAST AI stamps its own value and cannot honor custom ones",
+      "passed": true,
+      "evidence": "answer.md: \"On AKS specifically, **every node must carry a pool identity** — it is how AKS tracks node pool membership... Because AKS itself requires the label, CAST AI **cannot remove it, delegate it, or let customers set its value**.\" This matches the live official doc almost verbatim: \"kubernetes.azure.com/agentpool | pool name | Set to `castai` for Cast AI provisioned nodes. Required by AKS for node pool membership.\""
+    },
+    {
+      "text": "Does NOT claim that a node template can set a custom agentpool value or that CAST nodes can join a customer-named Azure agent pool",
+      "passed": true,
+      "evidence": "Full read of answer.md finds no such false promise; it explicitly denies the possibility: header \"No — CAST nodes cannot carry a custom `agentpool` value, and that is by design, not a bug\", \"There is no configuration, alias, or override\", and \"**Do not propose** post-hoc relabeling (Kyverno/DaemonSet rewriting `agentpool` on nodes)\". The section-4 feature-request paragraph (\"file an ask to make the AKS pool-label *value* configurable... Odds are low... Do not gate the fix on it\") is carefully hedged and does not promise the capability."
+    },
+    {
+      "text": "Gives the supported alternative: one node template per pool, targeted with the scheduling.cast.ai/node-template label (and/or template custom labels)",
+      "passed": true,
+      "evidence": "answer.md section 2: \"**Recommended end state:** create **one node template per former `agentpool` value, named identically to the old pool value**... workloads select: `nodeSelector: scheduling.cast.ai/node-template: <their-old-pool-name>`\"; also documents template custom labels (\"Templates also accept arbitrary **custom labels** via the console, Terraform (`custom_labels`), or the API\"). The `scheduling.cast.ai/node-template` auto-label is confirmed by the live reserved-labels reference (\"Set when the node is provisioned using a specific node template\")."
+    },
+    {
+      "text": "Offers a migration path for existing workloads (e.g., PodMutation to rewrite legacy selectors, or updating manifests to the new label)",
+      "passed": true,
+      "evidence": "answer.md section 3 provides a complete value-agnostic PodMutation manifest (`filterV2.pod.celExpression` matching `agentpool` in nodeSelector, `patchesV2` copy+remove ops rewriting it to `scheduling.cast.ai/node-template`, `podEviction.enabled: true`) plus a 4-step rollout order ending with team-by-team manifest rewrites (\"replace `agentpool` selectors in manifests with `scheduling.cast.ai/node-template`; shrink/retire the mutation as adoption completes\"). All CRD fields used check out against the live pod-mutations reference, which even ships an official \"Azure agentpool migration\" patch example."
+    },
+    {
+      "text": "Cites at least one official CAST AI source (docs.cast.ai, api.cast.ai spec, changelog, or github.com/castai)",
+      "passed": true,
+      "evidence": "answer.md cites two official docs.cast.ai pages inline: https://docs.cast.ai/docs/autoscaler-reference-node-labels-and-taints and https://docs.cast.ai/docs/pod-mutations-reference. notes.md additionally lists docs.cast.ai/docs/node-templates, docs.cast.ai/docs/nodetemplates-nodeconfiguration-and-labels, and docs.cast.ai/docs/business-continuity. Both cited URLs were fetched live during grading and resolve with the expected content."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "total_tokens": null,
+    "duration_ms": 31294,
+    "total_duration_seconds": 31.3,
+    "note": "Wall-clock approximated from file mtimes; token counts not exposed by this harness"
+  },
+  "claims": [
+    {
+      "claim": "`agentpool` and `kubernetes.azure.com/agentpool` are on CAST AI's reserved labels list for AKS; values configured in a Node Template are overwritten",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Live fetch of https://docs.cast.ai/docs/autoscaler-reference-node-labels-and-taints (via r.jina.ai mirror, HTTP 200) shows the AKS (Azure) section listing `kubernetes.azure.com/agentpool` and `agentpool` (deprecated), and the page header states: \"Cast AI reserves the labels and taints listed in this document. If you configure any of these in a Node Template, Cast AI will overwrite your values with the ones it determines.\""
+    },
+    {
+      "claim": "CAST AI provisioned AKS nodes are stamped `kubernetes.azure.com/agentpool: castai` (and legacy `agentpool: castai`), because AKS requires the label for node pool membership",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Live doc table row: \"kubernetes.azure.com/agentpool | pool name | Set to `castai` for Cast AI provisioned nodes. Required by AKS for node pool membership.\""
+    },
+    {
+      "claim": "`agentpool` is the deprecated pre-k8s-1.24 key, replaced by the qualified `kubernetes.azure.com/agentpool` key",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Live doc table row: \"agentpool (deprecated) | pool name | Deprecated AKS agent pool label (pre k8s 1.24). Replaced by kubernetes.azure.com/agentpool.\""
+    },
+    {
+      "claim": "Every node provisioned from a node template is automatically labeled `scheduling.cast.ai/node-template: <template name>` (plus `scheduling.cast.ai/node-template-version`)",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Live reserved-labels doc table: \"scheduling.cast.ai/node-template | template name | Set when the node is provisioned using a specific node template.\" and the adjacent node-template-version row."
+    },
+    {
+      "claim": "PodMutation is a cluster-scoped CRD (apiVersion pod-mutations.cast.ai/v1) supporting filterV2.workload.excludeNamespaces exact/regex matchers, filterV2.pod.celExpression, patchesV2 grouped JSON Patch ops incl. copy/remove with RFC 6901 ~1 escaping, podEviction.enabled (requires mutator-level enforcement), and the `pod-mutations.cast.ai/podmutation-applied-patch` pod annotation",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Live fetch of https://docs.cast.ai/docs/pod-mutations-reference confirms every element: CRD table (group pod-mutations.cast.ai, version v1, scope Cluster); excludeNamespaces matcher objects with type exact/regex; \"celExpression | CEL expression evaluated against the pod\"; PatchOperation enum add/remove/replace/move/copy/test with `from` required for copy; \"Escape `~` as `~0` and `/` as `~1`\"; \"podEviction.enabled: true has no effect unless enforcement is also enabled at the pod mutator level\"; applied-patch annotation listed under pod annotations. The page even contains an \"Azure agentpool migration\" example moving /spec/nodeSelector/agentpool — directly validating the answer's migration strategy."
+    },
+    {
+      "claim": "Node templates accept arbitrary custom labels via the console, Terraform (`custom_labels`), or the API",
+      "type": "factual",
+      "verified": true,
+      "evidence": "The live reserved-labels doc points to the Node Templates page \"for...custom labels and workload targeting\", and docs.cast.ai/docs/nodetemplates-nodeconfiguration-and-labels exists in the official sitemap, confirming custom-label support on templates. The exact Terraform attribute name `custom_labels` was not independently re-verified during grading (plausible, matches CAST AI provider conventions) — substance of the claim holds."
+    },
+    {
+      "claim": "Readiness check command `kubectl get nodes -l provisioner.cast.ai/managed-by=cast.ai -L agentpool,...` uses the real CAST AI managed-by label",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Live reserved-labels doc table: \"provisioner.cast.ai/managed-by | cast.ai | Set at node creation. Marks the node as managed by Cast AI.\""
+    },
+    {
+      "claim": "Root cause and remedy were \"confirmed against the reserved-labels reference and the changelog (Oct 2025 → Jul 2026); nothing ever shipped a pool-label override\"",
+      "type": "process",
+      "verified": false,
+      "evidence": "Unverifiable for this run and likely overstated: there is no execution transcript, and notes.md concedes \"live web search was unavailable in this session... URLs... were previously verified and are cited from the dated local research notes\". A live changelog scan (Oct 2025 – Jul 2026) could not have happened in-session. The substance (no override exists) is consistent with the live docs, which still show a fixed `castai` value, but the changelog-confirmation process claim is not corroborated."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Offers a migration path for existing workloads (e.g., PodMutation to rewrite legacy selectors, or updating manifests to the new label)",
+        "reason": "A confident but wrong migration recipe would also pass — the assertion only checks that *a* path is offered, not that its mechanics are real. Consider an accuracy assertion such as: proposed PodMutation YAML must use fields that exist in the pod-mutations reference (filterV2/patchesV2/podEviction, valid ops). In this run the YAML happened to be fully accurate (the official reference even ships an 'Azure agentpool migration' example), but nothing in the current assertion set would catch invalid CRD fields."
+      },
+      {
+        "assertion": "Cites at least one official CAST AI source (docs.cast.ai, api.cast.ai spec, changelog, or github.com/castai)",
+        "reason": "Satisfied by any doc-looking URL string, including a fabricated slug. Consider requiring the cited URL to resolve (or be checked against the sitemap) — here both cited pages were fetched live and exist, but the assertion as written cannot distinguish real citations from hallucinated ones."
+      },
+      {
+        "reason": "No assertion checks that the answer flags unsafe/unsupported workarounds. This run explicitly rejected post-hoc node relabeling (Kyverno/DaemonSet fighting the AKS control plane) — an important support-quality signal worth asserting, since an answer that proposes relabeling agentpool directly at the node level would be actively harmful yet still pass all six current assertions if it also mentioned node templates."
+      }
+    ],
+    "overall": "Strong, discriminating assertion set — the negative assertion (#3) is exactly the right shape, and the root-cause/platform-rationale pair is verified accurate verbatim against live docs.cast.ai. Main gap: assertions check message content but not the technical validity of the workaround mechanics or citation resolvability."
+  }
+}

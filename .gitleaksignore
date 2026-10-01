@@ -1,3 +1,10 @@
 # Ignore false-positive test key in E2E docs.
 # The value is `invalid_key_12345`, not a real CAST AI token.
 64d3de38d4a3273a9160c7fe9180292f94a915bf:.ai/agents/castai-dev-dashboard-e2e.md:generic-api-key:33
+
+# Fake credentials planted by unit tests that assert the redactor masks them.
+# None are real: `castai_v1_secret123`, `castai_v1_AbCdEf…`, `sk-live-abcdef…`, AWS docs example.
+castai-support-swarm/test/unit/gmail-draft-sink.test.js:generic-api-key:86
+castai-support-swarm/test/unit/eks-live-sandbox.test.js:generic-api-key:244
+castai-support-swarm/test/unit/kb-reader.test.js:generic-api-key:140
+projects/castai-support-swarm/tests/tools/kube.test.js:generic-api-key:33

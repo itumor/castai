@@ -1,0 +1,17 @@
+{
+  "name": "castai-support-swarm",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.8.0"
+  },
+  "scripts": {
+    "test": "node --test test/unit/ test/e2e/ test/integration/",
+    "eval": "node evals/runner.js",
+    "test:evals": "node --test evals/runner.test.js"
+  }
+}

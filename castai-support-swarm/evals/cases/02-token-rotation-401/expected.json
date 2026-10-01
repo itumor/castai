@@ -1,0 +1,29 @@
+{
+  "id": "02-token-rotation-401",
+  "expectedIssueCategory": "security",
+  "expectedEvidenceTypes": [
+    "documentation"
+  ],
+  "expectedLoops": 1,
+  "requiredDraftPhrases": [
+    "Glejn",
+    "token"
+  ],
+  "forbiddenPhrases": [
+    "thank you for reaching out",
+    "as an ai",
+    "I hope this email finds you well",
+    "delve"
+  ],
+  "expectedRouteRange": [
+    "answer_with_uncertainty",
+    "fully_verified"
+  ],
+  "expectedAgents": [
+    "docs-researcher",
+    "product-engineer",
+    "sre-investigator",
+    "cloud-security-engineer"
+  ],
+  "notes": "Restored spec semantics: the token-rotation email triages as security. With the verification ladder the loop-2 pass reaches docs 20 + repro 25 + e2e 20 + telemetry 10 = 75 (no code producer in this fixture), so the route range spans answer_with_uncertainty..fully_verified. expectedAgents is the security routing-table entry (ladder agents are additionally executed and not scored)."
+}

@@ -1,0 +1,112 @@
+{
+  "expectations": [
+    {
+      "text": "States that no public endpoint exists to revoke/invalidate a cluster token immediately",
+      "passed": true,
+      "evidence": "answer.md (a): 'Is there an endpoint to revoke the old token immediately? **No.** The CAST AI public API exposes exactly one operation for cluster tokens: POST /v1/kubernetes/external-clusters/{clusterId}/token. There is no `DELETE` or revoke method for cluster tokens.' Verified accurate against live spec: only token paths are /v1/auth/tokens{,/{id}} (AuthTokenAPI, org/user API keys), partner tokens, and the single cluster-token POST; no 'revoke'/'invalidate' anywhere in path summaries, descriptions, or operationIds."
+    },
+    {
+      "text": "States the old token remains valid for a period after rotation (grace period / extended validity), addressing the zero-downtime question",
+      "passed": true,
+      "evidence": "answer.md: 'issues a new token but does **not synchronously revoke the previous one**. Both tokens authenticate in parallel for an overlap period... we observed the old token returning HTTP 200 for at least 60 minutes after rotation.' And: 'On zero downtime: this overlap actually works in your favor. Rotation is not a hard cutover, so the correct procedure causes no downtime at all... At no point is a component left without a valid credential.'"
+    },
+    {
+      "text": "Distinguishes officially documented behavior from locally observed/inferred behavior rather than asserting undocumented facts as certain",
+      "passed": true,
+      "evidence": "answer.md: '**There is no documented TTL for the overlap.** CAST AI does not publish how long the old token remains accepted.' / '**Empirically, we observed** ... treat 60 minutes as a lower bound from our testing, not a guarantee.' / 'because the overlap duration is undocumented, don't design around a specific grace period.' notes.md also lists this framing as an explicit assumption ('presented as an empirical lower bound, not a CAST AI guarantee')."
+    },
+    {
+      "text": "Explains the post-rotation 401 means a component is still authenticating with an outdated token copy, and gives the fix: update every secret holding the token and restart all components (agent etc.)",
+      "passed": true,
+      "evidence": "answer.md: 'The `401 Authorization Required` errors you saw previously were not caused by the rotation itself — they were caused by a component still holding the old token **after the overlap window closed** (in your case, a missed `castai-cluster-controller` secret).' Fix given: '2. Update **every** Kubernetes secret that holds the cluster token. 3. Rolling-restart all CAST AI components so they pick up the new token', plus verification step: 'verify with a log scan (0 occurrences of `401 Authorization Required` across all CAST AI components)'."
+    },
+    {
+      "text": "Notes that an organization API key cannot be used as a substitute for the cluster token for agent authentication",
+      "passed": true,
+      "evidence": "answer.md: 'organization-level API keys ... are a *different* credential ... Just don't use them as a substitute for the cluster token in the agent/controller components.' Consistent with spec summary for the cluster-token POST: 'Returns cluster token that is used for agent and cluster controller.'"
+    },
+    {
+      "text": "Cites at least one official CAST AI source (docs.cast.ai, api.cast.ai spec, changelog, or github.com/castai)",
+      "passed": true,
+      "evidence": "answer.md cites 'Details: https://docs.cast.ai/docs/api-access' — verified live (HTTP 200, official docs.cast.ai 'API access / API Access Keys' guide). Caveat: notes.md admits the URL was 'Not fetched directly during this session; carried over from the reviewed runbooks', so the citation is presence-only, not source-anchored."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "total_tokens": null,
+    "duration_ms": 5834,
+    "total_duration_seconds": 5.8,
+    "note": "Wall-clock approximated from file mtimes (spawn ~= metadata write, end ~= answer.md write); token counts not exposed by this harness"
+  },
+  "claims": [
+    {
+      "claim": "POST /v1/kubernetes/external-clusters/{clusterId}/token exists and is the only public API operation for cluster tokens",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Verified against live https://api.cast.ai/v1/spec/openapi.json (fetched 2026-09-30): path exists as operationId ExternalClusterAPI_CreateClusterToken, summary 'Returns cluster token that is used for agent and cluster controller.' No other external-clusters path contains 'token'."
+    },
+    {
+      "claim": "No endpoint exists to revoke/invalidate a cluster token immediately (no DELETE or revoke method for cluster tokens)",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Full-spec scan of https://api.cast.ai/v1/spec/openapi.json: the only token-bearing paths are GET/POST /v1/auth/tokens, DELETE/GET/POST /v1/auth/tokens/{id}, partner token paths, and POST .../token for clusters. Zero occurrences of 'revoke' or 'invalidate' in any path summary/description/operationId."
+    },
+    {
+      "claim": "DELETE /v1/auth/tokens/{id} revokes organization/user management-API keys (not cluster tokens), and POST /v1/auth/tokens creates them",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Live spec: DELETE /v1/auth/tokens/{id} = AuthTokenAPI_DeleteAuthToken 'Deletes auth token'; POST = AuthTokenAPI_CreateAuthToken 'creates a new api auth token'; GET list = 'Lists user auth tokens' (AuthToken schema is organization-scoped). This is the AuthTokenAPI (management API keys), entirely separate from the cluster-token endpoint."
+    },
+    {
+      "claim": "Old cluster token remains valid for at least 60 minutes after rotation",
+      "type": "factual",
+      "verified": false,
+      "evidence": "Not verifiable against any official source: the live OpenAPI spec documents no TTL/grace period for cluster tokens. The claim is an empirical observation from local E2E testing (.kimchi/docs/token-rotation-e2e-status.md). answer.md correctly frames it as 'observed ≥60 minutes ... lower bound from our testing, not a guarantee', so the unverifiable fact is honestly attributed, but it is not an official fact."
+    },
+    {
+      "claim": "Disconnecting or deleting the cluster is the only API-side action that guarantees a cluster token stops working",
+      "type": "factual",
+      "verified": false,
+      "evidence": "Partly supported: live spec confirms both operations exist (POST /v1/kubernetes/external-clusters/{clusterId}/disconnect 'Disconnects cluster by removing all CAST dependencies'; DELETE /v1/kubernetes/external-clusters/{clusterId} 'Deletes the cluster from CAST console'), but the spec does not state that either invalidates cluster tokens. Token-invalidation semantics are undocumented; the 'guarantee' wording is locally inferred, not officially confirmed."
+    },
+    {
+      "claim": "An organization API key cannot be used as a substitute for the cluster token for agent authentication",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Live spec operation summary for POST /v1/kubernetes/external-clusters/{clusterId}/token: 'Returns cluster token that is used for agent and cluster controller' — the designated agent credential is the cluster token; AuthTokenAPI keys are user/org management-API tokens in a separate API surface."
+    },
+    {
+      "claim": "Executor consulted three local .kimchi/docs runbooks (token-rotation-e2e-status.md, reply-glejn-token-rotation.md, rotate-token-manual-commands.md) and no fetched official sources",
+      "type": "process",
+      "verified": true,
+      "evidence": "All three files exist at /Users/eramadan/castai/.kimchi/docs/ (e.g., token-rotation-e2e-status.md header: 'CAST AI Token Rotation E2E Harness — Status Report'). notes.md explicitly states no skill was loaded and the cited URL was carried over, not fetched."
+    },
+    {
+      "claim": "The draft reply fully and correctly addresses both customer questions (validity window / zero downtime; immediate revocation)",
+      "type": "quality",
+      "verified": true,
+      "evidence": "answer.md has dedicated sections (a) and (b), a bottom-line summary, gives the correct operational procedure (rotate → update every secret → rolling-restart all components → log-scan for 401s), correctly reframes the 401 cause as a missed secret copy, and adds the undocumented-TTL caveat. Content matches the verified spec facts."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Cites at least one official CAST AI source (docs.cast.ai, api.cast.ai spec, changelog, or github.com/castai)",
+        "reason": "Passes on mere presence of a URL. This run cites docs.cast.ai/docs/api-access without ever fetching it (notes.md: 'carried over from the reviewed runbooks') — a stale or dead URL would pass identically. Consider grading whether the citation is resolvable/verified, or whether at least one key fact is anchored to an official source the executor actually consulted."
+      },
+      {
+        "assertion": "States the old token remains valid for a period after rotation (grace period / extended validity), addressing the zero-downtime question",
+        "reason": "Non-discriminating on correctness of the window: any invented duration (e.g., '24 hours', 'the token never expires') satisfies the assertion as written, since no official TTL exists to check against. Consider asserting that the answer presents any specific duration as observed/estimated rather than guaranteed, or that it names a concrete verification step (log scan for 401s)."
+      },
+      {
+        "reason": "No assertion checks whether claims that CAN be verified against official sources are correct — only that they are stated. The grader had to add the spec check (endpoint existence, DELETE /v1/auth/tokens/{id} semantics). A <b assert> such as 'correctly identifies DELETE /v1/auth/tokens/{id} as managing org/user auth tokens, not cluster tokens' would catch a confident-but-wrong answer (e.g., advising DELETE /v1/auth/tokens/{clusterTokenId} to revoke a cluster token)."
+      }
+    ],
+    "overall": "The six expectations cover the semantic content well (all 6 pass), but they grade presence of statements, not their accuracy or provenance. In this without_skill baseline the answer was strongly helped by .kimchi/docs runbooks persisting the skill's knowledge — the eval may be measuring local documentation recall as much as baseline knowledge. Adding at least one fact-accuracy assertion anchored to the official API spec would make the eval more discriminating."
+  }
+}

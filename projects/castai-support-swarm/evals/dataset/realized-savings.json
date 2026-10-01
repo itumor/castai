@@ -1,0 +1,26 @@
+{
+  "id": "realized-savings",
+  "file": "fixtures/thread-realized-savings.md",
+  "grounding": ".kimchi/docs/castai-api-savings-endpoints.md exists (baseline-vs-current savings endpoints + formula semantics) — a correct reply cites documentation evidence for the realized-savings methodology rather than asserting from memory.",
+  "expect": {
+    "category": "cost_reporting",
+    "planIncludes": [
+      "researcher",
+      "product",
+      "qa",
+      "verifier",
+      "writer",
+      "knowledge"
+    ],
+    "verdict": "PASS",
+    "minConfidence": 60,
+    "replyMustInclude": [
+      "realized",
+      "savings",
+      "baseline",
+      "formula|methodology"
+    ],
+    "replyMustExclude": [],
+    "referencesMustInclude": "\\.kimchi/docs/\\S+\\.md"
+  }
+}

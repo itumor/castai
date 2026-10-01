@@ -1,0 +1,52 @@
+{
+  "steps": [
+    {
+      "match": "Classify this support case",
+      "response": "{\"orgId\":null,\"clusterId\":\"36575565-3657-4657-8657-556536575565\",\"provider\":\"eks\",\"castaiMode\":\"full\",\"components\":[\"castai-agent\"],\"issueCategory\":\"iam\",\"severity\":\"P3\",\"expected\":\"CAST AI onboarding completes with iam:PutRolePolicy allowed\",\"actual\":\"connect run fails with iam:PutRolePolicy 403 AccessDenied on account 951463557399\",\"missingInfo\":[]}"
+    },
+    {
+      "match": "Analyze the reported permission issue",
+      "response": "{\"analysis\": \"The onboarding deployer role policy lacks the iam:PutRolePolicy permission, so the connect run is denied with 403 AccessDenied.\", \"requiredPermissions\": [\"iam:PutRolePolicy\", \"iam:GetRolePolicy\", \"iam:DeleteRolePolicy\"], \"fixStatement\": \"Add iam:PutRolePolicy plus GetRolePolicy and DeleteRolePolicy scoped to arn:aws:iam::951463557399:role/cast-* and re-run the same onboarding command; it is idempotent.\", \"confirmed\": true}"
+    },
+    {
+      "match": "Answer each implementation question",
+      "response": "{\"answers\": []}"
+    },
+    {
+      "tag": "seed-hypotheses",
+      "response": "[\"onboarding role policy missing iam:PutRolePolicy permission\"]"
+    },
+    {
+      "match": "Vote on each hypothesis",
+      "response": "{\"votes\":[{\"id\":\"H1\",\"vote\":\"confirmed\",\"reason\":\"Cluster telemetry shows the agent online and nodes Ready, so the cluster side is healthy; the KB note and the sandbox reproduction confirm the deployer role policy lacks iam:PutRolePolicy.\",\"evidenceIds\":[\"E1\",\"E2\",\"E3\",\"E4\",\"E5\",\"E6\",\"E7\",\"E8\",\"E9\",\"E10\",\"E11\",\"E12\",\"E13\",\"E14\",\"E15\",\"E16\",\"E17\",\"E18\",\"E19\",\"E20\",\"E21\",\"E22\",\"E23\",\"E24\",\"E25\",\"E26\",\"E27\",\"E28\",\"E29\",\"E30\",\"E31\",\"E32\",\"E33\",\"E34\",\"E35\",\"E36\",\"E37\",\"E38\",\"E39\",\"E40\"]}]}"
+    },
+    {
+      "match": "candidate claims",
+      "response": "{\"claims\":[\"add iam:PutRolePolicy plus Get/DeleteRolePolicy scoped to arn:aws:iam::951463557399:role/cast-* and re-run the same onboarding command; it is idempotent and there is no Terraform workaround\"]}"
+    },
+    {
+      "match": "Summarize the sandbox reproduction run",
+      "response": "{\"summary\":\"Sandbox reproduced the 403 AccessDenied with a role policy lacking iam:PutRolePolicy; onboarding completed after adding it.\"}"
+    },
+    {
+      "tag": "propose-solution",
+      "response": "The onboarding deployer role is missing the iam:PutRolePolicy permission; add it together with GetRolePolicy and DeleteRolePolicy so repeated runs stay idempotent, scoped to arn:aws:iam::951463557399:role/cast-*. There is no Terraform workaround because the Terraform provider performs the same API call and needs the same permission. Re-running the same onboarding command after the policy update is safe and idempotent."
+    },
+    {
+      "tag": "verifier:claims",
+      "response": "{\"claims\":[{\"claim\":\"The deployer role policy lacks iam:PutRolePolicy (plus GetRolePolicy/DeleteRolePolicy for idempotency), scoped to arn:aws:iam::951463557399:role/cast-*\",\"evidenceIds\":[\"E1\",\"E2\",\"E3\",\"E4\",\"E5\",\"E6\",\"E7\",\"E8\",\"E9\",\"E10\",\"E11\",\"E12\",\"E13\",\"E14\",\"E15\",\"E16\",\"E17\",\"E18\",\"E19\",\"E20\",\"E21\",\"E22\",\"E23\",\"E24\",\"E25\",\"E26\",\"E27\",\"E28\",\"E29\",\"E30\",\"E31\",\"E32\",\"E33\",\"E34\",\"E35\",\"E36\",\"E37\",\"E38\",\"E39\",\"E40\"]},{\"claim\":\"There is no Terraform workaround; re-running the same onboarding command after the policy update is safe and idempotent\",\"evidenceIds\":[\"E1\",\"E2\",\"E3\",\"E4\",\"E5\",\"E6\",\"E7\",\"E8\",\"E9\",\"E10\",\"E11\",\"E12\",\"E13\",\"E14\",\"E15\",\"E16\",\"E17\",\"E18\",\"E19\",\"E20\",\"E21\",\"E22\",\"E23\",\"E24\",\"E25\",\"E26\",\"E27\",\"E28\",\"E29\",\"E30\",\"E31\",\"E32\",\"E33\",\"E34\",\"E35\",\"E36\",\"E37\",\"E38\",\"E39\",\"E40\"]}]}"
+    },
+    {
+      "tag": "support-writer:draft",
+      "response": "{\"body\":\"Hi Samuel,\\n\\nI checked the cluster telemetry first: the CAST AI agent is online and node telemetry is flowing, so the cluster side is healthy. We reproduced the failure in a sandbox \u2014 a deployer role whose policy lacks iam:PutRolePolicy gets a 403 AccessDenied during the connect run, exactly matching your report.\\n\\nPer the documentation, the missing permission is iam:PutRolePolicy (add GetRolePolicy and DeleteRolePolicy as well so repeated runs stay idempotent), scoped to arn:aws:iam::951463557399:role/cast-*. There is no Terraform workaround: the Terraform provider performs the same API call and needs the same permission.\\n\\nAfter the policy update, re-running the same onboarding command is safe \u2014 it reuses the already-created role and policy. Our tests pass against the updated policy in the sandbox.\\n\\n\u2014 CAST AI Support\"}"
+    },
+    {
+      "tag": "knowledge-agent:proposals",
+      "response": "{\"proposals\":[{\"title\":\"EKS onboarding 403 on iam:PutRolePolicy\",\"text\":\"When castctl cluster connect fails with iam:PutRolePolicy 403, add iam:PutRolePolicy plus GetRolePolicy and DeleteRolePolicy scoped to arn:aws:iam::<account>:role/cast-* and re-run the same command; it is idempotent. There is no Terraform workaround: the provider needs the same permission.\",\"targetPath\":\"brain/notes/runbooks/putrolepolicy-403-onboarding.md\"}]}"
+    },
+    {
+      "tag": "solution-architect:review",
+      "response": "{\"fit\":\"ok\",\"notes\":\"Policy-only IAM change plus a re-run of the idempotent connect command; no component rollouts or cluster mutations required.\"}"
+    }
+  ]
+}

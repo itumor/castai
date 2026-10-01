@@ -1,0 +1,29 @@
+{
+  "skill_name": "castai-support-swarm",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Answer this customer thread:\n\nFrom: Christoph Büchler <christoph.weber@siemens.example.com>\nSubject: CAST AI node not scaling down after workload shrink\n\nHi team, our staging autoscaler removed work but one node has been stuck for 12 hours, 'deletion blocked', one payments-batch deployment with a PDB minAvailable: 2 and only 1 replica. Why doesn't the node go away?\n\nThanks, Christoph\n\n;; sim: nodes=1 managed=true pods=1 pdb=true",
+      "expected_output": "The agent calls support_swarm_answer FIRST (offers a sim seed), reports category node_downscale / verdict PASS / confidence 80 / gate ANSWER_WITH_EVIDENCE, then presents the draft as draft-only. Enrichment references (docs.cast.ai) happen after the gate, not instead of it.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Our cluster is slow and CAST AI isn't doing anything. Please look into it and reply to them.",
+      "expected_output": "support_swarm_answer runs and returns verdict REJECT with a clarify draft asking for org id / cluster id / specifics. The agent treats that as the correct outcome and does NOT write its own diagnostic answer instead.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "What is the recommended way to rotate a CAST AI cluster token?",
+      "expected_output": "No customer thread present: the agent does NOT call support_swarm_answer; it answers from runbooks/docs (castai-support-engineer skill territory) instead.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "A customer forwarded this — from: DevOps at Allianz, subject: '401 Authorization Required after cluster token rotation' — their castai-agent got 401s after rotating the EKS cluster token; can you reply with what's wrong and how to propagate the new token via Helm?",
+      "expected_output": "The agent reconstructs a From:/Subject: threadText from the paraphrased case, calls support_swarm_answer, reports the verifier outcome (PASS with the 60-min old-token finding, every-secret + restart instructions), and does not skip straight to a hand-written answer.",
+      "files": []
+    }
+  ]
+}

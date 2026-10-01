@@ -1,0 +1,4 @@
+node_modules/
+outbox/
+evals/results.json
+.DS_Store

@@ -322,6 +322,64 @@ class TestWaCoverageKind:
         assert v["wa_coverage_pct"] is None           # 0-total -> NA
         assert v["wa_estimated_savings_hourly"] is None  # costs absent -> NA
 
+    # ---- v2-OPS extended keys (full workloads-summary surface, NA-safe) ----
+    FULL_SUMMARY = {
+        "totalCount": 12,
+        "optimizedCount": 6,
+        "hpaOptimizedCount": "2",
+        "vpaOptimizedCount": "3",
+        "hpaVpaOptimizedCount": "1",
+        "apiManagedCount": "5",
+        "annotationManagedCount": "4",
+        "cpuCoresDifference": "1.75",
+        "memoryDifference": "0.5",
+        "originalRequestedCpuCores": "9.0",
+        "originalRequestedMemoryGibs": "18.5",
+        "usageCpuCores": "4.2",
+        "usageMemoryGibs": "8.75",
+        "costsPerHour": {"requested": 2.0, "recommended": 1.25, "originalRequested": 2.4},
+    }
+
+    EXTENDED_KEYS = (
+        "wa_optimized_vpa_count", "wa_optimized_hpa_count", "wa_optimized_both_count",
+        "wa_api_managed_count", "wa_annotation_managed_count",
+        "wa_cpu_cores_difference", "wa_memory_difference",
+        "wa_original_requested_cpu", "wa_original_requested_ram_gib",
+        "wa_usage_cpu_cores", "wa_usage_memory_gib",
+    )
+
+    def test_extended_keys_extracted_na_safely(self):
+        client = StubClient(payloads={"get_wa_workloads_summary": self.FULL_SUMMARY})
+        v = run_enrichment(
+            "wa_coverage", client,
+            [_row("o1", "c1", workload_autoscaler_status="AGENT_STATUS_RUNNING")],
+        ).values[("o1", "c1")]
+        # pre-existing keys unchanged (no clash — merge_enrichment stays generic)
+        assert v["wa_total_workloads"] == 12
+        assert v["wa_optimized_workloads"] == 6
+        # extended keys: proto3 strings + numerics both parse
+        assert v["wa_optimized_vpa_count"] == pytest.approx(3.0)
+        assert v["wa_optimized_hpa_count"] == pytest.approx(2.0)
+        assert v["wa_optimized_both_count"] == pytest.approx(1.0)
+        assert v["wa_api_managed_count"] == pytest.approx(5.0)
+        assert v["wa_annotation_managed_count"] == pytest.approx(4.0)
+        assert v["wa_cpu_cores_difference"] == pytest.approx(1.75)
+        assert v["wa_memory_difference"] == pytest.approx(0.5)
+        assert v["wa_original_requested_cpu"] == pytest.approx(9.0)
+        assert v["wa_original_requested_ram_gib"] == pytest.approx(18.5)
+        assert v["wa_usage_cpu_cores"] == pytest.approx(4.2)
+        assert v["wa_usage_memory_gib"] == pytest.approx(8.75)
+
+    def test_extended_keys_absent_fields_are_none_never_zero(self):
+        client = StubClient(payloads={"get_wa_workloads_summary": {"totalCount": 3}})
+        v = run_enrichment(
+            "wa_coverage", client,
+            [_row("o1", "c1", workload_autoscaler_status="AGENT_STATUS_RUNNING")],
+        ).values[("o1", "c1")]
+        for key in self.EXTENDED_KEYS:
+            assert key in v, key
+            assert v[key] is None, key  # absent -> None (renders —, never 0)
+
 
 # -------------------------------------------------------------------- progress
 class TestProgress:

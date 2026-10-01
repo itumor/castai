@@ -1,0 +1,19 @@
+{
+  "id": "putrolepolicy-403",
+  "file": "fixtures/thread-putrolepolicy-403.md",
+  "grounding": "Real incident: /Users/eramadan/castai/labs/putrolepolicy-403/ and brain/notes/PutRolePolicy 403 Case.md — a correct reply lands on iam:PutRolePolicy missing on the deployer/CI identity, scoped to the CAST AI role ARNs (never IAMFullAccess, never Resource \"*\").",
+  "expect": {
+    "category": "iam_onboarding",
+    "planIncludes": ["sre", "security", "researcher", "repro", "verifier", "writer"],
+    "verdict": "PASS",
+    "replyMustInclude": [
+      "putrolepolicy",
+      "cast.{0,30}role|role.{0,30}cast",
+      "scope|least privilege|never widen|not.*iamfullaccess"
+    ],
+    "replyMustExclude": [
+      "you should (grant|use|attach) iamfullaccess",
+      "resource[\"']?\\s*[:=]\\s*[\"']?\\*"
+    ]
+  }
+}

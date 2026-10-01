@@ -72,9 +72,20 @@ _BUNDLE_ENDPOINTS = (
 # totalWaste cross-check stays drill-down-only (cost_service.waste_by_organization).
 _ORG_EFFICIENCY_ENDPOINT = ("org_efficiency", "get_org_cluster_efficiency", True)
 
+# ADR v2 R11 (OPS-VISIBILITY wave): `/v1/rebalancing-schedules` is the 7th
+# per-org Tier-1 call (default ON, flag CASTAI_ENABLE_REBALANCE_SCHEDULES).
+# NOT windowed — the schedule inventory is point-in-time. The payloads ride
+# FleetResult.rebalance_schedules at ORG level: schedule↔cluster linkage is
+# NOT resolvable from this payload (embedded jobs[] are opaque by contract;
+# launchConfiguration NodeSelectors are label selectors with no cluster field,
+# spec-verified), so fleet rows keep rebalance_* columns NA and per-cluster
+# truth comes from the drill-down rebalancing-jobs endpoint (NA tab).
+_REBALANCE_SCHEDULES_ENDPOINT = ("rebalance_schedules", "get_rebalancing_schedules", False)
+
 _MAX_WORKER_CAP = 32  # docs/architecture.md §4
 
 _ENV_FLAG_ORG_EFFICIENCY = "CASTAI_ENABLE_ORG_EFFICIENCY"
+_ENV_FLAG_REBALANCE_SCHEDULES = "CASTAI_ENABLE_REBALANCE_SCHEDULES"
 _TRUE_VALUES = {"1", "true", "yes", "on"}
 _FALSE_VALUES = {"0", "false", "no", "off"}
 
@@ -97,6 +108,26 @@ def _org_efficiency_default() -> bool:
     return True  # unknown values stay ON (fail-visible: extra verified call)
 
 
+def _env_flag_default(env_name: str) -> bool:
+    """Shared env-first bool resolution (ON unless explicitly disabled —
+    fail-visible: a typo keeps the extra verified call rather than silently
+    dropping data). Mirrors config/settings.py precedence."""
+
+    raw = os.environ.get(env_name)
+    if raw is None:
+        return True
+    lowered = raw.strip().lower()
+    if lowered in _FALSE_VALUES:
+        return False
+    return True
+
+
+def _rebalance_schedules_default() -> bool:
+    """Env resolution of the rebalancing-schedules Tier-1 flag (default ON)."""
+
+    return _env_flag_default(_ENV_FLAG_REBALANCE_SCHEDULES)
+
+
 @dataclass
 class FleetResult:
     df: pd.DataFrame  # columns = FLEET_COLUMNS
@@ -110,6 +141,11 @@ class FleetResult:
     # org-efficiency Tier-1 flag is ON (ADR v2 R2 default); matched items feed
     # the fleet waste_*_usd columns during row build.
     org_efficiency: dict = field(default_factory=dict)
+    # {org_id: raw /v1/rebalancing-schedules payload} — populated only when
+    # the rebalancing-schedules Tier-1 flag is ON (ADR v2 R11 default).
+    # ORG-LEVEL ONLY: no row join (embedded jobs[] are opaque; NodeSelectors
+    # carry no cluster field). Surfaced in the NA-tab Rebalancing section.
+    rebalance_schedules: dict = field(default_factory=dict)
 
 
 def _utc_iso_seconds() -> str:
@@ -125,18 +161,20 @@ def _fetch_bundle(
     end: str,
     *,
     include_org_efficiency: bool = True,
+    include_rebalance_schedules: bool = True,
 ) -> tuple[dict[str, dict | None], list[FetchError]]:
     """Fetch the Tier-1 payloads for ONE org; NEVER raises.
 
-    5 base calls (+1 ``org_efficiency`` when the flag is ON — ADR v2 default).
+    5 base calls (+1 ``org_efficiency`` when the flag is ON — ADR v2 default;
+    +1 ``rebalance_schedules`` when ITS flag is ON — ADR v2 R11 default).
     Each call is wrapped individually: failure -> FetchError (sanitized) and
     that payload is None. A non-dict wire answer counts as a failed endpoint.
     """
-    endpoints = (
-        [*_BUNDLE_ENDPOINTS, _ORG_EFFICIENCY_ENDPOINT]
-        if include_org_efficiency
-        else list(_BUNDLE_ENDPOINTS)
-    )
+    endpoints = list(_BUNDLE_ENDPOINTS)
+    if include_org_efficiency:
+        endpoints.append(_ORG_EFFICIENCY_ENDPOINT)
+    if include_rebalance_schedules:
+        endpoints.append(_REBALANCE_SCHEDULES_ENDPOINT)
     payloads: dict[str, dict | None] = {}
     errors: list[FetchError] = []
     for operation, method, windowed in endpoints:
@@ -192,7 +230,8 @@ def _org_rows(
     end: str,
     fetched_at: object,
     include_org_efficiency: bool = True,
-) -> tuple[list[dict], list[FetchError], dict | None, dict | None]:
+    include_rebalance_schedules: bool = True,
+) -> tuple[list[dict], list[FetchError], dict | None, dict | None, dict | None]:
     """Build one org's fleet rows + errors. NEVER raises (executor isolation)."""
     # Deferred: data.normalizers imports FLEET_COLUMNS from this module, so a
     # top-level import here would close a circular-import trap.
@@ -201,9 +240,10 @@ def _org_rows(
     payloads, errors = _fetch_bundle(
         client, org_id, org_name, start, end,
         include_org_efficiency=include_org_efficiency,
+        include_rebalance_schedules=include_rebalance_schedules,
     )
     if all(payloads[op] is None for op, _, _ in _BUNDLE_ENDPOINTS):
-        return [], errors, None, None  # all 5 base endpoints failed -> zero rows
+        return [], errors, None, None, None  # all 5 base endpoints failed -> zero rows
 
     # api-matrix §2.1: deleted clusters (deletedAt set) are excluded everywhere —
     # blacklisted from the id union so a stale summary/overview/report row for a
@@ -221,6 +261,12 @@ def _org_rows(
         payloads.get("org_efficiency") if isinstance(payloads.get("org_efficiency"), dict) else None
     )
     efficiency_map = _index_by((efficiency_payload or {}).get("items"), "clusterId")
+    # ADR v2 R11: rebalance schedules stay ORG-level (no row join — see the
+    # FleetResult field note); the payload is only carried out.
+    rebalance_payload = (
+        payloads.get("rebalance_schedules")
+        if isinstance(payloads.get("rebalance_schedules"), dict) else None
+    )
 
     # Report-window extras per cluster (display-only; see module docstring).
     report_extras: dict[str, dict[str, float | None]] = {}
@@ -272,7 +318,7 @@ def _org_rows(
             value = extras.get(name)
             row[name] = pd.NA if value is None else value
         rows.append(row)
-    return rows, errors, report_payload, efficiency_payload
+    return rows, errors, report_payload, efficiency_payload, rebalance_payload
 
 
 def build_fleet_dataframe(
@@ -284,6 +330,7 @@ def build_fleet_dataframe(
     max_workers: int = 8,
     progress_cb: Callable[[str, int, int], None] | None = None,
     include_org_efficiency: bool | None = None,
+    include_rebalance_schedules: bool | None = None,
 ) -> FleetResult:
     """Enterprise fleet table: one row per (organization_id, cluster_id).
 
@@ -298,12 +345,20 @@ def build_fleet_dataframe(
     False restores the v1 5-call bundle. The efficiency payloads ride
     ``FleetResult.org_efficiency`` AND feed the per-row waste_*_usd columns
     (items[] matched by clusterId during row build; ADR v2 R2).
+
+    ``include_rebalance_schedules``: None resolves env-first (ADR v2 R11
+    default ON): the per-org bundle then costs 7 calls (+``rebalancing-
+    schedules``), budget ``1 + 7×N_orgs``; explicit OFF keeps the 6-call
+    bundle. Payloads ride ``FleetResult.rebalance_schedules`` at ORG level —
+    no row join (opaque embedded jobs[]; NodeSelectors carry no cluster id).
     """
     # Deferred: data.normalizers imports FLEET_COLUMNS from this module.
     from data.normalizers import EXTRA_COLUMNS
 
     if include_org_efficiency is None:
         include_org_efficiency = _org_efficiency_default()
+    if include_rebalance_schedules is None:
+        include_rebalance_schedules = _rebalance_schedules_default()
 
     columns = list(dict.fromkeys([*FLEET_COLUMNS, *EXTRA_COLUMNS, *REPORT_EXTRA_COLUMNS]))
     orgs = [o for o in (organizations or []) if o is not None]
@@ -313,6 +368,7 @@ def build_fleet_dataframe(
     errors_all: list[FetchError] = []
     reports: dict[str, dict] = {}
     org_efficiency: dict[str, dict] = {}
+    rebalance_schedules: dict[str, dict] = {}
     total = len(orgs)
     done = 0
 
@@ -329,15 +385,16 @@ def build_fleet_dataframe(
                     end,
                     fetched_at,
                     include_org_efficiency,
+                    include_rebalance_schedules,
                 ): org
                 for org in orgs
             }
             for future in as_completed(futures):
                 org = futures[future]
                 try:
-                    org_rows, org_errors, org_report, org_eff = future.result()
+                    org_rows, org_errors, org_report, org_eff, org_reb = future.result()
                 except Exception as exc:  # belt-and-braces: NEVER abort the sweep
-                    org_rows, org_errors, org_report, org_eff = (
+                    org_rows, org_errors, org_report, org_eff, org_reb = (
                         [],
                         [
                             FetchError(
@@ -350,6 +407,7 @@ def build_fleet_dataframe(
                         ],
                         None,
                         None,
+                        None,
                     )
                 rows_all.extend(org_rows)
                 errors_all.extend(org_errors)
@@ -357,6 +415,8 @@ def build_fleet_dataframe(
                     reports[str(org.organization_id)] = org_report
                 if org_eff is not None:
                     org_efficiency[str(org.organization_id)] = org_eff
+                if org_reb is not None:
+                    rebalance_schedules[str(org.organization_id)] = org_reb
                 done += 1
                 if progress_cb is not None:
                     try:
@@ -371,6 +431,7 @@ def build_fleet_dataframe(
         fetched_at=fetched_at,
         reports=reports,
         org_efficiency=org_efficiency,
+        rebalance_schedules=rebalance_schedules,
     )
 
 

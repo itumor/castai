@@ -1,0 +1,108 @@
+{
+  "expectations": [
+    {
+      "text": "Identifies agentpool and/or kubernetes.azure.com/agentpool as CAST AI reserved labels whose values are overwritten",
+      "passed": true,
+      "evidence": "answer.md section 1: '`agentpool` (and its successor `kubernetes.azure.com/agentpool`) are on CAST AI's **reserved labels** list' and quotes the official docs verbatim: 'If you configure any of these in a Node Template, Cast AI will overwrite your values with the ones it determines... Do not configure these reserved labels or taints in Node Templates.' Verified against live https://docs.cast.ai/docs/autoscaler-reference-node-labels-and-taints: the AKS table lists both keys and the page carries exactly this reserved-labels warning."
+    },
+    {
+      "text": "Explains that AKS requires every node to carry a pool identity label, which is why CAST AI stamps its own value and cannot honor custom ones",
+      "passed": true,
+      "evidence": "answer.md section 1: 'On AKS every node must carry a pool identity — that is how AKS tracks node pool membership — so CAST AI cannot remove, rename, or delegate this label, and no Node Template value for it will ever survive. This is an AKS platform requirement, not something a template can opt out of.' Also cites the docs' AKS entry: 'Set to `castai` for Cast AI provisioned nodes. Required by AKS for node pool membership.'"
+    },
+    {
+      "text": "Does NOT claim that a node template can set a custom agentpool value or that CAST nodes can join a customer-named Azure agent pool",
+      "passed": true,
+      "evidence": "Full read of answer.md found no such claim. It consistently asserts the opposite: 'no Node Template value for it will ever survive' (sec. 1), 'setting `agentpool` in a node template silently does nothing' (sec. 1), 'they cannot rename or alias CAST AI's keys' (sec. 2), and the only feature-request offered (sec. 4) is for a configurable label VALUE derived from the node configuration name, labeled low-odds — it never suggests CAST nodes can join a customer-named Azure agent pool."
+    },
+    {
+      "text": "Gives the supported alternative: one node template per pool, targeted with the scheduling.cast.ai/node-template label (and/or template custom labels)",
+      "passed": true,
+      "evidence": "answer.md section 2: 'One template per former `agentpool` value... \"the supported way to target CAST node pools\" = `nodeSelector: scheduling.cast.ai/node-template: <pool>` (plus template custom labels if desired).' It also covers arbitrary template custom labels (console/Terraform `custom_labels`/API) and the recommended explicit-selection semantics, matching the live Node Templates doc."
+    },
+    {
+      "text": "Offers a migration path for existing workloads (e.g., PodMutation to rewrite legacy selectors, or updating manifests to the new label)",
+      "passed": true,
+      "evidence": "answer.md provides both paths: section 3 ships a complete value-agnostic PodMutation YAML (CEL filter matching pods with an `agentpool` nodeSelector; copy agentpool -> scheduling.cast.ai~1node-template, remove agentpool, add a value-agnostic Exists toleration; podEviction.enabled to migrate running pods), and section 5 rollout step 4 directs teams to 'replace `agentpool` selectors with `scheduling.cast.ai/node-template` natively' in manifests and retire the mutation over time."
+    },
+    {
+      "text": "Cites at least one official CAST AI source (docs.cast.ai, api.cast.ai spec, changelog, or github.com/castai)",
+      "passed": true,
+      "evidence": "answer.md's Sources section cites three official docs.cast.ai pages (autoscaler-reference-node-labels-and-taints, node-templates, pod-mutations-reference), and notes.md additionally records a docs.cast.ai/changelog scan. All three docs URLs were re-verified live by the grader with HTTP 200 and content matching the quotes in answer.md."
+    }
+  ],
+  "summary": {
+    "passed": 6,
+    "failed": 0,
+    "total": 6,
+    "pass_rate": 1.0
+  },
+  "timing": {
+    "total_tokens": null,
+    "duration_ms": 61265,
+    "total_duration_seconds": 61.3,
+    "note": "Wall-clock approximated from file mtimes; token counts not exposed by this harness"
+  },
+  "claims": [
+    {
+      "claim": "agentpool and kubernetes.azure.com/agentpool are CAST AI reserved labels for AKS; kubernetes.azure.com/agentpool is 'Set to castai for Cast AI provisioned nodes. Required by AKS for node pool membership.', and agentpool is the deprecated pre-k8s-1.24 equivalent",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Grader fetched https://docs.cast.ai/docs/autoscaler-reference-node-labels-and-taints(.md) live (updatedAt 2026-09-04): AKS section lists 'kubernetes.azure.com/agentpool — Set to `castai` for Cast AI provisioned nodes. Required by AKS for node pool membership.' and 'agentpool (deprecated) — Deprecated AKS agent pool label (pre k8s 1.24). Replaced by kubernetes.azure.com/agentpool.'"
+    },
+    {
+      "claim": "Configuring a reserved label in a Node Template causes CAST AI to overwrite the value; the docs warn 'Do not configure these reserved labels or taints in Node Templates.'",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Live docs page states verbatim: 'Cast AI reserves the labels and taints listed in this document. If you configure any of these in a Node Template, Cast AI will overwrite your values with the ones it determines... Do not configure these reserved labels or taints in Node Templates.' Matches the quote in answer.md exactly."
+    },
+    {
+      "claim": "Every node provisioned from a node template is automatically labeled scheduling.cast.ai/node-template: <template name>, and selecting a template by that label (nodeSelector/nodeAffinity, operator In only) is the explicit recommended path; templates also accept arbitrary custom labels",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Grader fetched https://docs.cast.ai/docs/node-templates.md live (updatedAt 2026-09-23): 'Recommended: use scheduling.cast.ai/node-template for explicit template selection... the autoscaler uses that as a direct, unambiguous template selection'; 'Using nodeAffinity... The only supported nodeAffinity operator is In'; custom labels documented; the labels reference lists 'scheduling.cast.ai/node-template — Set when the node is provisioned using a specific node template.'"
+    },
+    {
+      "claim": "The Pod mutations reference documents filterV2.pod.celExpression, patchesV2 RFC 6902 ops (add/remove/replace/move/copy/test), podEviction.enabled (no effect unless enforcement enabled at mutator level), one-mutation-per-pod specificity scoring (workload name 4 > pod labels 2 > namespace 1), the pod-mutations.cast.ai/podmutation-applied-patch verification annotation, and an official 'Azure agentpool migration' patch example",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Grader fetched https://docs.cast.ai/docs/pod-mutations-reference.md live (updatedAt 2026-09-10): all elements present, including the '### Azure agentpool migration' example ('migrating from Azure's native agentpool labels to Cast AI Node Templates'), the specificity scoring table, the CEL expression filter field, and the applied-patch annotation table. Note: the official example uses op: move to a 'dedicated' label; the answer's copy+remove adaptation to scheduling.cast.ai/node-template uses only documented ops and is a legitimate, arguably better-targeted variant."
+    },
+    {
+      "claim": "Templates taint nodes by default with scheduling.cast.ai/node-template: <name>:NoSchedule (shouldTaint: true is the default)",
+      "type": "factual",
+      "verified": true,
+      "evidence": "Labels reference: 'Node Template Taint — scheduling.cast.ai/node-template ... Applied to all nodes provisioned via a node template.' Node templates doc documents shouldTaint=true examples requiring the node-template selector plus matching toleration, consistent with default tainting; consistent with the CAST AI API where shouldTaint defaults to true."
+    },
+    {
+      "claim": "'No override/alias/rename for the AKS pool label exists in docs or in the changelog (scan Oct 2025 to Jul 2026)'",
+      "type": "factual",
+      "verified": false,
+      "evidence": "UNVERIFIABLE by grader (negative claim; no independent changelog re-scan performed). Plausible and consistent with the verified docs — no reserved-label override mechanism appears anywhere in the three verified official pages — but the changelog-scan statement itself was not re-verified."
+    },
+    {
+      "claim": "Process: official sources were verified live 2026-09-25 via the docs' published .md markdown endpoints; web_search was unavailable (missing API key)",
+      "type": "process",
+      "verified": true,
+      "evidence": "Grader independently re-fetched all three cited pages via both HTML and .md endpoints with HTTP 200; the updatedAt front-matter dates (2026-09-04, 2026-09-23, 2026-09-10) match notes.md exactly, and the quoted passages match the live content. notes.md transparently flags that only answer.md/notes.md were written to the output dir."
+    },
+    {
+      "claim": "Quality: the deliverable is a correct, actionable support answer for the SiePortal AKS agentpool-label case",
+      "type": "quality",
+      "verified": true,
+      "evidence": "Root cause, supported contract, zero-rewrite bridge YAML, caveats (taints, one-mutation-per-pod, CEL-dialect thinness, nodeAffinity users, key spelling, excludeNamespaces for classic VMSS namespaces), a phased rollout, and verification kubectl commands are all present and technically consistent with live official docs. Assumptions (legacy unqualified 'agentpool' key spelling, mutation requires pod-mutator) are stated explicitly up front."
+    }
+  ],
+  "eval_feedback": {
+    "suggestions": [
+      {
+        "assertion": "Does NOT claim that a node template can set a custom agentpool value or that CAST nodes can join a customer-named Azure agent pool",
+        "reason": "Negative assertions are weakly discriminating in a free-form answer — a vacuous one-line reply would also 'pass' it. Consider pairing it with a positive check that the answer explicitly refutes the misconception (e.g., 'The answer explicitly states that setting the label in a node template has no effect / is overwritten'), which this run's answer does satisfy ('setting agentpool in a node template silently does nothing')."
+      },
+      {
+        "reason": "No assertion guards against a subtler hallucination class: an answer could claim a PodMutation or webhook can rewrite the agentpool label ON THE NODE (or on Azure pool membership) rather than only rewriting pod selectors. An assertion like 'Does not suggest any mechanism that changes the node-level agentpool label value to a customer-chosen string' would discriminate between correct and confidently wrong outputs; this run passes such a check (Sec. 1: 'CAST AI cannot remove, rename, or delegate this label')."
+      }
+    ],
+    "overall": "Evals are well-targeted and all six were meaningfully discriminating here; the answer satisfied them with genuine substance (live-quoted docs, working YAML, caveats, rollout) rather than surface compliance. Only refinement: strengthen the negative expectation (#3) with an explicit-refutation requirement. Executor's notes.md was transparent about assumptions and the web_search workaround; nothing flagged needs human follow-up."
+  }
+}

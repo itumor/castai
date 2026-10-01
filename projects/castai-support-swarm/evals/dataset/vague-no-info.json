@@ -1,0 +1,27 @@
+{
+  "id": "vague-no-info",
+  "thread": {
+    "from": "Alex <alex@example.com>",
+    "subject": "help",
+    "messages": [
+      {
+        "from": "Alex <alex@example.com>",
+        "date": "",
+        "body": "It is broken, please help."
+      }
+    ]
+  },
+  "grounding": "Almost no detail. The honest behavior is NEEDS_MORE_EVIDENCE and a clarify reply asking for the organization id and cluster id — never an invented technical answer.",
+  "expect": {
+    "category": "unknown",
+    "planIncludes": ["researcher", "verifier", "writer"],
+    "verdict": "REJECT",
+    "gate": "NEEDS_MORE_EVIDENCE",
+    "maxConfidence": 59,
+    "replyMustInclude": [
+      "organization id",
+      "cluster id"
+    ],
+    "replyMustExclude": []
+  }
+}

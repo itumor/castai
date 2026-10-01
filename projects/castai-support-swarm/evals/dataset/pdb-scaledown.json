@@ -1,0 +1,17 @@
+{
+  "id": "pdb-scaledown",
+  "file": "fixtures/thread-pdb-scaledown.md",
+  "grounding": "Fixture thread with ';; sim: nodes=1 managed=true pods=1 pdb=true' — one CAST AI-managed node blocked by a PodDisruptionBudget (minAvailable: 2 on the payments workload).",
+  "expect": {
+    "category": "node_downscale",
+    "planIncludes": ["sre", "repro", "qa", "architect", "verifier", "writer", "knowledge"],
+    "verdict": "PASS",
+    "minConfidence": 80,
+    "replyMustInclude": [
+      "poddisruptionbudget",
+      "minavailable|maxunavailable",
+      "reproduced"
+    ],
+    "replyMustExclude": []
+  }
+}
