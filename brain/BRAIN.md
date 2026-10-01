@@ -21,6 +21,9 @@ and engineering support operation.
    the default empty org; decide whether to swap it for the enterprise key.
 3. Keep fleet inventory (`cluster-readiness-outputs/castai_cluster_inventory.xlsx`)
    current for engagement reporting.
+4. [[PutRolePolicy 403 Case]] — Conceptboard/Siemens test account 951463557399:
+   autoscaling onboarding blocked on missing `iam:PutRolePolicy` in deployer
+   role. Reply drafted in `labs/putrolepolicy-403/`, awaiting human send.
 
 ## Project map
 
@@ -43,5 +46,6 @@ and engineering support operation.
 - [[Siemens Fleet]] — live fleet facts, top orgs, agent health
 - [[API Keys & Regions]] — which key sees what, where they live
 - [[CreateTags Case]] — full case file for the active CreateTags blocker
+- [[PutRolePolicy 403 Case]] — Conceptboard onboarding blocked on deployer IAM gap
 - [[Karpenter + CAST AI Coexistence]] — supported models, conflicts, migration
 - [[Reusable Components]] — one-liner reference for each project component
