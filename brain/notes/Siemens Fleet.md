@@ -7,7 +7,7 @@ Live snapshot from `cluster-readiness-outputs/castai_cluster_inventory.xlsx`
 
 - **111 organizations** in the Siemens AG enterprise tree
 - **230 clusters** visible to the enterprise API key
-- 2026-09-24: `/v1/organizations` now returns **129 orgs** (fleet still growing; refresh the xlsx before next report)
+- 2026-10-02: `/v1/organizations` now returns **130 orgs** (fleet still growing; refresh the xlsx before next report)
 - **41** in Phase 2 / autoscaler mode
 - **189** read-only / monitoring only
 
@@ -50,3 +50,6 @@ python3 castai_cluster_inventory.py
 ```
 
 After refresh, update the counts in this note.
+
+Deep-dive on the three NGM clusters (helios/integ/kronos, org SI GSW CLO) — costs, savings proof, config audit — lives in
+[SI GSW CLO NGM Clusters.md](./SI%20GSW%20CLO%20NGM%20Clusters.md) (2026-10-02); that org runs 100% on-demand fleet-wide.

@@ -59,3 +59,12 @@ castai-savings-potential-live.xlsx
 projects/castai-cost-timeline-dashboard/data/
 projects/castai-cost-timeline-dashboard/public/data/
 projects/castai-cost-timeline-dashboard/scripts/_tier*
+
+# local google-calendar tooling (never commit)
+.gcal-home/
+.venv-gcalcli/
+
+# local tool auth caches, venvs & session data (never commit — contains live OAuth tokens)
+**/.mcp-auth/
+.venv-roi/
+.deepseek/

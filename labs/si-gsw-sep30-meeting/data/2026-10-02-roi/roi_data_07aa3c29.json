@@ -1,0 +1,85 @@
+{
+  "customer_name": "Siemens \u00b7 SI GSW CLO",
+  "short_org_id": "07aa3c29",
+  "period_label": "Oct 2025 \u2013 Sep 2026 (last 12 months, CAST API list prices)",
+  "generated_date": "02 October 2026",
+  "report_context_label": "Qbr",
+  "executive_summary": "Savings ROI for Siemens SI GSW CLO \u2014 ngm-helios-eks, ngm-integ-eks, ngm-kronos-eks. Over the last 12 months (Oct 2025 \u2013 Sep 2026) CAST AI downscaling removed $526,923 of node-hours at AWS list prices, a 33.5% reduction against the $1,573,732 infrastructure baseline these clusters would have cost without CAST AI. Measured against the platform fee (\u20ac5 \u00d7 avg provisioned vCPU = \u20ac157,074 \u2248 $169,638): net $357,285 after fee, 211% ROI, $3.1 returned per $1 of fee. Every cluster is net-positive every month \u2014 integ +$215.6k, helios +$128.9k, kronos +$12.8k \u2014 and net remains $83k\u2013$136k even at Siemens' effective discounted rates (48\u201358% of list). Spot is not yet enabled ($0 spot savings today), which is the next upside beyond these numbers.",
+  "kpi_cards": [
+    {
+      "label": "Total Saved (12 months)",
+      "value": "$526,923",
+      "sub": "vs no-CAST baseline"
+    },
+    {
+      "label": "Savings Rate",
+      "value": "33.5%",
+      "sub": "of baseline infra cost"
+    },
+    {
+      "label": "Net After CAST Fee",
+      "value": "$357,284",
+      "sub": "savings \u2212 platform fee"
+    },
+    {
+      "label": "Return per $1 of Fee",
+      "value": "3.1\u00d7",
+      "sub": "savings-to-fee ratio"
+    }
+  ],
+  "roi_metrics": [
+    {
+      "indicator": "Total Actual Savings (12 months)",
+      "value": "$526,923"
+    },
+    {
+      "indicator": "Baseline Infrastructure Cost (no CAST AI)",
+      "value": "$1,573,732"
+    },
+    {
+      "indicator": "Optimized Cost After CAST AI",
+      "value": "$1,046,809"
+    },
+    {
+      "indicator": "CAST AI Platform Fee (\u20ac5 \u00d7 avg prov. vCPU)",
+      "value": "\u20ac157,074 \u2248 $169,638"
+    },
+    {
+      "indicator": "Net Savings (Savings \u2212 Fee)",
+      "value": "$357,285"
+    },
+    {
+      "indicator": "ROI on Platform Fee",
+      "value": "211%"
+    },
+    {
+      "indicator": "Savings-to-Fee Ratio",
+      "value": "3.1\u00d7"
+    },
+    {
+      "indicator": "Fee Payback \u00b7 Net at Siemens' rates (48\u201358% of list)",
+      "value": "~11 days/mo of savings \u00b7 still $83k\u2013$136k net"
+    },
+    {
+      "indicator": "\u00b7 ngm-helios-eks",
+      "value": "saved $220.8k (27.2%) \u00b7 fee $91.9k \u00b7 net $128.9k"
+    },
+    {
+      "indicator": "\u00b7 ngm-integ-eks",
+      "value": "saved $289.2k (40.3%) \u00b7 fee $73.7k \u00b7 net $215.6k"
+    },
+    {
+      "indicator": "\u00b7 ngm-kronos-eks",
+      "value": "saved $16.8k (38.2%) \u00b7 fee $4.0k \u00b7 net $12.8k"
+    }
+  ],
+  "savings_breakdown": {
+    "node_savings": 526922.82,
+    "node_savings_pct": 33.5,
+    "woop_savings": 0,
+    "woop_savings_pct": 0,
+    "node_share_pct": 100,
+    "woop_share_pct": 0
+  },
+  "disclaimer": "Source: CAST AI cost-reports API (api.eu.cast.ai), org SI GSW CLO, pulled 02 Oct 2026; 12 monthly buckets Oct 2025 \u2013 Sep 2026. Savings = measured downscaling (node-hours removed) vs CAST AI baseline at AWS list prices; spot savings $0 (spot not yet enabled on these clusters). Platform fee basis: \u20ac5 \u00d7 average provisioned vCPU (EUR\u2192USD 1.08). Costs include compute + storage. Clusters: ngm-helios-eks (419c39e4-66bf-4d61-b833-4562968a61c7), ngm-integ-eks (1ad1a0bf-defe-4f51-acea-cbebb3d3fc3f), ngm-kronos-eks (6d20eb8e-a1e5-4411-b4c8-5346ac3291b0)."
+}

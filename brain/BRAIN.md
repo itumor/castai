@@ -44,6 +44,12 @@ and engineering support operation.
 ## Key knowledge notes
 
 - [[Siemens Fleet]] — live fleet facts, top orgs, agent health
+- [[SI GSW ngm Cost Case]] — ngm-helios-eks / ngm-integ-eks high-cost analysis:
+  billable-CPU basis verified; levers are 0% spot + over-requested workloads
+- [[SI GSW CLO Savings]] — Helios/Integ/Kronos Jun–Oct frozen-price trajectory,
+  per-month CAST-realized cross-checks, meeting reconciliation; **fee = €5/CPU·mo
+  (verified), not 5% share**; verdict: optimization real, Integ/Kronos net-positive,
+  Helios fee-marginal until spot + rightsizing land
 - [[API Keys & Regions]] — which key sees what, where they live
 - [[CreateTags Case]] — full case file for the active CreateTags blocker
 - [[PutRolePolicy 403 Case]] — Conceptboard onboarding blocked on deployer IAM gap

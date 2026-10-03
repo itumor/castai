@@ -29,12 +29,19 @@ Operate as a senior Cast AI support engineer and implementer. Capable of handlin
 
 ## Access Available
 - **Identity**: Ebrahim Ramadan <ebrahim@cast.ai> at **CAST AI**. Confirmed site: `castai.atlassian.net`.
-- **JIRA_TOKEN** + **CONFLUENCE_TOKEN** in Granular Vault — auth returns 401/403 against castai.atlassian.net (expired, wrong account, or IP-allowlist blocked).
+- **JIRA_TOKEN** + **CONFLUENCE_TOKEN** in Granular Vault — auth returns 401/403 against castai.atlassian.net (expired, wrong account, or IP-allowlist blocked). Superseded by Rovo MCP access below.
 - **CAST AI API token**: use `TF_VAR_castai_api_token` env var (Vault possible).
 - **Rovo/Granola/Gemini/Slack**: installed locally, but sessions don't transfer to agent terminal — need my own API keys.
 - **Local tools**: terraform, aws, kubectl, helm all working.
 
-### Jira status as of 2026-09-11 (evidence-backed)
+### Atlassian Rovo MCP access — working as of 2026-10-02 (tested end-to-end)
+- Path: DSH agent preset **Atlassian Rovo** (`~/.dsh/.agent-presets/atlassian-rovo/`) → `mcp-atlassian` row → mcp-remote stdio bridge → `https://mcp.atlassian.com/v2/mcp`. OAuth as `ebrahim@cast.ai`, tokens cached/refreshed in `~/.mcp-auth/mcp-remote-v1/`.
+- Verified 2026-10-02: identity via `atlassianUserInfo`; site `castai.atlassian.net` (cloudId `cadcf1d7-a828-400d-a780-4d72a462516f`) with read access across Jira/Confluence/products; JQL search returns org-wide issues (old API token could not); full issue reads work; Rovo semantic `search` spans Jira + Confluence (~11k hits for a support-topic query, incl. CSU tickets and Support KB pages).
+- CLI for agent sessions (no browser): `node tools/atlassian-mcp-smoke.mjs tools` / `call <tool> '<json>'`. JQL must be bounded (`updated >= -2d`, `assignee = currentUser()`) — unbounded queries are rejected with 400.
+- This replaces the old JIRA_TOKEN permission problem: OAuth runs as the real account, so visibility = the account's actual Jira/Confluence permissions (CSU/Support included).
+- Keep the read-only posture: only call read tools (`getJiraIssue`, `searchJiraIssuesUsingJql`, `search`, `getConfluenceContent`, `getAccessibleAtlassianResources`, `atlassianUserInfo`, `executeRead`, `getGraph*`). Write tools exist (`createJiraIssue`, `executeWrite`, …) — never call them without explicit human approval (AGENTS.md §5).
+
+### Jira status as of 2026-09-11 (evidence-backed) — historical, superseded by Rovo MCP above
 - ✅ Token authenticates. I CAN read: dashboards (4 found: "CSU woops" by Ondrej Unger, "REP", "WIRE - CSUs and CFRs" by Ioana Adelina Apetrei), so I'm inside the real CAST AI org.
 - ❌ I CANNOT see: any issues (all JQL returns 0, direct issue keys return 404), project list, /myself (non-JSON, scope-limited).
 - Pattern = token is real but has **no Browse Projects permission** on any project. Dashboards are globally shared (sharePermissions.type=global), which is why I see them.

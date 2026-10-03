@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-25",
+  "updated": "2026-10-02",
   "purpose": "Routing index for CAST AI support answers. Match the case topic, then (1) read any matching local_knowledge entry before answering — these contain verified facts and human-reviewed reply templates — and (2) confirm current behavior against the official_sources in priority order when features, APIs, limits, or setup steps may have changed. Paths are relative to the repository root unless absolute.",
   "official_sources": [
     {
@@ -48,6 +48,16 @@
     }
   ],
   "local_knowledge": [
+    {
+      "path": "brain/notes/SI GSW CLO NGM Clusters.md",
+      "topics": ["ngm clusters", "ngm-helios-eks", "ngm-integ-eks", "ngm-kronos-eks", "SI GSW CLO", "org 07aa3c29", "savings proof", "spot disabled org-wide", "evictor incompatible", "no savings complaint", "cost audit siemens"],
+      "verified_facts": "Live audit 2026-10-02: CAST AI beneficial on all 3 NGM clusters (realized $20.2k/$19.5k/$2.1k per month; conservative M1 net $7.1k/$8.9k/$1.1k; ER 0.86/0.70/0.62). Spot OFF org-wide; evictor Incompatible (self-managed detection) on all 3; WOOP installed but optimizedCount=0 (metrics-only) with requests at 7-13x usage. No Karpenter. Cluster IDs + org id inside. Full report: .kimchi/docs/si-gsw-clo-ngm-cost-savings-analysis-2026-10.md; raw API evidence: cluster-cost-analysis/ngm-*/."
+    },
+    {
+      "path": ".kimchi/docs/si-gsw-clo-ngm-cost-savings-analysis-2026-10.md",
+      "topics": ["three-number reconciliation", "naive delta vs frozen baseline vs CAST AI realized", "what-if spot model", "Layman scenario capture", "WOOP refusal price tag", "removal-disabled audit", "zone-pinned PVC rebalancing blocker", "insufficient capacity 2 AZ"],
+      "verified_facts": "Customer-facing cost/savings report for the 3 NGM clusters with formulas, assumptions, ranges, and a P1/P2/P3 tuning plan honoring the no-WOOP constraint; includes the recurring monthly review command (savings_report.py)."
+    },
     {
       "path": ".kimchi/docs/token-rotation-e2e-status.md",
       "topics": ["cluster token rotation", "401 after rotation", "revoke token", "old token validity"],
@@ -142,6 +152,16 @@
       "path": "castai-terraform-1/brain/notes/castai-optimization-quality-metrics-and-notifications.md",
       "topics": ["optimization quality metrics", "cluster score", "optimization health notifications"],
       "verified_facts": "Docs-extracted research on optimization-quality metrics and health notifications."
+    },
+    {
+      "path": "brain/notes/SI GSW Savings Analysis.md",
+      "topics": ["SI GSW", "net cost benefit", "helios", "integ", "kronos", "saved vCPU billing", "rebalancer eviction", "Cloudability reconciliation"],
+      "verified_facts": "API-verified monthly cost/savings for ngm-helios-eks (419c39e4-66bf-4d61-b833-4562968a61c7), ngm-integ-eks (1ad1a0bf-defe-4f51-acea-cbebb3d3fc3f), ngm-kronos-eks (6d20eb8e-a1e5-4411-b4c8-5346ac3291b0) in org SI GSW CLO (07aa3c29-3e1f-44bc-ad60-ceedb878d99a). Net at customer rates = savings×d − fee (Helios 0–5%, Integ +23–32%); June→July Helios increase = workload growth; savings cannot re-accrue on restarts but deploy waves raise the €5/avg-vCPU fee basis; rebalancing plans generate hourly, execute ~03:00/~21:00 UTC and sometimes off-window by design. Fleet queries need the projects/castai-billing-export/.env enterprise key + X-CastAI-Organization-Id header."
+    },
+    {
+      "path": "labs/si-gsw-sep30-meeting/savings-analysis-helios-integ-kronos.md",
+      "topics": ["cost-reports API", "93-day range limit", "monthly cost formula", "audit v2 events", "billing platform-usage feature enum", "SI GSW meeting deliverable"],
+      "verified_facts": "cost/savings endpoints max 93 days per call at stepSeconds=86400 (chunk longer windows); item numerics are strings (use tonumber in jq); monthly list cost = (ΣcostOnDemand+ΣcostSpot+ΣcostSpotFallback+ΣstorageCost)×24; /v2/audit/events returns .events[] and rejects occurredAt sort; billing platform-usage-detail needs an undocumented feature enum. Raw API pulls stored under labs/si-gsw-sep30-meeting/data/2026-10-02/."
     }
   ],
   "reply_exemplars": [

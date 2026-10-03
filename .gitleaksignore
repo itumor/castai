@@ -8,3 +8,12 @@ castai-support-swarm/test/unit/gmail-draft-sink.test.js:generic-api-key:86
 castai-support-swarm/test/unit/eks-live-sandbox.test.js:generic-api-key:244
 castai-support-swarm/test/unit/kb-reader.test.js:generic-api-key:140
 projects/castai-support-swarm/tests/tools/kube.test.js:generic-api-key:33
+
+# Verified false positives (2026-10-02 nightly sweep, commit 36268f7f) —
+# synthetic KEY test fixtures (two marked "synthetic; never a real key")
+# and an AWS KMS key-ID doc example from the public CAST AI OpenAPI spec.
+36268f7f7dab1fdf044ab39a5c51e7cc8368e953:castai-enterprise-dashboard/tests/test_client.py:generic-api-key:39
+36268f7f7dab1fdf044ab39a5c51e7cc8368e953:castai-enterprise-dashboard/tests/test_client_v2_delta.py:generic-api-key:24
+36268f7f7dab1fdf044ab39a5c51e7cc8368e953:castai-enterprise-dashboard/tests/test_qa_scale_security.py:generic-api-key:54
+36268f7f7dab1fdf044ab39a5c51e7cc8368e953:castai-enterprise-dashboard/tests/test_rate_gate.py:generic-api-key:20
+36268f7f7dab1fdf044ab39a5c51e7cc8368e953:castai-enterprise-dashboard/docs/openapi/castai-openapi.json:generic-api-key:57164
