@@ -21,7 +21,43 @@ Do not proceed if any required credential is missing or if the target environmen
 
 ---
 
-## 2. Verify AWS credentials and CAST AI API key scope
+## 2. Subagent-first parallelization policy (hook)
+
+This section is always in context and acts as the session's enforcement hook —
+DSH has no executable hook runtime, so this policy plus the auto-discovered
+`cluster-fanout` skill **is** the hook. Every session in this repo follows it.
+
+**Core law: N clusters = N subagents.** Any task touching 2 or more CAST AI
+clusters (cost, savings, inventory, nodes, events, recommendations, autoscaler
+status, audits, readiness checks) spawns exactly one background subagent per
+cluster, all launched in a single assistant message so they run concurrently.
+Serial cluster loops in the main session are a policy violation: they cost N×
+the wall-clock time and flood the main context with raw API payloads that only
+need to be summaries.
+
+**Generalize the fan-out.** Any work with independent units — multi-file
+audits, multi-endpoint pulls, multi-source research, repetitive transforms —
+fans out the same way: one subagent per unit, one message, background mode.
+When speed or efficiency is requested, delegation is the default, not the
+exception. Only single-cluster single lookups and dependent step chains stay
+inline.
+
+| Rule | Detail |
+|------|--------|
+| 1. Load the skill first | Load the `cluster-fanout` skill before multi-cluster or parallel work; follow its per-cluster prompt template and aggregation format. |
+| 2. One message, N calls | Spawn all subagents in one assistant message with background mode; never drip them one per turn. |
+| 3. Self-contained prompts | Subagents see no conversation history; each prompt carries its cluster id/name, org context, exact data to collect, and the read-only constraint. |
+| 4. Enumerate before spawning | Resolve the exact cluster list first (read-only inventory call or user-provided list); never guess ids (§6.10). |
+| 5. Safety is inherited, still restated | Subagents inherit this file's prohibitions — and every subagent prompt still restates the read-only rule, because fan-out must multiply speed, never risk. |
+| 6. Merge, don't dump | The main session aggregates subagent results into one report (one row per cluster, anomalies flagged, errored clusters listed) instead of relaying N raw dumps. |
+| 7. Wave cap | More than ~8 units → fan out in waves of 8 to respect concurrency limits. |
+
+Preflight (§1) still gates everything: no fan-out before credentials, region,
+org, and target scope are confirmed.
+
+---
+
+## 3. Verify AWS credentials and CAST AI API key scope
 
 ### AWS credentials
 
@@ -58,7 +94,7 @@ Never use a key with `*:write`, `*:admin`, billing, or cluster-connect scopes un
 
 ---
 
-## 3. Run tests for each component
+## 4. Run tests for each component
 
 ### Root repo utilities
 
@@ -140,7 +176,7 @@ preset discovers workspace skills: load it before answering.
 
 ---
 
-## 4. Canonical customer-support workflow
+## 5. Canonical customer-support workflow
 
 ```text
 receive case → check brain → reproduce → document → reply
@@ -158,7 +194,7 @@ If reproduction requires a write action, stop after step 3 and escalate.
 
 ---
 
-## 5. Do not do
+## 6. Do not do
 
 | # | Prohibition | Why |
 |---|-------------|-----|
@@ -175,7 +211,7 @@ If reproduction requires a write action, stop after step 3 and escalate.
 
 ---
 
-## 6. Known runbooks
+## 7. Known runbooks
 
 When a case involves CAST AI cluster token rotation or `401 Authorization Required` after rotation, load the project skill `castai-token-rotation` and read the runbooks in `.kimchi/docs/`:
 

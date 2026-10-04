@@ -1,0 +1,306 @@
+{
+  "cluster_name": "ngm-integ-eks",
+  "cluster_id": "1ad1a0bf-defe-4f51-acea-cbebb3d3fc3f",
+  "generated_at": "04 October 2026 15:35 UTC",
+  "evictor": {
+    "window_start": "2026-09-30 (rebalancing plans; no Loki access)",
+    "window_end": "2026-10-04 (last plan run)",
+    "reconcile_cycles": 0,
+    "blocked_nodes": [
+      {
+        "node": "n/a (replacement-node upscale failed)",
+        "category": "PVC/Storage (zone-pinned PVC)",
+        "blocking_pod": "scada-dp-server-0-0",
+        "namespace": "it-292442-74978447"
+      },
+      {
+        "node": "n/a (replacement-node upscale failed)",
+        "category": "PVC/Storage (zone-pinned PVC)",
+        "blocking_pod": "scada-dp-server-0-1",
+        "namespace": "it-292442-74978447"
+      },
+      {
+        "node": "n/a (replacement-node upscale failed)",
+        "category": "PVC/Storage (zone-pinned PVC)",
+        "blocking_pod": "scada-dp-server-1-0",
+        "namespace": "it-292442-74978447"
+      },
+      {
+        "node": "n/a (replacement-node upscale failed)",
+        "category": "PVC/Storage (zone-pinned PVC)",
+        "blocking_pod": "scada-dp-server-1-1",
+        "namespace": "it-292442-74978447"
+      },
+      {
+        "node": "n/a (replacement-node upscale failed)",
+        "category": "PVC/Storage (zone-pinned PVC)",
+        "blocking_pod": "it978447-valkey-cluster-node-0",
+        "namespace": "it-292442-74978447"
+      },
+      {
+        "node": "n/a (replacement-node upscale failed)",
+        "category": "PVC/Storage (zone-pinned PVC)",
+        "blocking_pod": "it978447-valkey-cluster-node-1",
+        "namespace": "it-292442-74978447"
+      },
+      {
+        "node": "n/a (replacement-node upscale failed)",
+        "category": "PVC/Storage (zone-pinned PVC)",
+        "blocking_pod": "it978447-valkey-cluster-node-2",
+        "namespace": "it-292442-74978447"
+      },
+      {
+        "node": "n/a (replacement-node upscale failed)",
+        "category": "PVC/Storage (zone-pinned PVC)",
+        "blocking_pod": "scada-dp-server-0-0",
+        "namespace": "it-292442-74978499"
+      },
+      {
+        "node": "n/a (replacement-node upscale failed)",
+        "category": "PVC/Storage (zone-pinned PVC)",
+        "blocking_pod": "scada-dp-server-0-1",
+        "namespace": "it-292442-74978499"
+      },
+      {
+        "node": "n/a (replacement-node upscale failed)",
+        "category": "PVC/Storage (zone-pinned PVC)",
+        "blocking_pod": "scada-dp-server-1-0",
+        "namespace": "it-292442-74978499"
+      },
+      {
+        "node": "n/a (replacement-node upscale failed)",
+        "category": "PVC/Storage (zone-pinned PVC)",
+        "blocking_pod": "scada-dp-server-1-1",
+        "namespace": "it-292442-74978499"
+      },
+      {
+        "node": "n/a (replacement-node upscale failed)",
+        "category": "PVC/Storage (zone-pinned PVC)",
+        "blocking_pod": "it978499-valkey-cluster-node-0",
+        "namespace": "it-292442-74978499"
+      },
+      {
+        "node": "n/a (replacement-node upscale failed)",
+        "category": "PVC/Storage (zone-pinned PVC)",
+        "blocking_pod": "it978499-valkey-cluster-node-1",
+        "namespace": "it-292442-74978499"
+      },
+      {
+        "node": "n/a (replacement-node upscale failed)",
+        "category": "PVC/Storage (zone-pinned PVC)",
+        "blocking_pod": "it978499-valkey-cluster-node-2",
+        "namespace": "it-292442-74978499"
+      },
+      {
+        "node": "n/a (replacement-node upscale failed)",
+        "category": "PVC/Storage (zone-pinned PVC)",
+        "blocking_pod": "it978447-postgres-dev-cluster-instance1-8pkm-0",
+        "namespace": "it-292442-74978447"
+      },
+      {
+        "node": "n/a (replacement-node upscale failed)",
+        "category": "PVC/Storage (zone-pinned PVC)",
+        "blocking_pod": "it978447-tileserver-set-v2-0",
+        "namespace": "it-292442-74978447"
+      },
+      {
+        "node": "ip-10-46-249-239.eu-central-1.compute.internal",
+        "category": "Removal Disabled",
+        "blocking_pod": "(node annotation cast.ai/node-removal-disabled)",
+        "namespace": "-"
+      }
+    ],
+    "top_blockers": [
+      {
+        "category": "PVC/Storage (zone-pinned PVC)",
+        "count": 16
+      },
+      {
+        "category": "Removal Disabled",
+        "count": 1
+      }
+    ],
+    "evictions_completed": 18,
+    "cross_matches": []
+  },
+  "pod_health": {
+    "unhealthy": []
+  },
+  "max_pod_per_node": {
+    "provider": "EKS",
+    "config_summary": [
+      {
+        "node_config": "ngm-integ-castai",
+        "instance_type": "m6a/m7a/r6a.xlarge",
+        "provider": "EKS",
+        "max_pods": 58,
+        "node_count": 26
+      },
+      {
+        "node_config": "ngm-integ-castai",
+        "instance_type": "m6a/c6a/c5a.2xlarge",
+        "provider": "EKS",
+        "max_pods": 58,
+        "node_count": 23
+      },
+      {
+        "node_config": "ngm-integ-castai",
+        "instance_type": "m6a/c6a/c5a/c7i-flex/r6a.4xlarge",
+        "provider": "EKS",
+        "max_pods": 234,
+        "node_count": 29
+      }
+    ],
+    "at_capacity": []
+  },
+  "node_templates": {
+    "inventory": [
+      {
+        "template": "default-by-castai",
+        "count": 9,
+        "arch": [
+          "amd64"
+        ],
+        "capacity_type": [
+          "on-demand"
+        ],
+        "os": [
+          "linux"
+        ],
+        "instance_types": [
+          "m6a.2xlarge",
+          "m6a.4xlarge",
+          "r6a.4xlarge",
+          "r6a.large"
+        ],
+        "taints": [],
+        "gpu": false
+      },
+      {
+        "template": "(unmanaged) gitlab-runner",
+        "count": 1,
+        "arch": [
+          "amd64"
+        ],
+        "capacity_type": [
+          "on-demand"
+        ],
+        "os": [
+          "linux"
+        ],
+        "instance_types": [
+          "m6a.2xlarge"
+        ],
+        "taints": [
+          "ReservedFor=GitLabRunner:NoSchedule"
+        ],
+        "gpu": false
+      },
+      {
+        "template": "(unmanaged) windows",
+        "count": 1,
+        "arch": [
+          "amd64"
+        ],
+        "capacity_type": [
+          "on-demand"
+        ],
+        "os": [
+          "windows"
+        ],
+        "instance_types": [
+          "m7a.xlarge"
+        ],
+        "taints": [
+          "windowsOnly=true:NoExecute"
+        ],
+        "gpu": false
+      }
+    ],
+    "merge_candidates": [],
+    "keep_separate": [
+      {
+        "template": "(unmanaged) gitlab-runner",
+        "reason": "Dedicated ReservedFor=GitLabRunner:NoSchedule taint - intentionally outside Cast AI management (static node group)"
+      },
+      {
+        "template": "(unmanaged) windows",
+        "reason": "windowsOnly=true:NoExecute; windowsAutoscalingEnabled=false - also carries cast.ai/node-removal-disabled and blocks rebalancing"
+      }
+    ],
+    "misconfigured": [],
+    "spot_templates": []
+  },
+  "nt_resource_profile": {
+    "templates": [
+      {
+        "template": "default-by-castai",
+        "node_count": 9,
+        "cpu_vcpu": 298.9,
+        "mem_gi": 587.8,
+        "ratio_str": "1:2.0",
+        "pattern": "compute-heavy",
+        "recommendation": "c6i/c7g (AWS)  \u00b7  n2-highcpu (GCP)  \u00b7  Fsv2 (Azure)"
+      }
+    ],
+    "ds_advisory": false,
+    "ds_cpu_pct": 3.3,
+    "total_nodes": 78
+  },
+  "woop_rollout": {
+    "active": true,
+    "total_checked": 313,
+    "ok": 313,
+    "warnings": 0,
+    "action_needed": 0,
+    "issues": []
+  },
+  "exec_summary": {
+    "critical": [
+      {
+        "area": "Max Pod Per Node",
+        "finding": "Node config ngm-integ-castai pins kubeletConfig.maxPods=55 statically, overriding the EKS ENI formula (58 on xlarge/2xlarge, 234 on 4xlarge). On the burst-day mix (29x 4xlarge of 78 nodes, 2026-10-02) 4xl nodes run at 24% of their formula pod density; raising template maxCpu beyond 16 (8xl+) would repeat the same density cliff.",
+        "action": "Remove the static maxPods=55 override (or align it per instance class; consider prefix delegation) before raising node-template maxCpu; reload the node configuration and roll nodes."
+      }
+    ],
+    "high": [
+      {
+        "area": "Evictor / Rebalancing",
+        "finding": "16 zone-pinned-PVC StatefulSet pods (scada-dp-server x9, valkey-cluster x6, postgres-dev x1, tileserver x1 in it-292442-*) repeatedly fail rebalancing plans (8 failed plans on 2026-10-01: upscalingFailed, PVC bound to a single AZ / terminating). Consolidation for these nodes is fully blocked; 1 further node is removal-disabled.",
+        "action": "Pin scada-dp-server/valkey workloads to a dedicated node template scoped to their PVC zone (or adopt a topology-aware storage policy), or exclude them from rebalancing; confirm the removal-disabled annotation on ip-10-46-249-239 is intentional."
+      },
+      {
+        "area": "WOOP Rollout (efficiency)",
+        "finding": "94.6% of requested CPU is wasted: 292.3 of 309.1 requested cores unused across 313 workloads. Largest offenders: enrich-analog-reindexation-cron (~55.7 cores req, 0 used) and enrich-analog-reset-offset-cron (~34.3 cores req, 0 used) across it-287129-*/it-286247-* etc. WOOP is READ_ONLY/metrics-only on all 313 workloads; workload-autoscaler v1.10.4 is behind latest v1.14.1.",
+        "action": "Move WOOP from READ_ONLY to apply (one-by-one rollout) for the zero-use CronJobs, or right-size their requests manually; upgrade the workload-autoscaler agent to v1.14.1."
+      },
+      {
+        "area": "Pod Health (informational)",
+        "finding": "INFO: live pod-phase scan not possible - no kubectl in this run (AWS creds expired); pod table left empty rather than fabricated. API-verified signals are clean: unscheduled-pods=0 and problematic-nodes=0 (2026-10-04 deep audit), 152 workloads healthy in WOOP snapshot.",
+        "action": "Re-run with kubectl to complete the pod-health section; no action indicated from API data."
+      },
+      {
+        "area": "Evictor (self-managed)",
+        "finding": "Cluster runs self-managed cluster-autoscaler eviction: policies report evictor allowed=false, status=Incompatible (aggressiveMode=false, cycle 1m); consolidation proceeds only via rebalancing schedules (hourly + post-scale 05:00 cron). 18 nodeDrained evictions recorded in the 2026-10-02 audit window.",
+        "action": "Keep scheduled rebalancing as the consolidation path (working: 41/50 recent plans finished); no evictor change required unless switching to Cast-managed eviction."
+      }
+    ],
+    "medium": [
+      {
+        "area": "Node Templates",
+        "finding": "Template default-by-castai carries spotInterruptionPredictions type 'aws-rebalance-recommendations' (deprecated prediction type) even though spot is OFF (spot:false, onDemand:true, spotBackups armed, useSpotFallbacks:true).",
+        "action": "When enabling spot, switch the prediction type to the current 'cast-replacement-schedule' model and keep spotBackups enabled."
+      },
+      {
+        "area": "Node Templates (spot opportunity)",
+        "finding": "Burst test cluster (30d node range 44 -> 1,019, daily scale-down to ~601) is 100% on-demand with spot disabled on the single template.",
+        "action": "Evaluate enabling spot (with spot fallbacks) on default-by-castai for the daily burst window; burst, fault-tolerant integ workloads are a strong spot fit."
+      },
+      {
+        "area": "NT Resource Profile",
+        "finding": "Non-DaemonSet request ratio is 1:2.0 vCPU:Gi (compute-heavy), but it is skewed by ~90 cores of zero-use cron requests (reindexation/reset-offset); DS CPU overhead is only 3.3% (no advisory).",
+        "action": "Re-profile after right-sizing the idle crons; expect the true ratio to relax toward general-purpose, keeping m-family instances valid."
+      }
+    ]
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "cluster_name": "ngm-kronos-eks",
+  "cluster_id": "6d20eb8e-a1e5-4411-b4c8-5346ac3291b0",
+  "generated_at": "04 October 2026 15:35 UTC",
+  "evictor": {
+    "window_start": "2026-10-01 16:00 UTC (audit-events window)",
+    "window_end": "2026-10-01 23:01 UTC",
+    "reconcile_cycles": 0,
+    "blocked_nodes": [
+      {
+        "node": "ip-10-47-207-93.eu-central-1.compute.internal",
+        "category": "Removal Disabled",
+        "blocking_pod": "node annotation cast.ai/node-removal-disabled (unmanaged m7a.xlarge node)",
+        "namespace": "\u2014"
+      }
+    ],
+    "top_blockers": [
+      {
+        "category": "Removal Disabled",
+        "count": 1
+      }
+    ],
+    "evictions_completed": 12,
+    "cross_matches": []
+  },
+  "pod_health": {
+    "unhealthy": []
+  },
+  "max_pod_per_node": {
+    "provider": "EKS",
+    "config_summary": [
+      {
+        "node_config": "ngm-kronos-castai (default-by-castai)",
+        "instance_type": "r6a.large",
+        "provider": "EKS",
+        "max_pods": 29,
+        "node_count": 2
+      },
+      {
+        "node_config": "ngm-kronos-castai (default-by-castai)",
+        "instance_type": "c6a.4xlarge",
+        "provider": "EKS",
+        "max_pods": 55,
+        "node_count": 4
+      },
+      {
+        "node_config": "ngm-kronos-castai (default-by-castai)",
+        "instance_type": "m6a.4xlarge",
+        "provider": "EKS",
+        "max_pods": 55,
+        "node_count": 4
+      },
+      {
+        "node_config": "ngm-kronos-castai (default-by-castai)",
+        "instance_type": "m6a.2xlarge",
+        "provider": "EKS",
+        "max_pods": 55,
+        "node_count": 1
+      },
+      {
+        "node_config": "ngm-kronos-castai (default-by-castai)",
+        "instance_type": "c5a.2xlarge",
+        "provider": "EKS",
+        "max_pods": 55,
+        "node_count": 1
+      },
+      {
+        "node_config": "ngm-kronos-castai (default-by-castai)",
+        "instance_type": "r6a.4xlarge",
+        "provider": "EKS",
+        "max_pods": 55,
+        "node_count": 1
+      },
+      {
+        "node_config": "\u2014 (not CAST-managed)",
+        "instance_type": "m7a.xlarge",
+        "provider": "EKS",
+        "max_pods": "\u2014",
+        "node_count": 1
+      }
+    ],
+    "at_capacity": []
+  },
+  "node_templates": {
+    "inventory": [
+      {
+        "template": "default-by-castai",
+        "count": 13,
+        "arch": [
+          "amd64"
+        ],
+        "capacity_type": [
+          "on-demand"
+        ],
+        "os": [
+          "linux"
+        ],
+        "instance_types": [
+          "r6a.large",
+          "m6a.2xlarge",
+          "c6a.4xlarge",
+          "m6a.4xlarge",
+          "c5a.2xlarge",
+          "r6a.4xlarge"
+        ],
+        "taints": [],
+        "gpu": false
+      }
+    ],
+    "merge_candidates": [],
+    "keep_separate": [],
+    "misconfigured": [],
+    "spot_templates": []
+  },
+  "nt_resource_profile": {
+    "templates": [
+      {
+        "template": "default-by-castai",
+        "node_count": 13,
+        "cpu_vcpu": 127.2,
+        "mem_gi": 261.8,
+        "ratio_str": "1:2.1",
+        "pattern": "general-purpose",
+        "recommendation": "m6i/m7g (AWS) \u00b7 n2-standard (GCP) \u00b7 Dsv5 (Azure) \u2014 currently compute-leaning (0.49 vCPU/GiB, near compute-heavy boundary); c-families in mix acceptable"
+      }
+    ],
+    "ds_advisory": false,
+    "ds_cpu_pct": 8.4,
+    "total_nodes": 14
+  },
+  "woop_rollout": {
+    "active": true,
+    "total_checked": 264,
+    "ok": 0,
+    "warnings": 0,
+    "action_needed": 0,
+    "issues": []
+  },
+  "exec_summary": {
+    "critical": [
+      {
+        "area": "Max Pod Per Node",
+        "finding": "2x r6a.large nodes: EKS ENI formula caps them at 29 pods, but static kubeletConfig.maxPods=55 in node configuration ngm-kronos-castai (v31) \u2014 pods can be scheduled on these nodes with no IPs left (ContainerCreating / IP exhaustion risk). Only 45% of CPU is allocatable on these 2-vCPU nodes.",
+        "action": "Lower kubelet maxPods to <=29 for small instances (or remove the static override), and set minCpu>=4 in the node template so 2-vCPU nodes are never provisioned."
+      }
+    ],
+    "high": [
+      {
+        "area": "WOOP (informational)",
+        "finding": "[INFORMATIONAL] 93.7% of requested CPU is wasted (38 of 41 cores unused, workload-efficiency 30d); 264 WOOP-managed workloads (6 policies, ORIGIN_ASSIGNMENT_RULES) but all recommendation statuses STATUS_UNKNOWN / appliedPods=0 \u2014 WOOP not yet applying. WOOP agent v1.10.4 is behind latest v1.14.1.",
+        "action": "Upgrade workload-autoscaler to v1.14.1 and verify why recommendations are not applying (appliedPods=0) before relying on WOOP savings."
+      },
+      {
+        "area": "Weekend Hibernation (informational)",
+        "finding": "[INFORMATIONAL] Cluster collapses to 3 nodes (~14 vCPU) on weekends (3-104 nodes over 30d) \u2014 idle-standby dev pattern; ~$0.3k/mo weekend hibernation candidate. Unscheduled pods = 0 verified.",
+        "action": "Schedule weekend scale-down / hibernation (e.g. castai pause or scheduled node-count reduction) for this dev cluster."
+      },
+      {
+        "area": "Pod Health (informational)",
+        "finding": "[INFORMATIONAL] Live pod-health scan (Pending/Failed/CrashLoopBackOff) could not be performed \u2014 no kubectl access (AWS credentials expired at collection time). Proxies show: unscheduled pods = 0, problematic nodes = 1 (removal-disabled only), 0 WOOP problematic pods.",
+        "action": "Re-run Steps 4-5 with live kubectl/API access to confirm container-level health."
+      }
+    ],
+    "medium": [
+      {
+        "area": "Node Templates",
+        "finding": "Single default template with spot OFF: nodeConstraints maxCpu=16 but no minCpu/minMemory floor (unlike sibling cluster helios); spotInterruptionPredictions enabled with deprecated type aws-rebalance-recommendations.",
+        "action": "Add minCpu/minMemory floors to the template; when spot is enabled for dev, migrate prediction type from aws-rebalance-recommendations to the native CAST AI spot prediction model."
+      },
+      {
+        "area": "Evictor (informational)",
+        "finding": "[INFORMATIONAL] Evictor enabled but reported Not-Allowed / Incompatible on this self-managed cluster (cluster-autoscaler deployment still present, evictor-advanced config empty). 12 drains / 16 node deletions in the audit window were rebalancer-driven. 19/50 recent rebalancing plans ended achievedSavingsBelowThreshold \u2014 benign schedule-skip condition, excluded from blocked nodes.",
+        "action": "Remove/disable the legacy cluster-autoscaler deployment and make evictor compatible to unlock continuous consolidation."
+      },
+      {
+        "area": "Node Template Resource Profile",
+        "finding": "No minCpu floor: 2-vCPU r6a.large nodes carry the full per-node DaemonSet/system tax (only 0.9 of 2.0 vCPU allocatable). DaemonSet requests = 510m of 6.06 vCPU workload requests (8.4%) on a 14-node cluster, so the >=50-node advisory does not fire but the tax is material on small instances.",
+        "action": "Set minCpu=4 in node template default-by-castai to avoid tiny nodes absorbing full DaemonSet overhead."
+      }
+    ]
+  }
+}

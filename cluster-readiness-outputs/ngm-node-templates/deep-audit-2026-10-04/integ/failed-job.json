@@ -1,0 +1,1 @@
+{"id":"dcef165f-72a9-4ed7-8fd8-52ae5ea753d9", "clusterId":"1ad1a0bf-defe-4f51-acea-cbebb3d3fc3f", "rebalancingScheduleId":"833f4b9e-8c0c-4508-acd7-84b45eece72e", "rebalancingPlanId":"9a65f47d-0d7c-43b4-9d79-6488f7c91ded", "enabled":true, "lastTriggerAt":"2026-10-04T11:00:02.430863Z", "nextTriggerAt":"2026-10-04T12:00:00Z", "status":"JobStatusFailed"}

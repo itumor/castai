@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CAST AI Tuning Recommendations — ngm-helios-eks — SI GSW CLO — 2026-10-04</title>
+<style>
+  @page {
+    size: A4;
+    margin: 20mm 14mm 18mm 14mm;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: Helvetica, "Helvetica Neue", -apple-system, Arial, sans-serif;
+    font-size: 9.3pt;
+    color: #1d2433;
+    line-height: 1.42;
+  }
+  /* Repeated page header / footer (Chrome repeats position:fixed on every printed page) */
+  #page-header {
+    position: fixed; top: -15mm; left: 0; right: 0;
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1.6pt solid #000028;
+    padding-bottom: 2.2mm;
+    font-size: 8.2pt; color: #000028;
+  }
+  #page-header .org { font-weight: 700; letter-spacing: 0.4pt; }
+  #page-header .doc { color: #455060; }
+  #page-header .date { color: #455060; }
+  #page-footer {
+    position: fixed; bottom: -13mm; left: 0; right: 0;
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-top: 0.7pt solid #9aa6b2;
+    padding-top: 2mm;
+    font-size: 8pt; color: #5a6675;
+  }
+  #page-footer .draft { font-weight: 700; color: #8a5a00; letter-spacing: 0.3pt; }
+
+  /* Title block */
+  .titleblock { margin: 0 0 5mm 0; }
+  .titleblock h1 {
+    font-size: 17pt; margin: 0 0 1.5mm 0; color: #000028; letter-spacing: 0.2pt;
+  }
+  .titleblock .subtitle { font-size: 10pt; color: #009999; font-weight: 700; margin-bottom: 3mm; }
+  .titleblock .lede { color: #455060; font-size: 9.3pt; max-width: 180mm; }
+
+  h2 {
+    font-size: 12.5pt; color: #000028; margin: 7mm 0 2.4mm 0;
+    border-bottom: 1.2pt solid #009999; padding-bottom: 1.2mm;
+    page-break-after: avoid;
+  }
+  h3 {
+    font-size: 10pt; color: #000028; margin: 4.5mm 0 1.6mm 0;
+    page-break-after: avoid;
+  }
+  p { margin: 1.6mm 0; }
+
+  /* Generic tables */
+  table { border-collapse: collapse; width: 100%; margin: 2mm 0 3mm 0; }
+  th, td { border: 0.6pt solid #b7c0ca; padding: 1.6mm 2mm; vertical-align: top; text-align: left; }
+  th { background: #000028; color: #ffffff; font-size: 8.3pt; letter-spacing: 0.2pt; }
+  td { font-size: 8.6pt; }
+  tr { page-break-inside: avoid; }
+
+  /* Snapshot table */
+  table.snapshot td.k { width: 34%; font-weight: 700; color: #000028; background: #f2f5f7; }
+
+  /* Recommendations grid */
+  table.reco { table-layout: fixed; }
+  table.reco col.c-change { width: 31%; }
+  table.reco col.c-impact { width: 29%; }
+  table.reco col.c-why    { width: 40%; }
+  table.reco td { font-size: 8.4pt; }
+  table.reco tr.group td {
+    background: #e3f1f1; color: #000028; font-weight: 700; font-size: 8.8pt;
+    border-left: 2.4pt solid #009999; letter-spacing: 0.2pt;
+  }
+  table.reco .field { font-family: "Menlo", "Consolas", monospace; font-size: 7.9pt; }
+  .arrow { color: #009999; font-weight: 700; }
+  .keep { color: #5a6675; font-style: italic; }
+
+  /* Code / JSON blocks */
+  pre {
+    font-family: "Menlo", "Consolas", monospace; font-size: 7.6pt; line-height: 1.38;
+    background: #f4f6f8; border: 0.6pt solid #c3ccd4; border-left: 2.4pt solid #009999;
+    padding: 2.6mm 3mm; margin: 2mm 0 3mm 0;
+    white-space: pre-wrap; word-wrap: break-word;
+  }
+  code { font-family: "Menlo", "Consolas", monospace; font-size: 0.92em; background: #eef1f4; padding: 0 1pt; }
+
+  ul, ol { margin: 1.6mm 0 2.5mm 0; padding-left: 5.5mm; }
+  li { margin: 1mm 0; }
+
+  .notebox {
+    border: 0.7pt solid #009999; background: #effafa; padding: 2.4mm 3mm; margin: 2.5mm 0;
+    page-break-inside: avoid;
+  }
+  .warnbox {
+    border: 0.7pt solid #c9a227; background: #fdf7e8; padding: 2.4mm 3mm; margin: 2.5mm 0;
+    page-break-inside: avoid;
+  }
+  .small { font-size: 8pt; color: #5a6675; }
+</style>
+</head>
+<body>
+
+<div id="page-header">
+  <span class="org">SI GSW CLO</span>
+  <span class="doc">CAST AI tuning recommendations — EKS cluster <b>ngm-helios-eks</b> (production)</span>
+  <span class="date">2026-10-04</span>
+</div>
+<div id="page-footer">
+  <span>SI GSW CLO · ngm-helios-eks · CAST AI node template / configuration / policy tuning</span>
+  <span class="draft">Draft — for review</span>
+</div>
+
+<div class="titleblock">
+  <h1>CAST AI Tuning Recommendations — ngm-helios-eks</h1>
+  <div class="subtitle">Production cluster · Org SI GSW CLO · Node templates, node configuration, evictor, rebalancing, spot stance, workload rightsizing &amp; commitments</div>
+  <div class="lede">
+    Prepared from live, read-only CAST AI API evidence (2026-10-04), cross-checked against the full audit of 2026-10-02 and CAST AI documentation.
+    Every change below applies to <b>newly provisioned nodes only</b> and rolls out through the existing rebalancing windows — running workloads are not touched.
+  </div>
+</div>
+
+<h2>1. Cluster snapshot</h2>
+<table class="snapshot">
+  <tr><td class="k">Organization</td><td>SI GSW CLO (<code>07aa3c29-3e1f-44bc-ad60-ceedb878d99a</code>) · CAST AI EU API</td></tr>
+  <tr><td class="k">Cluster</td><td><b>ngm-helios-eks</b> · ID <code>419c39e4-66bf-4d61-b833-4562968a61c7</code> · EKS, eu-central-1, AWS account <code>600442974479</code></td></tr>
+  <tr><td class="k">Node configuration</td><td><code>ngm-helios-castai</code> (<code>4fae2e7f-5d07-46fa-8205-927799049e9e</code>), version <b>11</b> · created 2026-07-21, last updated 2026-09-25</td></tr>
+  <tr><td class="k">Node template</td><td>Single built-in <code>default-by-castai</code> (isDefault, no taints) — no custom templates exist</td></tr>
+  <tr><td class="k">Scale &amp; spend</td><td>~300 nodes (~1,991 vCPU provisioned, ~6.6 vCPU/node median) · <b>$53.4k/mo</b> (33% of org) · 30-day node range <b>40–574</b></td></tr>
+  <tr><td class="k">Savings to date</td><td>CAST AI realized savings <b>$20.2k/mo</b> (100% from downscaling; spot $0) · frozen baseline <b>$0.9823/vCPU-day</b> · pre-CAST overprovisioning factor <b>1.60×</b> · efficiency ratio 0.86</td></tr>
+  <tr><td class="k">Usage reality</td><td>~4,070 pods ≈ <b>14 pods/node</b> · CPU used vs provisioned 8.9% · provisioned:requested 1.32× · peak requested 2,052 cores · unscheduled pods: 0 · problematic nodes: 0</td></tr>
+  <tr><td class="k">Networking</td><td>2 AZs (eu-central-1a/1b), 2 × /18 subnets ≈ 32.7k usable IPs, ~13% used (~4.4k) — no near-term subnet exhaustion</td></tr>
+  <tr><td class="k">Fleet mix</td><td>large 8 (r6a.large) · xlarge 99 · 2xlarge 77 · 4xlarge 116 · 100% on-demand, amd64-only · <b>46 × c5a/c5ad (5th-gen ≈ 15%)</b> · AMI <code>ami-0706179e8561145ae</code> pinned</td></tr>
+  <tr><td class="k">Automation status</td><td>Evictor: <code>enabled, allowed=false, status=Incompatible</code> (self-managed install) · Rebalancing: nightly schedule 22:00–03:59 Europe/London · WOOP running but metrics-only (v1.10.4) · no SP/RI imported · removal-disabled pins: 2 nodes</td></tr>
+</table>
+
+<h2>2. Recommendations grid</h2>
+<p>Every change is one row: <b>CHANGE</b> (exact field, current → proposed), <b>IMPACT</b> (quantified where possible), <b>WHY</b> (evidence). Field paths refer to the node template <code>constraints</code> object or the node configuration payload shown in §3–§4.</p>
+
+<table class="reco">
+  <col class="c-change"><col class="c-impact"><col class="c-why">
+  <tr><th>CHANGE</th><th>IMPACT</th><th>WHY</th></tr>
+
+  <tr class="group"><td colspan="3">2.1 Node template constraints — <code>default-by-castai</code> (proposed full JSON in §3)</td></tr>
+  <tr>
+    <td><span class="field">constraints.maxCpu: 16 <span class="arrow">→</span> 24</span> (step toward 32 after observation); <span class="field">minCpu: none <span class="arrow">→</span> 4</span></td>
+    <td>Bin-packing density up: bigger nodes amortize the ~1 vCPU + 4 GiB per-node system/DaemonSet tax that burns ~10–15% of provisioned CPU today. <span class="field">minCpu 4</span> retires the 8 r6a.large nodes and with them the 29-IP-vs-55-maxPods mismatch class.</td>
+    <td>Live data: 1,991 vCPU / 300 nodes ≈ 6.6 vCPU median; largest template-eligible node capped at 16 vCPU. 8xlarge nodes share the same 234-pod ENI cap as 4xlarge → raising the ceiling is IP-neutral; rebalancing can pack 2–4 mid nodes into one.</td>
+  </tr>
+  <tr>
+    <td><span class="field">constraints.azs: ["eu-central-1a","eu-central-1b"] <span class="arrow">→</span> + "eu-central-1c"</span> (new /18 subnet in 1c, added to the node configuration's subnet list)</td>
+    <td>3rd AZ widens on-demand pool breadth and adds a fresh IP CIDR — removes the 2-AZ thin-pool risk class and future-proofs IP space (current use only 13%).</td>
+    <td>Templates pin 2 AZs today; live <code>InsufficientCapacity</code> on c5a.4xlarge was captured in the integ audit — the same capacity thinness applies to helios pools.</td>
+  </tr>
+  <tr>
+    <td><span class="field">constraints.instanceFamilies.exclude: [] <span class="arrow">→</span> ["c5a","c5ad"]</span></td>
+    <td>46 legacy 5th-gen nodes (~15% of fleet, ≈ $8k/mo share) drift out at normal rebalances onto newer, cheaper-per-core generations — no forced migration.</td>
+    <td>Live fleet inventory: 46 × c5a/c5ad on helios; 7th/8th-gen AMD/Intel families deliver better price/performance at the same on-demand risk profile.</td>
+  </tr>
+  <tr>
+    <td><span class="field">constraints.customPriority: [] <span class="arrow">→</span></span> newest-gen-first tier (m8a/m8i/m7a/m7i, r8a/r8i/r7a/r7i, c8a/c8i/c7a/c7i and flex variants — full list in §3)</td>
+    <td>Autoscaler prefers current-generation silicon; savings compound with the c5a exclusion above. Priority also respects commitments once imported (§2.8).</td>
+    <td>Priority today is flat across a broad include list; CAST AI picks by price alone, which keeps aging instance types in rotation.</td>
+  </tr>
+  <tr>
+    <td><span class="field">constraints.resourceLimits.cpuLimitEnabled: false <span class="arrow">→</span> true; cpuLimitMaxCores: <span class="arrow">→</span> 6000</span></td>
+    <td>Runaway-burst circuit breaker at ~3× the observed 2,052-core peak request; never fires in normal operation. Replaces today's meaningless cluster-level ceiling of 16384 cores.</td>
+    <td>Audit finding: <code>clusterLimits.maxCores=16384</code> trips nothing; a template-level cap is the documented blast-radius control.</td>
+  </tr>
+  <tr>
+    <td><span class="field">constraints.spotInterruptionPredictionsType: "aws-rebalance-recommendations" <span class="arrow">→</span> "castai-predictions"</span></td>
+    <td>Housekeeping: replaces a signal deprecated upstream (Jul 2026). Dormant while spot stays off; correct the moment any spot pilot starts.</td>
+    <td>Template payload carries the deprecated enum today (verified live); CAST AI prediction model is the supported replacement.</td>
+  </tr>
+
+  <tr class="group"><td colspan="3">2.2 Node configuration — <code>ngm-helios-castai</code> v11 → v12 (proposed full JSON in §4)</td></tr>
+  <tr>
+    <td><span class="field">kubeletConfig.maxPods: 55 <span class="arrow">→</span> removed</span>, replaced by <span class="field">eks.maxPodsPerNodeFormula: "math.least(NUM_MAX_NET_INTERFACES * (NUM_IP_PER_INTERFACE - 1) + 2, 110)"</span></td>
+    <td><b>P0 fix.</b> Removes a latent incident: the 8 r6a.large nodes advertise 55 pod slots but the VPC CNI can wire only 29 IPs → pods stick in ContainerCreating on IP exhaustion. Also un-neuters the 116 4xlarge nodes (ENI ceiling 234, planned at 55): fewer avoidable extra nodes; cap 110 ≈ 8× the observed ~14 pods/node.</td>
+    <td>Live data: ~4,070 pods / ~14 per node / 29-vs-55 ENI mismatch on r6a.large. CAST AI docs explicitly recommend no static maxPods with the AWS VPC CNI — the same configuration spans many instance types; the formula makes the autoscaler plan with the same number the kubelet enforces.</td>
+  </tr>
+  <tr>
+    <td><span class="field">image: "ami-0706179e8561145ae" <span class="arrow">→</span> ""</span> + <span class="field">eks.imageFamily: <span class="arrow">→</span> "FAMILY_AL2023"</span></td>
+    <td>Auto-tracks the latest AL2023 AMI per Kubernetes version (security/k8s patch drift becomes automatic). Makes the existing <code>kubeReserved</code>/<code>evictionHard</code> settings actually apply (silently ignored on AL2-family images per CAST AI docs) and unlocks Container Live Migration later.</td>
+    <td>Audit: AMI is pinned and aging; patching is manual. Validate on integ first — the cluster's custom <code>initScript</code> must be AL2023-safe.</td>
+  </tr>
+  <tr>
+    <td><span class="field">minDiskSize: 100 <span class="arrow">→</span> 50</span> + <span class="field">diskCpuRatio: 0 <span class="arrow">→</span> 1</span></td>
+    <td><b>≈ $1.1k/mo</b> (300 nodes × ~45 GiB gp3 freed); a 16-vCPU node gets 64 GiB, small nodes shrink, large-node sizing unchanged.</td>
+    <td>Storage audit: 300 × 100 GiB flat gp3 root volumes ≈ $2.4k/mo, mostly idle; ratio scales disk with node size and removes the small-node disk tax.</td>
+  </tr>
+  <tr>
+    <td><span class="field">eks.imdsV1: unset <span class="arrow">→</span> false</span> (IMDSv2-only)</td>
+    <td>Consistent instance-metadata hardening everywhere; zero cost.</td>
+    <td>Audit already intended IMDSv2; today the field is unset, leaving enforcement implicit.</td>
+  </tr>
+  <tr>
+    <td><span class="field">drainTimeoutSec: unset <span class="arrow">→</span> 1200</span></td>
+    <td>Deterministic 20-minute drain behavior during rebalances instead of a hidden default.</td>
+    <td>Nightly rebalancing is the current bin-pack path; explicit timeout makes plans predictable (paired with <code>evictGracefully</code> in 2.4).</td>
+  </tr>
+  <tr>
+    <td><span class="field">kubeletConfig.kubeReserved: keep 1000m CPU / 4000Mi / 5Gi</span> <span class="keep">(no change)</span></td>
+    <td>Keeps node stability headroom; its <i>relative</i> tax halves automatically once <code>maxCpu</code> grows (2.1).</td>
+    <td>Reservation is sized per node; only worth shrinking after the density change lands — and it only truly applies once on AL2023 (previous row).</td>
+  </tr>
+
+  <tr class="group"><td colspan="3">2.3 Evictor — resolve the <code>Incompatible</code> state first</td></tr>
+  <tr>
+    <td>Deployment mode: self-managed (<span class="field">status: Incompatible, allowed: false, enabled: true</span>) <span class="arrow">→</span> CAST-managed (<span class="field">helm upgrade … --set autoscaler.castai-evictor.managedByCASTAI=true</span>)</td>
+    <td>Restores continuous bin-packing — today only the hourly-nightly scheduled rebalancings compact, and they now converge (runs skip with <code>achievedSavingsBelowThreshold</code>). All evictor tunables below become console-editable.</td>
+    <td>Live state identical on all 3 NGM clusters: <code>{enabled: true, allowed: false, status: "Incompatible"}</code> = CAST AI detected a self-managed Evictor; no evictor setting is changeable from the console until ownership is decided. Alternative: keep self-managed and set the same values as Helm values.</td>
+  </tr>
+  <tr>
+    <td><span class="field">cycleInterval: "1m" <span class="arrow">→</span> "10m"</span>; <span class="field">maxTargetNodesPerCycle: 20 (default) <span class="arrow">→</span> 5</span></td>
+    <td>Sized to the observed 30-day peak of 574 nodes: stops overlapping 1-minute cycles cancelling drains mid-flight; caps kube-apiserver eviction pressure per cycle.</td>
+    <td>CAST AI docs sizing table: 500+ nodes → 10m interval, 5 targets/cycle. Helios peak (574) is in that band.</td>
+  </tr>
+  <tr>
+    <td><span class="field">aggressiveMode: false · scopedMode: false · ignorePodDisruptionBudgets: false · softTainting: false</span> <span class="keep">(keep all)</span>; <span class="field">nodeGracePeriodMinutes: 10 (keep)</span>; <span class="field">dryRun: false (keep)</span></td>
+    <td>Production stays conservative: Evictor always respects PDBs; no forced eviction of single-replica or unprotected pods; grace period matches JVM/slow-start workloads.</td>
+    <td>Aggressive/scoped modes add nothing here (~95% of nodes already CAST-managed); <code>ignorePodDisruptionBudgets: true</code> must never be set on production.</td>
+  </tr>
+  <tr>
+    <td>Pre-flight (prerequisite, not a field): <code>kubectl get pdb -A</code> audit + review the 2 <code>autoscaling.cast.ai/removal-disabled</code> pins</td>
+    <td>Prevents stalled drains: PDBs with <code>minAvailable == replicas</code> block every eviction; the 2 pinned nodes (was 8 on 2026-10-02 — improving) freeze one instance each and will not roll in rebalances.</td>
+    <td>Audit evidence: removal-disabled pins helios 2 live now; zero-disruption PDBs are the standard cause of "evictor does nothing" reports.</td>
+  </tr>
+
+  <tr class="group"><td colspan="3">2.4 Rebalancing — keep the schedule, make it gentler</td></tr>
+  <tr>
+    <td><span class="field">evictGracefully: <span class="arrow">→</span> true</span> on the <code>hourly-nightly</code> plan; <span class="field">executionConditions.achievedSavingsPercentage: 5 (keep — do not lower on helios)</span>; <span class="field">minNodes: 1, nodeTtlSeconds: 300, numTargetedNodes: 50 (keep)</span></td>
+    <td>Drained-but-blocked nodes get cordoned and retried the next night instead of force-drained at <code>drainTimeoutSec</code> — gentler on production. Keeping the 5% floor avoids micro-thrash; the window (22:00–03:59 Europe/London, 50 nodes/run, UtilizedPrice) already works.</td>
+    <td>Live jobs show recent "skipped"/"failed" runs = <code>achievedSavingsBelowThreshold</code> — a <b>benign</b> signal: the on-demand curve has converged, so instance-to-instance reshuffling is nearly exhausted. New headroom comes from the mode changes in 2.5–2.7, then full rebalances re-open savings.</td>
+  </tr>
+
+  <tr class="group"><td colspan="3">2.5 Spot stance — HOLD for production (explicit no-change)</td></tr>
+  <tr>
+    <td><span class="field">constraints.spot: false</span> <span class="keep">(no change — keep on-demand-only on the default template)</span>; <span class="field">useSpotFallbacks/interruption-prediction flags stay configured but dormant</span></td>
+    <td>Deferred upside, not discarded: SpotOnly ceiling −64.3% ≈ <b>$48.4k/mo</b> (listing basis); SpotInstances-with-fallback scenario −25.3%. Entry path later: namespace-gated pilot on batchish cqa2-*/uxpt-* workloads — the integ cluster runs the shared spot-batch pilot first.</td>
+    <td>Non-negotiable preconditions: (a) PDB audit clean, (b) evictor CAST-managed (2.3), (c) batch candidates identified with correct PDBs. Spot is 0% org-wide today; production helios stays 0% until all three hold.</td>
+  </tr>
+
+  <tr class="group"><td colspan="3">2.6 Hibernation — not applicable</td></tr>
+  <tr>
+    <td>Hibernation schedules: none exist <span class="arrow">→</span> <b>Never hibernate (production)</b></td>
+    <td>$0 — no change; risk avoided. (The weekend-collapse savings pattern belongs to non-prod clusters such as kronos, not helios.)</td>
+    <td>Cluster hibernation is designed for non-production environments; org-wide hibernation schedules are empty and stay empty for this cluster.</td>
+  </tr>
+
+  <tr class="group"><td colspan="3">2.7 Workload rightsizing (WOOP) — the biggest lever currently declined</td></tr>
+  <tr>
+    <td>WOOP acceptance: metrics-only (<span class="field">optimizedCount: 0</span>) <span class="arrow">→</span> enable on named workloads — or at minimum manually rightsize the top offenders</td>
+    <td><b>875 of 939 requested CPU cores idle (93% waste) ≈ $10–15k/mo</b> at helios unit cost. Worst single offender: <code>argo/argocd-repo-server</code> requests <b>24.2 cores, uses 0.2</b>; cqa2-*/uxpt-* services request 5–8 cores each at ~0–5% use.</td>
+    <td>Fresh workload-efficiency API (30d): Σ 939 cores requested, 875 wasted. CAST AI already packs to requests (prov:req 1.32×), so this gap is pure requests-vs-usage — only rightsizing recovers it; rebalancing cannot.</td>
+  </tr>
+  <tr>
+    <td><span class="field">resourceQuotasAffectingOptimization: true <span class="arrow">→</span> false</span> (clear or exempt the namespace ResourceQuotas that constrain WOOP on helios)</td>
+    <td>Unblocks WOOP optimization on production — today, even where WOOP could act, quota boundaries prevent it from applying recommendations.</td>
+    <td>Live status flag <code>resourceQuotasAffectingOptimization: true</code> on helios only (integ/kronos: false) — verified 2026-10-04.</td>
+  </tr>
+  <tr>
+    <td><span class="field">workload-autoscaler version: v1.10.4 <span class="arrow">→</span> v1.14.1</span> (4 minors behind, all clusters)</td>
+    <td>Current recommendation engine, bug fixes, in-place resize improvements; <code>inPlaceResizeEnabled</code> is already on.</td>
+    <td>Version check live 2026-10-04; ride the normal agent upgrade train alongside cast-agent v0.161.1.</td>
+  </tr>
+
+  <tr class="group"><td colspan="3">2.8 Commitments — visibility gap</td></tr>
+  <tr>
+    <td>Savings Plans / RIs: none imported in CAST AI <span class="arrow">→</span> confirm inventory with FinOps (account <code>600442974479</code>/payer) and import; then align <code>customPriority</code> families with commitment coverage</td>
+    <td>Protects the discounted fleet: at $53.4k/mo (~$161k/mo org-wide), packing blind to SP/RI coverage can drift instance selection outside discounted inventory. Value opaque until FinOps confirms what exists.</td>
+    <td>Live check: <code>GET /v1/organizations/{org}/reservations</code> → empty. Commitment-aware selection + customPriority take documented precedence once imported. At ~$53k/mo spend, SP/RI coverage at the payer level is highly likely.</td>
+  </tr>
+</table>
+
+<div class="notebox">
+  <b>Where the money is, ranked:</b> ① Workload rightsizing (2.7) ≈ $10–15k/mo on helios — biggest and currently declined; ② Spot (2.5) — held for prod, pilot on integ; ③ density/family/disk fixes (2.1–2.2) ≈ $1.1k/mo + resilience; ④ rebalancing (2.4) — converged, hygiene only. Realized savings already banked: $20.2k/mo at the frozen $0.9823/vCPU-day baseline (overprovisioning factor crushed from 1.60×).
+</div>
+
+<h2>3. Proposed node template constraints JSON — <code>default-by-castai</code> (helios)</h2>
+<p class="small">Full proposed constraints payload. The instance-family include list stays as the current broad list; everything else is shown in final form. Applies to new nodes only.</p>
+<pre>{
+  "spot": false,
+  "onDemand": true,
+  "useSpotFallbacks": true,
+  "fallbackRestoreRateSeconds": 300,
+  "enableSpotReliability": true,
+  "spotReliabilityPriceIncreaseLimitPercent": 20,
+  "enableSpotDiversity": false,
+  "spotDiversityPriceIncreaseLimitPercent": 0,
+  "spotInterruptionPredictionsEnabled": true,
+  "spotInterruptionPredictionsType": "castai-predictions",
+  "isGpuOnly": false,
+  "architectures": ["amd64"],
+  "os": ["linux"],
+  "azs": ["eu-central-1a", "eu-central-1b", "eu-central-1c"],
+  "maxCpu": 24,
+  "minCpu": 4,
+  "minMemory": 16384,
+  "burstable": "DISABLED",
+  "customerSpecific": "DISABLED",
+  "cpuManufacturers": [],
+  "architecturePriority": [],
+  "instanceFamilies": {
+    "include": ["&lt;keep current broad include list&gt;"],
+    "exclude": ["c5a", "c5ad"]
+  },
+  "customPriority": [
+    { "families": ["m8a", "m8azn", "m8i", "m8i-flex", "m8id", "r8a", "r8i", "r8i-flex", "r8ib", "r8id", "r8idb", "r8idn", "r8in", "c8a", "c8i", "c8i-flex", "c8id", "c8in", "c8ine", "m7a", "m7i", "m7i-flex", "r7a", "r7i", "r7iz", "c7a", "c7i", "c7i-flex"] }
+  ],
+  "dedicatedNodeAffinity": [],
+  "resourceLimits": { "cpuLimitEnabled": true, "cpuLimitMaxCores": 6000 },
+  "lifecycleTaintsDisabled": false,
+  "maxPricePerCpu": 0
+}</pre>
+<p class="small"><b>Rationale:</b> <code>maxCpu 16→24</code> (step toward 32 after a week of observation), <code>minCpu 4</code> removes the 29-IP small-node class, 3rd AZ widens on-demand pools, c5a/c5ad excluded + newest-gen priority retires the 46 legacy nodes naturally, CPU limit 6000 ≈ 3× the 2,052-core peak request. Spot stays off until evictor ownership and the PDB audit are resolved.</p>
+
+<h2>4. Proposed node configuration JSON — <code>ngm-helios-castai</code> (v11 → v12)</h2>
+<p class="small">Unchanged fields omitted; <code>initScript</code> and <code>tags</code> stay exactly as today. <code>maxPods</code> is deleted from <code>kubeletConfig</code> and replaced by the formula field.</p>
+<pre>{
+  "diskCpuRatio": 1,
+  "minDiskSize": 50,
+  "image": "",
+  "containerRuntime": "CONTAINERD",
+  "drainTimeoutSec": 1200,
+  "eks": {
+    "imageFamily": "FAMILY_AL2023",
+    "maxPodsPerNodeFormula": "math.least(NUM_MAX_NET_INTERFACES * (NUM_IP_PER_INTERFACE - 1) + 2, 110)",
+    "imdsV1": false,
+    "volumeType": "gp3"
+  },
+  "kubeletConfig": {
+    "evictionHard": {
+      "imagefs.available": "10%", "imagefs.inodesFree": "10%",
+      "memory.available": "4Gi",
+      "nodefs.available": "10%", "nodefs.inodesFree": "10%",
+      "pid.available": "10%"
+    },
+    "kubeReserved": { "cpu": "1000m", "ephemeral-storage": "5Gi", "memory": "4000Mi" },
+    "systemReserved": { "cpu": "100m", "ephemeral-storage": "100Mi", "memory": "500Mi" }
+  },
+  "initScript": "&lt;keep current — unchanged&gt;",
+  "tags": "&lt;keep current — unchanged&gt;"
+}</pre>
+<p class="small">If subnet IP space ever becomes tight, enable VPC CNI prefix delegation and switch the formula to the CAST AI preset <code>math.least((NUM_MAX_NET_INTERFACES - 1) * (NUM_IP_PER_INTERFACE - 1) * NUM_IP_PER_PREFIX + 2, 300)</code>. Not required at the current 13% subnet utilization.</p>
+
+<h2>5. Rollout order &amp; known blockers</h2>
+<h3>5.1 Rollout order</h3>
+<ol>
+  <li><b>P0 — maxPods fix (this cluster last within the fleet):</b> apply the §4 node configuration change to ngm-integ-eks first, then ngm-kronos-eks, then ngm-helios-eks — one rebalance cycle apart. Fixes the live 29-vs-55 mismatch on the 8 r6a.large nodes; zero cost risk.</li>
+  <li><b>P1 — prerequisites:</b> run the PDB audit and decide evictor ownership (CAST-managed recommended). Validate <code>FAMILY_AL2023</code> + the custom initScript on integ; create the eu-central-1c /18 subnet and add it to the node configuration subnet list. The shared spot pilot runs on integ's dedicated tainted template — not here.</li>
+  <li><b>P2 — helios template changes:</b> apply §3 (maxCpu 24, minCpu 4, 3 AZs, c5a/c5ad exclusion, family priorities, CPU limit 6000) after ~1 week of integ data; roll the fleet via the nightly rebalancing windows. Raise maxCpu 24 → 32 later if PDB/eviction behavior stays clean.</li>
+  <li><b>P3 — structural follow-ups:</b> WOOP enablement/offender fixes (2.7), SP/RI import (2.8), namespace-gated spot pilot only after all preconditions in 2.5 hold. Hibernation: never (production).</li>
+</ol>
+<h3>5.2 Known blockers</h3>
+<table>
+  <tr><th style="width:30%">Blocker</th><th style="width:38%">Effect on helios</th><th style="width:32%">Action</th></tr>
+  <tr>
+    <td>Evictor self-managed (<code>status: Incompatible, allowed: false</code>)</td>
+    <td>No console-editable evictor settings; continuous bin-packing off — nightly scheduled rebalancing is the only compactor.</td>
+    <td>Ownership decision first (2.3): <code>managedByCASTAI=true</code> helm upgrade, or align self-managed chart values.</td>
+  </tr>
+  <tr>
+    <td>2 removal-disabled nodes (<code>autoscaling.cast.ai/removal-disabled: "true"</code>)</td>
+    <td>These nodes will not roll during rebalances; each freezes one instance. Improved from 8 pins on 2026-10-02.</td>
+    <td>Review each pin with owners; unpin or codify via evictor advanced config.</td>
+  </tr>
+  <tr>
+    <td>PDB audit prerequisite</td>
+    <td>PDBs with <code>minAvailable == replicas</code> stall every drain — affects evictor, rebalancing, and any future spot.</td>
+    <td><code>kubectl get pdb -A</code> before enabling anything; fix zero-disruption PDBs.</td>
+  </tr>
+  <tr>
+    <td>Zone-pinned PVCs (<code>scada-dp-server</code>, <code>valkey</code>)</td>
+    <td><b>Do NOT apply here.</b> This blocker is on ngm-integ-eks only — listed for completeness from the shared audit; no zone-pinned-PVC blocker exists on helios.</td>
+    <td>None for helios. (Integ needs a storage-topology decision.)</td>
+  </tr>
+  <tr>
+    <td>Namespace ResourceQuotas (<code>resourceQuotasAffectingOptimization: true</code>)</td>
+    <td>Blocks WOOP from applying rightsizing on production — the 93%-waste lever stays locked.</td>
+    <td>Clear or exempt the constraining quotas (2.7).</td>
+  </tr>
+  <tr>
+    <td>Custom <code>initScript</code> + pinned AMI</td>
+    <td>AL2023 switch (§4) is safe only if the initScript is AL2023-compatible.</td>
+    <td>Validate on integ first; only then bump helios config to v12.</td>
+  </tr>
+</table>
+
+<p class="small">Sources: live read-only CAST AI API pulls of 2026-10-04 (configs, templates, policies, rebalancing jobs, workload-efficiency, estimated-savings, reservations) and the full audit of 2026-10-02 (fleet mix, cost model, subnet inventory). Docs: CAST AI node templates, node configuration, evictor, rebalancing, spot. All changes are recommendations for human review — nothing has been applied.</p>
+
+</body>
+</html>
