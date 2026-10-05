@@ -38,6 +38,24 @@ Three numbers, never blend, always show the range:
 - Rebalancing error taxonomy: kronos `achievedSavingsBelowThreshold` = **benign** skip; integ `no instance types fit pod: persistentvolumeclaim…` (scada-dp-server, valkey) = **real** zone-pinned-PVC blocker needing a storage/topology decision.
 - Helios storage $8.8k/mo: ~$2.4k node roots (300×100 GiB gp3) + **~$6.4k attached EBS/PVs (~64 TiB)** → PV governance lever $0.6–1.9k/mo.
 
+## UI-visibility verification for "customer doesn't see savings" (2026-10-05, live)
+
+- ≥20% card rule (docs.cast.ai/docs/savings-baseline): Realized Savings card shows only when node autoscaler manages ≥20% of nodes; WA card only when VPA ≥20% of workloads; hidden ≠ zero. **Rule does NOT explain this fleet** — live CAST-managed shares: helios **98.7%** (305/309; Sept min ≥90% by node-count bounds), integ **92.0%** (172/187; 15 unmanaged = EKS nodegroup `ngm-integ-eks-glr-ng-2`), kronos **66.7%** (2/3 at weekend floor; 1 customer-managed node, no nodeConfigurationId). All Phase2/agents online.
+- Baselines all CLUSTER_HISTORY, verified via `/reporting/v1beta/organizations/{org}/clusters/{cid}/baseline-params` (the `/v1/cost-reports/...` shape 404s): helios 2025-09-30→2026-07-20 cpuOP 1.60× memOP 2.17×; integ →2026-04-27 cpuOP 2.20× memOP 3.47×; kronos →2025-11-06 cpuOP **5.2468×** memOP **11.0015×** (window = createdAt→firstOperationAt, updated 2025-12-03 — stale).
+- **Console vs API model split**: legacy `GET /v1/cost-reports/clusters/{id}/savings` (Fabian's gross source; items = downscalingSavings+spotSavings) vs the console's current Savings Report reading `POST .../clusters:runValueRealizationReport` (value-realization: actual/projected/autoscalerSavings/WAS/totalSavings). Same direction, different math — plausible console-vs-API number mismatch; POST untestable under read-only.
+- All Sept savings on all three = **100% downscalingSavings, spotSavings=$0 every day**.
+- The only card actually hidden on this fleet: **Workload Autoscaler savings** (VPA 0% everywhere).
+
+## Fabian PPT verification (2026-10-05, live API)
+
+- Deck period = **September 2026 calendar month**; gross per cluster = `GET /v1/cost-reports/clusters/{id}/savings → summary.totalSavings` (helios 18,877.78 / integ 18,512.46 / kronos 3,501.32; Δ ≤ $1.15 vs deck = recompute drift). Trailing-30d does NOT match.
+- Deck **net = gross − €5 × summary.avgCpuCount at EUR/USD ≈ 1.14** — exact to the cent on all three (integ: €5,029.39×1.14=$5,733.51).
+- Deck Slide-2 numbers are **single-hour estimated-savings-history snapshots, mixed bases/dates**: kronos = 2026-08-26T17Z peak (~180 vCPU) vs **September monthly avg only $385 (rightsizing)/$489 (spot)** — ~6–7× overstated; integ = Oct-3 trough hours (±60% swing); helios ≈ 0.5× listing-basis scenarios. ARM = external model, no API scenario. $101k total double-counts rightsizing (P2 tuning + P1 kronos rows reuse P1 dollars); unique ≈ $78.1k.
+- `/savings` **hourly step undercounts ~7×** (helios Sept: $2,644 vs $18,878 daily) — always daily step.
+- Kronos: 30/50 recent hourly rebalancing plans `status=error`, 0 ops (`isRebalancingRecommended=true`); fleet already = 3 nodes off-peak, weekday batch peaks 34–104 nodes — "10→3 nodes" is peak-hour projection.
+- WOOP zero-workloads is **policy, not defect**: helios 3,628 assigned/appliedPods=0, integ 1,523 recommend-only, kronos 263 READ_ONLY. Agent v1.10.4 vs latest v1.14.1.
+- Case artifacts: `outbox/case-threads/20261005T174203Z-*` (thread, brief, draft reply, verified 2-slide pptx + builder JSON).
+
 ## Method gotchas (verified live)
 
 - `/v1/cost-reports/clusters/{id}/cost` returns avg-**hourly** items: `Σ cost×24×days = summary.totalCost` exactly (helios: 74.134192×720 = $53,376.62 ✓). Script's `CALIBRATION_FAIL` flag can be a false alarm — check this identity before doubting numbers.
