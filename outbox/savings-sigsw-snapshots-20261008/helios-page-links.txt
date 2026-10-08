@@ -1,0 +1,25 @@
+Learn more on our Cookie Policy. -> https://cast.ai/cookie-policy/
+ -> https://www.cookieyes.com/product/cookie-consent/?ref=cypbcyb&utm_source=cookie-banner&utm_medium=powered-by-cookieyes
+Cluster List -> /automation/cluster-list?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+Overview -> /automation/overview?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+Cloud VMs -> /automation/cloud-vms?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+Schedules -> /automation/schedules?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+Cost monitoring -> /automation/cost-report?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+Network Intelligence -> /automation/network-intelligence?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+Budgets -> /automation/budgets?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+Dashboard -> /automation/external-clusters/419c39e4-66bf-4d61-b833-4562968a61c7/dashboard?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+Cluster score -> /automation/external-clusters/419c39e4-66bf-4d61-b833-4562968a61c7/cluster-score?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+Optimization constraints -> /automation/external-clusters/419c39e4-66bf-4d61-b833-4562968a61c7/optimization-constraints?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+Available savings -> /automation/external-clusters/419c39e4-66bf-4d61-b833-4562968a61c7/available-savings?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+Cost monitoring -> /automation/external-clusters/419c39e4-66bf-4d61-b833-4562968a61c7/cost-report?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+Workload autoscaler -> /automation/external-clusters/419c39e4-66bf-4d61-b833-4562968a61c7/workload-optimization/workloads?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+Node autoscaler -> /automation/external-clusters/419c39e4-66bf-4d61-b833-4562968a61c7/nodes?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+Vulnerabilities -> /automation/external-clusters/419c39e4-66bf-4d61-b833-4562968a61c7/vulnerabilities?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+Compliance -> /automation/external-clusters/419c39e4-66bf-4d61-b833-4562968a61c7/compliance?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+Settings -> /automation/external-clusters/419c39e4-66bf-4d61-b833-4562968a61c7/settings?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+Logs -> /automation/external-clusters/419c39e4-66bf-4d61-b833-4562968a61c7/logs?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+ -> /dashboard?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a
+51 -> /external-clusters/419c39e4-66bf-4d61-b833-4562968a61c7/nodes?node-list=%257B%2522org%2522%253A%252207aa3c29-3e1f-44bc-ad60-ceedb878d99a%2522%252C%2522Resource%2520offering%253A%2522%253A%255B%2522on-demand%2522%255D%257D
+0 -> /external-clusters/419c39e4-66bf-4d61-b833-4562968a61c7/nodes?node-list=%257B%2522org%2522%253A%252207aa3c29-3e1f-44bc-ad60-ceedb878d99a%2522%252C%2522Resource%2520offering%253A%2522%253A%255B%2522fallback%2522%255D%257D
+0 -> /external-clusters/419c39e4-66bf-4d61-b833-4562968a61c7/nodes?node-list=%257B%2522org%2522%253A%252207aa3c29-3e1f-44bc-ad60-ceedb878d99a%2522%252C%2522Resource%2520offering%253A%2522%253A%255B%2522spot%2522%255D%257D
+View cluster efficiency -> /automation/external-clusters/419c39e4-66bf-4d61-b833-4562968a61c7/cost-report/cluster/efficiency?org=07aa3c29-3e1f-44bc-ad60-ceedb878d99a

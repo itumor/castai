@@ -1,0 +1,8 @@
+# k8s (5771ec22-fb0e-4fd8-a73a-fdf451ab0741) — status 2026-10-08 (org SMO Railigent X; both headers sent)
+01 GET  /v1/kubernetes/external-clusters/{id} -> 01-cluster.json : 200 OK (1002 B; status=ready provider=eks region=ap-south-1 agentStatus=online created 2026-06-23)
+02 GET  /v1/kubernetes/external-clusters/{id}/nodes -> 02-nodes.json : 200 OK (42413 B; 15 nodes, 12 karpenter-labeled, 0 cast.ai-labeled, 3 EKS-managed-nodegroup)
+03 GET  /reporting/v1beta/organizations/{org}/clusters/{id}/baseline-params -> 03-baseline.json : 404 nginx (unavailable even WITH org header; error body saved)
+04 GET  /v1/workload-autoscaling/clusters/{id}/workloads-summary -> 04-was-summary.json : 200 OK (96 workloads, 87 optimized; cpu 38.56->14.243 cores, mem 131.95->113.09 GiB)
+05 GET  /v1/cost-reports/clusters/{id}/savings?startTime=2026-09-08&endTime=2026-10-08 -> 05-classic-savings.json : 400 "cluster is read-only" (EXPECTED for Karpenter/read-only; body saved as evidence)
+06 POST /reporting/v1beta/organizations/{org}/clusters:runValueRealizationReport?startTime=2026-09-05&endTime=2026-10-05 (approved) -> 06-value-realization.json : 200 OK, first-attempt body {"clusterIds":[...]} (actual=projected=564.07, woopSavings=167.95, woopAdopted=true, autoscalerAdopted=false, baselineType=UNSPECIFIED)
+07 GET  /v1/workload-autoscaling/clusters/{id}/workloads-summary-metrics?startTime=2026-07-10&endTime=2026-10-08 -> 07-was-metrics.json : 200 OK (264771 B, 672 points; API clamped window to 2026-09-30T21:15Z..2026-10-07T21:00Z)

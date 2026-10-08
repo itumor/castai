@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Siemens · CAST AI Realized Savings — Fleet Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0e13;--ink2:#0e141c;--panel:#111a24;--line:#1f2c3b;--line2:#2b3d52;
+--txt:#dbe7f3;--dim:#7d93a9;--faint:#4b5f74;--cyan:#2ee6d6;--amber:#ffb224;--red:#ff6b6b;--green:#4ade80;--violet:#a78bfa}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--txt);font:14px/1.5 "Archivo",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.mono{font-family:"JetBrains Mono",monospace}
+.wrap{max-width:1560px;margin:0 auto;padding:0 22px 90px}
+header{padding:24px 0 14px;display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between;border-bottom:1px solid var(--line)}
+h1{font-size:24px;font-weight:900;letter-spacing:-.02em}
+h1 .acc{color:var(--cyan)}
+.sub{color:var(--dim);font-size:12.5px;margin-top:4px}
+.stamp{font:600 10.5px/1.7 "JetBrains Mono",monospace;color:var(--faint);text-align:right}
+.badge{display:inline-flex;align-items:center;justify-content:center;min-width:26px;font:800 11px/1 "JetBrains Mono",monospace;border-radius:5px;padding:5px 8px}
+.b-B{background:rgba(46,230,214,.12);color:var(--cyan);border:1px solid rgba(46,230,214,.45)}
+.b-C{background:rgba(167,139,250,.14);color:var(--violet);border:1px solid rgba(167,139,250,.45)}
+.b-D{background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.45)}
+.b-A,.b-F{background:rgba(255,107,107,.10);color:#ff9b9b;border:1px solid rgba(255,107,107,.35)}
+.b-E{background:rgba(255,178,36,.12);color:var(--amber);border:1px solid rgba(255,178,36,.4)}
+.pill{font:700 9.5px/1 "JetBrains Mono",monospace;border-radius:4px;padding:3px 7px;letter-spacing:.05em;white-space:nowrap}
+.p-yes{background:rgba(74,222,128,.15);color:var(--green)}
+.p-no{background:rgba(125,147,169,.12);color:var(--dim)}
+.p-warn{background:rgba(255,178,36,.15);color:var(--amber)}
+.p-err{background:rgba(255,107,107,.15);color:#ff9b9b}
+.pillrow{display:flex;gap:5px;flex-wrap:wrap}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
+.kpi{background:linear-gradient(180deg,var(--panel),var(--ink2));border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.kpi .k{font:700 10px/1.3 "JetBrains Mono",monospace;letter-spacing:.09em;text-transform:uppercase;color:var(--faint)}
+.kpi .v{font:800 24px/1.15 "JetBrains Mono",monospace;margin-top:6px;font-variant-numeric:tabular-nums}
+.kpi .d{color:var(--dim);font-size:11.5px;margin-top:4px}
+.kpi.cy .v{color:var(--cyan)} .kpi.vi .v{color:var(--violet)} .kpi.gr .v{color:var(--green)} .kpi.am .v{color:var(--amber)}
+.filterbar{position:sticky;top:0;z-index:20;background:rgba(10,14,19,.94);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:12px;margin:14px 0;padding:12px 14px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:700 11px/1 "JetBrains Mono",monospace;letter-spacing:.04em;border:1px solid var(--line2);border-radius:999px;padding:7px 12px;background:var(--ink2);color:var(--dim);cursor:pointer;user-select:none;transition:border-color .15s,color .15s}
+.chip .n{opacity:.65;font-weight:600}
+.chip.on{color:var(--txt);border-color:var(--cyan)}
+.chip.on[data-case=B]{border-color:var(--cyan);color:var(--cyan)}
+.chip.on[data-case=C]{border-color:var(--violet);color:var(--violet)}
+.chip.on[data-case=D]{border-color:var(--green);color:var(--green)}
+.chip.on[data-case=A],.chip.on[data-case=F]{border-color:var(--red);color:#ff9b9b}
+input[type=search],select,input[type=date]{background:var(--ink2);border:1px solid var(--line2);color:var(--txt);border-radius:8px;padding:8px 11px;font:600 12.5px "JetBrains Mono",monospace;outline:none}
+input[type=date]{color-scheme:dark}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:9px;overflow:hidden;background:var(--ink2)}
+.segbtn{background:none;border:none;color:var(--dim);font:800 10.5px/1 "JetBrains Mono",monospace;letter-spacing:.05em;text-transform:uppercase;padding:10px 13px;cursor:pointer}
+.segbtn.on{background:rgba(46,230,214,.14);color:var(--cyan)}
+.segbtn:not(.on):hover{color:var(--txt)}
+#customWrap{display:inline-flex;align-items:center;gap:7px}
+input[type=search]{min-width:230px}
+input[type=search]:focus,select:focus{border-color:var(--cyan)}
+.btn{background:var(--cyan);color:#062723;border:none;border-radius:8px;padding:9px 16px;font:800 12px/1 "JetBrains Mono",monospace;letter-spacing:.05em;cursor:pointer}
+.btn:disabled{opacity:.45;cursor:wait}
+.btn.ghost{background:transparent;color:var(--dim);border:1px solid var(--line2)}
+.btn.ghost:hover{color:var(--txt);border-color:var(--dim)}
+.dropdown{position:relative}
+.ddpanel{position:absolute;top:calc(100% + 6px);left:0;z-index:30;background:var(--ink2);border:1px solid var(--line2);border-radius:10px;min-width:280px;max-height:340px;overflow:auto;box-shadow:0 18px 40px rgba(0,0,0,.5);padding:8px;display:none}
+.droptool{display:flex;gap:6px;padding:2px 4px 8px}
+.droptool .mini{font:700 10px "JetBrains Mono",monospace;color:var(--cyan);background:none;border:none;cursor:pointer;padding:2px 4px}
+.dditem{display:flex;gap:8px;align-items:center;padding:6px 8px;border-radius:6px;font:600 12px "JetBrains Mono",monospace;color:var(--txt);cursor:pointer}
+.dditem:hover{background:rgba(46,230,214,.06)}
+.dditem input{accent-color:var(--cyan)}
+.dditem .cnt{margin-left:auto;color:var(--faint);font-size:10.5px}
+.tblwrap{border:1px solid var(--line);border-radius:12px;background:var(--ink2);overflow:auto;max-height:calc(100vh - 330px)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+thead th{position:sticky;top:0;z-index:2;background:#0d141d;font:700 10px/1.3 "JetBrains Mono",monospace;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2);cursor:pointer;user-select:none;white-space:nowrap}
+thead th:hover{color:var(--cyan)}
+th .arr{opacity:.6}
+td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:middle;font-variant-numeric:tabular-nums}
+tbody tr{cursor:pointer;transition:background .1s}
+tbody tr:hover{background:rgba(46,230,214,.04)}
+td.num,th.num{font-family:"JetBrains Mono",monospace;text-align:right}
+td .small{display:block;color:var(--faint);font-size:10.5px;font-family:"JetBrains Mono",monospace}
+.zero{color:var(--faint)}
+.diffbad{color:var(--amber);font-weight:700}
+.na{color:var(--faint);font-style:italic;font-size:11px}
+h2.sec{font-size:14px;margin:22px 0 8px;font-weight:800;letter-spacing:.01em}
+.caseref{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
+.defs{background:rgba(46,230,214,.04);border:1px solid rgba(46,230,214,.25);border-radius:12px;margin-bottom:12px}
+.defs summary{font:800 12px/1 "JetBrains Mono",monospace;letter-spacing:.04em;color:var(--cyan);cursor:pointer;padding:12px 16px}
+.defgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px;padding:0 16px 16px}
+.defcol h4{font:800 10.5px/1 "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.def{font-size:12px;color:var(--dim);padding:7px 0;border-top:1px dashed var(--line)}
+.def b{color:var(--txt)}
+.def .mono{font-size:11px;color:var(--cyan)}
+.prin{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:12px;margin-top:10px}
+.pcol{background:rgba(46,230,214,.03);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.pcol h4{font:800 10.5px/1 "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
+.pcol .def{border-top:none;padding:4px 0}
+.pcol a{color:var(--cyan);text-decoration:none;border-bottom:1px dotted rgba(46,230,214,.5)}
+.pcol a:hover{border-bottom-style:solid}
+.deftbl{width:100%;border-collapse:collapse;margin-top:4px}
+.deftbl th{font:700 9.5px/1.3 "JetBrains Mono",monospace;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);text-align:left;padding:6px 8px 4px;border-bottom:1px solid var(--line2)}
+.deftbl td{font-size:11.5px;color:var(--dim);padding:7px 8px;border-bottom:1px dashed var(--line);vertical-align:top}
+.deftbl td:first-child{font:700 10.5px/1.5 "JetBrains Mono",monospace;color:var(--txt);white-space:nowrap}
+.deftbl .note{color:var(--faint);font-size:10.5px}
+.rel{font:800 10px/1 "JetBrains Mono",monospace;border-radius:4px;padding:3px 7px;white-space:nowrap}
+.rel.hi{background:rgba(74,222,128,.15);color:var(--green)}
+.rel.mid{background:rgba(255,178,36,.15);color:var(--amber)}
+.rel.lo{background:rgba(255,107,107,.15);color:#ff9b9b}
+.rel.rev{background:rgba(167,139,250,.15);color:var(--violet)}
+.cref{background:var(--ink2);border:1px solid var(--line);border-radius:10px;padding:11px 13px;font-size:12px;color:var(--dim)}
+.cref b{display:block;color:var(--txt);margin-bottom:3px;font-size:12.5px}
+.cref .f{font:600 10.5px/1.6 "JetBrains Mono",monospace;color:var(--cyan);display:block;margin-top:4px}
+#progress{display:none;margin:16px 0;background:var(--ink2);border:1px solid var(--line);border-radius:12px;padding:16px}
+#progress .bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:10px}
+#progress .fill{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),#38bdf8);transition:width .3s}
+#progress .txt{font:600 11.5px "JetBrains Mono",monospace;color:var(--dim)}
+#errPanel{margin:14px 0}
+details.errorgroup{background:rgba(255,107,107,.05);border:1px solid rgba(255,107,107,.28);border-radius:10px;padding:10px 14px}
+details.errorgroup summary{font:700 11.5px/1.6 "JetBrains Mono",monospace;color:#ff9b9b;cursor:pointer}
+details.errorgroup .e{font:600 10.5px/1.65 "JetBrains Mono",monospace;color:var(--dim);white-space:pre-wrap}
+.drawer-veil{position:fixed;inset:0;background:rgba(4,8,12,.6);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,94vw);background:var(--ink2);border-left:1px solid var(--line2);z-index:41;transform:translateX(100%);transition:transform .25s;overflow-y:auto;padding:22px}
+body.drawer-open .drawer{transform:none}
+body.drawer-open .drawer-veil{opacity:1;pointer-events:auto}
+.drawer h3{font-size:17px;margin-bottom:2px}
+.drawer .close{position:absolute;top:14px;right:14px;background:none;border:1px solid var(--line2);border-radius:8px;color:var(--dim);font:800 12px "JetBrains Mono",monospace;padding:6px 10px;cursor:pointer}
+.probe{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:12px;background:var(--panel)}
+.probe .ph{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.probe .pt{font:800 11px/1.4 "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.probe .pv{font:600 12px/1.8 "JetBrains Mono",monospace;margin-top:8px;white-space:pre-wrap;word-break:break-word}
+.probe .ps{font:600 10.5px/1.6 "JetBrains Mono",monospace;color:var(--faint);margin-top:8px;border-top:1px dashed var(--line2);padding-top:8px}
+.formula{background:#0a121c;border:1px dashed var(--line2);border-radius:8px;padding:10px 12px;font:600 11.5px/1.7 "JetBrains Mono",monospace;color:#c8e6ff;white-space:pre-wrap;margin-top:12px}
+.totrow td{background:rgba(46,230,214,.06);font-weight:700;border-top:1px solid rgba(46,230,214,.3)}
+footer{margin-top:32px;border-top:1px solid var(--line);padding-top:16px;color:var(--faint);font:600 10.5px/1.8 "JetBrains Mono",monospace}
+.lds{display:inline-block;width:11px;height:11px;border:2px solid rgba(46,230,214,.25);border-top-color:var(--cyan);border-radius:50%;animation:sp 1s linear infinite;vertical-align:-1.5px;margin-right:6px}
+@keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div>
+    <h1>Siemens Fleet <span class="acc">·</span> CAST AI Realized Savings</h1>
+    <div class="sub">Live from the CAST AI API — every number carries its endpoint + field. WAS = <b>Workload Autoscaler</b> (pod request rightsizing) · Node Autoscaler = CAST AI-managed nodes. The two tracks are independent and never summed.</div>
+  </div>
+  <div class="stamp" id="stamp">connecting…</div>
+</header>
+
+<div class="kpis" id="kpis"></div>
+
+<div class="filterbar">
+  <div class="chips" id="caseChips"></div>
+  <div class="chips" id="baseChips" title="filter by node-savings baseline type"></div>
+  <div class="dropdown">
+    <button class="btn ghost" id="orgBtn">Organizations ▾ <span id="orgSelCount"></span></button>
+    <div class="ddpanel" id="orgPanel">
+      <input type="search" id="orgSearch" placeholder="filter organizations…" style="width:100%;margin-bottom:6px">
+      <div class="droptool"><button class="mini" id="orgAll">ALL</button><button class="mini" id="orgNone">NONE</button><button class="mini" id="orgErrorsOnly">ERRORS ONLY</button></div>
+      <div id="orgList"></div>
+    </div>
+  </div>
+  <input type="search" id="nameSearch" placeholder="cluster name / id …">
+  <div class="seg" id="winMode">
+    <button class="segbtn on" data-mode="preset">rolling window</button>
+    <button class="segbtn" data-mode="custom">custom range</button>
+  </div>
+  <select id="windowSel">
+    <option value="7">7 days</option>
+    <option value="30" selected>30 days</option>
+    <option value="60">60 days</option>
+    <option value="90">90 days</option>
+  </select>
+  <span id="customWrap" style="display:none">
+    <input type="date" id="startDate" title="custom window start (YYYY-MM-DD, UTC)">
+    <span class="mono" style="color:var(--faint);font-size:10.5px">→</span>
+    <input type="date" id="endDate" title="custom window end (YYYY-MM-DD, UTC)">
+    <span id="dateWarn" class="pill p-err" style="display:none">set both dates (end &gt; start)</span>
+  </span>
+  <button class="btn" id="refreshBtn">Refresh (live API)</button>
+  <select id="sortSel">
+    <option value="org">sort: org → name</option>
+    <option value="was">sort: WAS $ ↓</option>
+    <option value="node">sort: node $ ↓</option>
+    <option value="total">sort: total $ ↓</option>
+    <option value="actual">sort: actual $ ↓</option>
+    <option value="baseline">sort: baseline → org → name</option>
+    <option value="classicdiff">sort: |classic − VR| ↓</option>
+    <option value="name">sort: name ↑</option>
+  </select>
+  <span class="pill p-no" id="rowCount">— rows</span>
+</div>
+
+<div id="progress"><div class="txt"><span class="lds"></span><span id="progressTxt">starting…</span></div><div class="bar"><div class="fill" id="progressFill"></div></div></div>
+<div id="errPanel"></div>
+
+<h2 class="sec">Case matrix (from the verified detection flow)</h2>
+<div class="caseref" id="caseRef"></div>
+<div class="prin">
+ <div class="pcol">
+  <h4>Key reporting principles</h4>
+  <div class="def">1. <b>Avoid double counting</b> — <span class="mono">totalSavings == autoscalerSavings</span>; with both autoscalers on, WAS impact is already inside realized savings.</div>
+  <div class="def">2. <b>Baseline dependency</b> — node-level realized savings require a valid baseline and begin after the baseline period ends; WAS savings are calculated independently of that period.</div>
+  <div class="def">3. <b>Adoption thresholds</b> — node-level realized savings once ≥20% of nodes are CAST-managed; WAS savings once ≥20% of workloads are managed in VPA mode.</div>
+  <div class="def">4. <b>Baseline quality</b> — CLUSTER_HISTORY preferred; INDUSTRY_AVERAGE uses fleet-wide assumptions → review unusually high estimates.</div>
+  <div class="def">5. <b>Missing data is not zero savings</b> — distinguish inactive autoscaling, missing baseline, disconnected agent, unavailable reporting.</div>
+ </div>
+ <div class="pcol">
+  <h4>Reporting recommendation &amp; docs</h4>
+  <div class="def">Classify each cluster into <b>A–F before aggregation</b>. Report realized node savings separately from WAS-only potential savings; for both-autoscaler clusters show WAS as attribution, not an additional saving.</div>
+  <div class="def">Detection statuses above are <b>observations from the verification flow</b>, not guaranteed API behavior.</div>
+  <div class="def">Official CAST AI docs: <a href="https://docs.cast.ai/docs/savings-report" target="_blank" rel="noopener">Realized Savings Report</a> · <a href="https://docs.cast.ai/docs/savings-baseline" target="_blank" rel="noopener">Baseline methodology</a> · <a href="https://docs.cast.ai/reference/clusterreportapi_getclustersavingsreport" target="_blank" rel="noopener">Savings API reference</a></div>
+ </div>
+</div>
+
+<h2 class="sec">Case E — transitions found in the fleet <span class="na">(org timeline, last 12 months)</span></h2>
+<div class="caseref" id="transitions" style="grid-template-columns:1fr"><div class="cref">scanning org timelines… <span class="lds"></span></div></div>
+
+<h2 class="sec">Clusters — realized savings <span class="na" id="winLabel"></span></h2>
+<details id="defs" class="defs" open>
+<summary>ⓘ What the columns mean (money · baseline types · agent &amp; flags)</summary>
+<div class="defgrid">
+ <div class="defcol">
+  <h4>Money columns — one window, one report</h4>
+  <div class="def"><b>WAS $</b> — savings from <b>Workload Autoscaler</b> right-sizing pod CPU/RAM requests, day by day: <span class="mono">(original − current requests) × unit price</span>, CPU + RAM summed. Accrues <b>without any baseline</b>. Field: <span class="mono">cost.workloadAutoscalerSavings</span>.</div>
+  <div class="def"><b>node $</b> — <b>realized node savings</b>: <span class="mono">projected − actual</span> per day, accruing only <b>after the baseline window ends</b>. Field: <span class="mono">cost.autoscalerSavings</span>.</div>
+  <div class="def"><b>total $</b> — <b>totalSavings == node $</b> (verified exactly, fleet-wide). WAS savings are already priced into the projection — <b>never add WAS $ + node $</b>. Field: <span class="mono">cost.totalSavings</span>.</div>
+  <div class="def"><b>actual $</b> — what the cluster <b>actually consumed</b> in the window; the spend these savings sit on. Ratio WAS$÷actual ≈ rightsizing share. Field: <span class="mono">cost.actualCost</span>.</div>
+ </div>
+ <div class="defcol">
+  <h4>Baseline chip — the "no-CAST-AI" counterfactual</h4>
+  <div class="def">Frozen the day node management started (<span class="mono">baselinePeriodEndTime</span>): per CPU and RAM an <b>overprovisioning factor</b> (× demand) and a <b>unit-price floor</b>. Needed only for the <b>node track</b>.</div>
+  <table class="deftbl">
+   <tr><th>Baseline type</th><th>How it is calculated</th><th>Reliability</th></tr>
+   <tr><td>CLUSTER_HISTORY</td><td>Uses at least 7 days of the cluster's own history before CAST AI node management</td><td><span class="rel hi">Highest</span></td></tr>
+   <tr><td>PEER_CLUSTERS</td><td>Uses historical baseline data from eligible clusters within the same organization</td><td><span class="rel mid">Medium</span></td></tr>
+   <tr><td>INDUSTRY_AVERAGE</td><td>Uses averages from CAST AI's broader cluster fleet when no suitable cluster or peer history exists <span class="note">(can be very generous: k8s-andreas 24h window, ×169 CPU factor)</span></td><td><span class="rel lo">Lowest</span></td></tr>
+   <tr><td>Overridden</td><td>CAST AI representative manually adjusts parameters or recalculates the baseline over a custom period</td><td><span class="rel rev">Requires review</span></td></tr>
+   <tr><td>UNSPECIFIED / No baseline</td><td>No baseline has been established, or node-level baseline reporting does not apply <span class="note">(WAS-only Case B works fine without one; endpoint returns 404 by design)</span></td><td class="na">N/A</td></tr>
+  </table>
+ </div>
+ <div class="defcol">
+  <h4>Agent &amp; flags columns</h4>
+  <div class="def"><b>agent on</b> — <span class="mono">agentStatus=online</span>: agent connected, reporting works.<br><b>agent off</b> — agent not reporting at sweep time: <span class="mono">disconnected · non-responding · waiting-connection · archived</span> → <b>Case F</b>: flagged, not dropped (e.g. rhx-test).<br><b>agent —</b> (amber) — status unknown (org response omitted its fleet row). The small text under the chip shows the raw API value.</div>
+  <div class="def"><b>woop</b> — <span class="mono">woopAdopted</span>: Workload Autoscaler in CAST-controlled mode on this cluster.</div>
+  <div class="def"><b>node mgmt</b> — <span class="mono">autoscalerAdopted</span>: CAST AI node management on. <b>Authoritative even with Karpenter integration</b> (0% managed-by labels yet node savings exist — the flag beats the label rule). Both flags come from the same report item as the money.</div>
+ </div>
+ <div class="defcol">
+  <h4>classic $ &middot; Δ — two savings methodologies, and why they differ</h4>
+  <div class="def"><b>VR total $ (this table's total column)</b> — the <i>value-realization</i> methodology: per day,
+   <span class="mono">projected = max(original, current demand) × overprovisioningFactor × max(currentPrice, baselineUnitPrice)</span>,
+   CPU + RAM summed; savings = <span class="mono">projected − actual</span>, starting after the baseline ends.
+   Baseline-driven, CFO-report methodology. Endpoint: <span class="mono">clusters:runValueRealizationReport</span>.</div>
+  <div class="def"><b>classic $</b> — the older cost-report methodology. Decomposes savings into two mechanisms per day:
+   <span class="mono">downscalingSavings</span> (right-sizing/bin-packing of the node mix) and <span class="mono">spotSavings</span>
+   (spot-vs-on-demand price arbitrage). No baseline concept. Endpoint:
+   <span class="mono">GET /v1/cost-reports/clusters/{id}/savings?startTime&amp;endTime</span> → <span class="mono">summary.totalSavings</span> (string). Observed decomposition, docs-consistent.</div>
+  <div class="def"><b>Why Δ ≠ 0</b> (amber when |Δ| ≥ 5% of VR total):
+   ① different cost basis — classic <span class="mono">totalCost</span> vs VR <span class="mono">actualCost</span> come from different pipelines;
+   ② classic counts <b>spot price arbitrage</b> as savings, VR does <b>not</b> — VR only beats the no-CAST-AI counterfactual price/baseline;
+   ③ VR applies baseline unit-price floors and overprovisioning factors; classic compares node mixes directly;
+   ④ window edges/rounding. Neither is "wrong" — they answer different questions (billing-mix effect vs no-CAST-AI counterfactual).</div>
+  <div class="def"><b>When classic shows "400 read-only"</b> — Case B: no node management, so classic has nothing to compute; WAS savings live only in the VR report. Report VR numbers for those clusters.</div>
+ </div>
+</div>
+</details>
+<div class="tblwrap"><table id="tbl"></table></div>
+
+<footer id="foot"></footer>
+</div>
+
+<div class="drawer-veil" onclick="closeDrawer()"></div>
+<aside class="drawer" id="drawer"><button class="close" onclick="closeDrawer()">ESC</button><div id="drawerBody"></div></aside>
+
+<script>
+const $=(s)=>document.querySelector(s);
+const esc=(v)=>String(v??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const usd=(v)=>(typeof v==='number')?'$'+v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}):null;
+const usd0=(v)=>(typeof v==='number')?'$'+Math.round(v).toLocaleString('en-US'):null;
+const money=(v)=>v==null?'<span class="na">—</span>':(Math.abs(v)<0.005?'<span class="zero">$0.00</span>':usd(v));
+const dt=(v)=>v?String(v).slice(0,10):'—';
+const CASES={
+ A:{name:'Monitoring only',desc:'Cluster connected read-only; neither autoscaler adopted. Report N/A — not $0, never drop.',det:'empty report items · WAS summary 400 · classic 400',ex:'bx-edex-prod-eu'},
+ B:{name:'Workload Autoscaler only',desc:'CAST AI rightsizes workloads; Karpenter/EKS keeps managing nodes. Report workloadAutoscalerSavings as modeled potential savings. No node-level realized savings; no baseline needed.',det:'woopAdopted=true · autoscalerAdopted=false · classic 400 · baseline 404',ex:'f8dd5b4f $431.26/30d'},
+ C:{name:'Node Autoscaler only',desc:'CAST AI manages nodes; workload rightsizing inactive. Report autoscalerSavings once the baseline period has ended.',det:'woopAdopted=false · autoscalerAdopted=true · baseline-params 200 (CLUSTER_HISTORY)',ex:'ngm-kronos-eks $7,702/30d'},
+ D:{name:'Both autoscalers',desc:'CAST AI manages nodes and rightsizes workloads. Report totalSavings as realized savings; show WAS savings separately for attribution — never add them together.',det:'both flags true · baseline (CLUSTER_HISTORY or INDUSTRY_AVERAGE)',ex:'k8s-andreas $150,024 + $619'},
+ E:{name:'Transition B → D',desc:'WAS enabled first, node management later: WAS savings continue independently; node-level savings start after baselinePeriodEndTime.',det:'org timeline: WAS $ precedes node $ (Railigent X: 2026-04 → 2026-05)',ex:'k8s-andreas (now D)'},
+ F:{name:'Disconnected / reporting unavailable',desc:'Agent disconnected or savings reporting unavailable. Flag as unavailable — do not report $0 or silently exclude.',det:'agentStatus∈{disconnected,non-responding,waiting-connection,archived} · not in report items',ex:'rhx-test'},
+};
+const P_ELIGIBLE=['B','C','D','A','F'];
+
+let DATA=null; let SEL_CASES=new Set(['B','C','D','A','F']); let SEL_ORGS=new Set(); let ORGERR=new Set();
+/* baseline types — canonical short keys; API mixes 'CLUSTER_HISTORY' and 'BASELINE_TYPE_X' shapes */
+const BASES=['CLUSTER_HISTORY','PEER_CLUSTERS','INDUSTRY_AVERAGE','OVERRIDDEN','NONE'];
+const BASE_LABEL={CLUSTER_HISTORY:'CLUSTER_HISTORY',PEER_CLUSTERS:'PEER_CLUSTERS',INDUSTRY_AVERAGE:'INDUSTRY_AVERAGE',OVERRIDDEN:'Overridden',NONE:'no baseline'};
+let SEL_BASES=new Set(BASES);
+let TRANS=new Map(); /* orgId → {firstWasMonth,firstNodeMonth,patternE} */
+
+/* ---------- Case E · org timeline scan ---------- */
+async function scanTransitions(){
+ try{
+  const res=await fetch('/api/transitions',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'}).then(r=>r.json());
+  TRANS=new Map(res.orgs.map(o=>[o.orgId,o]));
+  const eOrgs=res.orgs.filter(o=>o.patternE);
+  const empty=res.orgs.filter(o=>o.status===200&&(o.points||0)>0&&!eOrgs.includes(o));
+  const nores=res.orgs.filter(o=>o.status!==200||!o.points);
+  $('#transitions').innerHTML=
+   (eOrgs.length?eOrgs.map(o=>`<div class="cref"><b><span class="badge b-E" style="margin-right:6px">E</span>${esc(o.orgName)}</b>WAS $ first in <b>${esc(o.firstWasMonth)}</b> · node $ first in <b>${esc(o.firstNodeMonth)}</b> — the workload track accrued first, the node track followed; nothing was lost or double-counted.<span class="f">marker on rows: case-D clusters of this org get an “E→D” badge (org-level signal)</span></div>`).join('')
+    :`<div class="cref"><b>No Case-E pattern found</b> across ${res.orgs.length} scanned orgs in the last 12 months.</div>`)+
+   `<div class="cref" style="color:var(--faint)">scanned ${res.orgs.length} orgs · ${nores.length} without timeline data · CASES.md &amp; the case-console §03 show the Railigent X chart (WAS since 2026-04, node since 2026-05).</div>`;
+  renderTable();
+ }catch(e){$('#transitions').innerHTML=`<div class="cref">transition scan failed: ${esc(e)}</div>`;}
+}
+
+/* ---------- provenance label strings per field ---------- */
+const PROV={
+ was:'POST /reporting/v1beta/organizations/{org}/clusters:runValueRealizationReport<br>→ items[].cost.workloadAutoscalerSavings',
+ node:'same report → items[].cost.autoscalerSavings',
+ total:'same report → items[].cost.totalSavings (== node track, verified)',
+ classic:'GET /v1/cost-reports/clusters/{id}/savings?startTime&endTime → summary.totalSavings (older methodology; "—" when 400 read-only / unavailable)',
+ actual:'same report → items[].cost.actualCost',
+ caseB:'same report → items[].woopAdopted × items[].autoscalerAdopted (+ baselineType)',
+};
+
+/* ---------- KPI + legend ---------- */
+function renderKpis(rows){
+ const sum=(f)=>rows.reduce((a,r)=>a+(r[f]||0),0);
+ const cases=rows.reduce((a,r)=>(a[r.caseId]=(a[r.caseId]||0)+1,a),{});
+ $('#kpis').innerHTML=`
+  <div class="kpi"><div class="k">clusters in scope</div><div class="v">${rows.length}</div><div class="d">B ×${cases.B||0} · C ×${cases.C||0} · D ×${cases.D||0} · A ×${cases.A||0} · F ×${cases.F||0}</div></div>
+  <div class="kpi cy"><div class="k">WAS savings · window</div><div class="v">${usd0(sum('wasSavings'))||'—'}</div><div class="d" title="${PROV.was}">workloadAutoscalerSavings Σ (VR)</div></div>
+  <div class="kpi vi"><div class="k">node savings · window</div><div class="v">${usd0(sum('nodeSavings'))||'—'}</div><div class="d" title="${PROV.node}">autoscalerSavings Σ (VR)</div></div>
+  <div class="kpi gr"><div class="k">total savings · window</div><div class="v">${usd0(sum('totalSavings'))||'—'}</div><div class="d" title="${PROV.total}">totalSavings Σ — never WAS+node stacked</div></div>
+  <div class="kpi am"><div class="k">actual cost · window</div><div class="v">${usd0(sum('actualCost'))||'—'}</div><div class="d" title="${PROV.actual}">actualCost Σ — spend the savings sit on</div></div>`;
+}
+function renderLegend(){
+ $('#caseRef').innerHTML=['A','B','C','D','E','F'].map(k=>{const c=CASES[k];return `<div class="cref"><b><span class="badge b-${k}" style="margin-right:6px">${k}</span>${esc(c.name)}</b>${esc(c.desc)}<span class="f">detect: ${esc(c.det)}</span><span class="f">example: ${esc(c.ex)}</span></div>`;}).join('');
+}
+
+/* ---------- filters ---------- */
+function renderCaseChips(){
+ const counts=DATA?DATA.rows.reduce((a,r)=>(a[r.caseId]=(a[r.caseId]||0)+1,a),{}):{};
+ $('#caseChips').innerHTML=P_ELIGIBLE.map(k=>`<span class="chip ${SEL_CASES.has(k)?'on':''}" data-case="${k}" onclick="toggleCase('${k}')"><span class="badge b-${k}" style="min-width:0;padding:3px 6px;margin-right:6px">${k}</span>${CASES[k].name} <span class="n">${counts[k]??'·'}</span></span>`).join('');
+}
+window.toggleCase=(k)=>{SEL_CASES.has(k)?SEL_CASES.delete(k):SEL_CASES.add(k);renderCaseChips();renderTable();renderKpis(filteredRows());};
+const normBase=(r)=>{const t=(r.baselineType||'').replace('BASELINE_TYPE_','');if(!t||t==='UNSPECIFIED')return 'NONE';return ['CLUSTER_HISTORY','PEER_CLUSTERS','INDUSTRY_AVERAGE'].includes(t)?t:(t==='OVERRIDDEN'?'OVERRIDDEN':'NONE');};
+function renderBaseChips(){
+ const counts={}; (DATA?DATA.rows:[]).forEach(r=>{const b=normBase(r);counts[b]=(counts[b]||0)+1;});
+ if(DATA&&counts.BASELINE_TYPE_OVERRIDDEN===undefined&&!SEL_BASES.has('BASELINE_TYPE_OVERRIDDEN')){} /* keep selection stable */
+ $('#baseChips').innerHTML=BASES.map(b=>
+   `<span class="chip ${SEL_BASES.has(b)?'on':''}" onclick="toggleBase('${b}')" title="node-savings baseline: ${b}">${esc(BASE_LABEL[b])} <span class="n">${counts[b]||0}</span></span>`).join('');
+}
+window.toggleBase=(b)=>{SEL_BASES.has(b)?SEL_BASES.delete(b):SEL_BASES.add(b);renderBaseChips();renderTable();renderKpis(filteredRows());};
+function renderOrgPanel(){
+ const orgs=DATA?DATA.organizations:[];
+ const cnt={}; (DATA?DATA.rows:[]).forEach(r=>cnt[r.orgId]=(cnt[r.orgId]||0)+1);
+ const q=$('#orgSearch').value.toLowerCase();
+ $('#orgList').innerHTML=orgs.filter(o=>!q||o.name.toLowerCase().includes(q)||o.id.startsWith(q)).map(o=>
+  `<label class="dditem"><input type="checkbox" ${SEL_ORGS.has(o.id)?'checked':''} onchange="toggleOrg('${o.id}')"><span>${esc(o.name)}</span>${ORGERR.has(o.id)?'<span class="pill p-err">err</span>':''}<span class="cnt">${cnt[o.id]??0}</span></label>`).join('')||'<div class="dditem">no organizations</div>';
+ $('#orgSelCount').textContent=SEL_ORGS.size?`(${SEL_ORGS.size}/${orgs.length})`:'';
+}
+window.toggleOrg=(id)=>{SEL_ORGS.has(id)?SEL_ORGS.delete(id):SEL_ORGS.add(id);renderOrgPanel();renderTable();renderKpis(filteredRows());};
+$('#orgAll').onclick=()=>{SEL_ORGS=new Set(DATA.organizations.map(o=>o.id));renderOrgPanel();renderTable();renderKpis(filteredRows());};
+$('#orgNone').onclick=()=>{SEL_ORGS.clear();renderOrgPanel();renderTable();renderKpis(filteredRows());};
+$('#orgErrorsOnly').onclick=()=>{SEL_ORGS=new Set([...ORGERR]);renderOrgPanel();renderTable();renderKpis(filteredRows());};
+$('#orgBtn').onclick=()=>{const p=$('#orgPanel');p.style.display=p.style.display==='block'?'none':'block';};
+document.addEventListener('click',(e)=>{if(!e.target.closest('.dropdown'))$('#orgPanel').style.display='none';});
+$('#orgSearch').oninput=renderOrgPanel;
+$('#nameSearch').oninput=()=>{renderTable();renderKpis(filteredRows());};
+$('#sortSel').onchange=renderTable;
+
+function filteredRows(){
+ if(!DATA)return[];
+ const q=$('#nameSearch').value.trim().toLowerCase();
+ return DATA.rows.filter(r=>
+   SEL_CASES.has(r.caseId) &&
+   SEL_BASES.has(normBase(r)) &&
+   (!SEL_ORGS.size||SEL_ORGS.has(r.orgId)) &&
+   (!q||r.name.toLowerCase().includes(q)||r.clusterId.toLowerCase().startsWith(q)||r.id8.startsWith(q)));
+}
+
+/* ---------- table ---------- */
+let sortKey='org';
+const SORTS={
+ org:(a,b)=>a.orgName.localeCompare(b.orgName)||a.name.localeCompare(b.name),
+ was:(a,b)=>(b.wasSavings||0)-(a.wasSavings||0), node:(a,b)=>(b.nodeSavings||0)-(a.nodeSavings||0),
+ total:(a,b)=>(b.totalSavings||0)-(a.totalSavings||0), actual:(a,b)=>(b.actualCost||0)-(a.actualCost||0),
+ baseline:(a,b)=>(BASES.indexOf(normBase(a))-BASES.indexOf(normBase(b)))||a.orgName.localeCompare(b.orgName)||a.name.localeCompare(b.name),
+ classicdiff:(a,b)=>(Math.abs((b.classicSavings??0)-(b.totalSavings??0)))-(Math.abs((a.classicSavings??0)-(a.totalSavings??0))),
+ name:(a,b)=>a.name.localeCompare(b.name),
+};
+function renderTable(){
+ const rows=filteredRows().sort(SORTS[$('#sortSel').value]||SORTS.org);
+ $('#rowCount').textContent=`${rows.length} rows`;
+ const flagP=(v)=>v===true?'<span class="pill p-yes">on</span>':v===false?'<span class="pill p-no">off</span>':'<span class="pill p-warn">—</span>';
+ const body=rows.map(r=>`<tr onclick="openDrawer('${r.orgId}','${r.clusterId}')">
+    <td class="num"><span class="badge b-${r.caseId}" title="${PROV.caseB}">${r.caseId}</span>${r.caseId==='D'&&TRANS.get(r.orgId)?.patternE?`<span class="badge b-E" title="Case-E transition org: WAS $ from ${TRANS.get(r.orgId).firstWasMonth}, node $ from ${TRANS.get(r.orgId).firstNodeMonth} (org timeline)">E→D</span>`:''}</td>
+   <td><b>${esc(r.name)}</b><span class="small">${r.id8}</span></td>
+   <td>${esc(r.orgName)}<span class="small">${r.orgId.slice(0,8)}</span></td>
+   <td>${flagP(['online','ready','connected'].includes(r.agentStatus)?true:(r.agentStatus==='unknown'||!r.agentStatus)?null:false)}<span class="small">${esc(r.agentStatus)}</span></td>
+   <td>${flagP(r.woopAdopted)}<span class="small">woop</span></td>
+   <td>${flagP(r.autoscalerAdopted)}<span class="small">node</span></td>
+   <td>${r.baselineType?`<span class="pill ${r.baselineType.includes('UNSPECIFIED')?'p-no':'p-warn'}">${esc(r.baselineType.replace('BASELINE_TYPE_',''))}</span>`:'<span class="na">—</span>'}</td>
+   <td class="num" title="${PROV.was}">${money(r.wasSavings)}</td>
+   <td class="num" title="${PROV.node}">${money(r.nodeSavings)}</td>
+   <td class="num" title="${PROV.total}">${money(r.totalSavings)}</td>
+   <td class="num" title="${PROV.classic}">${classicCell(r)}</td>
+   <td class="num" title="${PROV.actual}">${money(r.actualCost)}</td>
+ </tr>`).join('');
+ const T=(f)=>rows.reduce((a,r)=>a+(r[f]||0),0);
+ const TS=rows.reduce((s,r)=>s+(r.classicSavings??0),0);
+ const TD=rows.reduce((s,r)=>s+((r.classicSavings!=null&&r.totalSavings!=null)?(r.classicSavings-r.totalSavings):0),0);
+ $('#tbl').innerHTML=`<thead><tr>
+   <th class="num" title="topology class — see legend above the table">case</th>
+   <th title="cluster name + id prefix · GET /v1/kubernetes/external-clusters">cluster</th>
+   <th title="GET /v1/organizations">organization</th>
+   <th title="on=connected · off=disconnected (Case F, flagged not dropped) · —=unknown">agent</th>
+   <th title="woopAdopted — workload rightsizing in CAST-controlled mode">woop</th>
+   <th title="autoscalerAdopted — CAST AI node management (authoritative; beats node-label rule)">node mgmt</th>
+   <th title="no-CAST-AI counterfactual: CLUSTER_HISTORY · PEER_CLUSTERS · INDUSTRY_AVERAGE · (none)=no baseline needed">baseline</th>
+   <th class="num" title="${PROV.was.replace(/<br>/g,' ')}">WAS $</th>
+   <th class="num" title="${PROV.node}">node $</th>
+   <th class="num" title="${PROV.total}">total $</th>
+   <th class="num" title="${PROV.classic}">classic $ · Δ</th>
+   <th class="num" title="${PROV.actual}">actual $</th></tr></thead>
+   <tbody>${body}
+   <tr class="totrow"><td></td><td colspan="6" class="mono">Σ ${rows.length} clusters (filtered)</td>
+   <td class="num">${usd(T('wasSavings'))}</td><td class="num">${usd(T('nodeSavings'))}</td><td class="num">${usd(T('totalSavings'))}</td>
+   <td class="num">${usd(TS)}<span class="small">Δ ${usd(TD)}</span></td><td class="num">${usd(T('actualCost'))}</td></tr></tbody>`;
+}
+
+/* classic savings cell: value + Δ vs value-realization totalSavings */
+function classicCell(r){
+ if(r.classicStatus==null) return '<span class="na">·</span>';
+ if(r.classicSavings==null){
+  const lab=r.classicStatus===400?'400 read-only':`HTTP ${r.classicStatus}`;
+  return `<span class="na" title="classic savings status ${r.classicStatus}">${lab}</span>`;
+ }
+ if(r.totalSavings==null) return `${usd(r.classicSavings)}<span class="small">Δ —</span>`;
+ const d=r.classicSavings-r.totalSavings;
+ const rel=Math.abs(d)>=Math.max(0.01,Math.abs(r.totalSavings)*0.05);
+ const cls=(Math.abs(d)<0.005)?'':(rel?'diffbad':'');
+ const sign=(d>=0)?'+':'';
+ return `${usd(r.classicSavings)}<span class="small ${cls}">Δ ${sign}${usd(d)}</span>`;
+}
+
+/* ---------- drill-down drawer ---------- */
+window.openDrawer=async(orgId,clusterId)=>{
+ const r=(DATA?.rows||[]).find(x=>x.orgId===orgId&&x.clusterId===clusterId);
+ if(!r)return;
+ document.body.classList.add('drawer-open');
+ $('#drawerBody').innerHTML=`
+  <span class="badge b-${r.caseId}">Case ${r.caseId}</span>
+  <h3 style="margin-top:10px">${esc(r.name)}</h3>
+  <div class="mono" style="color:var(--faint);font-size:11px">${r.clusterId}<br>${esc(r.orgName)} · ${esc(r.region||'')} · ${esc(r.providerType||'')}</div>
+  <div class="formula">${drawerFormula(r)}</div>
+  <div class="probe"><div class="ph"><span class="pt">live probes</span><span class="mono" style="color:var(--dim);font-size:10px">running…</span></div></div>
+  <div id="probeZone"></div>`;
+ const d=await fetch(`/api/cluster-detail?orgId=${orgId}&clusterId=${clusterId}`).then(r=>r.json()).catch(e=>({error:String(e)}));
+ renderProbes(r,d);
+};
+window.closeDrawer=()=>document.body.classList.remove('drawer-open');
+document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeDrawer();});
+function drawerFormula(r){
+ const c=CASES[r.caseId];
+ return`Case ${r.caseId} — ${c.name}\nreport: ${r.caseId==='B'?'workloadAutoscalerSavings only (no baseline needed)':r.caseId==='C'?'autoscalerSavings after baselinePeriodEndTime':r.caseId==='D'?'totalSavings = node track; WAS $ is explanatory (never add)':'no savings data — show "no data", not $0'}\nwindow: ${DATA.window.startTime.slice(0,10)} → ${DATA.window.endTime.slice(0,10)}\nsource: POST reporting/v1beta/organizations/{org}/clusters:runValueRealizationReport`;
+}
+function renderProbes(r,d){
+ const P=d.probes||{};
+ const chip=(st,okTxt)=>st===200?`<span class="pill p-yes">200 · ${okTxt||''}</span>`:st===404?`<span class="pill p-warn">404 · signal</span>`:st===400?`<span class="pill p-warn">400 · signal</span>`:`<span class="pill p-err">${st||'err'}</span>`;
+ $('#probeZone').innerHTML=`
+  <div class="probe"><div class="ph"><span class="pt">baseline-params</span>${chip(P.baseline?.status,P.baseline?.signal)}</div>
+   ${P.baseline?.status===200?`<div class="pv">type        ${esc(P.baseline.type)}\nwindow      ${dt(P.baseline.start)} → ${dt(P.baseline.end)}\nfactors     cpu ×${P.baseline.cpuFactor} · ram ×${P.baseline.ramFactor}\nunit floor  $${P.baseline.cpuPrice}/core-h · $${P.baseline.ramPrice}/GiB-h</div>`:`<div class="pv">${esc(P.baseline?.signal||'—')}</div>`}
+   <div class="ps">GET /reporting/v1beta/organizations/{org}/clusters/{id}/baseline-params</div></div>
+  <div class="probe"><div class="ph"><span class="pt">nodes (labels)</span>${chip(P.nodes?.status)}</div>
+   ${P.nodes?.status===200?`<div class="pv">nodes ${P.nodes.total} · cast-managed ${P.nodes.castManaged} (${P.nodes.sharePct}%) · karpenter-labeled ${P.nodes.karpenter}\n${P.nodes.castManaged===0&&r.caseId==='D'?'⚠ Karpenter-integration mode: 0% labels yet node savings exist — the adoption flag beats the label rule':''}</div>`:`<div class="pv">${esc(P.nodes?.signal||'—')}</div>`}
+   <div class="ps">GET /v1/kubernetes/external-clusters/{id}/nodes → node[].labels (provisioner.cast.ai/managed-by, karpenter.sh/*)</div></div>
+  <div class="probe"><div class="ph"><span class="pt">workloads summary (WAS effect)</span>${chip(P.workloads?.status)}</div>
+   ${P.workloads?.status===200?`<div class="pv">optimized ${P.workloads.optimized}/${P.workloads.total} workloads\nCPU req  ${P.workloads.cpuOriginal} → ${P.workloads.cpuNow} cores\nRAM req  ${P.workloads.ramOriginalGiB} → ${P.workloads.ramNowGiB} GiB</div>`:`<div class="pv">${esc(P.workloads?.signal||'—')}</div>`}
+   <div class="ps">GET /v1/workload-autoscaling/clusters/{id}/workloads-summary</div></div>
+  <div class="probe"><div class="ph"><span class="pt">classic savings (cross-check)</span>${chip(P.classicSavings?.status)}</div>
+   ${P.classicSavings?.status===200?`<div class="pv">classicAutoscalerSavings: ${usd(P.classicSavings.autoscalerSavings)??'—'}\n⚠ ${esc(P.classicSavings.note)}</div>`:`<div class="pv">${esc(P.classicSavings?.signal||'—')}</div>`}
+   <div class="ps">GET /v1/cost-reports/clusters/{id}/savings · “read-only” 400 = node track OFF</div></div>`;
+}
+
+/* ---------- errors panel ---------- */
+function renderErrors(){
+ if(!DATA){$('#errPanel').innerHTML='';return;}
+ ORGERR=new Set(DATA.orgErrors.map(e=>e.orgId));
+ $('#errPanel').innerHTML=DATA.orgErrors.length
+  ?`<details class="errorgroup"><summary>⚠ ${DATA.orgErrors.length} of ${DATA.organizations.length} organizations not reachable with this key/token (kept out of rows)</summary>${DATA.orgErrors.map(e=>`<div class="e">· ${esc(e.orgName)} ${esc(e.orgId.slice(0,8))} — ${esc(e.clusters||'')} ${esc(e.report||'')}</div>`).join('')}</details>`
+  :'';
+}
+
+/* ---------- flow ---------- */
+async function fetchConfig(){
+ const c=await fetch('/api/config').then(r=>r.json());
+ $('#foot').innerHTML=`api <b>${esc(c.apiBase)}</b> · read-only (GET + report queries) · local server on :${c.port} · <span class="mono">window: value-realization report, EU region</span>`;
+}
+async function refresh(force){
+ const btn=$('#refreshBtn');btn.disabled=true;
+ $('#progress').style.display='block';$('#progressTxt').textContent='requesting fleet sweep…';$('#progressFill').style.width='2%';
+ let body;
+ if(WIN_MODE==='custom'){
+  if(!customValid()){$('#dateWarn').style.display='inline-block';btn.disabled=false;return;}
+  body={startDate:$('#startDate').value,endDate:$('#endDate').value};
+ }else{
+  body={windowDays:Number($('#windowSel').value)};
+ }
+ const startRes=await fetch('/api/refresh',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(r=>r.json());
+ let result;
+ if(startRes.cached&&startRes.result){result=startRes.result;}
+ else{
+   for(;;){
+     await new Promise(r=>setTimeout(r,900));
+     const j=await fetch(`/api/job/${startRes.jobId}`).then(r=>r.json());
+     const pct=j.total?Math.round(100*j.done/j.total):2;
+     $('#progressFill').style.width=pct+'%';
+     $('#progressTxt').textContent=`sweeping ${j.done}/${j.total||'?'} orgs — ${j.progress?.current||''}`;
+     if(j.status==='done'){result=j.result;break;}
+     if(j.status==='failed'){$('#progressTxt').textContent='FAILED: '+j.error;btn.disabled=false;return;}
+   }
+ }
+ DATA=result;
+ if(!SEL_ORGS_BOOTED){SEL_ORGS=new Set(DATA.organizations.map(o=>o.id));SEL_ORGS_BOOTED=true;}
+ $('#progress').style.display='none';btn.disabled=false;
+ $('#stamp').innerHTML=`fetched ${esc(DATA.fetchedAtUtc.slice(0,16)).replace('T',' ')}Z<br>window ${esc(DATA.window.startTime.slice(0,10))} → ${esc(DATA.window.endTime.slice(0,10))}`;
+ $('#winLabel').textContent=`(${DATA.window.startTime.slice(0,10)} → ${DATA.window.endTime.slice(0,10)})`;
+ renderErrors();renderCaseChips();renderBaseChips();renderOrgPanel();renderTable();renderKpis(filteredRows());
+ scanTransitions();
+}
+let SEL_ORGS_BOOTED=false;
+$('#refreshBtn').onclick=()=>refresh(true);
+let WIN_MODE='preset';
+function customValid(){const sd=$('#startDate').value,ed=$('#endDate').value;return sd&&ed&&ed>sd;}
+function setWinMode(m){
+ WIN_MODE=m;
+ $('#windowSel').style.display=m==='preset'?'':'none';
+ $('#customWrap').style.display=m==='custom'?'inline-flex':'none';
+ document.querySelectorAll('#winMode .segbtn').forEach(b=>b.classList.toggle('on',b.dataset.mode===m));
+}
+$('#winMode').addEventListener('click',(e)=>{
+ const b=e.target.closest('.segbtn'); if(!b)return;
+ setWinMode(b.dataset.mode);
+ $('#dateWarn').style.display='none';
+ if(WIN_MODE==='preset')refresh(true);
+ else if(customValid())refresh(true); else $('#dateWarn').style.display='inline-block';
+});
+['startDate','endDate'].forEach(id=>$('#'+id).addEventListener('change',()=>{
+ if(customValid()){$('#dateWarn').style.display='none';refresh(true);}
+ else{$('#dateWarn').style.display='inline-block';}
+}));
+$('#windowSel').onchange=()=>{refresh(true);};
+
+(async()=>{
+ renderLegend();
+ await fetchConfig();
+ await refresh(true);
+})();
+</script>
+</body>
+</html>

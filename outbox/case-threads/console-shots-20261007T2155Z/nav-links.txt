@@ -1,0 +1,20 @@
+Learn more on our Cookie Policy. -> https://cast.ai/cookie-policy/
+ -> https://www.cookieyes.com/product/cookie-consent/?ref=cypbcyb&utm_source=cookie-banner&utm_medium=powered-by-cookieyes
+Cluster List -> /automation/cluster-list?org=137fa0c7-511b-483d-9ac2-dedf4e086195
+Overview -> /automation/overview?org=137fa0c7-511b-483d-9ac2-dedf4e086195
+Cloud VMs -> /automation/cloud-vms?org=137fa0c7-511b-483d-9ac2-dedf4e086195
+Schedules -> /automation/schedules?org=137fa0c7-511b-483d-9ac2-dedf4e086195
+Cost monitoring -> /automation/cost-report?org=137fa0c7-511b-483d-9ac2-dedf4e086195
+Network Intelligence -> /automation/network-intelligence?org=137fa0c7-511b-483d-9ac2-dedf4e086195
+Budgets -> /automation/budgets?org=137fa0c7-511b-483d-9ac2-dedf4e086195
+ -> /dashboard?org=137fa0c7-511b-483d-9ac2-dedf4e086195
+dr-us -> /automation/external-clusters/aa358fd0-7ef8-4259-83bb-d947456688f4/dashboard?org=137fa0c7-511b-483d-9ac2-dedf4e086195
+? -> /external-clusters/aa358fd0-7ef8-4259-83bb-d947456688f4/cluster-score/summary?org=137fa0c7-511b-483d-9ac2-dedf4e086195
+krep-eu -> /automation/external-clusters/6fbe0648-87a4-41b6-9f83-576b47af71aa/dashboard?org=137fa0c7-511b-483d-9ac2-dedf4e086195
+4.6 -> /external-clusters/6fbe0648-87a4-41b6-9f83-576b47af71aa/cluster-score/summary?org=137fa0c7-511b-483d-9ac2-dedf4e086195
+tilt-infra -> /automation/external-clusters/026c28d8-6149-4967-970e-7b4f46a01fc9/dashboard?org=137fa0c7-511b-483d-9ac2-dedf4e086195
+4.8 -> /external-clusters/026c28d8-6149-4967-970e-7b4f46a01fc9/cluster-score/summary?org=137fa0c7-511b-483d-9ac2-dedf4e086195
+krep-dev -> /automation/external-clusters/b2cf996a-28f4-4c8d-901d-de2db2e5b3b6/dashboard?org=137fa0c7-511b-483d-9ac2-dedf4e086195
+4.2 -> /external-clusters/b2cf996a-28f4-4c8d-901d-de2db2e5b3b6/cluster-score/summary?org=137fa0c7-511b-483d-9ac2-dedf4e086195
+prod-master -> /automation/external-clusters/c92acdca-b949-4ca1-b916-442c175245ce/dashboard?org=137fa0c7-511b-483d-9ac2-dedf4e086195
+6 -> /external-clusters/c92acdca-b949-4ca1-b916-442c175245ce/cluster-score/summary?org=137fa0c7-511b-483d-9ac2-dedf4e086195

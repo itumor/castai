@@ -1,0 +1,1 @@
+{"cpuOverprovisioningFactor":169.58215697737756, "memoryOverprovisioningFactor":35.444140636683834, "costPerCpuCoreHourly":0.029356507112324532, "costPerMemoryGibHourly":0.005328127741116751, "baselinePeriodStartTime":"2026-04-15T00:00:00Z", "baselinePeriodEndTime":"2026-04-16T00:00:00Z", "baselineType":"INDUSTRY_AVERAGE", "updateTime":"2026-04-16T08:00:50Z"}

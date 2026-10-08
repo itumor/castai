@@ -1,0 +1,1669 @@
+{
+ "generatedAtUtc": "2026-10-07T21:34:59.911Z",
+ "apiBase": "https://api.eu.cast.ai",
+ "authNote": "Every call: X-API-Key + X-CastAI-Organization-Id (enterprise master key sees 0 clusters without the org header — verified live 2026-10-08).",
+ "windows": {
+  "valueRealization": "2026-09-05T00:00:00Z → 2026-10-05T00:00:00Z",
+  "classicSavings": "2026-09-08T00:00:00Z → 2026-10-08T00:00:00Z",
+  "timeline": "2025-10-05T00:00:00Z → 2026-10-05T00:00:00Z, step=ONE_MONTH"
+ },
+ "endpoints": {
+  "01": {
+   "name": "Cluster detail",
+   "method": "GET",
+   "path": "/v1/kubernetes/external-clusters/{clusterId}",
+   "doc": "https://docs.cast.ai/reference/externalclusterapi_getcluster"
+  },
+  "02": {
+   "name": "Cluster nodes",
+   "method": "GET",
+   "path": "/v1/kubernetes/external-clusters/{clusterId}/nodes",
+   "doc": "https://docs.cast.ai/reference/externalclusterapi_listnodes"
+  },
+  "03": {
+   "name": "Baseline params",
+   "method": "GET",
+   "path": "/reporting/v1beta/organizations/{orgId}/clusters/{clusterId}/baseline-params",
+   "doc": "https://docs.cast.ai/docs/savings-baseline"
+  },
+  "04": {
+   "name": "Workloads summary (WOOP)",
+   "method": "GET",
+   "path": "/v1/workload-autoscaling/clusters/{clusterId}/workloads-summary",
+   "doc": "https://docs.cast.ai/reference/workloadoptimizationapi_getworkloadssummary"
+  },
+  "05": {
+   "name": "Classic cluster savings",
+   "method": "GET",
+   "path": "/v1/cost-reports/clusters/{clusterId}/savings",
+   "doc": "https://docs.cast.ai/reference/clusterreportapi_getclustersavingsreport"
+  },
+  "06": {
+   "name": "Value realization report",
+   "method": "POST",
+   "path": "/reporting/v1beta/organizations/{orgId}/clusters:runValueRealizationReport",
+   "doc": "https://docs.cast.ai/reference/valuerealizationapi_runclustersvaluerealizationreport"
+  },
+  "07": {
+   "name": "Workloads summary metrics (effect over time)",
+   "method": "GET",
+   "path": "/v1/workload-autoscaling/clusters/{clusterId}/workloads-summary-metrics",
+   "doc": "https://docs.cast.ai/reference/workloadoptimizationapi_getworkloadssummarymetrics"
+  }
+ },
+ "clusters": [
+  {
+   "id8": "0e277bb2",
+   "org": "SMO Railigent X",
+   "orgId": "f15f33b9-20ad-4128-8289-da529844d3f0",
+   "name": "k8s",
+   "status": "ready",
+   "provider": "eks",
+   "region": "eu-central-1",
+   "createdAt": "2026-06-23T10:22:18.587570Z",
+   "agentStatus": "online",
+   "http": {},
+   "nodes": {
+    "total": 6,
+    "castManaged": 0,
+    "karpenter": 3,
+    "other": 3,
+    "shareCastManagedPct": 0
+   },
+   "was": {
+    "totalWorkloads": 65,
+    "optimized": 56,
+    "vpaOptimized": 56,
+    "hpaOptimized": 0,
+    "apiManaged": 62,
+    "cpuNow": 10.62,
+    "cpuRecommended": 7.94,
+    "cpuOriginal": 29.19,
+    "ramNowGiB": 46.23,
+    "ramRecommendedGiB": 40.19,
+    "ramOriginalGiB": 102.8,
+    "cpuReductionPct": 63.6,
+    "ramReductionPct": 55
+   },
+   "wasMetrics": {
+    "points": 672,
+    "firstPoint": "2026-09-30T21:30:00Z",
+    "lastPoint": "2026-10-07T21:15:00Z"
+   },
+   "vr": {
+    "clusterName": "k8s",
+    "status": "ready",
+    "baselineType": "BASELINE_TYPE_UNSPECIFIED",
+    "woopAdopted": true,
+    "autoscalerAdopted": false,
+    "actual": 552.57,
+    "projected": 552.57,
+    "autoscalerSavings": 0,
+    "workloadAutoscalerSavings": 369.35,
+    "totalSavings": 0,
+    "cpu": {
+     "actual": 364.47,
+     "projected": 364.47,
+     "provisionedCoreHours": 18814,
+     "requestedCoreHours": 10546
+    },
+    "memory": {
+     "actual": 188.1,
+     "projected": 188.1,
+     "provisionedGibHours": 69684,
+     "requestedGibHours": 47137
+    }
+   },
+   "baseline": null,
+   "classicSavings": {
+    "unavailable": "this API is not available for cluster \"0e277bb2-036d-485f-8690-4bf22720af9f\": cluster is read-only"
+   },
+   "caseId": "B"
+  },
+  {
+   "id8": "4952c4ce",
+   "org": "SMO Railigent X",
+   "orgId": "f15f33b9-20ad-4128-8289-da529844d3f0",
+   "name": "k8s",
+   "status": "ready",
+   "provider": "eks",
+   "region": "eu-central-1",
+   "createdAt": "2026-03-06T11:45:05.176343Z",
+   "agentStatus": "online",
+   "http": {},
+   "nodes": {
+    "total": 220,
+    "castManaged": 0,
+    "karpenter": 217,
+    "other": 3,
+    "shareCastManagedPct": 0
+   },
+   "was": {
+    "totalWorkloads": 634,
+    "optimized": 616,
+    "vpaOptimized": 616,
+    "hpaOptimized": 0,
+    "apiManaged": 622,
+    "cpuNow": 211.15,
+    "cpuRecommended": 192.29,
+    "cpuOriginal": 313.91,
+    "ramNowGiB": 1157.15,
+    "ramRecommendedGiB": 1211.6,
+    "ramOriginalGiB": 851.46,
+    "cpuReductionPct": 32.7,
+    "ramReductionPct": -35.9
+   },
+   "wasMetrics": {
+    "points": 672,
+    "firstPoint": "2026-09-30T21:15:00Z",
+    "lastPoint": "2026-10-07T21:00:00Z"
+   },
+   "vr": {
+    "clusterName": "k8s",
+    "status": "ready",
+    "baselineType": "BASELINE_TYPE_UNSPECIFIED",
+    "woopAdopted": true,
+    "autoscalerAdopted": false,
+    "actual": 23735.55,
+    "projected": 23735.55,
+    "autoscalerSavings": 0,
+    "workloadAutoscalerSavings": 2267.45,
+    "totalSavings": 0,
+    "cpu": {
+     "actual": 15523.86,
+     "projected": 15523.86,
+     "provisionedCoreHours": 742929,
+     "requestedCoreHours": 262855
+    },
+    "memory": {
+     "actual": 8211.69,
+     "projected": 8211.69,
+     "provisionedGibHours": 2870284,
+     "requestedGibHours": 1396181
+    }
+   },
+   "baseline": null,
+   "classicSavings": {
+    "unavailable": "this API is not available for cluster \"4952c4ce-6a3a-44f4-9b3c-9794ca9ddbc9\": cluster is read-only"
+   },
+   "caseId": "B"
+  },
+  {
+   "id8": "5771ec22",
+   "org": "SMO Railigent X",
+   "orgId": "f15f33b9-20ad-4128-8289-da529844d3f0",
+   "name": "k8s",
+   "status": "ready",
+   "provider": "eks",
+   "region": "ap-south-1",
+   "createdAt": "2026-06-23T10:29:19.173702Z",
+   "agentStatus": "online",
+   "http": {
+    "05": 202,
+    "06": 202,
+    "07": 202
+   },
+   "nodes": {
+    "total": 15,
+    "castManaged": 0,
+    "karpenter": 12,
+    "other": 3,
+    "shareCastManagedPct": 0
+   },
+   "was": {
+    "totalWorkloads": 96,
+    "optimized": 87,
+    "vpaOptimized": 87,
+    "hpaOptimized": 0,
+    "apiManaged": 93,
+    "cpuNow": 14.24,
+    "cpuRecommended": 13.27,
+    "cpuOriginal": 38.56,
+    "ramNowGiB": 113.09,
+    "ramRecommendedGiB": 108.08,
+    "ramOriginalGiB": 131.95,
+    "cpuReductionPct": 63.1,
+    "ramReductionPct": 14.3
+   },
+   "wasMetrics": {
+    "points": 672,
+    "firstPoint": "2026-09-30T21:15:00Z",
+    "lastPoint": "2026-10-07T21:00:00Z"
+   },
+   "vr": {
+    "clusterName": "k8s",
+    "status": "ready",
+    "baselineType": "BASELINE_TYPE_UNSPECIFIED",
+    "woopAdopted": true,
+    "autoscalerAdopted": false,
+    "actual": 564.07,
+    "projected": 564.07,
+    "autoscalerSavings": 0,
+    "workloadAutoscalerSavings": 167.95,
+    "totalSavings": 0,
+    "cpu": {
+     "actual": 373.58,
+     "projected": 373.58,
+     "provisionedCoreHours": 46242,
+     "requestedCoreHours": 13695
+    },
+    "memory": {
+     "actual": 190.5,
+     "projected": 190.5,
+     "provisionedGibHours": 184991,
+     "requestedGibHours": 101521
+    }
+   },
+   "baseline": null,
+   "classicSavings": {
+    "unavailable": "this API is not available for cluster \"5771ec22-fb0e-4fd8-a73a-fdf451ab0741\": cluster is read-only"
+   },
+   "caseId": "B"
+  },
+  {
+   "id8": "7eb37770",
+   "org": "SMO Railigent X",
+   "orgId": "f15f33b9-20ad-4128-8289-da529844d3f0",
+   "name": "k8s",
+   "status": "ready",
+   "provider": "eks",
+   "region": "ap-south-1",
+   "createdAt": "2026-06-19T14:33:27.608553Z",
+   "agentStatus": "online",
+   "http": {},
+   "nodes": {
+    "total": 13,
+    "castManaged": 0,
+    "karpenter": 10,
+    "other": 3,
+    "shareCastManagedPct": 0
+   },
+   "was": {
+    "totalWorkloads": 98,
+    "optimized": 89,
+    "vpaOptimized": 89,
+    "hpaOptimized": 0,
+    "apiManaged": 95,
+    "cpuNow": 14.82,
+    "cpuRecommended": 14.01,
+    "cpuOriginal": 37.74,
+    "ramNowGiB": 80.84,
+    "ramRecommendedGiB": 75.25,
+    "ramOriginalGiB": 119.55,
+    "cpuReductionPct": 60.7,
+    "ramReductionPct": 32.4
+   },
+   "wasMetrics": {
+    "points": 672,
+    "firstPoint": "2026-09-30T21:15:00Z",
+    "lastPoint": "2026-10-07T21:00:00Z"
+   },
+   "vr": {
+    "clusterName": "k8s",
+    "status": "ready",
+    "baselineType": "BASELINE_TYPE_UNSPECIFIED",
+    "woopAdopted": true,
+    "autoscalerAdopted": false,
+    "actual": 482.08,
+    "projected": 482.08,
+    "autoscalerSavings": 0,
+    "workloadAutoscalerSavings": 200.99,
+    "totalSavings": 0,
+    "cpu": {
+     "actual": 323.16,
+     "projected": 323.16,
+     "provisionedCoreHours": 38412,
+     "requestedCoreHours": 11841
+    },
+    "memory": {
+     "actual": 158.93,
+     "projected": 158.93,
+     "provisionedGibHours": 151322,
+     "requestedGibHours": 77989
+    }
+   },
+   "baseline": null,
+   "classicSavings": {
+    "unavailable": "this API is not available for cluster \"7eb37770-9c35-460d-a896-910949ae0ea6\": cluster is read-only"
+   },
+   "caseId": "B"
+  },
+  {
+   "id8": "cf62a8e1",
+   "org": "SMO Railigent X",
+   "orgId": "f15f33b9-20ad-4128-8289-da529844d3f0",
+   "name": "k8s",
+   "status": "ready",
+   "provider": "eks",
+   "region": "eu-central-1",
+   "createdAt": "2026-06-23T10:25:02.059296Z",
+   "agentStatus": "online",
+   "http": {
+    "01": 404,
+    "02": 200,
+    "03": 404,
+    "04": 200,
+    "05": 400,
+    "06": 200,
+    "07": 200
+   },
+   "nodes": {
+    "total": 171,
+    "castManaged": 0,
+    "karpenter": 168,
+    "other": 3,
+    "shareCastManagedPct": 0
+   },
+   "was": {
+    "totalWorkloads": 378,
+    "optimized": 321,
+    "vpaOptimized": 321,
+    "hpaOptimized": 0,
+    "apiManaged": 373,
+    "cpuNow": 126.22,
+    "cpuRecommended": 115.28,
+    "cpuOriginal": 198.83,
+    "ramNowGiB": 866.7,
+    "ramRecommendedGiB": 959.24,
+    "ramOriginalGiB": 882.13,
+    "cpuReductionPct": 36.5,
+    "ramReductionPct": 1.7
+   },
+   "wasMetrics": {
+    "points": 672,
+    "firstPoint": "2026-09-30T21:15:00Z",
+    "lastPoint": "2026-10-07T21:00:00Z"
+   },
+   "vr": {
+    "clusterName": "k8s",
+    "status": "ready",
+    "baselineType": "BASELINE_TYPE_UNSPECIFIED",
+    "woopAdopted": true,
+    "autoscalerAdopted": false,
+    "actual": 16991.85,
+    "projected": 16991.85,
+    "autoscalerSavings": 0,
+    "workloadAutoscalerSavings": 1816.26,
+    "totalSavings": 0,
+    "cpu": {
+     "actual": 11014.85,
+     "projected": 11014.85,
+     "provisionedCoreHours": 474909,
+     "requestedCoreHours": 187876
+    },
+    "memory": {
+     "actual": 5977,
+     "projected": 5977,
+     "provisionedGibHours": 1894666,
+     "requestedGibHours": 1077227
+    }
+   },
+   "baseline": null,
+   "classicSavings": {
+    "unavailable": "this API is not available for cluster \"cf62a8e1-1f1e-40dc-bd90-1b5c84dfa9df\": cluster is read-only"
+   },
+   "caseId": "B"
+  },
+  {
+   "id8": "d0c7a7a5",
+   "org": "SMO Railigent X",
+   "orgId": "f15f33b9-20ad-4128-8289-da529844d3f0",
+   "name": "k8s",
+   "status": "ready",
+   "provider": "eks",
+   "region": "eu-central-1",
+   "createdAt": "2026-06-19T13:58:18.684490Z",
+   "agentStatus": "online",
+   "http": {
+    "01": 200,
+    "02": 200,
+    "03": 404,
+    "04": 200,
+    "05": 400,
+    "06": 200,
+    "07": 200
+   },
+   "nodes": {
+    "total": 202,
+    "castManaged": 0,
+    "karpenter": 199,
+    "other": 3,
+    "shareCastManagedPct": 0
+   },
+   "was": {
+    "totalWorkloads": 422,
+    "optimized": 383,
+    "vpaOptimized": 383,
+    "hpaOptimized": 0,
+    "apiManaged": 416,
+    "cpuNow": 136.81,
+    "cpuRecommended": 128.16,
+    "cpuOriginal": 271.15,
+    "ramNowGiB": 872.19,
+    "ramRecommendedGiB": 896.42,
+    "ramOriginalGiB": 907.27,
+    "cpuReductionPct": 49.5,
+    "ramReductionPct": 3.9
+   },
+   "wasMetrics": {
+    "points": 672,
+    "firstPoint": "2026-09-30T21:15:00Z",
+    "lastPoint": "2026-10-07T21:00:00Z"
+   },
+   "vr": {
+    "clusterName": "k8s",
+    "status": "ready",
+    "baselineType": "BASELINE_TYPE_UNSPECIFIED",
+    "woopAdopted": true,
+    "autoscalerAdopted": false,
+    "actual": 18984.3,
+    "projected": 18984.3,
+    "autoscalerSavings": 0,
+    "workloadAutoscalerSavings": 2678.93,
+    "totalSavings": 0,
+    "cpu": {
+     "actual": 12462.15,
+     "projected": 12462.15,
+     "provisionedCoreHours": 629131,
+     "requestedCoreHours": 242309
+    },
+    "memory": {
+     "actual": 6522.15,
+     "projected": 6522.15,
+     "provisionedGibHours": 2398609,
+     "requestedGibHours": 1298870
+    }
+   },
+   "baseline": null,
+   "classicSavings": {
+    "unavailable": "this API is not available for cluster \"d0c7a7a5-72d2-4c09-a9f6-1b173c64d0a8\": cluster is read-only"
+   },
+   "caseId": "B"
+  },
+  {
+   "id8": "f8dd5b4f",
+   "org": "SMO Railigent X",
+   "orgId": "f15f33b9-20ad-4128-8289-da529844d3f0",
+   "name": "k8s",
+   "status": "ready",
+   "provider": "eks",
+   "region": "eu-central-1",
+   "createdAt": "2026-06-19T14:28:13.861475Z",
+   "agentStatus": "online",
+   "http": {
+    "05": 202
+   },
+   "nodes": {
+    "total": 7,
+    "castManaged": 0,
+    "karpenter": 4,
+    "other": 3,
+    "shareCastManagedPct": 0
+   },
+   "was": {
+    "totalWorkloads": 65,
+    "optimized": 56,
+    "vpaOptimized": 56,
+    "hpaOptimized": 0,
+    "apiManaged": 62,
+    "cpuNow": 5.7,
+    "cpuRecommended": 4.79,
+    "cpuOriginal": 25.72,
+    "ramNowGiB": 36.05,
+    "ramRecommendedGiB": 31.24,
+    "ramOriginalGiB": 99.52,
+    "cpuReductionPct": 77.8,
+    "ramReductionPct": 63.8
+   },
+   "wasMetrics": {
+    "points": 672,
+    "firstPoint": "2026-09-30T21:30:00Z",
+    "lastPoint": "2026-10-07T21:15:00Z"
+   },
+   "vr": {
+    "clusterName": "k8s",
+    "status": "ready",
+    "baselineType": "BASELINE_TYPE_UNSPECIFIED",
+    "woopAdopted": true,
+    "autoscalerAdopted": false,
+    "actual": 550.7,
+    "projected": 550.7,
+    "autoscalerSavings": 0,
+    "workloadAutoscalerSavings": 431.26,
+    "totalSavings": 0,
+    "cpu": {
+     "actual": 375.84,
+     "projected": 375.84,
+     "provisionedCoreHours": 18879,
+     "requestedCoreHours": 7848
+    },
+    "memory": {
+     "actual": 174.86,
+     "projected": 174.86,
+     "provisionedGibHours": 59320,
+     "requestedGibHours": 37873
+    }
+   },
+   "baseline": null,
+   "classicSavings": {
+    "unavailable": "this API is not available for cluster \"f8dd5b4f-3cf4-48e2-b453-7be4562e36cb\": cluster is read-only"
+   },
+   "caseId": "B"
+  },
+  {
+   "id8": "ae3e22a4",
+   "org": "SMO Railigent X",
+   "orgId": "f15f33b9-20ad-4128-8289-da529844d3f0",
+   "name": "staging",
+   "status": "ready",
+   "provider": "eks",
+   "region": "eu-central-1",
+   "createdAt": "2026-05-13T13:57:31.521664Z",
+   "agentStatus": "online",
+   "http": {},
+   "nodes": {
+    "total": 15,
+    "castManaged": 0,
+    "karpenter": 12,
+    "other": 3,
+    "shareCastManagedPct": 0
+   },
+   "was": {
+    "totalWorkloads": 87,
+    "optimized": 78,
+    "vpaOptimized": 78,
+    "hpaOptimized": 0,
+    "apiManaged": 84,
+    "cpuNow": 12.47,
+    "cpuRecommended": 9.89,
+    "cpuOriginal": 33.76,
+    "ramNowGiB": 81.81,
+    "ramRecommendedGiB": 74.28,
+    "ramOriginalGiB": 138.29,
+    "cpuReductionPct": 63.1,
+    "ramReductionPct": 40.8
+   },
+   "wasMetrics": {
+    "points": 672,
+    "firstPoint": "2026-09-30T21:30:00Z",
+    "lastPoint": "2026-10-07T21:15:00Z"
+   },
+   "vr": {
+    "clusterName": "staging",
+    "status": "ready",
+    "baselineType": "BASELINE_TYPE_UNSPECIFIED",
+    "woopAdopted": true,
+    "autoscalerAdopted": false,
+    "actual": 1354.78,
+    "projected": 1354.78,
+    "autoscalerSavings": 0,
+    "workloadAutoscalerSavings": 431.69,
+    "totalSavings": 0,
+    "cpu": {
+     "actual": 851.17,
+     "projected": 851.17,
+     "provisionedCoreHours": 45579,
+     "requestedCoreHours": 21478
+    },
+    "memory": {
+     "actual": 503.61,
+     "projected": 503.61,
+     "provisionedGibHours": 215254,
+     "requestedGibHours": 120523
+    }
+   },
+   "baseline": null,
+   "classicSavings": {
+    "unavailable": "this API is not available for cluster \"ae3e22a4-6e7a-487d-9c95-2c0fb3bb8f35\": cluster is read-only"
+   },
+   "caseId": "B"
+  },
+  {
+   "id8": "419c39e4",
+   "org": "SI GSW CLO",
+   "orgId": "07aa3c29-3e1f-44bc-ad60-ceedb878d99a",
+   "name": "ngm-helios-eks",
+   "status": "ready",
+   "provider": "eks",
+   "region": "eu-central-1",
+   "createdAt": "2025-09-30T09:54:26.699650Z",
+   "agentStatus": "online",
+   "http": {
+    "05": 202,
+    "07": 202
+   },
+   "nodes": {
+    "total": 55,
+    "castManaged": 52,
+    "karpenter": 0,
+    "other": 3,
+    "shareCastManagedPct": 94.5
+   },
+   "was": {
+    "totalWorkloads": 3602,
+    "optimized": 0,
+    "vpaOptimized": 0,
+    "hpaOptimized": 0,
+    "apiManaged": 3602,
+    "cpuNow": 415.72,
+    "cpuRecommended": 119.22,
+    "cpuOriginal": 439.63,
+    "ramNowGiB": 1753.86,
+    "ramRecommendedGiB": 1468.37,
+    "ramOriginalGiB": 1803.73,
+    "cpuReductionPct": 5.4,
+    "ramReductionPct": 2.8
+   },
+   "wasMetrics": {
+    "points": 672,
+    "firstPoint": "2026-09-30T21:30:00Z",
+    "lastPoint": "2026-10-07T21:15:00Z"
+   },
+   "vr": {
+    "clusterName": "ngm-helios-eks",
+    "status": "ready",
+    "baselineType": "CLUSTER_HISTORY",
+    "woopAdopted": false,
+    "autoscalerAdopted": true,
+    "actual": 41386.36,
+    "projected": 56354.23,
+    "autoscalerSavings": 14967.86,
+    "workloadAutoscalerSavings": 0,
+    "totalSavings": 14967.86,
+    "cpu": {
+     "actual": 24722.53,
+     "projected": 36468.05,
+     "provisionedCoreHours": 1192694,
+     "requestedCoreHours": 901835
+    },
+    "memory": {
+     "actual": 16663.83,
+     "projected": 19886.18,
+     "provisionedGibHours": 5466544,
+     "requestedGibHours": 2673106
+    }
+   },
+   "baseline": {
+    "type": "CLUSTER_HISTORY",
+    "periodStart": "2025-09-30T09:54:26Z",
+    "periodEnd": "2026-07-20T00:00:00Z",
+    "cpuFactor": 1.6035,
+    "ramFactor": 2.1697,
+    "cpuUnitCost": 0.025218,
+    "ramUnitCost": 0.003419,
+    "updateTime": "2026-07-21T08:00:50Z"
+   },
+   "classicSavings": {
+    "clusterId": "419c39e4-66bf-4d61-b833-4562968a61c7",
+    "items": [
+     {
+      "timestamp": "2026-09-30T00:00:00Z",
+      "downscalingSavings": "734.003897",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-28T00:00:00Z",
+      "downscalingSavings": "36.455422",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-04T00:00:00Z",
+      "downscalingSavings": "261.906910",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-20T00:00:00Z",
+      "downscalingSavings": "723.800601",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-01T00:00:00Z",
+      "downscalingSavings": "753.589627",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-03T00:00:00Z",
+      "downscalingSavings": "705.690494",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-08T00:00:00Z",
+      "downscalingSavings": "631.286499",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-21T00:00:00Z",
+      "downscalingSavings": "227.760233",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-27T00:00:00Z",
+      "downscalingSavings": "348.940381",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-06T00:00:00Z",
+      "downscalingSavings": "904.469129",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-18T00:00:00Z",
+      "downscalingSavings": "958.815955",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-05T00:00:00Z",
+      "downscalingSavings": "37.320883",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-17T00:00:00Z",
+      "downscalingSavings": "1040.614893",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-23T00:00:00Z",
+      "downscalingSavings": "563.768132",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-29T00:00:00Z",
+      "downscalingSavings": "867.060854",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-24T00:00:00Z",
+      "downscalingSavings": "636.870574",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-14T00:00:00Z",
+      "downscalingSavings": "153.376321",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-11T00:00:00Z",
+      "downscalingSavings": "664.881792",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-07T00:00:00Z",
+      "downscalingSavings": "710.914920",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-26T00:00:00Z",
+      "downscalingSavings": "650.366755",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-13T00:00:00Z",
+      "downscalingSavings": "462.413946",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-25T00:00:00Z",
+      "downscalingSavings": "640.110253",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-10T00:00:00Z",
+      "downscalingSavings": "721.972333",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-16T00:00:00Z",
+      "downscalingSavings": "635.673760",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-12T00:00:00Z",
+      "downscalingSavings": "645.867549",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-22T00:00:00Z",
+      "downscalingSavings": "771.083078",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-15T00:00:00Z",
+      "downscalingSavings": "864.946706",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-02T00:00:00Z",
+      "downscalingSavings": "728.889780",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-09T00:00:00Z",
+      "downscalingSavings": "710.587017",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-19T00:00:00Z",
+      "downscalingSavings": "525.781024",
+      "spotSavings": "0.000000"
+     }
+    ],
+    "summary": {
+     "totalCost": "43772.557526",
+     "totalSavings": "18319.219717"
+    }
+   },
+   "caseId": "C"
+  },
+  {
+   "id8": "6d20eb8e",
+   "org": "SI GSW CLO",
+   "orgId": "07aa3c29-3e1f-44bc-ad60-ceedb878d99a",
+   "name": "ngm-kronos-eks",
+   "status": "ready",
+   "provider": "eks",
+   "region": "eu-central-1",
+   "createdAt": "2025-09-30T09:54:27.680940Z",
+   "agentStatus": "online",
+   "http": {
+    "05": 202,
+    "06": 202,
+    "07": 202
+   },
+   "nodes": {
+    "total": 3,
+    "castManaged": 2,
+    "karpenter": 0,
+    "other": 1,
+    "shareCastManagedPct": 66.7
+   },
+   "was": {
+    "totalWorkloads": 285,
+    "optimized": 0,
+    "vpaOptimized": 0,
+    "hpaOptimized": 0,
+    "apiManaged": 285,
+    "cpuNow": 6.03,
+    "cpuRecommended": 1.8,
+    "cpuOriginal": 6.03,
+    "ramNowGiB": 23.02,
+    "ramRecommendedGiB": 20.37,
+    "ramOriginalGiB": 23.02,
+    "cpuReductionPct": 0,
+    "ramReductionPct": 0
+   },
+   "wasMetrics": {
+    "points": 672,
+    "firstPoint": "2026-09-30T21:30:00Z",
+    "lastPoint": "2026-10-07T21:15:00Z"
+   },
+   "vr": {
+    "clusterName": "ngm-kronos-eks",
+    "status": "ready",
+    "baselineType": "CLUSTER_HISTORY",
+    "woopAdopted": false,
+    "autoscalerAdopted": true,
+    "actual": 1780.63,
+    "projected": 9482.87,
+    "autoscalerSavings": 7702.24,
+    "workloadAutoscalerSavings": 0,
+    "totalSavings": 7702.24,
+    "cpu": {
+     "actual": 1183.27,
+     "projected": 5981.94,
+     "provisionedCoreHours": 56210,
+     "requestedCoreHours": 38158
+    },
+    "memory": {
+     "actual": 597.36,
+     "projected": 3500.93,
+     "provisionedGibHours": 209105,
+     "requestedGibHours": 76668
+    }
+   },
+   "baseline": {
+    "type": "CLUSTER_HISTORY",
+    "periodStart": "2025-09-30T09:54:27Z",
+    "periodEnd": "2025-11-06T00:00:00Z",
+    "cpuFactor": 5.2468,
+    "ramFactor": 11.0015,
+    "cpuUnitCost": 0.029858,
+    "ramUnitCost": 0.004142,
+    "updateTime": "2025-12-03T08:00:06Z"
+   },
+   "classicSavings": {
+    "clusterId": "6d20eb8e-a1e5-4411-b4c8-5346ac3291b0",
+    "items": [
+     {
+      "timestamp": "2026-09-28T00:00:00Z",
+      "downscalingSavings": "0.000000",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-30T00:00:00Z",
+      "downscalingSavings": "147.235643",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-04T00:00:00Z",
+      "downscalingSavings": "0.000000",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-20T00:00:00Z",
+      "downscalingSavings": "1.206926",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-01T00:00:00Z",
+      "downscalingSavings": "137.457379",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-03T00:00:00Z",
+      "downscalingSavings": "129.186802",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-08T00:00:00Z",
+      "downscalingSavings": "140.869208",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-18T00:00:00Z",
+      "downscalingSavings": "268.953043",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-06T00:00:00Z",
+      "downscalingSavings": "138.581948",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-21T00:00:00Z",
+      "downscalingSavings": "0.000000",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-27T00:00:00Z",
+      "downscalingSavings": "2.885992",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-05T00:00:00Z",
+      "downscalingSavings": "0.000000",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-17T00:00:00Z",
+      "downscalingSavings": "138.208408",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-23T00:00:00Z",
+      "downscalingSavings": "7.830658",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-29T00:00:00Z",
+      "downscalingSavings": "79.314322",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-24T00:00:00Z",
+      "downscalingSavings": "7.927011",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-07T00:00:00Z",
+      "downscalingSavings": "147.626497",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-11T00:00:00Z",
+      "downscalingSavings": "181.707295",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-14T00:00:00Z",
+      "downscalingSavings": "0.000000",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-26T00:00:00Z",
+      "downscalingSavings": "82.018253",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-13T00:00:00Z",
+      "downscalingSavings": "0.000000",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-25T00:00:00Z",
+      "downscalingSavings": "79.523097",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-12T00:00:00Z",
+      "downscalingSavings": "263.341515",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-10T00:00:00Z",
+      "downscalingSavings": "233.543424",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-16T00:00:00Z",
+      "downscalingSavings": "250.072627",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-15T00:00:00Z",
+      "downscalingSavings": "237.303422",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-22T00:00:00Z",
+      "downscalingSavings": "212.052579",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-09T00:00:00Z",
+      "downscalingSavings": "174.011402",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-02T00:00:00Z",
+      "downscalingSavings": "136.643736",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-19T00:00:00Z",
+      "downscalingSavings": "255.623786",
+      "spotSavings": "0.000000"
+     }
+    ],
+    "summary": {
+     "totalCost": "1887.145585",
+     "totalSavings": "3453.124973"
+    }
+   },
+   "caseId": "C"
+  },
+  {
+   "id8": "d03690cb",
+   "org": "SMO Railigent X",
+   "orgId": "f15f33b9-20ad-4128-8289-da529844d3f0",
+   "name": "k8s-andreas",
+   "status": "ready",
+   "provider": "eks",
+   "region": "eu-central-1",
+   "createdAt": "2026-02-04T17:03:41.910755Z",
+   "agentStatus": "online",
+   "http": {},
+   "nodes": {
+    "total": 14,
+    "castManaged": 0,
+    "karpenter": 11,
+    "other": 3,
+    "shareCastManagedPct": 0
+   },
+   "was": {
+    "totalWorkloads": 88,
+    "optimized": 79,
+    "vpaOptimized": 79,
+    "hpaOptimized": 0,
+    "apiManaged": 85,
+    "cpuNow": 11.99,
+    "cpuRecommended": 10.8,
+    "cpuOriginal": 31.04,
+    "ramNowGiB": 71.37,
+    "ramRecommendedGiB": 67.01,
+    "ramOriginalGiB": 108.62,
+    "cpuReductionPct": 61.4,
+    "ramReductionPct": 34.3
+   },
+   "wasMetrics": {
+    "points": 672,
+    "firstPoint": "2026-09-30T21:30:00Z",
+    "lastPoint": "2026-10-07T21:15:00Z"
+   },
+   "vr": {
+    "clusterName": "k8s-andreas",
+    "status": "ready",
+    "baselineType": "INDUSTRY_AVERAGE",
+    "woopAdopted": true,
+    "autoscalerAdopted": true,
+    "actual": 743.15,
+    "projected": 150767.48,
+    "autoscalerSavings": 150024.33,
+    "workloadAutoscalerSavings": 619.45,
+    "totalSavings": 150024.33,
+    "cpu": {
+     "actual": 506.51,
+     "projected": 132593.18,
+     "provisionedCoreHours": 31100,
+     "requestedCoreHours": 12223
+    },
+    "memory": {
+     "actual": 236.64,
+     "projected": 18174.3,
+     "provisionedGibHours": 101447,
+     "requestedGibHours": 59000
+    }
+   },
+   "baseline": {
+    "type": "INDUSTRY_AVERAGE",
+    "periodStart": "2026-04-15T00:00:00Z",
+    "periodEnd": "2026-04-16T00:00:00Z",
+    "cpuFactor": 169.5822,
+    "ramFactor": 35.4441,
+    "cpuUnitCost": 0.029357,
+    "ramUnitCost": 0.005328,
+    "updateTime": "2026-04-16T08:00:50Z"
+   },
+   "classicSavings": {
+    "unavailable": "this API is not available for cluster \"d03690cb-2ba4-4ff5-9519-27013515aba7\": cluster is read-only"
+   },
+   "caseId": "D"
+  },
+  {
+   "id8": "51dd234c",
+   "org": "SI GSW CLO",
+   "orgId": "07aa3c29-3e1f-44bc-ad60-ceedb878d99a",
+   "name": "ngm-sim-eks",
+   "status": "ready",
+   "provider": "eks",
+   "region": "eu-central-1",
+   "createdAt": "2025-09-30T09:53:08.196687Z",
+   "agentStatus": "online",
+   "http": {},
+   "nodes": {
+    "total": 48,
+    "castManaged": 46,
+    "karpenter": 0,
+    "other": 2,
+    "shareCastManagedPct": 95.8
+   },
+   "was": {
+    "totalWorkloads": 494,
+    "optimized": 0,
+    "vpaOptimized": 0,
+    "hpaOptimized": 0,
+    "apiManaged": 494,
+    "cpuNow": 297.62,
+    "cpuRecommended": 88.03,
+    "cpuOriginal": 297.62,
+    "ramNowGiB": 1086.7,
+    "ramRecommendedGiB": 883.66,
+    "ramOriginalGiB": 1086.7,
+    "cpuReductionPct": 0,
+    "ramReductionPct": 0
+   },
+   "wasMetrics": {
+    "points": 672,
+    "firstPoint": "2026-09-30T21:30:00Z",
+    "lastPoint": "2026-10-07T21:15:00Z"
+   },
+   "vr": {
+    "clusterName": "ngm-sim-eks",
+    "status": "ready",
+    "baselineType": "CLUSTER_HISTORY",
+    "woopAdopted": true,
+    "autoscalerAdopted": true,
+    "actual": 8084.39,
+    "projected": 59807.69,
+    "autoscalerSavings": 51723.31,
+    "workloadAutoscalerSavings": 0,
+    "totalSavings": 51723.31,
+    "cpu": {
+     "actual": 5149.32,
+     "projected": 30648.08,
+     "provisionedCoreHours": 251684,
+     "requestedCoreHours": 233834
+    },
+    "memory": {
+     "actual": 2935.06,
+     "projected": 29159.61,
+     "provisionedGibHours": 1059246,
+     "requestedGibHours": 796946
+    }
+   },
+   "baseline": {
+    "type": "CLUSTER_HISTORY",
+    "periodStart": "2025-09-30T09:53:08Z",
+    "periodEnd": "2026-06-03T00:00:00Z",
+    "cpuFactor": 3.8408,
+    "ramFactor": 7.8791,
+    "cpuUnitCost": 0.033938,
+    "ramUnitCost": 0.004615,
+    "updateTime": "2026-06-04T08:00:44Z"
+   },
+   "classicSavings": {
+    "clusterId": "51dd234c-a5bf-4f99-a884-b79956de8f94",
+    "items": [
+     {
+      "timestamp": "2026-09-22T00:00:00Z",
+      "downscalingSavings": "7.818903",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-15T00:00:00Z",
+      "downscalingSavings": "12.965032",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-10T00:00:00Z",
+      "downscalingSavings": "14.211513",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-16T00:00:00Z",
+      "downscalingSavings": "6.445842",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-12T00:00:00Z",
+      "downscalingSavings": "17.683375",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-02T00:00:00Z",
+      "downscalingSavings": "8.855663",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-09T00:00:00Z",
+      "downscalingSavings": "16.973978",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-19T00:00:00Z",
+      "downscalingSavings": "18.699095",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-29T00:00:00Z",
+      "downscalingSavings": "11.919784",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-24T00:00:00Z",
+      "downscalingSavings": "13.356630",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-14T00:00:00Z",
+      "downscalingSavings": "1.120113",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-11T00:00:00Z",
+      "downscalingSavings": "24.072471",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-07T00:00:00Z",
+      "downscalingSavings": "2.892549",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-26T00:00:00Z",
+      "downscalingSavings": "4.197057",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-13T00:00:00Z",
+      "downscalingSavings": "2.234073",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-25T00:00:00Z",
+      "downscalingSavings": "9.120783",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-21T00:00:00Z",
+      "downscalingSavings": "10.548268",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-27T00:00:00Z",
+      "downscalingSavings": "2.513768",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-06T00:00:00Z",
+      "downscalingSavings": "15.798723",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-18T00:00:00Z",
+      "downscalingSavings": "3.484556",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-03T00:00:00Z",
+      "downscalingSavings": "14.361413",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-08T00:00:00Z",
+      "downscalingSavings": "175.590483",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-05T00:00:00Z",
+      "downscalingSavings": "3.850071",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-17T00:00:00Z",
+      "downscalingSavings": "2.741076",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-23T00:00:00Z",
+      "downscalingSavings": "15.268317",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-30T00:00:00Z",
+      "downscalingSavings": "18.963617",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-28T00:00:00Z",
+      "downscalingSavings": "3.464560",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-04T00:00:00Z",
+      "downscalingSavings": "4.091801",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-09-20T00:00:00Z",
+      "downscalingSavings": "10.338006",
+      "spotSavings": "0.000000"
+     },
+     {
+      "timestamp": "2026-10-01T00:00:00Z",
+      "downscalingSavings": "171.026793",
+      "spotSavings": "0.000000"
+     }
+    ],
+    "summary": {
+     "totalCost": "8087.096716",
+     "totalSavings": "624.608313"
+    }
+   },
+   "caseId": "D"
+  },
+  {
+   "id8": "ce86ecf0",
+   "org": "IT IPS",
+   "orgId": "c67df1a0-06e0-46f9-a84e-27c14958d564",
+   "name": "bx-edex-prod-eu",
+   "status": "ready",
+   "provider": "eks",
+   "region": "eu-west-1",
+   "createdAt": "2025-10-06T15:54:02.252483Z",
+   "agentStatus": "online",
+   "http": {
+    "05": 202
+   },
+   "nodes": {
+    "total": 19,
+    "castManaged": 0,
+    "karpenter": 0,
+    "other": 19,
+    "shareCastManagedPct": 0
+   },
+   "was": {
+    "notInstalledMessage": "castai-workload-autoscaler should be installed to enable workload optimization"
+   },
+   "wasMetrics": null,
+   "vr": null,
+   "baseline": null,
+   "classicSavings": {
+    "unavailable": "this API is not available for cluster \"ce86ecf0-1c17-4d02-936b-dd239411ea0a\": cluster is read-only"
+   },
+   "caseId": "F"
+  },
+  {
+   "id8": "9cabe4ee",
+   "org": "SI GSW CLO",
+   "orgId": "07aa3c29-3e1f-44bc-ad60-ceedb878d99a",
+   "name": "clo-master-eks",
+   "status": "ready",
+   "provider": "eks",
+   "region": "eu-central-1",
+   "createdAt": "2025-10-03T08:49:32.810319Z",
+   "agentStatus": "online",
+   "http": {},
+   "nodes": {
+    "total": 2,
+    "castManaged": 0,
+    "karpenter": 0,
+    "other": 2,
+    "shareCastManagedPct": 0
+   },
+   "was": {
+    "notInstalledMessage": "castai-workload-autoscaler should be installed to enable workload optimization"
+   },
+   "wasMetrics": null,
+   "vr": null,
+   "baseline": null,
+   "classicSavings": {
+    "unavailable": "this API is not available for cluster \"9cabe4ee-c3cb-4877-a6e6-a464b3dd388a\": cluster is read-only"
+   },
+   "caseId": "F"
+  },
+  {
+   "id8": "e16fc060",
+   "org": "IT IPS",
+   "orgId": "c67df1a0-06e0-46f9-a84e-27c14958d564",
+   "name": "cloudcore01",
+   "status": "ready",
+   "provider": "eks",
+   "region": "eu-central-1",
+   "createdAt": "2025-09-24T14:25:14.911802Z",
+   "agentStatus": "online",
+   "http": {},
+   "nodes": {
+    "total": 7,
+    "castManaged": 0,
+    "karpenter": 0,
+    "other": 7,
+    "shareCastManagedPct": 0
+   },
+   "was": {
+    "notInstalledMessage": "castai-workload-autoscaler should be installed to enable workload optimization"
+   },
+   "wasMetrics": null,
+   "vr": null,
+   "baseline": null,
+   "classicSavings": {
+    "unavailable": "this API is not available for cluster \"e16fc060-803a-47e2-985e-f0c15058a6c9\": cluster is read-only"
+   },
+   "caseId": "F"
+  },
+  {
+   "id8": "35c0f9b5",
+   "org": "SMO Railigent X",
+   "orgId": "f15f33b9-20ad-4128-8289-da529844d3f0",
+   "name": "rhx-test",
+   "status": "ready",
+   "provider": "anywhere",
+   "region": "unknown",
+   "createdAt": "2026-06-15T15:37:01.489115Z",
+   "agentStatus": "disconnected",
+   "http": {
+    "05": 202,
+    "06": 202,
+    "07": 202
+   },
+   "nodes": {
+    "total": 4,
+    "castManaged": 0,
+    "karpenter": 0,
+    "other": 4,
+    "shareCastManagedPct": 0
+   },
+   "was": {
+    "notInstalledMessage": "castai-workload-autoscaler should be installed to enable workload optimization"
+   },
+   "wasMetrics": null,
+   "vr": null,
+   "baseline": null,
+   "classicSavings": {
+    "unavailable": "this API is not available for cluster \"35c0f9b5-25f1-49bb-aa2a-ec49915352b3\": cluster is read-only"
+   },
+   "caseId": "F"
+  }
+ ],
+ "orgRailigentX": {
+  "totals": {
+   "actual": 63959.05,
+   "projected": 213983.38,
+   "totalSavings": 150024.33,
+   "autoscalerSavings": 150024.33,
+   "workloadAutoscalerSavings": 8983.35
+  },
+  "summary": {
+   "cost": {
+    "actualCost": 325127.07435901836,
+    "projectedCost": 1032358.6603351881,
+    "autoscalerSavings": 707231.5859761697,
+    "workloadAutoscalerSavings": 28900.30681040023,
+    "totalSavings": 707231.5859761697
+   },
+   "cpu": {
+    "actualCost": 212560.73734454045,
+    "projectedCost": 836937.1405588071,
+    "provisionedCoresHourly": 2977.5429999999997,
+    "projectedCoresHourly": 8727.044999999998,
+    "requestedCoresHourly": 1398.145,
+    "provisionedCoreHours": 9414462.37,
+    "projectedCoreHours": 30625729.707,
+    "requestedCoreHours": 4027738.1129999994,
+    "provisionedCores": 325.7035934959349,
+    "projectedCores": 1059.5305209133367,
+    "requestedCores": 139.3439928386092
+   },
+   "memory": {
+    "actualCost": 112566.3370144779,
+    "projectedCost": 195421.51977638103,
+    "provisionedBytesHourly": 12494071160439,
+    "projectedBytesHourly": 16927470481158,
+    "requestedBytesHourly": 6281572554609,
+    "provisionedByteHours": 39837698319514860,
+    "projectedByteHours": 56307544579633440,
+    "requestedByteHours": 20604970028803520,
+    "provisionedGib": 1283.575428669272,
+    "projectedGib": 1814.235854979417,
+    "requestedGib": 663.8946112125952
+   },
+   "woopAdopted": true,
+   "autoscalerAdopted": true,
+   "workloadOptimization": {
+    "managedWorkloadCount": "6306",
+    "totalWorkloadCount": "11380",
+    "managed": {
+     "cpuUsedCoreHours": 459433.18532638636,
+     "cpuRequestedCoreHours": 1142953.1710589554,
+     "memoryUsedByteHours": 3563450721102193.5,
+     "memoryRequestedByteHours": 7627066310907223
+    },
+    "unmanaged": {
+     "cpuUsedCoreHours": 734108.4035113122,
+     "cpuRequestedCoreHours": 2891633.272122066,
+     "memoryUsedByteHours": 8605486122327984,
+     "memoryRequestedByteHours": 12992344635966212
+    }
+   },
+   "nodes": {
+    "actualNodeCount": 9899.47666845627,
+    "projectedNodeCount": 34699.95750748072,
+    "actualCostPerNode": 3.6492060837362192,
+    "projectedCostPerNode": 3.305667385624093
+   }
+  },
+  "timeline": [
+   {
+    "month": "2026-02",
+    "actual": 722.68,
+    "projected": 722.68,
+    "autoscalerSavings": 0,
+    "workloadAutoscalerSavings": 0,
+    "totalSavings": 0
+   },
+   {
+    "month": "2026-03",
+    "actual": 21679.77,
+    "projected": 21679.77,
+    "autoscalerSavings": 0,
+    "workloadAutoscalerSavings": 0,
+    "totalSavings": 0
+   },
+   {
+    "month": "2026-04",
+    "actual": 23480.36,
+    "projected": 23480.36,
+    "autoscalerSavings": 0,
+    "workloadAutoscalerSavings": 6.45,
+    "totalSavings": 0
+   },
+   {
+    "month": "2026-05",
+    "actual": 26320.28,
+    "projected": 120742.85,
+    "autoscalerSavings": 94422.58,
+    "workloadAutoscalerSavings": 507.13,
+    "totalSavings": 94422.58
+   },
+   {
+    "month": "2026-06",
+    "actual": 40877.07,
+    "projected": 190064.45,
+    "autoscalerSavings": 149187.37,
+    "workloadAutoscalerSavings": 1695.42,
+    "totalSavings": 149187.37
+   },
+   {
+    "month": "2026-07",
+    "actual": 70883.43,
+    "projected": 213464.34,
+    "autoscalerSavings": 142580.91,
+    "workloadAutoscalerSavings": 7395.84,
+    "totalSavings": 142580.91
+   },
+   {
+    "month": "2026-08",
+    "actual": 68594.71,
+    "projected": 218950.22,
+    "autoscalerSavings": 150355.52,
+    "workloadAutoscalerSavings": 9076.65,
+    "totalSavings": 150355.52
+   },
+   {
+    "month": "2026-09",
+    "actual": 64099.54,
+    "projected": 213051.41,
+    "autoscalerSavings": 148951.87,
+    "workloadAutoscalerSavings": 9127.65,
+    "totalSavings": 148951.87
+   },
+   {
+    "month": "2026-10",
+    "actual": 8469.24,
+    "projected": 30202.58,
+    "autoscalerSavings": 21733.34,
+    "workloadAutoscalerSavings": 1091.18,
+    "totalSavings": 21733.34
+   }
+  ]
+ }
+}

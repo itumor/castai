@@ -1,0 +1,283 @@
+Cluster
+Compute cost
+Reliability
+Network cost
+Efficiency
+Total cost
+
+CURRENT MONTH SPEND
+
+$6,125
+
+MONTHLY FORECAST
+
+~$22,621
+$2,836
+Than last month
+
+AVG. DAILY COST
+
+$756.42
+$39.11
+Than last month
+
+AVG. DAILY COST PER RESOURCE
+
+CPU
+
+$0.48871
+
+/CPU
+
+MEMORY
+
+$0.0664
+
+/GIB
+
+STORAGE
+
+$0.00313
+
+/GIB
+
+Compute spend
+PROJECTED END OF DAY SPEND
+$1,253
+ON-DEMAND SPEND
+$1,113
+FALLBACK SPEND
+$0.00
+SPOT SPEND
+$0.00
+STORAGE SPEND
+$139.90
+
+On-demand
+
+Fallback
+
+Spot
+
+Storage
+
+DAILY COST
+
+4
+
+$0
+$350
+$700
+$1050
+$1400
+Sep 30
+Oct 02
+Oct 04
+Oct 06
+Oct 08
+Oct 10
+Oct 12
+Oct 14
+Oct 16
+Oct 18
+Oct 20
+Oct 22
+Oct 24
+Oct 26
+Oct 28
+Oct 30
+Normalized
+On-demand
+Fallback
+Spot
+
+Cost rate:
+
+/mo
+
+PROVISIONED CPU COST
+
+$14.93
+$0
+$8
+$16
+Sep 30
+Oct 03
+Oct 06
+Oct 09
+Oct 12
+Oct 15
+Oct 18
+Oct 21
+Oct 24
+Oct 27
+Oct 30
+
+PROVISIONED MEM COST
+
+$2.03
+$0
+$2
+$4
+Sep 30
+Oct 03
+Oct 06
+Oct 09
+Oct 12
+Oct 15
+Oct 18
+Oct 21
+Oct 24
+Oct 27
+Oct 30
+
+PROVISIONED STORAGE COST
+
+$0.0952
+$0
+$0.05
+$0.1
+Sep 30
+Oct 03
+Oct 06
+Oct 09
+Oct 12
+Oct 15
+Oct 18
+Oct 21
+Oct 24
+Oct 27
+Oct 30
+Daily compute spend details
+PROVISIONED RESOURCES
+TOTAL COST PER RESOURCE
+
+DATE
+
+CPU
+
+MEMORY
+
+STORAGE
+
+CPU
+
+MEMORY
+
+STORAGE
+
+TOTAL COST
+
+2026-10-31
+-
+-
+0 GiB
+$0.00
+$0.00
+$0.00
+
+$0.00
+
+2026-10-07
+
+1509.28
+
+5578.16
+
+44697.342 GiB
+$740.98
+$372.42
+$139.90
+
+$1,253
+
+2026-10-06
+
+1268.21
+
+4889.69
+
+30751.787 GiB
+$618.65
+$324.34
+$96.25
+
+$1,039
+
+2026-10-05
+
+725.78
+
+2952.15
+
+14769.744 GiB
+$353.30
+$195.37
+$46.23
+
+$594.90
+
+2026-10-04
+
+766.42
+
+3066.92
+
+15538.167 GiB
+$373.86
+$203.31
+$48.63
+
+$625.80
+
+2026-10-03
+
+264.44
+
+1200.46
+
+7033.044 GiB
+$129.53
+$79.73
+$22.01
+
+$231.27
+
+2026-10-02
+
+378.29
+
+1682.06
+
+17093.207 GiB
+$187.37
+$112.93
+$53.50
+
+$353.79
+
+2026-10-01
+
+961.36
+
+3834.14
+
+25714.337 GiB
+$468.66
+$253.83
+$80.48
+
+$802.97
+
+2026-09-30
+
+1363.06
+
+5385.64
+
+41288.432 GiB
+$664.38
+$356.48
+$129.23
+
+$1,150

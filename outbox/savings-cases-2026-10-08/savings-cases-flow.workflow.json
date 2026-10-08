@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "CAST AI Savings Cases — Detection & Data Provenance",
+    "output": "outbox/savings-cases-2026-10-08/savings-cases-flow.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "classify",
+        "label": "Classify the topology",
+        "focus": [
+          "vrCall",
+          "gate",
+          "caseB",
+          "caseC",
+          "caseD",
+          "caseNone"
+        ],
+        "note": "Two flags on the report item decide which savings track a cluster has."
+      },
+      {
+        "id": "transition",
+        "label": "Case E · the transition",
+        "focus": [
+          "caseB",
+          "caseD",
+          "timelineCall"
+        ],
+        "note": "WAS savings keep accruing when node management starts later — proof on the monthly timeline."
+      }
+    ]
+  },
+  "lanes": [
+    {
+      "id": "input",
+      "label": "Fleet & authority"
+    },
+    {
+      "id": "laneB",
+      "label": "Case B · WAS only (Karpenter)"
+    },
+    {
+      "id": "laneC",
+      "label": "Case C · Node only"
+    },
+    {
+      "id": "laneD",
+      "label": "Case D · Both"
+    },
+    {
+      "id": "laneNone",
+      "label": "Case A/F · No data",
+      "variant": "exception"
+    }
+  ],
+  "phases": [
+    {
+      "id": "phProbe",
+      "label": "Probe",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "phClassify",
+      "label": "Classify",
+      "fromCol": 2,
+      "toCol": 2,
+      "variant": "emphasis"
+    },
+    {
+      "id": "phTrack",
+      "label": "Savings track per case",
+      "fromCol": 3,
+      "toCol": 4
+    }
+  ],
+  "mainPath": [
+    "fleetList",
+    "vrCall",
+    "gate",
+    "caseB",
+    "caseD"
+  ],
+  "nodes": [
+    {
+      "id": "fleetList",
+      "lane": "input",
+      "col": 0,
+      "type": "messagebus",
+      "label": "Fleet",
+      "sublabel": "237 clusters",
+      "tag": "GET clusters"
+    },
+    {
+      "id": "vrCall",
+      "lane": "input",
+      "col": 2,
+      "type": "cloud",
+      "label": "VR report",
+      "sublabel": "flags + cost",
+      "tag": "POST report"
+    },
+    {
+      "id": "gate",
+      "lane": "input",
+      "col": 4,
+      "type": "security",
+      "label": "2 flags",
+      "sublabel": "woop × node",
+      "tag": "classifier"
+    },
+    {
+      "id": "caseB",
+      "lane": "laneB",
+      "col": 4,
+      "type": "backend",
+      "label": "B · WAS only",
+      "sublabel": "was$ · total 0",
+      "tag": "×8 · $431.26/30d"
+    },
+    {
+      "id": "caseC",
+      "lane": "laneC",
+      "col": 5,
+      "type": "backend",
+      "label": "C · Node only",
+      "sublabel": "post baselineEnd",
+      "tag": "kronos $7,702"
+    },
+    {
+      "id": "caseD",
+      "lane": "laneD",
+      "col": 4,
+      "type": "backend",
+      "label": "D · Both",
+      "sublabel": "total = node$",
+      "tag": "$150,024 + $619"
+    },
+    {
+      "id": "timelineCall",
+      "lane": "laneNone",
+      "col": 2,
+      "type": "cloud",
+      "label": "Timeline",
+      "sublabel": "monthly",
+      "tag": "POST 12m"
+    },
+    {
+      "id": "caseNone",
+      "lane": "laneNone",
+      "col": 5,
+      "type": "backend",
+      "label": "A/F · None",
+      "sublabel": "never $0",
+      "tag": "×4 live"
+    }
+  ],
+  "edges": [
+    {
+      "id": "eFleet",
+      "from": "fleetList",
+      "to": "vrCall",
+      "variant": "emphasis"
+    },
+    {
+      "id": "eVrGate",
+      "from": "vrCall",
+      "to": "gate",
+      "variant": "emphasis"
+    },
+    {
+      "id": "eGateB",
+      "from": "gate",
+      "to": "caseB",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "eTransition",
+      "from": "caseB",
+      "to": "caseD",
+      "variant": "emphasis",
+      "via": [
+        [
+          250,
+          243
+        ],
+        [
+          250,
+          491
+        ]
+      ],
+      "route": "return-left",
+      "fromSide": "left",
+      "toSide": "left"
+    },
+    {
+      "id": "eB2C",
+      "from": "caseB",
+      "to": "caseC",
+      "variant": "dashed"
+    },
+    {
+      "id": "eC2D",
+      "from": "caseC",
+      "to": "caseD",
+      "variant": "dashed"
+    },
+    {
+      "id": "eD2None",
+      "from": "caseD",
+      "to": "caseNone",
+      "variant": "dashed",
+      "role": "error"
+    },
+    {
+      "id": "eTimeline2D",
+      "from": "timelineCall",
+      "to": "caseD",
+      "variant": "dashed",
+      "fromSide": "top",
+      "toSide": "bottom"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "How Each Case Reads Its Data",
+      "items": [
+        "B: VR wasSavings = Σ (orig−now requests) × max(current, baseline price) · WAS summary shows orig→now (CPU −78%, RAM −64% on f8dd5b4f) · classic savings 400 “read-only” = node track OFF · baseline-params 404 = none needed",
+        "C/D: baseline-params 200 gives CLUSTER_HISTORY window, factors, unit costs; node savings = Σ (projected − actual) from baselinePeriodEndTime",
+        "A/F: VR returns empty items — report “no data”, never $0 · nodes probe (GET) shows 0% provisioner.cast.ai/managed-by labels"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Single Source of Truth",
+      "items": [
+        "Board numbers come from the value-realization report only",
+        "Classic savings ≠ value-realization: kronos 30d reads $3,453 vs $7,702 — never mix both",
+        "Dedupe by clusterId, never by name (six clusters are named “k8s”)"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Double-Count Guard",
+      "items": [
+        "totalSavings == autoscalerSavings (node track) — verified exactly on live data",
+        "workloadAutoscalerSavings is explanatory — already priced into the projection",
+        "Wrong sum would read $159,007.68 vs true $150,024.33 for the org month"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Auth & Signal Quirks",
+      "items": [
+        "Every call needs X-API-Key + X-CastAI-Organization-Id — without it the fleet reads as zero clusters",
+        "Karpenter integration: 0% managed-by labels yet node savings exist (andreas) — the flag beats the label",
+        "WAS-enable date: first timeline month with WAS $ > 0 (metrics API holds ~7 days only)"
+      ]
+    }
+  ]
+}

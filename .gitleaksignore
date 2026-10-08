@@ -17,3 +17,7 @@ projects/castai-support-swarm/tests/tools/kube.test.js:generic-api-key:33
 36268f7f7dab1fdf044ab39a5c51e7cc8368e953:castai-enterprise-dashboard/tests/test_qa_scale_security.py:generic-api-key:54
 36268f7f7dab1fdf044ab39a5c51e7cc8368e953:castai-enterprise-dashboard/tests/test_rate_gate.py:generic-api-key:20
 36268f7f7dab1fdf044ab39a5c51e7cc8368e953:castai-enterprise-dashboard/docs/openapi/castai-openapi.json:generic-api-key:57164
+
+# Same AWS KMS key-ID doc example, second copy of the public CAST AI OpenAPI spec
+# (2026-10-08 nightly sweep, verified identical doc text).
+outbox/savings-cases-2026-10-08/spec/openapi.json:generic-api-key:57456

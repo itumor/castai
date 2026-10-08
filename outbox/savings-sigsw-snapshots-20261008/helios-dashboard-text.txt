@@ -1,0 +1,206 @@
+ngm-helios-eks
+
+SNAPSHOT:
+
+OCTOBER 8, 01:27
+
+RECONCILE:
+
+OCTOBER 8, 01:07
+
+ACCOUNT ID: 600442974479
+
+CLUSTER STATUS:
+
+Connected
+
+K8S PROVIDER:
+
+ONBOARDED VIA:
+
+terraform/9.5.0
+
+REGION:
+
+EU (Frankfurt)
+
+KUBERNETES VERSION:
+
+1.34
+
+CONNECTED:
+
+a year ago
+
+CLUSTER ID:
+
+419c39e4-66bf-4d61-b833-4562968a61c7
+
+CLUSTER TAGS:
+
+Environment: helios, Name: ngm-helios-eks, ProjectName: ngm, acp_rating: 211, application_id: APM0022911, gmas_environment: helios, gmas_project: ngm, owner: paul.till@siemens.com, pipeline_url: https://code.siemens.com/masglobaldevops/ngm/internal/ngm/deployconfig/helios/config-ngm-helios-eks
+
++8 more
+
+HIBERNATION SCHEDULES
+
+0
+
+Nodes
+TOTAL NODES
+51
+ON-DEMAND
+51
+FALLBACK
+0
+SPOT
+0
+OVERPROVISIONING
+
+MANAGED BY
+
+COUNT
+
+CPU
+
+GiB
+
+EKS
+
+3
+55%
+75.8%
+
+CASTAI
+
+48
+24.3%
+40.4%
+TOTAL PODS
+1090
+SCHEDULED
+1090
+UNSCHEDULED
+0
+CPU
+676
+CPU
+
+PROVISIONED
+
+REQUESTED
+506.63
+74.95%
+USED
+33.41
+4.94%
+ALLOCATABLE
+622.1
+92.03%
+OVERHEAD
+53.9
+7.97%
+Memory
+3.4K
+GiB
+
+PROVISIONED
+
+REQUESTED
+1979.44
+58.91%
+USED
+654.42
+19.48%
+ALLOCATABLE
+2824.29
+84.06%
+OVERHEAD
+535.71
+15.94%
+Storage
+90.5K
+GiB
+
+PROVISIONED
+
+REQUESTED
+23223.49
+25.67%
+Cluster OOM kills
+TOTAL EVENTS
+185
+UNMANAGED WORKLOADS
+185
+MANAGED WORKLOADS
+0
+01 AM
+02 AM
+03 AM
+04 AM
+05 AM
+06 AM
+07 AM
+08 AM
+09 AM
+10 AM
+11 AM
+12 PM
+01 PM
+02 PM
+03 PM
+04 PM
+05 PM
+06 PM
+07 PM
+08 PM
+09 PM
+10 PM
+11 PM
+12 AM
+0
+2
+4
+6
+8
+
+Provisioned
+
+Requested
+
+Used
+
+CPU Utilization
+View cluster efficiency
+AVG. PROVISIONED
+$--
+CPU/h
+AVG. REQUESTED
+$--
+CPU/h
+AVG. USED
+$--
+CPU/h
+No data available
+Try selecting a different period
+Memory Utilization
+AVG. PROVISIONED
+$--
+GiB/h
+AVG. REQUESTED
+$--
+GiB/h
+AVG. USED
+$--
+GiB/h
+No data available
+Try selecting a different period
+Storage Utilization
+AVG. PROVISIONED
+--
+GiB/h
+AVG. REQUESTED
+--
+GiB/h
+No data available
+Try selecting a different period

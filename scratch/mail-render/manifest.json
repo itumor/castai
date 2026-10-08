@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "backend": "native",
+  "rasterEngine": "libreoffice",
+  "source": "saved",
+  "inputPath": "/Users/eramadan/castai/outbox/case-threads/20261008T0122Z-cps-negative-savings-mail.docx",
+  "sourceSha256": "8e70a116ff9e31c5181436c394169f7c393ca25f96c8c44e4b8993ca24bab43e",
+  "dpi": 100,
+  "pageCount": 4,
+  "images": [
+    {
+      "index": 1,
+      "page": 1,
+      "path": "/Users/eramadan/castai/scratch/mail-render/page-0001.png",
+      "width": 827,
+      "height": 1170,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 793.7333333333333,
+        "height": 1122.5333333333333
+      },
+      "byteLength": 6252
+    },
+    {
+      "index": 2,
+      "page": 2,
+      "path": "/Users/eramadan/castai/scratch/mail-render/page-0002.png",
+      "width": 827,
+      "height": 1170,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 793.7333333333333,
+        "height": 1122.5333333333333
+      },
+      "byteLength": 6252
+    },
+    {
+      "index": 3,
+      "page": 3,
+      "path": "/Users/eramadan/castai/scratch/mail-render/page-0003.png",
+      "width": 827,
+      "height": 1170,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 793.7333333333333,
+        "height": 1122.5333333333333
+      },
+      "byteLength": 6252
+    },
+    {
+      "index": 4,
+      "page": 4,
+      "path": "/Users/eramadan/castai/scratch/mail-render/page-0004.png",
+      "width": 827,
+      "height": 1170,
+      "rectangle": {
+        "x": 0,
+        "y": 0,
+        "width": 793.7333333333333,
+        "height": 1122.5333333333333
+      },
+      "byteLength": 6252
+    }
+  ],
+  "missingFonts": [
+    "Calibri"
+  ]
+}

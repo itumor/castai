@@ -1,0 +1,268 @@
+Cluster
+Compute cost
+Reliability
+Network cost
+Efficiency
+Total cost
+
+CURR. OVERPROV. CPU
+
+25.05%
+
+CPU total
+
+Provisioned:
+
+676 CPU
+
+Requested:
+
+506.63 CPU
+
+Used:
+
+32.87 CPU
+
+AVG. HOURLY COST PER CPU
+
+Provisioned:
+
+$0.02061
+
+Requested:
+
+$0.02755
+
+Used:
+
+$0.2422
+
+CURR. OVERPROV. GiB
+
+41.09%
+
+GiB total
+
+Provisioned:
+
+3360 GiB
+
+Requested:
+
+1979.44 GiB
+
+Used:
+
+657.8 GiB
+
+AVG. HOURLY COST PER GiB
+
+Provisioned:
+
+$0.00291
+
+Requested:
+
+$0.00639
+
+Used:
+
+$0.01439
+
+CURR. OVERPROV. STORAGE GiB
+
+74.33%
+
+GiB total
+
+Provisioned:
+
+90476 GiB
+
+Requested:
+
+23223.49 GiB
+
+AVG. HOURLY COST PER GiB
+
+Provisioned:
+
+$0.00013
+
+Requested:
+
+$0.00034
+CPU
+Memory
+Storage
+Resources
+Costs
+Res. offering
+Cost rate
+OVERPROVISIONED
+386
+CPU
+PROV. CPU
+1,560
+CPU
+REQ. CPU
+1,174
+CPU
+USED CPU
+136
+CPU
+0
+800
+1600
+2400
+3200 CPU
+Oct 01
+Oct 04
+Oct 07
+Oct 10
+Oct 13
+Oct 16
+Oct 19
+Oct 22
+Oct 25
+Oct 27
+Oct 30
+DIFFERENCE
+$0.00893
+PROV. CPU
+$0.02058
+REQ. CPU
+$0.0295
+USED CPU
+$0.36104
+$0
+$0.25
+$0.5
+$0.75
+$1
+Oct 01
+Oct 04
+Oct 07
+Oct 10
+Oct 13
+Oct 16
+Oct 19
+Oct 22
+Oct 25
+Oct 27
+Oct 30
+Daily CPU efficiency details
+CPU COST
+
+DATE
+
+PROVISIONED
+
+REQUESTED
+
+USED
+
+PER PROV.
+
+PER REQ.
+
+PER USED
+
+OVERPROV.
+
+2026-10-08
+
+748.06
+
+503.37
+
+39.21
+
+$0.52577
+$0.78135
+$10.03
+32.71%
+2026-10-07
+
+2060.64
+
+1541.93
+
+189.54
+
+$0.49545
+$0.66212
+$5.39
+25.17%
+2026-10-06
+
+2044.19
+
+1567.79
+
+187.77
+
+$0.49208
+$0.6416
+$5.36
+23.31%
+2026-10-05
+
+1913.39
+
+1429.75
+
+178.99
+
+$0.49755
+$0.66585
+$5.32
+25.28%
+2026-10-04
+
+295.42
+
+246.34
+
+14.31
+
+$0.4996
+$0.59914
+$10.31
+16.62%
+2026-10-03
+
+698.23
+
+417.37
+
+26.81
+
+$0.48802
+$0.81642
+$12.71
+40.22%
+2026-10-02
+
+1977.94
+
+1525.45
+
+189.58
+
+$0.48898
+$0.63403
+$5.10
+22.88%
+2026-10-01
+
+1995.26
+
+1543.92
+
+172.03
+
+$0.48858
+$0.63141
+$5.67
+22.62%

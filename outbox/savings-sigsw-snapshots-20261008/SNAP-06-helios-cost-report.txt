@@ -1,0 +1,289 @@
+Cluster
+Compute cost
+Reliability
+Network cost
+Efficiency
+Total cost
+
+CURRENT MONTH SPEND
+
+$11,869
+
+MONTHLY FORECAST
+
+~$38,978
+$18,089
+Than last month
+
+AVG. DAILY COST
+
+$1,476
+$307.09
+Than last month
+
+AVG. DAILY COST PER RESOURCE
+
+CPU
+
+$0.49456
+
+/CPU
+
+MEMORY
+
+$0.06974
+
+/GIB
+
+STORAGE
+
+$0.00313
+
+/GIB
+
+Compute spend
+PROJECTED END OF DAY SPEND
+$989.53
+ON-DEMAND SPEND
+$707.06
+FALLBACK SPEND
+$0.00
+SPOT SPEND
+$0.00
+STORAGE SPEND
+$282.47
+
+On-demand
+
+Fallback
+
+Spot
+
+Storage
+
+DAILY COST
+
+3
+
+6
+
+3
+
+2
+
+$0
+$500
+$1000
+$1500
+$2000
+Sep 30
+Oct 02
+Oct 04
+Oct 06
+Oct 08
+Oct 10
+Oct 12
+Oct 14
+Oct 16
+Oct 18
+Oct 20
+Oct 22
+Oct 24
+Oct 26
+Oct 28
+Oct 30
+Normalized
+On-demand
+Fallback
+Spot
+
+Cost rate:
+
+/mo
+
+PROVISIONED CPU COST
+
+$15.99
+$0
+$8
+$16
+Sep 30
+Oct 03
+Oct 06
+Oct 09
+Oct 12
+Oct 15
+Oct 18
+Oct 21
+Oct 24
+Oct 27
+Oct 30
+
+PROVISIONED MEM COST
+
+$2.56
+$0
+$2
+$4
+Sep 30
+Oct 03
+Oct 06
+Oct 09
+Oct 12
+Oct 15
+Oct 18
+Oct 21
+Oct 24
+Oct 27
+Oct 30
+
+PROVISIONED STORAGE COST
+
+$0.0952
+$0
+$0.05
+$0.1
+Sep 30
+Oct 03
+Oct 06
+Oct 09
+Oct 12
+Oct 15
+Oct 18
+Oct 21
+Oct 24
+Oct 27
+Oct 30
+Daily compute spend details
+PROVISIONED RESOURCES
+TOTAL COST PER RESOURCE
+
+DATE
+
+CPU
+
+MEMORY
+
+STORAGE
+
+CPU
+
+MEMORY
+
+STORAGE
+
+TOTAL COST
+
+2026-10-31
+-
+-
+0 GiB
+$0.00
+$0.00
+$0.00
+
+$0.00
+
+2026-10-07
+
+753.47
+
+3700.07
+
+90249.543 GiB
+$396.21
+$310.86
+$282.47
+
+$989.53
+
+2026-10-06
+
+2060.64
+
+9556.19
+
+90696.473 GiB
+$1,021
+$683.84
+$283.87
+
+$1,989
+
+2026-10-05
+
+2044.19
+
+9626.34
+
+90814.198 GiB
+$1,006
+$667.64
+$284.24
+
+$1,958
+
+2026-10-04
+
+1913.39
+
+8670.93
+
+90225.921 GiB
+$952.00
+$617.45
+$282.39
+
+$1,852
+
+2026-10-03
+
+295.42
+
+1153.03
+
+89336.301 GiB
+$147.59
+$78.27
+$279.61
+
+$505.47
+
+2026-10-02
+
+698.23
+
+3151.59
+
+89408.489 GiB
+$340.75
+$207.96
+$279.84
+
+$828.54
+
+2026-10-01
+
+1977.94
+
+8688.74
+
+90303.904 GiB
+$967.18
+$574.51
+$282.64
+
+$1,824
+
+2026-09-30
+
+1995.26
+
+9165.30
+
+90627.316 GiB
+$974.85
+$605.53
+$283.65
+
+$1,864

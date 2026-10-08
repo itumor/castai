@@ -1,0 +1,188 @@
+Available savings
+
+October 08, 01:29
+
++
+
+ngm-kronos-eks
+
+Connected
+
+AVAILABLE SAVINGS
+
+66.01%
+MONTHLY
+$292.88
+/mo
+ANNUAL
+$3,515
+/y
+Spot instances
+All workloads are currently running on spot instances.
+Configure the workloads to be migrated on spot.
+$37.97
+8.56%
+Workload rightsizing
+Apply the rightsizing recommendations found in the
+
+Workload autoscaler
+
+$59.24
+13.35%
+Cluster schedule
+Run cluster only when needed, keep it paused rest of the time.
+$83.49
+18.82%
+Configuration comparison
+Current cluster configuration
+COST
+
+QTY
+
+NAME
+
+CPU/H
+
+TOTAL /MO
+
+1 x
+
+m7a.xlarge
+
+4 CPU, 16 GiB
+
+$0.045
+$202.33
+1 x
+
+m6a.2xlarge
+
+8 CPU, 32 GiB
+
+$0.02
+$181.42
+1 x
+
+r6a.large
+
+2 CPU, 16 GiB
+
+$0.02
+$59.95
+CURRENT CLUSTER COMPUTE COST:
+$443.70
+/mo
+3
+
+INSTANCES
+
+14
+
+CPU
+
+64
+
+GIB
+
+3
+
+TIB STORAGE
+
+730
+
+HOURS
+
+51
+
+PODS
+
+Optimized cluster configuration
+COST
+
+QTY
+
+NAME
+
+CPU/H
+
+TOTAL /MO
+
+1 x
+
+m6a.xlarge
+
+4 CPU, 16 GiB
+
+$0.02
+$90.71
+1 x
+
+c5a.large
+
+2 CPU, 4 GiB
+
+$0.021
+$38.13
+1 x
+
+m6a.large
+
+2 CPU, 8 GiB
+
+$0.01
+$21.98
+OPTIMIZED CLUSTER COMPUTE COST:
+$150.82
+/mo
+3
+
+INSTANCES
+
+8
+
+CPU
+
+28
+
+GIB
+
+201
+
+GIB STORAGE
+
+730
+
+HOURS
+
+51
+
+PODS
+
+Comparison over time
+Cluster configuration comparison
+AVG. AVAILABLE SAVINGS
+42.21%
+CURRENT AVG. COST
+$1,649
+/mo
+OPTIMAL AVG. COST
+$953.06
+/mo
+
+MONTHLY CLUSTER COST
+
+$0
+$1000
+$2000
+$3000
+$4000
+$5000
+Oct 02
+Oct 03
+Oct 04
+Oct 05
+Oct 06
+Oct 07
+Oct 08
+Cost rate
+/mo

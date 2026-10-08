@@ -1,0 +1,14 @@
+Learn more on our Cookie Policy. -> https://cast.ai/cookie-policy/
+ -> https://www.cookieyes.com/product/cookie-consent/?ref=cypbcyb&utm_source=cookie-banner&utm_medium=powered-by-cookieyes
+Cluster List -> /automation/cluster-list?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Overview -> /automation/overview?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Cloud VMs -> /automation/cloud-vms?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Schedules -> /automation/schedules?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Cost monitoring -> /automation/cost-report?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Network Intelligence -> /automation/network-intelligence?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Budgets -> /automation/budgets?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+ -> /dashboard?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+dema-platform-services -> /automation/external-clusters/5dc3bf31-a263-4c6b-88bb-e95b6403aa51/dashboard?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+4.9 -> /external-clusters/5dc3bf31-a263-4c6b-88bb-e95b6403aa51/cluster-score/summary?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+dema-platform-services-test -> /automation/external-clusters/00ee8944-67f6-43d5-8517-c270951ec02c/dashboard?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+6.2 -> /external-clusters/00ee8944-67f6-43d5-8517-c270951ec02c/cluster-score/summary?org=5e413e89-eb67-48fb-b81c-6172baa988ed

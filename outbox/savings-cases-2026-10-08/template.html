@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CAST AI · Savings Case Console — Siemens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0e13; --ink2:#0e141c; --panel:#111a24; --line:#1f2c3b; --line2:#2b3d52;
+  --txt:#dbe7f3; --dim:#7d93a9; --faint:#4b5f74;
+  --cyan:#2ee6d6; --cyan-d:#0e3f3b; --amber:#ffb224; --red:#ff6b6b; --green:#4ade80; --violet:#a78bfa;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--txt);font:15px/1.55 "Archivo",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;
+  background-image:radial-gradient(ellipse 80% 50% at 70% -10%,rgba(46,230,214,.07),transparent),repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(125,147,169,.05) 39px,rgba(125,147,169,.05) 40px)}
+.mono{font-family:"JetBrains Mono",monospace}
+.wrap{max-width:1440px;margin:0 auto;padding:0 28px 120px}
+header.top{padding:38px 0 26px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;justify-content:space-between}
+h1{font-size:clamp(26px,3.4vw,42px);font-weight:900;letter-spacing:-.02em;line-height:1.05}
+h1 .acc{color:var(--cyan)}
+.subtitle{color:var(--dim);margin-top:10px;max-width:70ch;font-size:14px}
+.chiprow{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.chip{font:600 11px/1 "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);
+  border:1px solid var(--line2);border-radius:999px;padding:7px 12px;background:rgba(17,26,36,.7)}
+.chip b{color:var(--txt);font-weight:800}
+.chip.cy{color:var(--cyan);border-color:rgba(46,230,214,.4)}
+.stamp{font:600 11px/1.7 "JetBrains Mono",monospace;color:var(--faint);text-align:right;letter-spacing:.04em}
+nav.toc{position:sticky;top:0;z-index:9;display:flex;gap:2px;overflow-x:auto;background:rgba(10,14,19,.92);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);margin:0 -28px;padding:10px 28px}
+nav.toc a{color:var(--dim);text-decoration:none;font:700 11px/1 "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;
+  padding:8px 12px;border-radius:6px;white-space:nowrap;transition:color .15s,background .15s}
+nav.toc a:hover{color:var(--cyan);background:var(--cyan-d)}
+section{margin-top:64px}
+.secnum{font:800 12px/1 "JetBrains Mono",monospace;color:var(--cyan);letter-spacing:.3em;text-transform:uppercase}
+h2{font-size:clamp(21px,2.2vw,30px);font-weight:900;letter-spacing:-.01em;margin:10px 0 8px}
+.secnote{color:var(--dim);max-width:86ch;font-size:13.5px;margin-bottom:22px}
+.grid{display:grid;gap:14px}
+.cards-qa{grid-template-columns:repeat(auto-fit,minmax(430px,1fr))}
+.cards-case{grid-template-columns:repeat(auto-fit,minmax(460px,1fr))}
+.card{background:linear-gradient(180deg,var(--panel),var(--ink2));border:1px solid var(--line);border-radius:12px;padding:20px 22px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),transparent 60%);opacity:.7}
+.card.warn::before{background:linear-gradient(90deg,var(--amber),transparent 60%)}
+.q-tag{display:inline-block;font:800 10px/1 "JetBrains Mono",monospace;letter-spacing:.12em;color:var(--ink);background:var(--cyan);border-radius:4px;padding:4px 8px;margin-bottom:12px}
+.card h3{font-size:16.5px;font-weight:700;margin-bottom:10px;letter-spacing:-.005em}
+.card p{color:var(--dim);font-size:13.5px}
+.card p b,.card li b{color:var(--txt)}
+.card ul{margin:10px 0 0 18px;color:var(--dim);font-size:13.5px;display:grid;gap:6px}
+.rule{margin-top:12px;background:rgba(46,230,214,.05);border:1px solid rgba(46,230,214,.22);border-radius:8px;padding:10px 14px;
+  font:600 12px/1.65 "JetBrains Mono",monospace;color:#9ee8e0;white-space:pre-wrap;word-break:break-word}
+.rule.amber{background:rgba(255,178,36,.06);border-color:rgba(255,178,36,.3);color:#ffd98a}
+.formula{margin-top:12px;background:#0a121c;border:1px dashed var(--line2);border-radius:8px;padding:12px 14px;
+  font:600 12.5px/1.7 "JetBrains Mono",monospace;color:#c8e6ff;white-space:pre-wrap}
+.badge{display:inline-flex;align-items:center;gap:6px;font:800 10.5px/1 "JetBrains Mono",monospace;letter-spacing:.08em;
+  border-radius:5px;padding:5px 9px;text-transform:uppercase}
+.b-B{background:rgba(46,230,214,.12);color:var(--cyan);border:1px solid rgba(46,230,214,.45)}
+.b-C{background:rgba(167,139,250,.14);color:var(--violet);border:1px solid rgba(167,139,250,.45)}
+.b-D{background:rgba(74,222,128,.12);color:var(--green);border:1px solid rgba(74,222,128,.45)}
+.b-A,.b-F{background:rgba(255,107,107,.10);color:#ff9b9b;border:1px solid rgba(255,107,107,.35)}
+.b-E{background:rgba(255,178,36,.12);color:var(--amber);border:1px solid rgba(255,178,36,.4)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--ink2)}
+th{font:700 10.5px/1.3 "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);
+  text-align:left;padding:12px 14px;border-bottom:1px solid var(--line2);position:sticky;top:0;background:var(--ink2)}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tbody tr{transition:background .12s}
+tbody tr:hover{background:rgba(46,230,214,.035)}
+td.num,th.num{font-family:"JetBrains Mono",monospace;text-align:right;font-variant-numeric:tabular-nums}
+td .small{display:block;color:var(--faint);font-size:11px;font-family:"JetBrains Mono",monospace}
+.prov{color:var(--faint);font-size:10.5px;font-family:"JetBrains Mono",monospace}
+.prov b{color:var(--dim)}
+.pill{font:700 10px/1 "JetBrains Mono",monospace;border-radius:4px;padding:3px 7px;letter-spacing:.05em}
+.p-yes{background:rgba(74,222,128,.15);color:var(--green)}
+.p-no{background:rgba(125,147,169,.12);color:var(--dim)}
+.p-warn{background:rgba(255,178,36,.15);color:var(--amber)}
+.totrow td{background:rgba(46,230,214,.06);font-weight:700;border-top:1px solid var(--cyan-d)}
+.check{display:flex;gap:12px;align-items:flex-start;background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.25);border-radius:12px;padding:16px 20px;margin-top:14px}
+.check .mark{color:var(--green);font-size:20px;line-height:1}
+.check p{color:#b8e6c8;font-size:13px;font-family:"JetBrains Mono",monospace}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-bottom:18px}
+.kpi{background:linear-gradient(180deg,var(--panel),var(--ink2));border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.kpi .k{font:700 10.5px/1.4 "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.kpi .v{font:800 30px/1.1 "JetBrains Mono",monospace;margin-top:8px;font-variant-numeric:tabular-nums}
+.kpi .d{color:var(--dim);font-size:12px;margin-top:6px}
+.kpi.cy .v{color:var(--cyan)} .kpi.vi .v{color:var(--violet)} .kpi.gr .v{color:var(--green)} .kpi.am .v{color:var(--amber)}
+.chartbox{border:1px solid var(--line);border-radius:12px;background:var(--ink2);padding:22px;overflow-x:auto}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin:0 0 14px 2px;font:600 11px/1 "JetBrains Mono",monospace;color:var(--dim);letter-spacing:.05em}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+footer{margin-top:80px;border-top:1px solid var(--line);padding-top:24px;color:var(--faint);font:600 11px/1.8 "JetBrains Mono",monospace;letter-spacing:.04em}
+code.inline{font:600 12px/1.4 "JetBrains Mono",monospace;background:rgba(46,230,214,.08);border:1px solid rgba(46,230,214,.2);border-radius:5px;padding:2px 7px;color:#9ee8e0;white-space:nowrap}
+a{color:var(--cyan);text-decoration:none} a:hover{text-decoration:underline}
+@media print{body{background:#fff;color:#111} .card,.kpi,.chartbox,.tblwrap{break-inside:avoid} nav.toc{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div>
+    <h1>CAST AI <span class="acc">·</span> Savings <span class="acc">Case Console</span></h1>
+    <div class="subtitle">Every savings topology in the Siemens orgs, detected from the CAST AI API alone — case detection rules, calculation formulas, double-reporting guards, and live numbers with per-number API provenance. Built for the savings-report design discussion (Corak/Marin et al.).</div>
+    <div class="chiprow">
+      <span class="chip cy">api <b>api.eu.cast.ai</b></span>
+      <span class="chip">currency <b>USD</b></span>
+      <span class="chip">window 30d <b>2026-09-05 → 2026-10-05</b></span>
+      <span class="chip">timeline <b>12m · step 1mo</b></span>
+      <span class="chip">clusters <b id="chipClusters">…</b></span>
+      <span class="chip">orgs <b>SMO Railigent X · SI GSW CLO · IT IPS</b></span>
+      <span class="chip cy">auth <b>X-API-Key + X-CastAI-Organization-Id</b></span>
+    </div>
+  </div>
+  <div class="stamp" id="stamp">generated …<br>read-only · no mutations<br>raw payloads: raw/&lt;id8&gt;/01–07.json</div>
+</header>
+
+<nav class="toc">
+  <a href="#qas">01 · Board questions</a>
+  <a href="#cases">02 · Case matrix</a>
+  <a href="#org">03 · Railigent X · 12 months</a>
+  <a href="#ledger">04 · Cluster ledger</a>
+  <a href="#math">05 · Formulas &amp; guards</a>
+  <a href="#api">06 · API coverage</a>
+</nav>
+
+<section id="qas">
+  <div class="secnum">01 · The five board questions</div>
+  <h2>Answers, machine-checkable</h2>
+  <p class="secnote">Each answer names the exact API object and field. “VR” = value-realization report item. Nothing here is estimated — every rule below is backed by a live response in <span class="mono">raw/</span>.</p>
+  <div class="grid cards-qa" id="qaCards"></div>
+</section>
+
+<section id="cases">
+  <div class="secnum">02 · Case matrix</div>
+  <h2>Every topology, detected &amp; priced</h2>
+  <p class="secnote">A cluster is classified by two flags on its value-realization item — <code class="inline">autoscalerAdopted</code> (node track) and <code class="inline">woopAdopted</code> (workload track) — plus node labels and endpoint behavior. Live counts from this pull are shown per case.</p>
+  <div class="grid cards-case" id="caseCards"></div>
+</section>
+
+<section id="org">
+  <div class="secnum">03 · Org view — SMO Railigent X</div>
+  <h2>Where WAS starts before nodes — the transition, month by month</h2>
+  <p class="secnote">Value-realization timeline report, 12 months, monthly step. The workload track accrues from April; the node track joins in May (k8s-andreas via the Karpenter integration with an INDUSTRY_AVERAGE baseline). Both coexist — one report, two columns, no summing.</p>
+  <div class="kpis" id="orgKpis"></div>
+  <div class="chartbox">
+    <div class="legend">
+      <span><i style="background:var(--violet)"></i>node autoscalerSavings $</span>
+      <span><i style="background:var(--cyan)"></i>workloadAutoscalerSavings $</span>
+      <span><i style="background:var(--faint)"></i>actualCost $</span>
+    </div>
+    <div id="chart"></div>
+  </div>
+  <div class="check"><div class="mark">✓</div><p id="crosscheck"></p></div>
+</section>
+
+<section id="ledger">
+  <div class="secnum">04 · Cluster ledger</div>
+  <h2>All 16 clusters · live numbers · per-number provenance</h2>
+  <p class="secnote">Hover any figure’s source tag. “—” means the API returned no value for that field in this window (not zero). Node-share = nodes labeled <code class="inline">provisioner.cast.ai/managed-by=cast.ai</code> ÷ total. Note k8s-andreas: 0% cast-labeled yet node savings exist — in the Karpenter-integration mode CAST steers consolidation, so the <i>label rule</i> does not detect management; the <i>autoscalerAdopted flag</i> does.</p>
+  <div class="tblwrap"><table id="ledgerTbl"></table></div>
+</section>
+
+<section id="math">
+  <div class="secnum">05 · Formulas &amp; guards</div>
+  <h2>How each number is derived</h2>
+  <p class="secnote">These are the formulas the report applies per day and resource (CPU, RAM), then sums. Numbers below are from the k8s-andreas and f8dd5b4f payloads.</p>
+  <div class="grid cards-case" id="mathCards"></div>
+</section>
+
+<section id="api">
+  <div class="secnum">06 · API coverage</div>
+  <h2>Seven calls cover every case</h2>
+  <p class="secnote">Method ≠ intent: the two POSTs are report <i>queries</i> (read-semantics), approved for this session. Everything else is GET. Observed HTTP behaviors are documented on the right.</p>
+  <div class="tblwrap"><table id="apiTbl"></table></div>
+</section>
+
+<footer>
+  CAST AI EU · read-only collection · <span id="footStamp"></span><br>
+  Numbers: CAST AI API only (api.eu.cast.ai). No cloud-billing, no estimates. Raw JSON per cluster/call in raw/. Methodology disputes → report endpoint wins (single source of truth).
+</footer>
+</div>
+
+<script id="live-data" type="application/json">__DATA__</script>
+<script>
+const D = JSON.parse(document.getElementById('live-data').textContent);
+const $ = (s)=>document.querySelector(s);
+const esc = (v)=>String(v??'').replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const usd = (v)=> (typeof v==='number') ? '$'+v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '—';
+const usd0 = (v)=> (typeof v==='number') ? '$'+Math.round(v).toLocaleString('en-US') : '—';
+const pct = (v)=> (typeof v==='number') ? v.toFixed(1)+'%' : '—';
+const dt = (v)=> v? String(v).slice(0,10) : '—';
+const prov = (ep, field)=> `<span class="prov"><b>${esc(ep)}</b> · ${esc(field)}</span>`;
+
+$('#chipClusters').textContent = D.clusters.length;
+$('#stamp').innerHTML = `generated ${esc(D.generatedAtUtc.slice(0,16)).replace('T',' ')}Z<br>read-only · no mutations<br>raw payloads: raw/&lt;id8&gt;/01–07.json`;
+$('#footStamp').textContent = `generated ${D.generatedAtUtc}`;
+
+/* ---------- 01 Board questions ---------- */
+const QAS = [
+ {t:'Q1 · Recognize “WAS on, node autoscaling OFF”?', d:'Use the two adoption flags on the cluster’s value-realization item. This is the authoritative one-liner — verified on 8 live clusters.',
+  r:'VR item:  woopAdopted=true  AND  autoscalerAdopted=false\n(+ baselineType=BASELINE_TYPE_UNSPECIFIED)\ncorroborate: nodes endpoint → 0% provisioner.cast.ai/managed-by,\nclassic savings endpoint → HTTP 400 "cluster is read-only"',
+  warn:false},
+ {t:'Q2 · Avoid double reporting?', d:'One report object per cluster; it already carries the two tracks in separate fields. totalSavings equals the node track. The workload effect is already inside the projection — adding it again counts it twice. And never mix the classic endpoint with value-realization: same month reads $3,453.12 vs $7,702.24 on ngm-kronos-eks.',
+  r:'report totalSavings (node) and workloadAutoscalerSavings (workload)\nNEVER: totalSavings + workloadAutoscalerSavings\nNEVER: classic /savings ⊕ value-realization (methodologies differ)',
+  warn:true},
+ {t:'Q3 · Where are savings & what is the baseline?', d:'Savings: VR cost fields, window-scoped. Baseline = the no-CAST-AI counterfactual: per-resource overprovisioning factor + unit-cost floor, frozen at baselinePeriodEndTime; CLUSTER_HISTORY → PEER → INDUSTRY average. Case-B clusters have NO baseline (baseline-params → 404) and need none for WOOP.',
+  r:'GET …/clusters/{id}/baseline-params → type, periodStart/End,\ncpuOverprovisioningFactor, memoryOverprovisioningFactor,\ncostPerCpuCoreHourly, costPerMemoryGibHourly   (404 = no baseline)',
+  warn:false},
+ {t:'Q4 · When was workload autoscaling enabled?', d:'The metrics endpoint keeps ~7 days only (verified: 2026-09-30→10-07 on a 90-day request) — it cannot answer for older clusters. Use the timeline report: first monthly bucket with workloadAutoscalerSavings > 0 (Railigent X: 2026-04). Exact install timestamp lives in cluster change history (console/audit), not in reporting.',
+  r:'TL: first month where timelineItems[].cost.workloadAutoscalerSavings > 0\nWM: workloads-summary-metrics → first datapoint (≤7d history only)',
+  warn:false},
+ {t:'Q5 · WAS cluster later enables node autoscaling?', d:'Case E, verified on the org timeline: the workload track keeps accruing (from 2026-04), the node track starts at its own baselinePeriodEndTime (2026-05). Nothing restarts, nothing absorbed, both fields coexist on the same cluster (k8s-andreas today).',
+  r:'before:  woop $ only, total=0, baseline 404\nafter:   autoscalerSavings from baselinePeriodEndTime,\n         woop $ continues, totalSavings=node track, no stacking',
+  warn:false},
+];
+$('#qaCards').innerHTML = QAS.map(q=>`
+ <div class="card ${q.warn?'warn':''}"><span class="q-tag">${esc(q.t.slice(0,2))}</span><h3>${esc(q.t.slice(5))}</h3>
+ <p>${q.d}</p><div class="rule ${q.warn?'amber':''}">${esc(q.r)}</div></div>`).join('');
+
+/* ---------- 02 Case matrix ---------- */
+const countCase = (id)=> D.clusters.filter(c=>c.caseId===id).length;
+const example = (id)=> D.clusters.filter(c=>c.caseId===id).slice(0,3).map(c=>c.name+' ('+c.id8+')').join(', ') || '—';
+const CASES = [
+ {id:'B', name:'Workload Autoscaler only — Karpenter keeps the nodes', cls:'b-B',
+  d:'CAST AI steers workload requests (VPA); Karpenter/cloud nodegroups keep provisioning nodes. The classic node-savings endpoint answers 400 "read-only" — expected, not an error.',
+  rule:'savings report = workloadAutoscalerSavings only\naccrues with NO baseline, even inside baseline windows\nactualCost == projectedCost · totalSavings = 0 (node track absent)\nformula: Σdays (orig−cur requests) × max(current, baseline $/unit), CPU+RAM',
+  live:'f8dd5b4f: $431.26/30d · 56/65 VPA · CPU −78% · RAM −64%'},
+ {id:'C', name:'Node Autoscaler only — CAST AI manages nodes, no WOOP', cls:'b-C',
+  d:'CAST AI bins/schedules nodes (≥20% managed). No workload rightsizing. Savings start only AFTER the baseline window closes (baselinePeriodEndTime).',
+  rule:'savings report = autoscalerSavings (node track) only\nper day: projected − actual; projected =\n  max(orig,cur demand) × factor × max(current, baseline $/unit)\ninside baseline window: projected=actual → savings=0',
+  live:'ngm-kronos-eks: $7,702.24/30d · baseline CLUSTER_HISTORY\nngm-helios-eks: $14,967.86/30d'},
+ {id:'D', name:'Both autoscalers — double-count guard matters', cls:'b-D',
+  d:'Node track and workload track both active. totalSavings equals the node track; workloadAutoscalerSavings is an explanatory decomposition of the projection, NOT an add-on.',
+  rule:'totalSavings == autoscalerSavings   (verified exactly)\nworkloadAutoscalerSavings is explanatory — never add\nbaseline: required for node track (CLUSTER_HISTORY or,\nwith <7d history, INDUSTRY_AVERAGE — possibly a 24h window)',
+  live:'k8s-andreas: node $150,024.33 + woop $619.45 (INDUSTRY_AVERAGE)\nngm-sim-eks: node $51,723.31 + woop $0 (adopted, 0 applied yet)'},
+ {id:'E', name:'Transition — WAS first, node autoscaling later', cls:'b-E',
+  d:'A Case-B cluster that later turns on node management becomes Case D. The workload track never pauses; the node track begins at its own baselinePeriodEndTime.',
+  rule:'timeline proof (Railigent X): woop $ from 2026-04,\nnode $ from 2026-05 — independent tracks, same report\nbaseline date does NOT restart for the woop track',
+  live:'org timeline Apr→May handover (see §03 chart)'},
+ {id:'A', name:'Connected, nothing enabled (read-only)', cls:'b-A',
+  d:'Agent connected in read-only/console mode: no node management, no WOOP agent. Value-realization returns zero rows for the cluster.',
+  rule:'report as n/a — NOT as $0 (absence of data ≠ savings of $0)\ndetect: empty VR items + WS 400 "should be installed"\n+ CS 400 "read-only" + 0% managed-by labels',
+  live:'cloudcore01 · bx-edex-prod-eu · clo-master-eks'},
+ {id:'F', name:'Not eligible / no reporting data', cls:'b-F',
+  d:'Agent disconnected or platform without cost reporting — nothing to compute. Flag the cluster instead of silently dropping it from the report.',
+  rule:'detect: VR empty items + agentStatus=disconnected\nmust appear in exports as "no data" row',
+  live:'rhx-test (disconnected; WOOP not installed)'},
+];
+$('#caseCards').innerHTML = CASES.map(c=>`
+ <div class="card"><span class="badge ${c.cls}">Case ${c.id}</span>
+ <h3 style="margin-top:10px">${esc(c.name)}</h3><p>${esc(c.d)}</p>
+ <div class="rule">${esc(c.rule)}</div>
+ <p style="margin-top:12px;color:var(--faint)" class="mono small">live ×${countCase(c.id)} — ${esc(example(c.id))}</p>
+ <p style="margin-top:4px;color:var(--cyan);font-size:12.5px" class="mono">${esc(c.live)}</p></div>`).join('');
+
+/* ---------- 03 Org view ---------- */
+const T = D.orgRailigentX.totals;
+$('#orgKpis').innerHTML = `
+ <div class="kpi"><div class="k">actual cost · 30d (VR cost.actualCost Σ)</div><div class="v">${usd0(T.actual)}</div><div class="d">9 clusters with reporting data, 2026-09-05→10-05</div></div>
+ <div class="kpi cy"><div class="k">workloadAutoscalerSavings Σ (VR)</div><div class="v">${usd(T.workloadAutoscalerSavings)}</div><div class="d">≈ ${(100*T.workloadAutoscalerSavings/T.actual).toFixed(1)}% of actual spend · 9 clusters; matches the email-thread figure</div></div>
+ <div class="kpi vi"><div class="k">node autoscalerSavings Σ (VR)</div><div class="v">${usd0(T.autoscalerSavings)}</div><div class="d">entirely k8s-andreas (Case D) · totalSavings = this column</div></div>
+ <div class="kpi am"><div class="k">12m totals (TL summary)</div><div class="v">${usd0(D.orgRailigentX.summary.cost.totalSavings)}</div><div class="d">node $${Math.round(D.orgRailigentX.summary.cost.autoscalerSavings).toLocaleString()} + woop $${Math.round(D.orgRailigentX.summary.cost.workloadAutoscalerSavings).toLocaleString()} since 2026-02</div></div>`;
+
+const tl = D.orgRailigentX.timeline;
+const maxV = Math.max(...tl.map(p=>Math.max(p.actualCost||0,(p.autoscalerSavings||0)+(p.workloadAutoscalerSavings||0))));
+const W=Math.max(760, tl.length*96), H=300, P={l:62,r:14,t:16,b:34};
+const x=(i)=> P.l + i*((W-P.l-P.r)/tl.length) + 8;
+const bw=((W-P.l-P.r)/tl.length)-22;
+const y=(v)=> P.t + (H-P.t-P.b) * (1-(v/maxV||0));
+let bars='', labels='', line='';
+tl.forEach((p,i)=>{
+  const a=p.autoscalerSavings||0, w=p.workloadAutoscalerSavings||0, act=p.actualCost||0;
+  bars += `<rect x="${x(i)}" y="${y(a)}" width="${bw}" height="${(H-P.b)-y(a)}" fill="var(--violet)" rx="2"><title>node autoscalerSavings ${p.month}: ${usd(a)}</title></rect>`;
+  bars += `<rect x="${x(i)}" y="${y(a)-(((H-P.b)-y(w)))}" width="${bw}" height="${(H-P.b)-y(w)}" fill="var(--cyan)" rx="2" opacity=".95"><title>workloadAutoscalerSavings ${p.month}: ${usd(w)}</title></rect>`;
+  line += (i? 'L':'M') + (x(i)+bw/2) + ',' + y(act) + ' ';
+  labels += `<text x="${x(i)+bw/2}" y="${H-12}" fill="var(--faint)" font-size="10.5" font-family="JetBrains Mono" text-anchor="middle">${esc(p.month)}</text>`;
+  labels += `<text x="${x(i)+bw/2}" y="${y(act)-6}" fill="var(--dim)" font-size="10" font-family="JetBrains Mono" text-anchor="middle">${act? '$'+Math.round(act/1000)+'k':''}</text>`;
+});
+$('#chart').innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="monthly savings timeline">
+ ${[0,.25,.5,.75,1].map(f=>`<line x1="${P.l}" y1="${y(maxV*f)}" x2="${W-P.r}" y2="${y(maxV*f)}" stroke="var(--line)" stroke-dasharray="3 4"/><text x="${P.l-8}" y="${y(maxV*f)+3}" fill="var(--faint)" font-size="10" font-family="JetBrains Mono" text-anchor="end">$${Math.round(maxV*f/1000)}k</text>`).join('')}
+ ${bars}<path d="${line}" fill="none" stroke="var(--faint)" stroke-width="1.6" stroke-dasharray="5 3"/>${labels}</svg>`;
+$('#crosscheck').innerHTML = `CROSS-CHECK vs email thread — org 30d: workload savings ${usd(T.workloadAutoscalerSavings)} on ${usd0(T.actual)} spend (≈14%) ✓ · f8dd5b4f woop ${usd(431.26)} ✓ · 56/65 VPA-optimized ✓ · classic endpoint 400 "read-only" on Karpenter clusters ✓`;
+
+/* ---------- 04 Ledger ---------- */
+const bdg = (c)=>{const m={B:'b-B',C:'b-C',D:'b-D',E:'b-E',A:'b-A',F:'b-F'};return `<span class="badge ${m[c]}">${c}</span>`;};
+const pill = (v)=> v===true? '<span class="pill p-yes">yes</span>' : v===false? '<span class="pill p-no">no</span>' : '<span class="pill p-warn">n/a</span>';
+const rows = D.clusters.map(c=>{
+  const wl = c.was && c.was.totalWorkloads!=null
+    ? `${c.was.optimized}/${c.was.totalWorkloads} <span class="small">CPU ${c.was.cpuOriginal??'—'}→${c.was.cpuNow??'—'}c · RAM ${c.was.ramOriginalGiB??'—'}→${c.was.ramNowGiB??'—'}GiB</span>`
+    : (c.was?.notInstalledMessage ? '<span class="pill p-warn">agent not installed</span>' : '—');
+  const bl = c.baseline
+    ? `${esc(c.baseline.type?.replace('BASELINE_TYPE_','')||'') }<span class="small">${dt(c.baseline.periodStart)} → ${dt(c.baseline.periodEnd)} · f_cpu=${c.baseline.cpuFactor} · f_ram=${c.baseline.ramFactor}</span>`
+    : (c.vr?.baselineType?.includes('UNSPECIFIED') ? '<span class="pill p-no">no baseline (404)</span>' : '—');
+  const nodes = c.nodes.total==null ? '—' : `${c.nodes.castManaged}/${c.nodes.total} <span class="small">${c.nodes.shareCastManagedPct??0}% · karpenter ${c.nodes.karpenter}</span>`;
+  const cs = c.classicSavings?.unavailable
+    ? `<span class="pill p-warn">400</span> <span class="small">${esc(c.classicSavings.unavailable.slice(0,44))}…</span>`
+    : (c.classicSavings && !c.classicSavings.unavailable ? `${usd(c.classicSavings.summary?.autoscalerSavings ?? c.classicSavings.autoscalerSavings)} <span class="small">classic API</span>` : '—');
+  return `<tr>
+    <td><b>${esc(c.name)}</b> <span class="small">${c.id8} · ${esc(c.org)}</span><span class="small">${esc(c.region||'')} · ${esc(c.status||'')}${c.agentStatus==='disconnected'?' · ⚠ disconnected':''}</span></td>
+    <td class="num">${bdg(c.caseId)}</td>
+    <td class="num">${pill(c.vr?.woopAdopted)}<span class="small">woop</span></td>
+    <td class="num">${pill(c.vr?.autoscalerAdopted)}<span class="small">node</span></td>
+    <td class="num">${nodes}</td>
+    <td>${wl}</td>
+    <td>${bl}</td>
+    <td class="num">${c.vr? usd(c.vr.workloadAutoscalerSavings):'—'}<br>${prov('VR','cost.workloadAutoscalerSavings')}</td>
+    <td class="num">${c.vr? usd(c.vr.autoscalerSavings):'—'}<br>${prov('VR','cost.autoscalerSavings')}</td>
+    <td class="num">${c.vr? usd(c.vr.totalSavings):'—'}<br>${prov('VR','cost.totalSavings')}</td>
+    <td class="num">${c.vr? usd(c.vr.actual):'—'}<br>${prov('VR','cost.actualCost')}</td>
+    <td class="num">${cs}</td>
+  </tr>`;
+}).join('');
+$('#ledgerTbl').innerHTML = `<thead><tr>
+ <th>cluster</th><th class="num">case</th><th class="num">woop</th><th class="num">node</th>
+ <th class="num">cast nodes</th><th>workloads (WS)</th><th>baseline (BP)</th>
+ <th class="num">woop $ ·30d</th><th class="num">node $ ·30d</th><th class="num">total $ ·30d</th><th class="num">actual $ ·30d</th><th class="num">classic $</th></tr></thead>
+ <tbody>${rows}
+ <tr class="totrow"><td>Railigent X org Σ (9 reporting clusters)</td><td></td><td></td><td></td><td></td><td></td><td></td>
+ <td class="num">${usd(T.workloadAutoscalerSavings)}</td><td class="num">${usd0(T.autoscalerSavings)}</td><td class="num">${usd0(T.totalSavings)}</td><td class="num">${usd0(T.actual)}</td><td></td></tr></tbody>`;
+
+/* ---------- 05 Formulas ---------- */
+const M = [
+ {t:'WorkloadAutoscalerSavings (per day)', f:'woop$ = (originalRequested − currentRequested)\n        × max(currentEffective $/unit, baseline $/unit)\nCPU in core-hours · RAM in GiB-hours · CPU and RAM summed\nbaseline NOT required (works without node management)',
+  live:'f8dd5b4f 30d: CPU 25.92→5.85c & RAM 99.7→36.3GiB → $431.26'},
+ {t:'Projected cost (node track, post-baseline)', f:'demand = max(originalRequested, currentRequested)\nprice  = max(currentEffective $/unit, baselineUnitCost)\nprojected = demand × overprovisioningFactor × price\nbefore baselinePeriodEndTime: projected = actual (savings 0)',
+  live:'ngm-kronos-eks: f_cpu=5.2468 · f_ram=11.0015 · $0.029858/core-h'},
+ {t:'Realized / autoscalerSavings (node track)', f:'autoscalerSavings = Σdays ( projected − actual )\nvalid baseline required → 404 on baseline-params = no baseline\n→ no realized savings for this cluster',
+  live:'k8s-andreas: $743.15 actual vs $150,767.48 projected → $150,024.33'},
+ {t:'Double-count guard', f:'totalSavings == autoscalerSavings   (exact, verified)\nworkloadAutoscalerSavings ⊄ totalSavings\nWRONG: total + woop   → counts rightsizing twice\n(org 30d wrong sum would read $159,007.68 vs true $150,024.33)',
+  live:null, warn:true},
+ {t:'Source-of-truth guard (methodologies differ)', f:'classic /savings ≠ value-realization on the same fleet+window:\nngm-kronos-eks 30d:  $3,453.12 (CS)  vs  $7,702.24 (VR)\nngm-helios-eks 30d: $18,319.22 (CS)  vs $14,967.86 (VR)\n→ pick ONE source for reporting: value-realization',
+  live:null, warn:true},
+ {t:'WOOP can raise a resource (under-provisioned)', f:'4952c4ce: CPU 313.9→211.2 cores (−33%)\nbut RAM 851.5→1157.2 GiB (+36%) — WOOP protected it\nper-resource delta can be negative — do not clamp:\nnet for the window still +$2,267.45 woop savings',
+  live:null},
+];
+$('#mathCards').innerHTML = M.map(m=>`
+ <div class="card ${m.warn?'warn':''}"><h3>${esc(m.t)}</h3><div class="formula ${m.warn?'rule amber':''}">${esc(m.f)}</div>
+ ${m.live?`<p style="margin-top:10px" class="mono small">${esc(m.live)}</p>`:''}</div>`).join('');
+
+/* ---------- 06 API table ---------- */
+const BEHAVIOR = {
+ '01':'200 with org header · 404 nginx without (enterprise key)',
+ '02':'labels drive the ≥20% managed-share rule',
+ '03':'200 on node-managed clusters · 404 = no baseline (not an error)',
+ '04':'200 live counters · 400 "should be installed" when WOOP agent absent',
+ '05':'200 on managed clusters · 400 "cluster is read-only" on Karpenter/WOOP-only — the Q1 machine signal',
+ '06':'200; flags woopAdopted/autoscalerAdopted classify every case; empty items = no data',
+ '07':'⚠ ~7-day retention regardless of requested window',
+};
+const PATHSHOW = {
+ '/reporting/v1beta/organizations/{orgId}/clusters:runValueRealizationReport':'/reporting/v1beta/orgs/{org}/clusters:runValueRealizationReport',
+ '/reporting/v1beta/organizations/{orgId}/clusters/{clusterId}/baseline-params':'/reporting/v1beta/orgs/{org}/clusters/{id}/baseline-params',
+ '/v1/workload-autoscaling/clusters/{clusterId}/workloads-summary':'/v1/workload-autoscaling/clusters/{id}/workloads-summary',
+ '/v1/workload-autoscaling/clusters/{clusterId}/workloads-summary-metrics':'/v1/workload-autoscaling/clusters/{id}/workloads-summary-metrics',
+ '/v1/kubernetes/external-clusters/{clusterId}':'/v1/kubernetes/external-clusters/{id}',
+ '/v1/kubernetes/external-clusters/{clusterId}/nodes':'/v1/kubernetes/external-clusters/{id}/nodes',
+ '/v1/cost-reports/clusters/{clusterId}/savings':'/v1/cost-reports/clusters/{id}/savings',
+};
+$('#apiTbl').innerHTML = `<thead><tr><th>#</th><th>endpoint</th><th>method</th><th>what it proves / returns</th><th>observed behavior (live)</th><th>docs</th></tr></thead><tbody>${Object.entries(D.endpoints).map(([k,v])=>`
+ <tr><td class="num mono">${k}</td><td class="mono" style="font-size:12px">${esc(PATHSHOW[v.path]||v.path)}</td>
+ <td><span class="pill ${v.method==='GET'?'p-yes':'p-warn'}">${v.method}${v.method==='POST'?' (report query)':''}</span></td>
+ <td>${esc(v.name)}</td><td class="prov" style="font-size:11.5px">${esc(BEHAVIOR[k]||'')}</td>
+ <td><a href="${v.doc}" target="_blank" rel="noopener">docs ↗</a></td></tr>`).join('')}
+ <tr><td class="num mono">08</td><td class="mono" style="font-size:12px">/reporting/v1beta/orgs/{org}:runValueRealizationTimelineReport</td><td><span class="pill p-warn">POST (report query)</span></td><td>Monthly timeline of all cost/savings fields — the Case-E proof & 12-month source</td><td class="prov" style="font-size:11.5px">⚠ …/clusters:… variant 404s; org-scoped path only</td><td><a href="https://docs.cast.ai/reference/valuerealizationapi_runvaluerealizationtimelinereport" target="_blank" rel="noopener">docs ↗</a></td></tr></tbody>`;
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+Learn more on our Cookie Policy. -> https://cast.ai/cookie-policy/
+ -> https://www.cookieyes.com/product/cookie-consent/?ref=cypbcyb&utm_source=cookie-banner&utm_medium=powered-by-cookieyes
+Cluster List -> /automation/cluster-list?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Overview -> /automation/overview?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Cloud VMs -> /automation/cloud-vms?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Schedules -> /automation/schedules?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Cost monitoring -> /automation/cost-report?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Network Intelligence -> /automation/network-intelligence?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Budgets -> /automation/budgets?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Dashboard -> /automation/external-clusters/00ee8944-67f6-43d5-8517-c270951ec02c/dashboard?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Cluster score -> /automation/external-clusters/00ee8944-67f6-43d5-8517-c270951ec02c/cluster-score?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Optimization constraints -> /automation/external-clusters/00ee8944-67f6-43d5-8517-c270951ec02c/optimization-constraints?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Available savings -> /automation/external-clusters/00ee8944-67f6-43d5-8517-c270951ec02c/available-savings?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Cost monitoring -> /automation/external-clusters/00ee8944-67f6-43d5-8517-c270951ec02c/cost-report?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Workload autoscaler -> /automation/external-clusters/00ee8944-67f6-43d5-8517-c270951ec02c/workload-optimization/workloads?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Node autoscaler -> /automation/external-clusters/00ee8944-67f6-43d5-8517-c270951ec02c/nodes?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Vulnerabilities -> /automation/external-clusters/00ee8944-67f6-43d5-8517-c270951ec02c/vulnerabilities?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Compliance -> /automation/external-clusters/00ee8944-67f6-43d5-8517-c270951ec02c/compliance?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Settings -> /automation/external-clusters/00ee8944-67f6-43d5-8517-c270951ec02c/settings?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+Logs -> /automation/external-clusters/00ee8944-67f6-43d5-8517-c270951ec02c/logs?org=5e413e89-eb67-48fb-b81c-6172baa988ed
+ -> /dashboard?org=5e413e89-eb67-48fb-b81c-6172baa988ed

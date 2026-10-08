@@ -1,0 +1,61 @@
+{
+  "format": "docx",
+  "verdict": "fail",
+  "checks": [
+    {
+      "id": "package",
+      "status": "pass"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "nothing is wrong"
+    },
+    {
+      "id": "contains",
+      "status": "fail",
+      "text": "+,992"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "348 OOM kills"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "September 24"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "Workload Autoscaler"
+    }
+  ],
+  "summary": {
+    "paragraphs": 50,
+    "tables": [
+      {
+        "rows": 5,
+        "columns": 3
+      }
+    ],
+    "sections": [
+      {
+        "page_twips": {
+          "w": "11909",
+          "h": "16834"
+        },
+        "margins_twips": {
+          "top": "1440",
+          "right": "1152",
+          "bottom": "1440",
+          "left": "1152",
+          "header": "720",
+          "footer": "720",
+          "gutter": "0"
+        }
+      }
+    ]
+  }
+}

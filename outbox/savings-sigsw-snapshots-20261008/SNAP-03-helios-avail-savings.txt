@@ -1,0 +1,236 @@
+Available savings
+
+October 08, 01:28
+
++
+
+ngm-helios-eks
+
+Connected
+
+AVAILABLE SAVINGS
+
+33.64%
+MONTHLY
+$6,374
+/mo
+ANNUAL
+$76,490
+/y
+Spot instances
+All workloads are currently running on spot instances.
+Configure the workloads to be migrated on spot.
+$0.00
+0%
+Workload rightsizing
+Apply the rightsizing recommendations found in the
+
+Workload autoscaler
+
+$5,009
+26.44%
+Cluster schedule
+Run cluster only when needed, keep it paused rest of the time.
+$6,960
+36.73%
+Configuration comparison
+Current cluster configuration
+COST
+
+QTY
+
+NAME
+
+CPU/H
+
+TOTAL /MO
+
+14 x
+
+m6a.4xlarge
+
+16 CPU, 64 GiB
+
+$0.02
+$5,080
+9 x
+
+r6a.4xlarge
+
+16 CPU, 128 GiB
+
+$0.02
+$4,316
+12 x
+
+c5a.4xlarge
+
+16 CPU, 32 GiB
+
+$0.021
+$3,660
+1 x
+
+x8i.4xlarge
+
+16 CPU, 256 GiB
+
+$0.048
+$1,789
+1 x
+
+x2iedn.2xlarge
+
+8 CPU, 256 GiB
+
+$0.054
+$1,704
+9 x
+
+m6a.2xlarge
+
+8 CPU, 32 GiB
+
+$0.02
+$1,633
+2 x
+
+m7a.xlarge
+
+4 CPU, 16 GiB
+
+$0.045
+$404.67
+3 x
+
+r6a.xlarge
+
+4 CPU, 32 GiB
+
+$0.02
+$359.69
+CURRENT CLUSTER COMPUTE COST:
+$18,946
+/mo
+51
+
+INSTANCES
+
+676
+
+CPU
+
+3.28
+
+TIB
+
+91.4
+
+TIB STORAGE
+
+730
+
+HOURS
+
+639
+
+PODS
+
+Optimized cluster configuration
+COST
+
+QTY
+
+NAME
+
+CPU/H
+
+TOTAL /MO
+
+13 x
+
+m6a.8xlarge
+
+32 CPU, 128 GiB
+
+$0.02
+$9,434
+2 x
+
+c5a.8xlarge
+
+32 CPU, 64 GiB
+
+$0.021
+$1,220
+2 x
+
+r6a.4xlarge
+
+16 CPU, 128 GiB
+
+$0.02
+$959.18
+1 x
+
+r6a.8xlarge
+
+32 CPU, 256 GiB
+
+$0.02
+$959.18
+OPTIMIZED CLUSTER COMPUTE COST:
+$12,572
+/mo
+18
+
+INSTANCES
+
+544
+
+CPU
+
+2.25
+
+TIB
+
+23
+
+TIB STORAGE
+
+730
+
+HOURS
+
+639
+
+PODS
+
+Comparison over time
+Cluster configuration comparison
+AVG. AVAILABLE SAVINGS
+33.59%
+CURRENT AVG. COST
+$36,612
+/mo
+OPTIMAL AVG. COST
+$24,315
+/mo
+
+MONTHLY CLUSTER COST
+
+$0
+$20000
+$40000
+$60000
+$80000
+$100000
+Oct 02
+Oct 03
+Oct 04
+Oct 05
+Oct 06
+Oct 07
+Oct 08
+Cost rate
+/mo

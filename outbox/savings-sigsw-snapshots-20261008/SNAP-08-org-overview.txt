@@ -1,0 +1,207 @@
+Introducing OpsPilot
+
+Get instant answers, automation tips, and insights across your clusters, workloads, and Cast AI features — all powered by AI.
+
+Try it now
+Organization Overview
+Discover clusters
+Connect cluster
+Clusters
+20
+
+CONNECTED
+
+20
+
+HIBERNATING
+
+0
+
+EXPERIENCING ISSUES
+
+0
+CPU
+5375.5
+
+USED
+
+246.1
+
+REQUESTED
+
+3748.9
+
+ALLOCATABLE
+
+5375.5
+GPU
+0
+
+USED
+
+0
+
+REQUESTED
+
+0
+
+ALLOCATABLE
+
+0
+Memory (GiB)
+20391.5
+
+USED
+
+5528.3
+
+REQUESTED
+
+12214
+
+ALLOCATABLE
+
+20391.5
+Efficiency
+
+CPU
+
+64.31%
+
+MEMORY
+
+48.58%
+Node autoscaler potential
+
+PROVISIONED CPU
+
+5834
+
+3976
+
+32%
+
+PROVISIONED MEMORY (GIB)
+
+25076
+
+16156
+
+36%
+Workload autoscaler potential
+
+CPU REQUESTS
+
+3749
+
+1057
+
+72%
+
+MEMORY REQUESTS (GIB)
+
+12214
+
+8964
+
+27%
+Total nodes
+614
+
+0 SPOT
+
+$0.00
+
+/ mo
+
+614 ON-DEMAND
+
+$158,318
+
+/ mo
+
+0 FALLBACK
+
+$0.00
+
+/ mo
+
+Resources & Utilization
+CPU
+Memory
+Storage
+AVG. PROVISIONED
+6105.09
+CPU
+AVG. REQUESTED
+4293.22
+CPU
+AVG. USED
+370.29
+CPU
+UTILIZATION
+5.6%
+0
+2500
+5000
+7500
+10000 CPU
+0
+3
+6
+9
+12%
+Oct 01
+Oct 02
+Oct 03
+Oct 04
+Oct 05
+Oct 06
+Oct 07
+Oct 08
+OOM Kills
+TOTAL EVENTS
+11260
+UNMANAGED WORKLOADS
+11210
+MANAGED WORKLOADS
+50
+Oct 01
+Oct 04
+Oct 07
+Oct 10
+Oct 13
+Oct 16
+Oct 19
+Oct 22
+Oct 25
+Oct 27
+Oct 30
+0
+55
+110
+165
+220
+Compute Cost
+PREVIOUS MONTH
+$182,509
+CURRENT MO.
+$51,311
+CURRENT MO. ESTIMATE
+$168,032
+0
+2000
+4000
+6000
+$8,000.00
+Sep 30
+Oct 03
+Oct 06
+Oct 09
+Oct 12
+Oct 15
+Oct 18
+Oct 21
+Oct 24
+Oct 26
+Oct 29

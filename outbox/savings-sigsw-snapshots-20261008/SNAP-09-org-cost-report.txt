@@ -1,0 +1,446 @@
+Clusters
+Compute cost
+Efficiency
+
+TOTAL CLUSTERS COST
+
+$51,311
+256%
+ON-DEMAND
+$44,680
+FALLBACK
+$0.00
+SPOT
+$0.00
+TOTAL CPU COST
+$27,893
+255%
+Than last month
+TOTAL CPU
+6,277CPU
+TOTAL MEMORY COST
+$16,787
+256%
+Than last month
+TOTAL MEMORY
+27,484GIB
+TOTAL STORAGE COST
+$6,631
+259%
+Than last month
+TOTAL STORAGE
+263TIB
+NGM-HELIOS-EKS
+$12,789
+NGM-TEST-EKS
+$11,219
+NGM-INTEG-EKS
+$6,119
+IANDS-SALES2-EKS
+$3,299
+NGM-DEMO-EKS
+$2,649
+
+COMPUTE COST PER CLUSTER
+
+$0
+$500
+$1000
+$1500
+$2000
+Sep 30
+Oct 02
+Oct 04
+Oct 06
+Oct 08
+Oct 10
+Oct 12
+Oct 14
+Oct 16
+Oct 18
+Oct 20
+Oct 22
+Oct 24
+Oct 25
+Oct 27
+Oct 29
+Oct 31
+20 clusters
+PROVISIONED RESOURCES
+TOTAL COST PER RESOURCE
+
+CLUSTER
+
+CPU
+
+MEMORY
+
+STORAGE
+
+CPU
+
+MEMORY
+
+STORAGE
+
+TOTAL COST
+
+ngm-helios-eks
+
+600442974479
+
+1524.88 CPU
+
+7011.63 GiB
+
+88.08 TiB
+
+$6,410
+
+$4,103
+
+$2,276
+
+$12,789
+
+ngm-test-eks
+
+600442974479
+
+1220.59 CPU
+
+5445.39 GiB
+
+34.95 TiB
+
+$6,417
+
+$3,903
+
+$899.46
+
+$11,219
+
+ngm-integ-eks
+
+600442974479
+
+968.57 CPU
+
+3821.88 GiB
+
+25.67 TiB
+
+$3,571
+
+$1,937
+
+$610.76
+
+$6,119
+
+iands-sales2-eks
+
+547787420222
+
+419.83 CPU
+
+1743.3 GiB
+
+21.65 TiB
+
+$1,806
+
+$1,022
+
+$470.53
+
+$3,299
+
+ngm-demo-eks
+
+600442974479
+
+322.89 CPU
+
+1483.86 GiB
+
+17.69 TiB
+
+$1,331
+
+$859.60
+
+$457.88
+
+$2,649
+
+onboard-sales1-eks
+
+547787420222
+
+292 CPU
+
+1232 GiB
+
+11.13 TiB
+
+$1,485
+
+$855.08
+
+$287.66
+
+$2,628
+
+ngm-sim-eks
+
+894875834901
+
+353.76 CPU
+
+1431.03 GiB
+
+8.16 TiB
+
+$1,418
+
+$775.81
+
+$210.83
+
+$2,405
+
+hermes-val-eks
+
+275315285795
+
+232 CPU
+
+992 GiB
+
+13.51 TiB
+
+$1,239
+
+$720.44
+
+$349.75
+
+$2,309
+
+onboard-delivery-eks
+
+547787420222
+
+185.32 CPU
+
+805.26 GiB
+
+5.96 TiB
+
+$950.84
+
+$563.31
+
+$153.90
+
+$1,668
+
+ngm-sim3-eks
+
+894875834901
+
+188 CPU
+
+816 GiB
+
+4.07 TiB
+
+$771.02
+
+$464.92
+
+$105.36
+
+$1,341
+
+alliander-demo-eks
+
+721233634880
+
+106.99 CPU
+
+491.95 GiB
+
+4.52 TiB
+
+$597.78
+
+$370.66
+
+$117.01
+
+$1,085
+
+baseline-clo-eks
+
+110201440604
+
+113.34 CPU
+
+522.78 GiB
+
+4.58 TiB
+
+$451.50
+
+$273.49
+
+$118.39
+
+$843.38
+
+ngm-data-eks
+
+595960695089
+
+66 CPU
+
+328 GiB
+
+12.15 TiB
+
+$265.42
+
+$182.40
+
+$304.63
+
+$752.46
+
+ngm-sim2-eks
+
+894875834901
+
+83.04 CPU
+
+547.44 GiB
+
+4.07 TiB
+
+$340.39
+
+$292.80
+
+$105.31
+
+$738.51
+
+ngm-kronos-eks
+
+600442974479
+
+67.23 CPU
+
+281.33 GiB
+
+2.93 TiB
+
+$306.22
+
+$172.47
+
+$75.69
+
+$554.39
+
+shire-dev-eks
+
+843594798263
+
+73.55 CPU
+
+294.19 GiB
+
+2.57 TiB
+
+$252.60
+
+$137.73
+
+$59.67
+
+$450.00
+
+clo-master-eks
+
+115928806288
+
+30.98 CPU
+
+123.92 GiB
+
+40 GiB
+
+$170.64
+
+$93.14
+
+$1.01
+
+$264.79
+
+shire-qa-eks
+
+843594798263
+
+12.01 CPU
+
+48.04 GiB
+
+1.05 TiB
+
+$46.71
+
+$25.47
+
+$27.25
+
+$99.44
+
+workbench-preprodeu-eks
+
+136730153639
+
+8 CPU
+
+32.02 GiB
+
+0 Bytes
+
+$31.19
+
+$17.01
+
+$0.00
+
+$48.19
+
+shire-demo-eks
+
+843594798263
+
+8.01 CPU
+
+32.02 GiB
+
+0 Bytes
+
+$31.15
+
+$16.99
+
+$0.00
+
+$48.14

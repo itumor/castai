@@ -1,0 +1,244 @@
+Available savings
+
+October 08, 01:29
+
++
+
+ngm-integ-eks
+
+Connected
+
+AVAILABLE SAVINGS
+
+57.07%
+MONTHLY
+$17,991
+/mo
+ANNUAL
+$215,892
+/y
+Spot instances
+All workloads are currently running on spot instances.
+Configure the workloads to be migrated on spot.
+$444.39
+1.41%
+Workload rightsizing
+Apply the rightsizing recommendations found in the
+
+Workload autoscaler
+
+$1,707
+5.42%
+Cluster schedule
+Run cluster only when needed, keep it paused rest of the time.
+$7,491
+23.76%
+Configuration comparison
+Current cluster configuration
+COST
+
+QTY
+
+NAME
+
+CPU/H
+
+TOTAL /MO
+
+22 x
+
+m6a.4xlarge
+
+16 CPU, 64 GiB
+
+$0.02
+$7,983
+43 x
+
+m6a.2xlarge
+
+8 CPU, 32 GiB
+
+$0.02
+$7,801
+69 x
+
+m6a.xlarge
+
+4 CPU, 16 GiB
+
+$0.02
+$6,259
+7 x
+
+c5a.4xlarge
+
+16 CPU, 32 GiB
+
+$0.021
+$2,135
+12 x
+
+c5a.2xlarge
+
+8 CPU, 16 GiB
+
+$0.021
+$1,830
+5 x
+
+c6a.4xlarge
+
+16 CPU, 32 GiB
+
+$0.021
+$1,530
+3 x
+
+r6a.4xlarge
+
+16 CPU, 128 GiB
+
+$0.02
+$1,439
+6 x
+
+c6a.2xlarge
+
+8 CPU, 16 GiB
+
+$0.021
+$918.14
+4 x
+
+m7a.xlarge
+
+4 CPU, 16 GiB
+
+$0.045
+$809.34
+3 x
+
+r6a.2xlarge
+
+8 CPU, 64 GiB
+
+$0.02
+$719.37
+CURRENT CLUSTER COMPUTE COST:
+$31,524
+/mo
+175
+
+INSTANCES
+
+1400
+
+CPU
+
+5.09
+
+TIB
+
+44
+
+TIB STORAGE
+
+730
+
+HOURS
+
+767
+
+PODS
+
+Optimized cluster configuration
+COST
+
+QTY
+
+NAME
+
+CPU/H
+
+TOTAL /MO
+
+9 x
+
+m6a.16xlarge
+
+64 CPU, 256 GiB
+
+$0.02
+$13,062
+1 x
+
+m6a.4xlarge
+
+16 CPU, 64 GiB
+
+$0.02
+$362.85
+1 x
+
+r6in.2xlarge
+
+8 CPU, 64 GiB
+
+$0.009
+$107.76
+OPTIMIZED CLUSTER COMPUTE COST:
+$13,533
+/mo
+11
+
+INSTANCES
+
+600
+
+CPU
+
+2.38
+
+TIB
+
+43
+
+TIB STORAGE
+
+730
+
+HOURS
+
+767
+
+PODS
+
+Comparison over time
+Cluster configuration comparison
+AVG. AVAILABLE SAVINGS
+36.46%
+CURRENT AVG. COST
+$16,960
+/mo
+OPTIMAL AVG. COST
+$10,777
+/mo
+
+MONTHLY CLUSTER COST
+
+$0
+$15000
+$30000
+$45000
+$60000
+$75000
+Oct 02
+Oct 03
+Oct 04
+Oct 05
+Oct 06
+Oct 07
+Oct 08
+Cost rate
+/mo
