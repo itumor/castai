@@ -1,0 +1,137 @@
+{
+ "window": {
+  "st": "2026-10-05T00:00:00.000Z",
+  "en": "2026-10-12T00:00:00.000Z"
+ },
+ "baselineParams": {
+  "status": 200,
+  "body": {
+   "cpuOverprovisioningFactor": 3.0120791805055753,
+   "memoryOverprovisioningFactor": 3.8938062796171264,
+   "costPerCpuCoreHourly": 0.00874888569480014,
+   "costPerMemoryGibHourly": 0.0011870151730899218,
+   "baselinePeriodStartTime": "2025-11-19T05:34:27Z",
+   "baselinePeriodEndTime": "2025-12-05T00:00:00Z",
+   "baselineType": "CLUSTER_HISTORY",
+   "updateTime": "2025-12-05T08:00:10Z"
+  }
+ },
+ "vr": {
+  "status": 200,
+  "body": {
+   "items": [
+    {
+     "clusterId": "c6cdf969-f81c-4324-a498-89008dce1351",
+     "clusterName": "eks-Cluster1",
+     "clusterStatus": "ready",
+     "baselineType": "CLUSTER_HISTORY",
+     "cost": {
+      "actualCost": 564.4388987232808,
+      "projectedCost": 1175.724931145772,
+      "autoscalerSavings": 611.2860324224912,
+      "workloadAutoscalerSavings": 47.115789390545736,
+      "totalSavings": 611.2860324224912
+     },
+     "cpu": {
+      "actualCost": 409.0525337501699,
+      "projectedCost": 897.9532523061163,
+      "provisionedCoresHourly": 269.097,
+      "projectedCoresHourly": 594.414,
+      "requestedCoresHourly": 160.397,
+      "provisionedCoreHours": 40167.768,
+      "projectedCoreHours": 88200.885,
+      "requestedCoreHours": 24940.811,
+      "provisionedCores": 276.70104247990815,
+      "projectedCores": 607.5835935706085,
+      "requestedCores": 171.80811251435134
+     },
+     "memory": {
+      "actualCost": 155.38636497311086,
+      "projectedCost": 277.7716788396557,
+      "provisionedBytesHourly": 784770525465,
+      "projectedBytesHourly": 1428468111403,
+      "requestedBytesHourly": 334705001632,
+      "provisionedByteHours": 117549459516369,
+      "projectedByteHours": 210619921672404,
+      "requestedByteHours": 50061634153477,
+      "provisionedGib": 754.1432740397893,
+      "projectedGib": 1351.2405583278098,
+      "requestedGib": 321.17242256675803
+     },
+     "woopAdopted": true,
+     "autoscalerAdopted": true
+    }
+   ],
+   "nextPageCursor": ""
+  }
+ },
+ "classic": {
+  "status": 200,
+  "body": {
+   "clusterId": "c6cdf969-f81c-4324-a498-89008dce1351",
+   "items": [
+    {
+     "timestamp": "2026-10-09T00:00:00Z",
+     "downscalingSavings": "90.467942",
+     "spotSavings": "116.296122"
+    },
+    {
+     "timestamp": "2026-10-07T00:00:00Z",
+     "downscalingSavings": "20.483627",
+     "spotSavings": "132.939693"
+    },
+    {
+     "timestamp": "2026-10-12T00:00:00Z",
+     "downscalingSavings": "3.019930",
+     "spotSavings": "93.178230"
+    },
+    {
+     "timestamp": "2026-10-11T00:00:00Z",
+     "downscalingSavings": "15.857075",
+     "spotSavings": "96.752407"
+    },
+    {
+     "timestamp": "2026-10-06T00:00:00Z",
+     "downscalingSavings": "6.375694",
+     "spotSavings": "139.802933"
+    },
+    {
+     "timestamp": "2026-10-10T00:00:00Z",
+     "downscalingSavings": "10.729124",
+     "spotSavings": "96.534579"
+    },
+    {
+     "timestamp": "2026-10-08T00:00:00Z",
+     "downscalingSavings": "10.691207",
+     "spotSavings": "129.568456"
+    }
+   ],
+   "summary": {
+    "totalCost": "631.238340",
+    "totalSavings": "962.697018"
+   }
+  }
+ },
+ "woopSummary": {
+  "status": 200,
+  "body": {
+   "totalCount": 363,
+   "optimizedCount": 127,
+   "hpaOptimizedCount": 111,
+   "vpaOptimizedCount": 127,
+   "hpaVpaOptimizedCount": 111,
+   "apiManagedCount": 361,
+   "annotationManagedCount": 2,
+   "recommendedCpuCores": 93.219,
+   "requestedCpuCores": 122.587,
+   "cpuCoresDifference": 29.36800000000001,
+   "recommendedMemory": 361.5478515625,
+   "requestedMemory": 284.6731013059616,
+   "memoryDifference": -76.87475025653839,
+   "originalRequestedCpuCores": 198.636,
+   "originalRequestedMemoryGibs": 339.8891693353653,
+   "usageCpuCores": 14.489,
+   "usageMemoryGibs": 207.79073333740234
+  }
+ }
+}

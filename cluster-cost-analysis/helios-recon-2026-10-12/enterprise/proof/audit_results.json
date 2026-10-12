@@ -1,0 +1,6799 @@
+{
+ "results": {
+  "00ee8944-67f6-43d5-8517-c270951ec02c": {
+   "cluster": "dema-platform-services-test",
+   "org": "CPS",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'CPS' vs 'CPS'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'dema-platform-services-test' vs 'dema-platform-services-test'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-central-1' vs 'eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2025-10-21' vs '2025-10-21'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2026-07-22 16:16:54' vs '2026-07-22 16:16:54'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-07-22' vs '2026-07-22'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'31' vs '31'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2025-10-21' vs '2025-10-21'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2026-07-22' vs '2026-07-22'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2026-07-23' vs '2026-07-23'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "1.6483 vs 1.6483"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "4.1115 vs 4.1115"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'dema-platform-services-test#373270804851#eu-central-1' vs 'dema-platform-services-test#373270804851#eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'CPS' vs 'CPS'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "465.0 vs 465.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "666.0 vs 666.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "202.0 vs 202.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "202.0 vs 202.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "117.16 vs 117.16"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "105.34 vs 105.34"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "16.89 vs 16.89"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "84.45 vs 84.45"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "96.27 vs 96.27"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "201.61 vs 201.6100"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "84.45 vs 84.4500"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "96.27 vs 96.2730"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "117.16 vs 117.1600"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "105.34 vs 105.3400"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "464.83 vs raw 464.8280045397561"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "666.44 vs raw 666.442809001467"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "201.61 vs raw 201.61480446171092"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2025-10-21' vs raw '2025-10-21'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2026-07-22' vs raw '2026-07-22'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2026-07-23' vs raw '2026-07-23'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "1.6483 vs raw 1.6483001522657164"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "4.1115 vs raw 4.111494592266913"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2025-10-21' vs raw '2025-10-21'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2026-07-22 16:16:54' vs raw '2026-07-22 16:16:54'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-central-1' vs raw 'eu-central-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "373270804851 in dema-platform-services-test#373270804851#eu-central-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-07-22 vs raw page1-min 2026-07-22 [exact, single page]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "31 vs raw page1-count 31 [exact, single page]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "16.89 vs raw 16.89"
+    }
+   ],
+   "anomalies": [
+    "RAM factor 4.1115 (>4x) \u2014 baseline provisioning heavily exceeds demand"
+   ],
+   "orgid": "5e413e89-eb67-48fb-b81c-6172baa988ed"
+  },
+  "7e04bd70-0513-4c6b-8b38-42b6c46905d9": {
+   "cluster": "dev-cluster",
+   "org": "DI AUT PI APF",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'DI AUT PI APF' vs 'DI AUT PI APF'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'dev-cluster' vs 'dev-cluster'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-central-1' vs 'eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2026-08-20' vs '2026-08-20'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2026-09-08 14:01:56' vs '2026-09-08 14:01:56'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-09-08' vs '2026-09-08'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'6' vs '6'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2026-08-20' vs '2026-08-20'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2026-09-08' vs '2026-09-08'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2026-09-09' vs '2026-09-09'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "1.438 vs 1.438"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "1.3457 vs 1.3457"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'dev-cluster#660922352913#eu-central-1' vs 'dev-cluster#660922352913#eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'DI AUT PI APF' vs 'DI AUT PI APF'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "650.0 vs 650.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "596.0 vs 596.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "-54.0 vs -54.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "-54.0 vs -54.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "-185.94 vs -185.94"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "-204.43 vs -204.43"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "26.424 vs 26.424"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "132.12 vs 132.12"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "150.62 vs 150.62"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "-53.82 vs -53.8200"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "132.12 vs 132.1200"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "150.62 vs 150.6168"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "-185.94 vs -185.9400"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "-204.43 vs -204.4400 [2dp store-rounding]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "649.52 vs raw 649.5170621296295"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "595.7 vs raw 595.700990957539"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "-53.82 vs raw -53.81607117209049"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2026-08-20' vs raw '2026-08-20'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2026-09-08' vs raw '2026-09-08'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2026-09-09' vs raw '2026-09-09'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "1.4380 vs raw 1.4379892709262996"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "1.3457 vs raw 1.3457335025264296"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2026-08-20' vs raw '2026-08-20'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2026-09-08 14:01:56' vs raw '2026-09-08 14:01:56'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-central-1' vs raw 'eu-central-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "660922352913 in dev-cluster#660922352913#eu-central-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-09-08 vs raw page1-min 2026-09-08 [exact, single page]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "6 vs raw page1-count 6 [exact, single page]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "26.424 vs raw 26.423999999999996"
+    }
+   ],
+   "anomalies": [
+    "NEGATIVE gross savings (-53.82) \u2014 actual exceeds projected counterfactual",
+    "net NEGATIVE @5.00 (-185.94) \u2014 September platform fee exceeds September savings",
+    "baseline end 2026-09-08 overlaps September window \u2014 savings suppressed"
+   ],
+   "orgid": "d7534e71-612b-4963-89c8-22304c7a9d3d"
+  },
+  "a4ee9bce-da9e-4cae-8eda-caeb0b5ab20a": {
+   "cluster": "pioneer-tcx",
+   "org": "IT IPS",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'IT IPS' vs 'IT IPS'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'pioneer-tcx' vs 'pioneer-tcx'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-central-1' vs 'eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2026-02-12' vs '2026-02-12'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2026-05-11 18:22:26' vs '2026-05-11 18:22:26'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-08-03' vs '2026-08-03'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'50' vs '50'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2026-02-12' vs '2026-02-12'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2026-05-12' vs '2026-05-12'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2026-05-13' vs '2026-05-13'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "5.8329 vs 5.8329"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "10.453 vs 10.453"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'pioneer-tcx#136905788720#eu-central-1' vs 'pioneer-tcx#136905788720#eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'IT IPS' vs 'IT IPS'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "663.0 vs 663.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "3629.0 vs 3629.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "2966.0 vs 2966.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "2966.0 vs 2966.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "2843.14 vs 2843.14"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "2825.94 vs 2825.94"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "24.561 vs 24.561"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "122.81 vs 122.81"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "140.0 vs 140.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "2965.94 vs 2965.9400"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "122.81 vs 122.8050"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "140.0 vs 139.9977"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "2843.14 vs 2843.1300 [2dp store-rounding]"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "2825.94 vs 2825.9400"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "663.37 vs raw 663.3703754484964"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "3629.31 vs raw 3629.311260763146"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "2965.94 vs raw 2965.9408853146497"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2026-02-12' vs raw '2026-02-12'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2026-05-12' vs raw '2026-05-12'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2026-05-13' vs raw '2026-05-13'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "5.8329 vs raw 5.832924232090141"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "10.4530 vs raw 10.452982944427252"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2026-02-12' vs raw '2026-02-12'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2026-05-11 18:22:26' vs raw '2026-05-11 18:22:26'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-central-1' vs raw 'eu-central-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "136905788720 in pioneer-tcx#136905788720#eu-central-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-08-03 vs raw page1-min 2026-08-03 [PAGINATED: true count >50, first<=stored-min 2026-08-03]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "50 vs raw page1-count 50 [PAGINATED: true count >50, first<=stored-min 2026-08-03]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "24.561 vs raw 24.561000000000007"
+    }
+   ],
+   "anomalies": [
+    "CPU factor 5.8329 (>4x) \u2014 baseline provisioning heavily exceeds demand",
+    "RAM factor 10.4530 (>4x) \u2014 baseline provisioning heavily exceeds demand",
+    "baseline end 2026-05-12 later than first CAST op 2026-05-11 (node-mgmt >=20% adoption crossed after first operation)",
+    "projected/actual ratio 5.5x \u2014 customer will challenge plausibility"
+   ],
+   "orgid": "c67df1a0-06e0-46f9-a84e-27c14958d564"
+  },
+  "f0fa2ea7-48db-4473-b6b3-c73123fa0dac": {
+   "cluster": "eleX01",
+   "org": "IT IPS",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'IT IPS' vs 'IT IPS'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'eleX01' vs 'eleX01'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-central-1' vs 'eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2026-01-19' vs '2026-01-19'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2026-03-11 10:48:52' vs '2026-03-11 10:48:52'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-08-21' vs '2026-08-21'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'50' vs '50'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2026-01-19' vs '2026-01-19'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2026-03-13' vs '2026-03-13'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2026-03-13' vs '2026-03-13'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "1.5712 vs 1.5712"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "3.1299 vs 3.1299"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'eleX01#576061914293#eu-central-1' vs 'eleX01#576061914293#eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'IT IPS' vs 'IT IPS'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "6462.0 vs 6462.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "7710.0 vs 7710.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "1249.0 vs 1249.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "1249.0 vs 1249.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "-414.92 vs -414.92"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "-647.8 vs -647.8"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "332.684 vs 332.684"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "1663.42 vs 1663.42"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "1896.3 vs 1896.3"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "1248.5 vs 1248.5000"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "1663.42 vs 1663.4200"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "1896.3 vs 1896.2988"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "-414.92 vs -414.9200"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "-647.8 vs -647.8000"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "6461.5 vs raw 6461.503699402256"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "7710.0 vs raw 7710.00143297539"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "1248.5 vs raw 1248.4977335731344"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2026-01-19' vs raw '2026-01-19'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2026-03-13' vs raw '2026-03-13'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2026-03-13' vs raw '2026-03-13'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "1.5712 vs raw 1.571179024918293"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "3.1299 vs raw 3.1299094089848976"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2026-01-19' vs raw '2026-01-19'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2026-03-11 10:48:52' vs raw '2026-03-11 10:48:52'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-central-1' vs raw 'eu-central-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "576061914293 in eleX01#576061914293#eu-central-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-08-21 vs raw page1-min 2026-08-21 [PAGINATED: true count >50, first<=stored-min 2026-08-21]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "50 vs raw page1-count 50 [PAGINATED: true count >50, first<=stored-min 2026-08-21]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "332.684 vs raw 332.684"
+    }
+   ],
+   "anomalies": [
+    "net NEGATIVE @5.00 (-414.92) \u2014 September platform fee exceeds September savings",
+    "baseline end 2026-03-13 later than first CAST op 2026-03-11 (node-mgmt >=20% adoption crossed after first operation)"
+   ],
+   "orgid": "c67df1a0-06e0-46f9-a84e-27c14958d564"
+  },
+  "7b646d74-cc78-4703-a14f-865b3c0451bf": {
+   "cluster": "eleX01",
+   "org": "IT IPS",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'IT IPS' vs 'IT IPS'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'eleX01' vs 'eleX01'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'us-east-2' vs 'us-east-2'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2026-01-19' vs '2026-01-19'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2026-05-05 09:37:37' vs '2026-05-05 09:37:37'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-08-15' vs '2026-08-15'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'50' vs '50'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2026-01-19' vs '2026-01-19'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2026-05-06' vs '2026-05-06'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2026-05-06' vs '2026-05-06'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "1.571 vs 1.571"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "3.2622 vs 3.2622"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'eleX01#546544527727#us-east-2' vs 'eleX01#546544527727#us-east-2'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'IT IPS' vs 'IT IPS'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "5589.0 vs 5589.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "6670.0 vs 6670.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "1080.0 vs 1080.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "1080.0 vs 1080.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "-554.67 vs -554.67"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "-783.57 vs -783.57"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "327.003 vs 327.003"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "1635.02 vs 1635.02"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "1863.92 vs 1863.92"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "1080.34 vs 1080.3400"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "1635.02 vs 1635.0150"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "1863.92 vs 1863.9171"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "-554.67 vs -554.6800 [2dp store-rounding]"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "-783.57 vs -783.5800 [2dp store-rounding]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "5589.23 vs raw 5589.231585446395"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "6669.57 vs raw 6669.5743507709885"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "1080.34 vs raw 1080.3427653245928"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2026-01-19' vs raw '2026-01-19'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2026-05-06' vs raw '2026-05-06'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2026-05-06' vs raw '2026-05-06'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "1.5710 vs raw 1.5710144603809026"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "3.2622 vs raw 3.262179687781085"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2026-01-19' vs raw '2026-01-19'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2026-05-05 09:37:37' vs raw '2026-05-05 09:37:37'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'us-east-2' vs raw 'us-east-2'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "546544527727 in eleX01#546544527727#us-east-2"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-08-15 vs raw page1-min 2026-08-15 [PAGINATED: true count >50, first<=stored-min 2026-08-15]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "50 vs raw page1-count 50 [PAGINATED: true count >50, first<=stored-min 2026-08-15]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "327.003 vs raw 327.0030000000001"
+    }
+   ],
+   "anomalies": [
+    "net NEGATIVE @5.00 (-554.67) \u2014 September platform fee exceeds September savings",
+    "baseline end 2026-05-06 later than first CAST op 2026-05-05 (node-mgmt >=20% adoption crossed after first operation)"
+   ],
+   "orgid": "c67df1a0-06e0-46f9-a84e-27c14958d564"
+  },
+  "cf027570-8275-4d1d-a2e1-f9ffbb713f9e": {
+   "cluster": "eleX01in",
+   "org": "IT IPS",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'IT IPS' vs 'IT IPS'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'eleX01in' vs 'eleX01in'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'ap-south-1' vs 'ap-south-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2026-01-19' vs '2026-01-19'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2026-05-06 10:33:04' vs '2026-05-06 10:33:04'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-08-22' vs '2026-08-22'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'50' vs '50'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2026-01-19' vs '2026-01-19'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2026-05-15' vs '2026-05-15'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2026-05-15' vs '2026-05-15'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "1.5901 vs 1.5901"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "3.1964 vs 3.1964"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'eleX01in#637423451488#ap-south-1' vs 'eleX01in#637423451488#ap-south-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'IT IPS' vs 'IT IPS'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "3301.0 vs 3301.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "3935.0 vs 3935.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "634.0 vs 634.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "634.0 vs 634.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "-1047.29 vs -1047.29"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "-1282.73 vs -1282.73"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "336.342 vs 336.342"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "1681.71 vs 1681.71"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "1917.15 vs 1917.15"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "634.42 vs 634.4300 [2dp store-rounding]"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "1681.71 vs 1681.7100"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "1917.15 vs 1917.1494"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "-1047.29 vs -1047.2900"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "-1282.73 vs -1282.7300"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "3300.59 vs raw 3300.5923046319112"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "3935.02 vs raw 3935.0162133702297"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "634.42 vs raw 634.4239087383185"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2026-01-19' vs raw '2026-01-19'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2026-05-15' vs raw '2026-05-15'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2026-05-15' vs raw '2026-05-15'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "1.5901 vs raw 1.59006605506263"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "3.1964 vs raw 3.196421296116669"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2026-01-19' vs raw '2026-01-19'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2026-05-06 10:33:04' vs raw '2026-05-06 10:33:04'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'ap-south-1' vs raw 'ap-south-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "637423451488 in eleX01in#637423451488#ap-south-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-08-22 vs raw page1-min 2026-08-22 [PAGINATED: true count >50, first<=stored-min 2026-08-22]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "50 vs raw page1-count 50 [PAGINATED: true count >50, first<=stored-min 2026-08-22]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "336.342 vs raw 336.3420000000001"
+    }
+   ],
+   "anomalies": [
+    "net NEGATIVE @5.00 (-1047.29) \u2014 September platform fee exceeds September savings",
+    "baseline end 2026-05-15 later than first CAST op 2026-05-06 (node-mgmt >=20% adoption crossed after first operation)"
+   ],
+   "orgid": "c67df1a0-06e0-46f9-a84e-27c14958d564"
+  },
+  "823f9475-109e-4a8a-bed1-c1fba8441882": {
+   "cluster": "eleX01p",
+   "org": "IT IPS",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'IT IPS' vs 'IT IPS'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'eleX01p' vs 'eleX01p'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-central-1' vs 'eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2026-01-19' vs '2026-01-19'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2026-05-07 12:03:08' vs '2026-05-07 12:03:08'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-05-07' vs '2026-05-07'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'38' vs '38'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2026-01-19' vs '2026-01-19'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2026-05-08' vs '2026-05-08'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2026-05-09' vs '2026-05-09'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "1.5898 vs 1.5898"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "3.1728 vs 3.1728"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'eleX01p#976594908632#eu-central-1' vs 'eleX01p#976594908632#eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'IT IPS' vs 'IT IPS'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "12912.0 vs 12912.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "9647.0 vs 9647.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "-3265.0 vs -3265.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "-3265.0 vs -3265.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "-5966.49 vs -5966.49"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "-6344.65 vs -6344.65"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "540.227 vs 540.227"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "2701.13 vs 2701.13"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "3079.29 vs 3079.29"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "-3265.35 vs -3265.3600 [2dp store-rounding]"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "2701.13 vs 2701.1350"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "3079.29 vs 3079.2939"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "-5966.49 vs -5966.4800 [2dp store-rounding]"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "-6344.65 vs -6344.6400 [2dp store-rounding]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "12912.3 vs raw 12912.29511975"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "9646.94 vs raw 9646.942683835383"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "-3265.35 vs raw -3265.3524359146168"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2026-01-19' vs raw '2026-01-19'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2026-05-08' vs raw '2026-05-08'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2026-05-09' vs raw '2026-05-09'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "1.5898 vs raw 1.5898275325869113"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "3.1728 vs raw 3.1728278597016697"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2026-01-19' vs raw '2026-01-19'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2026-05-07 12:03:08' vs raw '2026-05-07 12:03:08'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-central-1' vs raw 'eu-central-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "976594908632 in eleX01p#976594908632#eu-central-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-05-07 vs raw page1-min 2026-05-07 [exact, single page]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "38 vs raw page1-count 38 [exact, single page]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "540.227 vs raw 540.2269999999999"
+    }
+   ],
+   "anomalies": [
+    "NEGATIVE gross savings (-3265.35) \u2014 actual exceeds projected counterfactual",
+    "net NEGATIVE @5.00 (-5966.49) \u2014 September platform fee exceeds September savings",
+    "baseline end 2026-05-08 later than first CAST op 2026-05-07 (node-mgmt >=20% adoption crossed after first operation)",
+    "first rebalance plan 2026-05-07 created BEFORE baseline end 2026-05-08"
+   ],
+   "orgid": "c67df1a0-06e0-46f9-a84e-27c14958d564"
+  },
+  "d909c528-e5d0-4ebd-8c1a-77ad9b76a54b": {
+   "cluster": "console-eks-integ",
+   "org": "Pillar#1",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'Pillar#1' vs 'Pillar#1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'console-eks-integ' vs 'console-eks-integ'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'us-east-1' vs 'us-east-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2025-12-04' vs '2025-12-04'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2025-12-04 14:38:35' vs '2025-12-04 14:38:35'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2025-12-04' vs '2025-12-04'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'6' vs '6'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2025-12-04' vs '2025-12-04'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2026-09-30' vs '2026-09-30'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2026-10-01' vs '2026-10-01'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "2.0964 vs 2.0964"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "2.0551 vs 2.0551"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'console-eks-integ#238720913587#us-east-1' vs 'console-eks-integ#238720913587#us-east-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'Pillar#1' vs 'Pillar#1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "2995.0 vs 2995.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "2995.0 vs 2995.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "0.0 vs 0.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "0.0 vs 0.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "-25.12 vs -25.12"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "-28.64 vs -28.64"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "5.024 vs 5.024"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "25.12 vs 25.12"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "28.64 vs 28.64"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "0.0 vs 0.0000"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "25.12 vs 25.1200"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "28.64 vs 28.6368"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "-25.12 vs -25.1200"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "-28.64 vs -28.6400"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "2995.12 vs raw 2995.1221038435415"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "2995.12 vs raw 2995.1221038435415"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "0.0 vs raw 0.0"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2025-12-04' vs raw '2025-12-04'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2026-09-30' vs raw '2026-09-30'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2026-10-01' vs raw '2026-10-01'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "2.0964 vs raw 2.0964122968099552"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "2.0551 vs raw 2.055081661651845"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2025-12-04' vs raw '2025-12-04'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2025-12-04 14:38:35' vs raw '2025-12-04 14:38:35'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'us-east-1' vs raw 'us-east-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "238720913587 in console-eks-integ#238720913587#us-east-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2025-12-04 vs raw page1-min 2025-12-04 [exact, single page]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "6 vs raw page1-count 6 [exact, single page]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "5.024 vs raw 5.024"
+    }
+   ],
+   "anomalies": [
+    "net NEGATIVE @5.00 (-25.12) \u2014 September platform fee exceeds September savings",
+    "projected == actual \u2014 September sits INSIDE baseline window (savings = $0 by definition)",
+    "baseline end 2026-09-30 overlaps September window \u2014 savings suppressed",
+    "baseline end 2026-09-30 later than first CAST op 2025-12-04 (node-mgmt >=20% adoption crossed after first operation)",
+    "first rebalance plan 2025-12-04 created BEFORE baseline end 2026-09-30"
+   ],
+   "orgid": "fce58d3c-0345-465e-9257-f5c31f29a810"
+  },
+  "fd1ca573-4982-4133-89ce-bfd4df4f5d7b": {
+   "cluster": "fgeks-blue-eks-cluster",
+   "org": "SI B SW",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'SI B SW' vs 'SI B SW'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'fgeks-blue-eks-cluster' vs 'fgeks-blue-eks-cluster'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-west-1' vs 'eu-west-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2026-06-25' vs '2026-06-25'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2026-07-06 10:23:57' vs '2026-07-06 10:23:57'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-06-30' vs '2026-06-30'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'6' vs '6'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2026-06-25' vs '2026-06-25'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2026-07-06' vs '2026-07-06'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2026-07-09' vs '2026-07-09'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "4.5265 vs 4.5265"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "3.7578 vs 3.7578"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'fgeks-blue-eks-cluster#183098873491#eu-west-1' vs 'fgeks-blue-eks-cluster#183098873491#eu-west-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'SI B SW' vs 'SI B SW'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "172.0 vs 172.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "514.0 vs 514.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "342.0 vs 342.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "342.0 vs 342.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "300.77 vs 300.77"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "294.99 vs 294.99"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "8.268 vs 8.268"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "41.34 vs 41.34"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "47.13 vs 47.13"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "342.11 vs 342.1100"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "41.34 vs 41.3400"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "47.13 vs 47.1276"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "300.77 vs 300.7700"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "294.99 vs 294.9800 [2dp store-rounding]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "171.62 vs raw 171.61916057017555"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "513.73 vs raw 513.7323212601692"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "342.11 vs raw 342.1131606899937"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2026-06-25' vs raw '2026-06-25'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2026-07-06' vs raw '2026-07-06'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2026-07-09' vs raw '2026-07-09'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "4.5265 vs raw 4.526525690440668"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "3.7578 vs raw 3.757799588597827"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2026-06-25' vs raw '2026-06-25'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2026-07-06 10:23:57' vs raw '2026-07-06 10:23:57'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-west-1' vs raw 'eu-west-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "183098873491 in fgeks-blue-eks-cluster#183098873491#eu-west-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-06-30 vs raw page1-min 2026-06-30 [exact, single page]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "6 vs raw page1-count 6 [exact, single page]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "8.268 vs raw 8.268000000000002"
+    }
+   ],
+   "anomalies": [
+    "CPU factor 4.5265 (>4x) \u2014 baseline provisioning heavily exceeds demand",
+    "first rebalance plan 2026-06-30 created BEFORE baseline end 2026-07-06"
+   ],
+   "orgid": "f872efe0-08ae-47df-b5ff-1e84187f8d72"
+  },
+  "6436c787-9169-4b3a-907c-d18776efeb19": {
+   "cluster": "fgeks-blue-eks-cluster",
+   "org": "SI B SW",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'SI B SW' vs 'SI B SW'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'fgeks-blue-eks-cluster' vs 'fgeks-blue-eks-cluster'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-west-1' vs 'eu-west-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2025-10-16' vs '2025-10-16'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2026-02-17 10:14:53' vs '2026-02-17 10:14:53'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-02-09' vs '2026-02-09'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'17' vs '17'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2025-10-16' vs '2025-10-16'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2026-02-17' vs '2026-02-17'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2026-02-18' vs '2026-02-18'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "6.0163 vs 6.0163"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "3.3445 vs 3.3445"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'fgeks-blue-eks-cluster#290851856511#eu-west-1' vs 'fgeks-blue-eks-cluster#290851856511#eu-west-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'SI B SW' vs 'SI B SW'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "195.0 vs 195.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "503.0 vs 503.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "309.0 vs 309.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "309.0 vs 309.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "261.96 vs 261.96"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "255.41 vs 255.41"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "9.368 vs 9.368"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "46.84 vs 46.84"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "53.4 vs 53.4"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "308.8 vs 308.8000"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "46.84 vs 46.8400"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "53.4 vs 53.3976"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "261.96 vs 261.9600"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "255.41 vs 255.4000 [2dp store-rounding]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "194.66 vs raw 194.65828602192983"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "503.46 vs raw 503.4626320143743"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "308.8 vs raw 308.8043459924445"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2025-10-16' vs raw '2025-10-16'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2026-02-17' vs raw '2026-02-17'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2026-02-18' vs raw '2026-02-18'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "6.0163 vs raw 6.01632723490135"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "3.3445 vs raw 3.344483284237653"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2025-10-16' vs raw '2025-10-16'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2026-02-17 10:14:53' vs raw '2026-02-17 10:14:53'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-west-1' vs raw 'eu-west-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "290851856511 in fgeks-blue-eks-cluster#290851856511#eu-west-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-02-09 vs raw page1-min 2026-02-09 [exact, single page]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "17 vs raw page1-count 17 [exact, single page]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "9.368 vs raw 9.368000000000006"
+    }
+   ],
+   "anomalies": [
+    "CPU factor 6.0163 (>4x) \u2014 baseline provisioning heavily exceeds demand",
+    "first rebalance plan 2026-02-09 created BEFORE baseline end 2026-02-17"
+   ],
+   "orgid": "f872efe0-08ae-47df-b5ff-1e84187f8d72"
+  },
+  "c6cdf969-f81c-4324-a498-89008dce1351": {
+   "cluster": "eks-Cluster1",
+   "org": "SI EA electrificationx",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'SI EA electrificationx' vs 'SI EA electrificationx'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'eks-Cluster1' vs 'eks-Cluster1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-central-1' vs 'eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2025-11-19' vs '2025-11-19'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2025-12-02 10:48:42' vs '2025-12-02 10:48:42'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-08-22' vs '2026-08-22'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'50' vs '50'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2025-11-19' vs '2025-11-19'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2025-12-05' vs '2025-12-05'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2025-12-05' vs '2025-12-05'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "3.0121 vs 3.0121"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "3.8938 vs 3.8938"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'eks-Cluster1#955761008245#eu-central-1' vs 'eks-Cluster1#955761008245#eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'SI EA electrificationx' vs 'SI EA electrificationx'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "4068.0 vs 4068.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "7865.0 vs 7865.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "3797.0 vs 3797.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "3797.0 vs 3797.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "1948.49 vs 1948.49"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "1689.66 vs 1689.66"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "369.753 vs 369.753"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "1848.76 vs 1848.76"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "2107.59 vs 2107.59"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "3797.25 vs 3797.2500"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "1848.76 vs 1848.7650"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "2107.59 vs 2107.5921"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "1948.49 vs 1948.4900"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "1689.66 vs 1689.6600"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "4067.62 vs raw 4067.617292069075"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "7864.87 vs raw 7864.869964055219"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "3797.25 vs raw 3797.252671986144"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2025-11-19' vs raw '2025-11-19'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2025-12-05' vs raw '2025-12-05'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2025-12-05' vs raw '2025-12-05'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "3.0121 vs raw 3.0120791805055753"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "3.8938 vs raw 3.8938062796171264"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2025-11-19' vs raw '2025-11-19'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2025-12-02 10:48:42' vs raw '2025-12-02 10:48:42'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-central-1' vs raw 'eu-central-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "955761008245 in eks-Cluster1#955761008245#eu-central-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-08-22 vs raw page1-min 2026-08-22 [PAGINATED: true count >50, first<=stored-min 2026-08-22]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "50 vs raw page1-count 50 [PAGINATED: true count >50, first<=stored-min 2026-08-22]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "369.753 vs raw 369.75299999999993"
+    }
+   ],
+   "anomalies": [
+    "baseline end 2025-12-05 later than first CAST op 2025-12-02 (node-mgmt >=20% adoption crossed after first operation)"
+   ],
+   "orgid": "259169ff-616b-4c53-9641-ae46235ace26"
+  },
+  "f31e9de1-7884-470e-95ce-11c9f5dcfe0d": {
+   "cluster": "eks-Cluster1",
+   "org": "SI EA electrificationx",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'SI EA electrificationx' vs 'SI EA electrificationx'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'eks-Cluster1' vs 'eks-Cluster1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-central-1' vs 'eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2026-01-20' vs '2026-01-20'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2026-02-13 04:04:45' vs '2026-02-13 04:04:45'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-08-22' vs '2026-08-22'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'50' vs '50'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2026-01-20' vs '2026-01-20'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2026-02-13' vs '2026-02-13'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2026-02-13' vs '2026-02-13'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "2.8375 vs 2.8375"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "2.9237 vs 2.9237"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'eks-Cluster1#129753847697#eu-central-1' vs 'eks-Cluster1#129753847697#eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'SI EA electrificationx' vs 'SI EA electrificationx'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "2978.0 vs 2978.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "5835.0 vs 5835.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "2857.0 vs 2857.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "2857.0 vs 2857.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "1533.89 vs 1533.89"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "1348.62 vs 1348.62"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "264.667 vs 264.667"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "1323.34 vs 1323.34"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "1508.6 vs 1508.6"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "2857.23 vs 2857.2300"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "1323.34 vs 1323.3350"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "1508.6 vs 1508.6019"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "1533.89 vs 1533.8900"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "1348.62 vs 1348.6300 [2dp store-rounding]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "2977.54 vs raw 2977.543983408136"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "5834.77 vs raw 5834.7697470019375"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "2857.23 vs raw 2857.2257635938017"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2026-01-20' vs raw '2026-01-20'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2026-02-13' vs raw '2026-02-13'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2026-02-13' vs raw '2026-02-13'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "2.8375 vs raw 2.8374943399174994"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "2.9237 vs raw 2.9236760420160053"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2026-01-20' vs raw '2026-01-20'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2026-02-13 04:04:45' vs raw '2026-02-13 04:04:45'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-central-1' vs raw 'eu-central-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "129753847697 in eks-Cluster1#129753847697#eu-central-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-08-22 vs raw page1-min 2026-08-22 [PAGINATED: true count >50, first<=stored-min 2026-08-22]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "50 vs raw page1-count 50 [PAGINATED: true count >50, first<=stored-min 2026-08-22]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "264.667 vs raw 264.66700000000003"
+    }
+   ],
+   "anomalies": [],
+   "orgid": "259169ff-616b-4c53-9641-ae46235ace26"
+  },
+  "51dd234c-a5bf-4f99-a884-b79956de8f94": {
+   "cluster": "ngm-sim-eks",
+   "org": "SI GSW CLO",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'SI GSW CLO' vs 'SI GSW CLO'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'ngm-sim-eks' vs 'ngm-sim-eks'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-central-1' vs 'eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2025-09-30' vs '2025-09-30'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2025-10-30 20:22:11' vs '2025-10-30 20:22:11'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-10-10' vs '2026-10-10'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'50' vs '50'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2025-09-30' vs '2025-09-30'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2026-06-03' vs '2026-06-03'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2026-06-04' vs '2026-06-04'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "3.8408 vs 3.8408"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "7.8791 vs 7.8791"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'ngm-sim-eks#894875834901#eu-central-1' vs 'ngm-sim-eks#894875834901#eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'SI GSW CLO' vs 'SI GSW CLO'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "8051.0 vs 8051.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "47377.0 vs 47377.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "39326.0 vs 39326.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "39326.0 vs 39326.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "37529.82 vs 37529.82"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "37278.39 vs 37278.39"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "359.195 vs 359.195"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "1795.97 vs 1795.97"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "2047.41 vs 2047.41"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "39325.8 vs 39325.8000"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "1795.97 vs 1795.9750"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "2047.41 vs 2047.4115"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "37529.82 vs 37529.8300 [2dp store-rounding]"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "37278.39 vs 37278.3900"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "8051.07 vs raw 8051.074252139175"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "47376.87 vs raw 47376.87098983789"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "39325.8 vs raw 39325.79673769871"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2025-09-30' vs raw '2025-09-30'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2026-06-03' vs raw '2026-06-03'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2026-06-04' vs raw '2026-06-04'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "3.8408 vs raw 3.8408043289117555"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "7.8791 vs raw 7.879099290344205"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2025-09-30' vs raw '2025-09-30'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2025-10-30 20:22:11' vs raw '2025-10-30 20:22:11'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-central-1' vs raw 'eu-central-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "894875834901 in ngm-sim-eks#894875834901#eu-central-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-10-10 vs raw page1-min 2026-10-10 [PAGINATED: true count >50, first<=stored-min 2026-10-10]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "50 vs raw page1-count 50 [PAGINATED: true count >50, first<=stored-min 2026-10-10]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "359.195 vs raw 359.19499999999994"
+    }
+   ],
+   "anomalies": [
+    "RAM factor 7.8791 (>4x) \u2014 baseline provisioning heavily exceeds demand",
+    "baseline end 2026-06-03 later than first CAST op 2025-10-30 (node-mgmt >=20% adoption crossed after first operation)",
+    "projected/actual ratio 5.9x \u2014 customer will challenge plausibility"
+   ],
+   "orgid": "07aa3c29-3e1f-44bc-ad60-ceedb878d99a"
+  },
+  "02810f4b-b793-4ef2-95f1-e902af61d9e3": {
+   "cluster": "baseline-clo-eks",
+   "org": "SI GSW CLO",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'SI GSW CLO' vs 'SI GSW CLO'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'baseline-clo-eks' vs 'baseline-clo-eks'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-central-1' vs 'eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2025-09-29' vs '2025-09-29'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2025-10-29 18:22:34' vs '2025-10-29 18:22:34'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-10-10' vs '2026-10-10'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'50' vs '50'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2025-09-29' vs '2025-09-29'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2025-10-30' vs '2025-10-30'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2025-12-03' vs '2025-12-03'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "5.6551 vs 5.6551"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "9.8786 vs 9.8786"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'baseline-clo-eks#110201440604#eu-central-1' vs 'baseline-clo-eks#110201440604#eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'SI GSW CLO' vs 'SI GSW CLO'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "2542.0 vs 2542.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "21639.0 vs 21639.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "19096.0 vs 19096.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "19096.0 vs 19096.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "18522.13 vs 18522.13"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "18441.78 vs 18441.78"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "114.793 vs 114.793"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "573.96 vs 573.96"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "654.32 vs 654.32"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "19096.1 vs 19096.1000"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "573.96 vs 573.9650"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "654.32 vs 654.3201"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "18522.13 vs 18522.1400 [2dp store-rounding]"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "18441.78 vs 18441.7800"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "2542.46 vs raw 2542.458636048905"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "21638.56 vs raw 21638.556740041382"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "19096.1 vs raw 19096.098103992474"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2025-09-29' vs raw '2025-09-29'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2025-10-30' vs raw '2025-10-30'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2025-12-03' vs raw '2025-12-03'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "5.6551 vs raw 5.65507069752581"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "9.8786 vs raw 9.87855227438075"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2025-09-29' vs raw '2025-09-29'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2025-10-29 18:22:34' vs raw '2025-10-29 18:22:34'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-central-1' vs raw 'eu-central-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "110201440604 in baseline-clo-eks#110201440604#eu-central-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-10-10 vs raw page1-min 2026-10-10 [PAGINATED: true count >50, first<=stored-min 2026-10-10]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "50 vs raw page1-count 50 [PAGINATED: true count >50, first<=stored-min 2026-10-10]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "114.793 vs raw 114.79299999999998"
+    }
+   ],
+   "anomalies": [
+    "CPU factor 5.6551 (>4x) \u2014 baseline provisioning heavily exceeds demand",
+    "RAM factor 9.8786 (>4x) \u2014 baseline provisioning heavily exceeds demand",
+    "baseline end 2025-10-30 later than first CAST op 2025-10-29 (node-mgmt >=20% adoption crossed after first operation)",
+    "projected/actual ratio 8.5x \u2014 customer will challenge plausibility"
+   ],
+   "orgid": "07aa3c29-3e1f-44bc-ad60-ceedb878d99a"
+  },
+  "8bd361b0-fcbf-491d-beac-af92fb7d6b46": {
+   "cluster": "ngm-sim2-eks",
+   "org": "SI GSW CLO",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'SI GSW CLO' vs 'SI GSW CLO'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'ngm-sim2-eks' vs 'ngm-sim2-eks'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-central-1' vs 'eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2026-08-21' vs '2026-08-21'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2026-09-07 13:46:17' vs '2026-09-07 13:46:17'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-10-10' vs '2026-10-10'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'50' vs '50'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2026-08-21' vs '2026-08-21'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2026-09-07' vs '2026-09-07'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2026-09-08' vs '2026-09-08'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "5.2429 vs 5.2429"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "5.0159 vs 5.0159"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'ngm-sim2-eks#894875834901#eu-central-1' vs 'ngm-sim2-eks#894875834901#eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'SI GSW CLO' vs 'SI GSW CLO'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "2047.0 vs 2047.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "11625.0 vs 11625.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "9578.0 vs 9578.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "9578.0 vs 9578.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "9241.84 vs 9241.84"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "9194.79 vs 9194.79"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "67.216 vs 67.216"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "336.08 vs 336.08"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "383.13 vs 383.13"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "9577.92 vs 9577.9200"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "336.08 vs 336.0800"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "383.13 vs 383.1312"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "9241.84 vs 9241.8400"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "9194.79 vs 9194.7900"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "2046.78 vs raw 2046.7768088905677"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "11624.7 vs raw 11624.695333159872"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "9577.92 vs raw 9577.918524269304"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2026-08-21' vs raw '2026-08-21'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2026-09-07' vs raw '2026-09-07'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2026-09-08' vs raw '2026-09-08'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "5.2429 vs raw 5.242925817190357"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "5.0159 vs raw 5.015857036721809"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2026-08-21' vs raw '2026-08-21'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2026-09-07 13:46:17' vs raw '2026-09-07 13:46:17'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-central-1' vs raw 'eu-central-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "894875834901 in ngm-sim2-eks#894875834901#eu-central-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-10-10 vs raw page1-min 2026-10-10 [PAGINATED: true count >50, first<=stored-min 2026-10-10]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "50 vs raw page1-count 50 [PAGINATED: true count >50, first<=stored-min 2026-10-10]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "67.216 vs raw 67.216"
+    }
+   ],
+   "anomalies": [
+    "CPU factor 5.2429 (>4x) \u2014 baseline provisioning heavily exceeds demand",
+    "RAM factor 5.0159 (>4x) \u2014 baseline provisioning heavily exceeds demand",
+    "baseline end 2026-09-07 overlaps September window \u2014 savings suppressed",
+    "projected/actual ratio 5.7x \u2014 customer will challenge plausibility"
+   ],
+   "orgid": "07aa3c29-3e1f-44bc-ad60-ceedb878d99a"
+  },
+  "1ad1a0bf-defe-4f51-acea-cbebb3d3fc3f": {
+   "cluster": "ngm-integ-eks",
+   "org": "SI GSW CLO",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'SI GSW CLO' vs 'SI GSW CLO'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'ngm-integ-eks' vs 'ngm-integ-eks'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-central-1' vs 'eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2025-09-30' vs '2025-09-30'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2026-04-27 12:30:00' vs '2026-04-27 12:30:00'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-10-10' vs '2026-10-10'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'50' vs '50'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2025-09-30' vs '2025-09-30'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2026-04-27' vs '2026-04-27'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2026-04-28' vs '2026-04-28'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "2.196 vs 2.196"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "3.4742 vs 3.4742"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'ngm-integ-eks#600442974479#eu-central-1' vs 'ngm-integ-eks#600442974479#eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'SI GSW CLO' vs 'SI GSW CLO'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "22031.0 vs 22031.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "30739.0 vs 30739.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "8708.0 vs 8708.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "8708.0 vs 8708.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "3458.42 vs 3458.42"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "2723.48 vs 2723.48"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "1049.915 vs 1049.915"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "5249.58 vs 5249.58"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "5984.52 vs 5984.52"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "8708.0 vs 8707.9900 [2dp store-rounding]"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "5249.58 vs 5249.5750"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "5984.52 vs 5984.5155"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "3458.42 vs 3458.4200"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "2723.48 vs 2723.4800"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "22030.68 vs raw 22030.67523160755"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "30738.67 vs raw 30738.672115358528"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "8708.0 vs raw 8707.996883750977"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2025-09-30' vs raw '2025-09-30'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2026-04-27' vs raw '2026-04-27'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2026-04-28' vs raw '2026-04-28'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "2.1960 vs raw 2.1959564377971414"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "3.4742 vs raw 3.4741782137820203"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2025-09-30' vs raw '2025-09-30'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2026-04-27 12:30:00' vs raw '2026-04-27 12:30:00'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-central-1' vs raw 'eu-central-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "600442974479 in ngm-integ-eks#600442974479#eu-central-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-10-10 vs raw page1-min 2026-10-10 [PAGINATED: true count >50, first<=stored-min 2026-10-10]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "50 vs raw page1-count 50 [PAGINATED: true count >50, first<=stored-min 2026-10-10]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "1049.915 vs raw 1049.9150000000002"
+    }
+   ],
+   "anomalies": [],
+   "orgid": "07aa3c29-3e1f-44bc-ad60-ceedb878d99a"
+  },
+  "419c39e4-66bf-4d61-b833-4562968a61c7": {
+   "cluster": "ngm-helios-eks",
+   "org": "SI GSW CLO",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'SI GSW CLO' vs 'SI GSW CLO'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'ngm-helios-eks' vs 'ngm-helios-eks'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-central-1' vs 'eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2025-09-30' vs '2025-09-30'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2026-07-20 17:17:55' vs '2026-07-20 17:17:55'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-10-05' vs '2026-10-05'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'50' vs '50'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2025-09-30' vs '2025-09-30'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2026-07-20' vs '2026-07-20'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2026-07-21' vs '2026-07-21'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "1.6035 vs 1.6035"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "2.1697 vs 2.1697"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'ngm-helios-eks#600442974479#eu-central-1' vs 'ngm-helios-eks#600442974479#eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'SI GSW CLO' vs 'SI GSW CLO'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "45121.0 vs 45121.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "51790.0 vs 51790.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "6668.0 vs 6668.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "6668.0 vs 6668.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "-2584.29 vs -2584.29"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "-3879.65 vs -3879.65"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "1850.511 vs 1850.511"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "9252.56 vs 9252.56"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "10547.91 vs 10547.91"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "6668.27 vs 6668.2600 [2dp store-rounding]"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "9252.56 vs 9252.5550"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "10547.91 vs 10547.9127"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "-2584.29 vs -2584.2900"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "-3879.65 vs -3879.6400 [2dp store-rounding]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "45121.35 vs raw 45121.348417434725"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "51789.61 vs raw 51789.61374381467"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "6668.27 vs raw 6668.265326379944"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2025-09-30' vs raw '2025-09-30'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2026-07-20' vs raw '2026-07-20'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2026-07-21' vs raw '2026-07-21'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "1.6035 vs raw 1.6035069234210761"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "2.1697 vs raw 2.169749667096723"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2025-09-30' vs raw '2025-09-30'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2026-07-20 17:17:55' vs raw '2026-07-20 17:17:55'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-central-1' vs raw 'eu-central-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "600442974479 in ngm-helios-eks#600442974479#eu-central-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-10-05 vs raw page1-min 2026-10-05 [PAGINATED: true count >50, first<=stored-min 2026-10-05]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "50 vs raw page1-count 50 [PAGINATED: true count >50, first<=stored-min 2026-10-05]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "1850.511 vs raw 1850.5110000000002"
+    }
+   ],
+   "anomalies": [
+    "net NEGATIVE @5.00 (-2584.29) \u2014 September platform fee exceeds September savings"
+   ],
+   "orgid": "07aa3c29-3e1f-44bc-ad60-ceedb878d99a"
+  },
+  "6d20eb8e-a1e5-4411-b4c8-5346ac3291b0": {
+   "cluster": "ngm-kronos-eks",
+   "org": "SI GSW CLO",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'SI GSW CLO' vs 'SI GSW CLO'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'ngm-kronos-eks' vs 'ngm-kronos-eks'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-central-1' vs 'eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2025-09-30' vs '2025-09-30'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2025-11-06 14:27:42' vs '2025-11-06 14:27:42'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-10-10' vs '2026-10-10'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'50' vs '50'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2025-09-30' vs '2025-09-30'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2025-11-06' vs '2025-11-06'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2025-12-03' vs '2025-12-03'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "5.2468 vs 5.2468"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "11.0015 vs 11.0015"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'ngm-kronos-eks#600442974479#eu-central-1' vs 'ngm-kronos-eks#600442974479#eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'SI GSW CLO' vs 'SI GSW CLO'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "1939.0 vs 1939.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "7330.0 vs 7330.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "5391.0 vs 5391.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "5391.0 vs 5391.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "4942.13 vs 4942.13"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "4879.35 vs 4879.35"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "89.686 vs 89.686"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "448.43 vs 448.43"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "511.21 vs 511.21"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "5390.56 vs 5390.5500 [2dp store-rounding]"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "448.43 vs 448.4300"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "511.21 vs 511.2102"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "4942.13 vs 4942.1300"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "4879.35 vs 4879.3500"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "1939.08 vs raw 1939.0751181560597"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "7329.63 vs raw 7329.632936124652"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "5390.56 vs raw 5390.557817968592"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2025-09-30' vs raw '2025-09-30'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2025-11-06' vs raw '2025-11-06'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2025-12-03' vs raw '2025-12-03'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "5.2468 vs raw 5.246809904878697"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "11.0015 vs raw 11.001476926214519"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2025-09-30' vs raw '2025-09-30'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2025-11-06 14:27:42' vs raw '2025-11-06 14:27:42'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-central-1' vs raw 'eu-central-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "600442974479 in ngm-kronos-eks#600442974479#eu-central-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-10-10 vs raw page1-min 2026-10-10 [PAGINATED: true count >50, first<=stored-min 2026-10-10]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "50 vs raw page1-count 50 [PAGINATED: true count >50, first<=stored-min 2026-10-10]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "89.686 vs raw 89.68599999999998"
+    }
+   ],
+   "anomalies": [
+    "CPU factor 5.2468 (>4x) \u2014 baseline provisioning heavily exceeds demand",
+    "RAM factor 11.0015 (>4x) \u2014 baseline provisioning heavily exceeds demand"
+   ],
+   "orgid": "07aa3c29-3e1f-44bc-ad60-ceedb878d99a"
+  },
+  "95276912-9b38-42d6-91d5-a388fc0280d2": {
+   "cluster": "cluster",
+   "org": "SI-EP-EMS-R&D",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'SI-EP-EMS-R&D' vs 'SI-EP-EMS-R&D'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'cluster' vs 'cluster'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-west-1' vs 'eu-west-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2026-07-24' vs '2026-07-24'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2026-08-18 08:35:03' vs '2026-08-18 08:35:03'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-08-18' vs '2026-08-18'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'4' vs '4'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2026-07-24' vs '2026-07-24'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2026-08-18' vs '2026-08-18'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2026-08-19' vs '2026-08-19'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "4.294 vs 4.294"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "2.7689 vs 2.7689"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'cluster#480007738569#eu-west-1' vs 'cluster#480007738569#eu-west-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'SI-EP-EMS-R&D' vs 'SI-EP-EMS-R&D'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "474.0 vs 474.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "1014.0 vs 1014.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "540.0 vs 540.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "540.0 vs 540.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "447.44 vs 447.44"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "434.44 vs 434.44"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "18.581 vs 18.581"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "92.91 vs 92.91"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "105.91 vs 105.91"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "540.35 vs 540.3500"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "92.91 vs 92.9050"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "105.91 vs 105.9117"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "447.44 vs 447.4400"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "434.44 vs 434.4400"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "473.93 vs raw 473.9327999999997"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "1014.28 vs raw 1014.2812142548167"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "540.35 vs raw 540.348414254817"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2026-07-24' vs raw '2026-07-24'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2026-08-18' vs raw '2026-08-18'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2026-08-19' vs raw '2026-08-19'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "4.2940 vs raw 4.294047990001803"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "2.7689 vs raw 2.7689376352192694"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2026-07-24' vs raw '2026-07-24'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2026-08-18 08:35:03' vs raw '2026-08-18 08:35:03'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-west-1' vs raw 'eu-west-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "480007738569 in cluster#480007738569#eu-west-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-08-18 vs raw page1-min 2026-08-18 [exact, single page]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "4 vs raw page1-count 4 [exact, single page]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "18.581 vs raw 18.581"
+    }
+   ],
+   "anomalies": [
+    "CPU factor 4.2940 (>4x) \u2014 baseline provisioning heavily exceeds demand"
+   ],
+   "orgid": "46ec1fa6-2521-4a17-8d27-aa0bc3e30599"
+  },
+  "67a9bd91-0edf-40f9-8429-e14f3707a750": {
+   "cluster": "cluster",
+   "org": "SI-EP-EMS-R&D",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'SI-EP-EMS-R&D' vs 'SI-EP-EMS-R&D'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'cluster' vs 'cluster'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-central-1' vs 'eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2026-07-24' vs '2026-07-24'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2026-09-16 07:28:24' vs '2026-09-16 07:28:24'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-09-16' vs '2026-09-16'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'5' vs '5'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2026-07-24' vs '2026-07-24'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2026-09-16' vs '2026-09-16'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2026-09-16' vs '2026-09-16'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "4.69 vs 4.69"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "2.8215 vs 2.8215"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'cluster#471112794282#eu-central-1' vs 'cluster#471112794282#eu-central-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'SI-EP-EMS-R&D' vs 'SI-EP-EMS-R&D'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "789.0 vs 789.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "1089.0 vs 1089.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "301.0 vs 301.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "301.0 vs 301.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "253.59 vs 253.59"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "246.99 vs 246.99"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "9.435 vs 9.435"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "47.17 vs 47.17"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "53.78 vs 53.78"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "300.77 vs 300.7600 [2dp store-rounding]"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "47.17 vs 47.1750"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "53.78 vs 53.7795"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "253.59 vs 253.6000 [2dp store-rounding]"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "246.99 vs 246.9900"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "788.66 vs raw 788.6571509623237"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "1089.42 vs raw 1089.4221636058444"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "300.77 vs raw 300.76501264352066"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2026-07-24' vs raw '2026-07-24'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2026-09-16' vs raw '2026-09-16'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2026-09-16' vs raw '2026-09-16'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "4.6900 vs raw 4.690021140731104"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "2.8215 vs raw 2.8214532490913347"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2026-07-24' vs raw '2026-07-24'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2026-09-16 07:28:24' vs raw '2026-09-16 07:28:24'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-central-1' vs raw 'eu-central-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "471112794282 in cluster#471112794282#eu-central-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-09-16 vs raw page1-min 2026-09-16 [exact, single page]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "5 vs raw page1-count 5 [exact, single page]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "9.435 vs raw 9.434999999999997"
+    }
+   ],
+   "anomalies": [
+    "CPU factor 4.6900 (>4x) \u2014 baseline provisioning heavily exceeds demand",
+    "baseline end 2026-09-16 overlaps September window \u2014 savings suppressed"
+   ],
+   "orgid": "46ec1fa6-2521-4a17-8d27-aa0bc3e30599"
+  },
+  "de02aae4-1fd1-401a-ad47-345711d4d7b3": {
+   "cluster": "pfm-eks-cluster",
+   "org": "Siemens Dev",
+   "checks": [
+    {
+     "layer": "L1",
+     "col": "Class",
+     "ok": true,
+     "detail": "'A' vs 'A'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization",
+     "ok": true,
+     "detail": "'Siemens Dev' vs 'Siemens Dev'"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster name",
+     "ok": true,
+     "detail": "'pfm-eks-cluster' vs 'pfm-eks-cluster'"
+    },
+    {
+     "layer": "L1",
+     "col": "Region",
+     "ok": true,
+     "detail": "'eu-west-1' vs 'eu-west-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "isPhase2",
+     "ok": true,
+     "detail": "'True' vs 'True'"
+    },
+    {
+     "layer": "L1",
+     "col": "Status",
+     "ok": true,
+     "detail": "'ready' vs 'ready'"
+    },
+    {
+     "layer": "L1",
+     "col": "Created",
+     "ok": true,
+     "detail": "'2025-03-20' vs '2025-03-20'"
+    },
+    {
+     "layer": "L1",
+     "col": "First CAST op",
+     "ok": true,
+     "detail": "'2025-08-12 12:01:43' vs '2025-08-12 12:01:43'"
+    },
+    {
+     "layer": "L1",
+     "col": "First rebalance",
+     "ok": true,
+     "detail": "'2026-08-06' vs '2026-08-06'"
+    },
+    {
+     "layer": "L1",
+     "col": "Plans",
+     "ok": true,
+     "detail": "'50' vs '50'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline start",
+     "ok": true,
+     "detail": "'2025-03-20' vs '2025-03-20'"
+    },
+    {
+     "layer": "L1",
+     "col": "Baseline end",
+     "ok": true,
+     "detail": "'2025-09-27' vs '2025-09-27'"
+    },
+    {
+     "layer": "L1",
+     "col": "Recomputed",
+     "ok": true,
+     "detail": "'2025-12-03' vs '2025-12-03'"
+    },
+    {
+     "layer": "L1",
+     "col": "CPU factor",
+     "ok": true,
+     "detail": "1.4208 vs 1.4208"
+    },
+    {
+     "layer": "L1",
+     "col": "RAM factor",
+     "ok": true,
+     "detail": "2.6533 vs 2.6533"
+    },
+    {
+     "layer": "L1",
+     "col": "Cluster ID str",
+     "ok": true,
+     "detail": "'pfm-eks-cluster#955761008245#eu-west-1' vs 'pfm-eks-cluster#955761008245#eu-west-1'"
+    },
+    {
+     "layer": "L1",
+     "col": "Organization(vr)",
+     "ok": true,
+     "detail": "'Siemens Dev' vs 'Siemens Dev'"
+    },
+    {
+     "layer": "L1",
+     "col": "Actual $ (VR)",
+     "ok": true,
+     "detail": "906.0 vs 906.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Projected $ (VR)",
+     "ok": true,
+     "detail": "1670.0 vs 1670.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(vr.csv)",
+     "ok": true,
+     "detail": "764.0 vs 764.0"
+    },
+    {
+     "layer": "L1",
+     "col": "VR savings $(verify)",
+     "ok": true,
+     "detail": "764.0 vs 764.0"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.00",
+     "ok": true,
+     "detail": "404.11 vs 404.11"
+    },
+    {
+     "layer": "L1",
+     "col": "Net VR @5.70",
+     "ok": true,
+     "detail": "353.73 vs 353.73"
+    },
+    {
+     "layer": "L1",
+     "col": "Billable vCPU",
+     "ok": true,
+     "detail": "71.969 vs 71.969"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.00",
+     "ok": true,
+     "detail": "359.84 vs 359.84"
+    },
+    {
+     "layer": "L1",
+     "col": "Fee $ @5.70",
+     "ok": true,
+     "detail": "410.22 vs 410.22"
+    },
+    {
+     "layer": "L1",
+     "col": "Has VR row",
+     "ok": true,
+     "detail": "'yes' vs 'yes'"
+    },
+    {
+     "layer": "L2",
+     "col": "savings = projected-actual",
+     "ok": true,
+     "detail": "763.95 vs 763.9500"
+    },
+    {
+     "layer": "L2",
+     "col": "fee5 = vcpu*5.00",
+     "ok": true,
+     "detail": "359.84 vs 359.8450"
+    },
+    {
+     "layer": "L2",
+     "col": "fee57 = vcpu*5.70",
+     "ok": true,
+     "detail": "410.22 vs 410.2233"
+    },
+    {
+     "layer": "L2",
+     "col": "net5 = savings-fee5",
+     "ok": true,
+     "detail": "404.11 vs 404.1100"
+    },
+    {
+     "layer": "L2",
+     "col": "net57 = savings-fee57",
+     "ok": true,
+     "detail": "353.73 vs 353.7300"
+    },
+    {
+     "layer": "L3",
+     "col": "raw actual",
+     "ok": true,
+     "detail": "905.78 vs raw 905.7757707665896"
+    },
+    {
+     "layer": "L3",
+     "col": "raw projected",
+     "ok": true,
+     "detail": "1669.73 vs raw 1669.7267830012365"
+    },
+    {
+     "layer": "L3",
+     "col": "raw savings",
+     "ok": true,
+     "detail": "763.95 vs raw 763.9510122346467"
+    },
+    {
+     "layer": "L3",
+     "col": "raw baselineType (vr)",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp type",
+     "ok": true,
+     "detail": "'CLUSTER_HISTORY' vs raw 'CLUSTER_HISTORY'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp start",
+     "ok": true,
+     "detail": "'2025-03-20' vs raw '2025-03-20'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp end",
+     "ok": true,
+     "detail": "'2025-09-27' vs raw '2025-09-27'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp recomputed",
+     "ok": true,
+     "detail": "'2025-12-03' vs raw '2025-12-03'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp cpuFactor",
+     "ok": true,
+     "detail": "1.4208 vs raw 1.420821227495585"
+    },
+    {
+     "layer": "L3",
+     "col": "raw bp ramFactor",
+     "ok": true,
+     "detail": "2.6533 vs raw 2.6532674991782668"
+    },
+    {
+     "layer": "L3",
+     "col": "raw created",
+     "ok": true,
+     "detail": "'2025-03-20' vs raw '2025-03-20'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw firstOperationAt",
+     "ok": true,
+     "detail": "'2025-08-12 12:01:43' vs raw '2025-08-12 12:01:43'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw status",
+     "ok": true,
+     "detail": "'ready' vs raw 'ready'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw region",
+     "ok": true,
+     "detail": "'eu-west-1' vs raw 'eu-west-1'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw isPhase2",
+     "ok": true,
+     "detail": "'True' vs raw 'True'"
+    },
+    {
+     "layer": "L3",
+     "col": "raw accountId",
+     "ok": true,
+     "detail": "955761008245 in pfm-eks-cluster#955761008245#eu-west-1"
+    },
+    {
+     "layer": "L3",
+     "col": "raw first rebalance",
+     "ok": true,
+     "detail": "2026-08-06 vs raw page1-min 2026-08-06 [PAGINATED: true count >50, first<=stored-min 2026-08-06]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw plans count",
+     "ok": true,
+     "detail": "50 vs raw page1-count 50 [PAGINATED: true count >50, first<=stored-min 2026-08-06]"
+    },
+    {
+     "layer": "L3",
+     "col": "raw billable vCPU",
+     "ok": true,
+     "detail": "71.969 vs raw 71.969"
+    }
+   ],
+   "anomalies": [
+    "baseline end 2025-09-27 later than first CAST op 2025-08-12 (node-mgmt >=20% adoption crossed after first operation)"
+   ],
+   "orgid": "43b8288a-7bc4-4f6b-a008-dcd9e1d5e7d2"
+  }
+ },
+ "totals": {
+  "actual": 124347.69000000002,
+  "projected": 224836.40000000005,
+  "savings": 100488.75,
+  "vcpu": 5892.512000000001,
+  "fee5": 29462.559999999998,
+  "fee57": 33587.32,
+  "net5": 71026.16999999998,
+  "net57": 66901.44
+ }
+}

@@ -1,0 +1,4 @@
+APM0423755 - Azure Platform Service	368d8ecf-b94f-46e3-a17a-a1e7fe594fc4	rg-lab-aks-nodes-prod	c88a141b-4ebf-47f9-8245-da64ad0c3dad	-	westeurope	no	-	-	-
+IT DF COL UC 2	2b9d9744-f37d-4a22-b9c6-2f1857a5417d	siemenstest-siemenstest-1	36575565-7149-431b-b5f6-71f43f18ef3f	951463557399	eu-west-1	no	-	-	-
+SMO-SW-PDH-TPS	a414d7cc-c2bf-4e6e-9591-ca75f26a0ccf	eks-tpslive-dev	d119d612-84ad-4c79-9992-a120b7206f15	522814722959	eu-central-1	no	-	-	-
+SMO-SW-PDH-TPS	a414d7cc-c2bf-4e6e-9591-ca75f26a0ccf	tps-eks-cluster-master	2ec5dafa-7a81-44fe-b42f-16d4d9f4b76d	730335428681	eu-central-1	no	-	-	-

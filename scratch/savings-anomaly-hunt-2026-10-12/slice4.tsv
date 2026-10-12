@@ -1,0 +1,40 @@
+IT IPS	cloudcore02	56d5ca2d-a5b7-4223-97f2-75f2af35b242	-	0.00	0.00	0.00	0.00	NA
+IT IPS	mof	66723d08-943f-4b85-9f75-80d9bd5c4511	-	19.96	0.00	0.00	2.85	0.00
+IT IPS	mof-staging	4aaa7671-3d83-454d-a7aa-449df17c10d3	-	19.96	0.01	0.00	2.85	0.00
+IT IPS	kafka-test	06a44e72-8f49-4f6f-a2f5-2092d14cffe4	2026-10-07T09:34:55.710161Z	92.94	27.79	3.97	13.28	0.30
+IT IPS	aks-dios-weu-prod-001	b5d4cd12-98b2-4e9f-90a1-4db0134337c4	-	693.11	29.90	4.27	99.02	0.04
+IT IPS	aks-dios-weu-test-001	b01c58a4-4ad2-4756-b729-e0cf07b8fba6	2026-08-20T23:06:58.705931Z	268.64	54.93	7.85	38.38	0.20
+IT IPS	aks-neobot-weu-prod-001	c66abc3b-7ffb-4576-b65e-9fa96ef14147	-	ERR	GET /v1/cost-reports/clusters/c66abc3b-7ffb-4576-b65e-9fa96ef14147/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+IT IPS	aks-neobot-weu-test-001	43d2436d-2f2d-44cb-99f5-6ed799511dac	-	ERR	GET /v1/cost-reports/clusters/43d2436d-2f2d-44cb-99f5-6ed799511dac/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+IT IPS	aks-n8n-weu-prod-001	285a5dae-36f4-4fa3-9e42-27948f0c06dd	-	ERR	GET /v1/cost-reports/clusters/285a5dae-36f4-4fa3-9e42-27948f0c06dd/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+IT IPS	ea-admin-management-cluster	51b3e19e-eb6d-421c-b8dc-6587aae498ba	-	ERR	GET /v1/cost-reports/clusters/51b3e19e-eb6d-421c-b8dc-6587aae498ba/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+IT IPS	aks-n8n-weu-test-001	78deb4c6-46e8-4512-8a1e-92d9416cb34f	-	ERR	GET /v1/cost-reports/clusters/78deb4c6-46e8-4512-8a1e-92d9416cb34f/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+IT IPS	pioneer-tcx	a4ee9bce-da9e-4cae-8eda-caeb0b5ab20a	2026-05-11T18:22:26.709876Z	235.33	57.71	8.24	33.62	0.25
+IT IPS	staging-sec	83ce9be7-78b8-4d5c-a49c-4e1584f93251	-	ERR	GET /v1/cost-reports/clusters/83ce9be7-78b8-4d5c-a49c-4e1584f93251/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+IT IPS	eleX01in	cf027570-8275-4d1d-a2e1-f9ffbb713f9e	2026-05-06T10:33:04.415053Z	789.77	149.94	21.42	112.82	0.19
+IT IPS	eleX01	f0fa2ea7-48db-4473-b6b3-c73123fa0dac	2026-03-11T10:48:52.070750Z	1499.74	83.82	11.97	214.25	0.06
+IT IPS	eleX01p	823f9475-109e-4a8a-bed1-c1fba8441882	2026-05-07T12:03:08.498988Z	3090.45	0.79	0.11	441.49	0.00
+IT IPS	eleX01	7b646d74-cc78-4703-a14f-865b3c0451bf	2026-05-05T09:37:37.226333Z	1263.29	0.00	0.00	180.47	0.00
+IT IPS	shared01	cd7be1fb-81c3-4c01-8d22-efe977e629bd	-	ERR	GET /v1/cost-reports/clusters/cd7be1fb-81c3-4c01-8d22-efe977e629bd/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+IT IPS	dev-sec	6bb5a236-875d-4158-9c5c-a1d66e08ac83	-	431.27	56.84	8.12	61.61	0.13
+IT IPS	iec-tcx-flat	c783a2f5-d6c9-4c93-9bbe-216d2c614903	-	258.16	0.00	0.00	36.88	0.00
+IT IPS	eagle-kafka01	ef65cdd5-853a-46d3-9694-6d93edd6ad2d	2026-07-31T08:51:54.988959Z	262.47	33.29	4.76	37.50	0.13
+IT IPS	bx-edex-prod-eu	ce86ecf0-1c17-4d02-936b-dd239411ea0a	-	ERR	GET /v1/cost-reports/clusters/ce86ecf0-1c17-4d02-936b-dd239411ea0a/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+IT IPS	bx-edex-int-eu	bc30a320-2cc9-4fa1-8423-67cb45fb4776	-	ERR	GET /v1/cost-reports/clusters/bc30a320-2cc9-4fa1-8423-67cb45fb4776/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+IT IPS	bx-edex-dev-eu	4f9d90bf-10e7-4bd8-8b18-a094484eaf68	-	ERR	GET /v1/cost-reports/clusters/4f9d90bf-10e7-4bd8-8b18-a094484eaf68/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+IT IPS	cloudcore01	e16fc060-803a-47e2-985e-f0c15058a6c9	-	ERR	GET /v1/cost-reports/clusters/e16fc060-803a-47e2-985e-f0c15058a6c9/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+SI EA electrificationx	eks-Cluster1	1ca6667a-06af-497f-a7ae-b9e7748c9493	2026-09-09T11:25:55.690214Z	58.42	2.19	0.31	8.35	0.04
+SI EA electrificationx	eks-Cluster1	f31e9de1-7884-470e-95ce-11c9f5dcfe0d	2026-02-13T04:04:45.935006Z	666.87	707.87	101.12	95.27	1.06
+SI EA electrificationx	eks-Cluster1	c6cdf969-f81c-4324-a498-89008dce1351	2025-12-02T10:48:42.089199Z	631.24	962.70	137.53	90.18	1.53
+Pillar#1	gw-eks-preprod	c086341f-ab62-4abc-90c8-a9ace1b45426	-	ERR	GET /v1/cost-reports/clusters/c086341f-ab62-4abc-90c8-a9ace1b45426/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+Pillar#1	fgac-eks-preprod	cce8c41d-bf31-4c7e-bfff-dd2f8f0cd519	-	ERR	GET /v1/cost-reports/clusters/cce8c41d-bf31-4c7e-bfff-dd2f8f0cd519/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+Pillar#1	nfr-eks-preprod	04f26ee9-6fe7-4467-a222-061cee09011f	-	ERR	GET /v1/cost-reports/clusters/04f26ee9-6fe7-4467-a222-061cee09011f/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+Pillar#1	console-eks-preprod	a8129ccd-1dd4-441c-aaee-babd56ea5dc3	-	ERR	GET /v1/cost-reports/clusters/a8129ccd-1dd4-441c-aaee-babd56ea5dc3/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+Pillar#1	fgac-eks-integ	b97e51e0-b4d7-42b3-a50a-ad29b9ab6b4d	-	ERR	GET /v1/cost-reports/clusters/b97e51e0-b4d7-42b3-a50a-ad29b9ab6b4d/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+Pillar#1	fds-sdk-testing	802629ad-ca96-4ee5-aa19-a253788f96d3	-	ERR	GET /v1/cost-reports/clusters/802629ad-ca96-4ee5-aa19-a253788f96d3/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+Pillar#1	console-eks-integ	d909c528-e5d0-4ebd-8c1a-77ad9b76a54b	2025-12-04T14:38:35.834363Z	475.09	74.35	10.62	67.87	0.16
+Pillar#1	nfr-eks-integ-3	7743765a-2915-4699-97cd-06bb897acc09	-	ERR	GET /v1/cost-reports/clusters/7743765a-2915-4699-97cd-06bb897acc09/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+Pillar#1	gw-eks-integ	514bf38c-5235-44b6-a951-8e69528b5943	-	ERR	GET /v1/cost-reports/clusters/514bf38c-5235-44b6-a951-8e69528b5943/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+SMO CS DS EAM - CORMAP	cormap-utilities-eks	3d1340c5-8316-417f-b108-2a8cda7f288c	-	ERR	GET /v1/cost-reports/clusters/3d1340c5-8316-417f-b108-2a8cda7f288c/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+IT-APS-DEV-ACO	n8n	46d4d358-f816-4b89-a7ba-79f8feeeb84e	-	ERR	GET /v1/cost-reports/clusters/46d4d358-f816-4b89-a7ba-79f8feeeb84e/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+IT-APS-DEV-ACO	grafana-poc	c368fd84-274b-47dd-bf2b-46394ce25f78	-	ERR	GET /v1/cost-reports/clusters/c368fd84-274b-47dd-bf2b-46394ce25f78/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-

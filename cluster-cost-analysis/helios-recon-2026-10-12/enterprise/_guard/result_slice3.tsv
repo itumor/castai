@@ -1,0 +1,14 @@
+ORG_NAME	ORG_ID	CLUSTER_NAME	CLUSTER_UUID	ACCOUNT	REGION	HAS_VR	ACTUAL	PROJECTED	SAVINGS
+APM0002714 - GSP Kafka	ca1dddf7-a0fa-41a5-be72-8d6afe2559ac	gspkafka-k8s-dev	529d60a3-9950-452d-8cc9-a8fd9070522f	203629096770	eu-central-1	no	-	-	-
+APM0002714 - GSP Kafka	ca1dddf7-a0fa-41a5-be72-8d6afe2559ac	gspkafka-k8s-prod	069c6305-e281-40a6-a9fe-702db92b56be	203629096770	eu-central-1	no	-	-	-
+APM0006869 - PKN - Product Knowledge Network	c15c4c5b-211a-4489-be4c-913936b1c113	pkn-nonprod-eks-1985	43f6e766-d18d-4440-ac98-15e23f33871c	522706696288	eu-central-1	no	-	-	-
+APM0006869 - PKN - Product Knowledge Network	c15c4c5b-211a-4489-be4c-913936b1c113	pkn-prod-eks-1985	0af93eb7-eb8b-48a4-8332-462b5d70da62	997599126409	eu-central-1	no	-	-	-
+APM0029033 - CIC API Management - KONG	ebb6beff-3cce-4ef2-929d-d32719d80fd5	case-k8s-private-dev-1	2ec364da-c551-42ba-a3c9-5f48e5aa27ac	203629096770	eu-central-1	no	-	-	-
+APM0029033 - CIC API Management - KONG	ebb6beff-3cce-4ef2-929d-d32719d80fd5	case-k8s-private-prod-fargate	1ae6f85c-c34d-40b6-9581-f9097dd5a38f	203629096770	eu-central-1	no	-	-	-
+APM0271596 - PSE Consulting	86b32a7a-c4e8-4070-91f6-12c1ed5c388b	pse-consulting-eks-shared	67726d70-3a2d-4246-a303-2244240eb3eb	135808938578	eu-west-2	no	-	-	-
+DI AUT PI APF	d7534e71-612b-4963-89c8-22304c7a9d3d	dev-cluster	7e04bd70-0513-4c6b-8b38-42b6c46905d9	660922352913	eu-central-1	no	-	-	-
+FT-RDP-SSP-DEVOPSFF-EKS-DEV	e649ef84-37ee-47a1-b4fc-91a54f00182e	eks-dev	54535938-4437-42d5-b5f5-bc4a2f90ce8b	096367275314	eu-central-1	no	-	-	-
+SI-EP-EMS-R&D	46ec1fa6-2521-4a17-8d27-aa0bc3e30599	cluster	67a9bd91-0edf-40f9-8429-e14f3707a750	471112794282	eu-central-1	no	-	-	-
+SI-EP-EMS-R&D	46ec1fa6-2521-4a17-8d27-aa0bc3e30599	cluster	95276912-9b38-42d6-91d5-a388fc0280d2	480007738569	eu-west-1	no	-	-	-
+SMO CS DS EAM - CORMAP	1181330d-6e2a-4734-a75e-593b2ad606a9	cormap-utilities-eks	3d1340c5-8316-417f-b108-2a8cda7f288c	872515263587	eu-central-1	no	-	-	-
+evosoft IT MIS	ac3cfa8c-c094-4f06-b96a-6aa86f218e66	ITMIS	31864129-b09c-47b2-a8df-c616f98d65b7	864981718205	eu-central-1	no	-	-	-

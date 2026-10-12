@@ -1,0 +1,53 @@
+ORG_NAME	ORG_ID	CLUSTER_NAME	CLUSTER_UUID	ACCOUNT	REGION	HAS_VR	ACTUAL	PROJECTED	SAVINGS
+APM0022732 - PCIS - Product Class Infostructure	84e3a4cf-fae5-4bb7-a0eb-d6f16d9423c2	pcis-nonprod-eks-9841	30b1d039-cb59-4c57-96f9-a0a9c6a2c09c	131871546785	eu-central-1	no	-	-	-
+APM0022732 - PCIS - Product Class Infostructure	84e3a4cf-fae5-4bb7-a0eb-d6f16d9423c2	pcis-prod-eks-9841	7432b4fb-e6eb-4639-8f23-4d8eec172cbb	090877363637	eu-central-1	no	-	-	-
+Botanica	b6a79c03-59eb-4823-8686-ca552b850f3e	kubernetes	71ddd440-4ff4-4f4d-9a0d-6be345000920	-	westeurope	no	-	-	-
+Botanica	b6a79c03-59eb-4823-8686-ca552b850f3e	kubernetes	a8161722-2e3a-4d33-8c91-8684fa751ffe	-	westeurope	no	-	-	-
+CASE	2dafa4dc-9364-4bfb-8b9a-542fcdf3ac4f	shining-star	ef2ddd68-7577-4b2b-a1fc-34dc18392249	641078483763	eu-central-1	no	-	-	-
+CYS - CNAPP	3d956ed7-719e-4438-99b6-7aa2a62c425b	wiz-outpost-lite	95bf32c8-ced4-4a81-9665-f3c6278f5f57	890988596583	eu-central-1	no	-	-	-
+DDI SW MNDX PRO&TECH	fc1285f2-f5fb-4e33-8675-9e43142cf6f2	central-accp	c42d0d42-e7e4-4f9a-b8e3-2cb4dcc44e8f	311800285949	eu-central-1	no	-	-	-
+DDI SW MNDX PRO&TECH	fc1285f2-f5fb-4e33-8675-9e43142cf6f2	central-test	70984162-3989-4311-9b06-29e60edf5dbf	407331438481	eu-central-1	no	-	-	-
+DDI SW MNDX PRO&TECH	fc1285f2-f5fb-4e33-8675-9e43142cf6f2	gp-us-1-test	2ad94570-45a2-4401-bdf8-b42c410a7970	407331438481	us-east-1	no	-	-	-
+DDI SW MNDX PRO&TECH	fc1285f2-f5fb-4e33-8675-9e43142cf6f2	internal-dev	ce85dc32-5f2b-4ad2-b2b1-674ee5a24ca3	473076314459	eu-central-1	no	-	-	-
+DDI SW MNDX PRO&TECH	fc1285f2-f5fb-4e33-8675-9e43142cf6f2	nonprod-2-eks	1e712207-9f93-4d66-a848-83dc87403f04	147868785316	eu-west-1	no	-	-	-
+DDI SW MNDX PRO&TECH	fc1285f2-f5fb-4e33-8675-9e43142cf6f2	nonprod-4-eks	88bdcb08-d7b9-4643-b7ee-8c987e6b3e6b	147868785316	eu-central-1	no	-	-	-
+DDI SW MNDX PRO&TECH	fc1285f2-f5fb-4e33-8675-9e43142cf6f2	nonprod-5-eks	ef108bbf-a7a1-4a06-b8bc-209e40ffa595	244720914069	eu-west-1	no	-	-	-
+DDI SW MNDX PRO&TECH	fc1285f2-f5fb-4e33-8675-9e43142cf6f2	pipeline-accp	a2f426eb-fd4a-448c-b6ca-d4691da80e4c	311800285949	eu-central-1	no	-	-	-
+DDI SW MNDX PRO&TECH	fc1285f2-f5fb-4e33-8675-9e43142cf6f2	pipeline-test	4a5813f2-a222-4753-a0d5-1f74417a5719	407331438481	eu-central-1	no	-	-	-
+DDI SW MNDX PRO&TECH	fc1285f2-f5fb-4e33-8675-9e43142cf6f2	public-cloud-cd-nonprod	4a53a7e9-6150-45e4-9f19-93b8ee38990f	767397904780	eu-central-1	no	-	-	-
+DDI SW MNDX PRO&TECH	fc1285f2-f5fb-4e33-8675-9e43142cf6f2	synthia-test-2	d0de1275-62ef-40bc-9272-c8e5547e7040	044911596899	eu-central-1	no	-	-	-
+DDI SW MNDX PRO&TECH	fc1285f2-f5fb-4e33-8675-9e43142cf6f2	ucp-cd-nonprod	14beb823-ce64-4841-a2e1-10ffb384aaa8	767397904780	eu-central-1	no	-	-	-
+DI FA DSP - DPP	ad02d1f6-14e2-4fbe-bb90-469b71335755	bp-blo-260	a73f3484-8c34-4a5a-9743-9fc2f36bfc71	609823840427	eu-central-1	no	-	-	-
+DI FA DSP - DPP	ad02d1f6-14e2-4fbe-bb90-469b71335755	bp-blo-359	6c756141-5a54-4e8f-a995-cbe71a4766ee	609823840427	eu-central-1	no	-	-	-
+DI FA DSP - DPP	ad02d1f6-14e2-4fbe-bb90-469b71335755	bp-blo-379t	886df315-be86-4d8e-acf2-e4864390113f	609823840427	eu-central-1	no	-	-	-
+DI FA DSP - DPP	ad02d1f6-14e2-4fbe-bb90-469b71335755	bp-blo-408	7594bd20-39fd-4b31-a81e-8d570c4f331a	609823840427	eu-central-1	no	-	-	-
+DI FA DSP - DPP	ad02d1f6-14e2-4fbe-bb90-469b71335755	bp-blo-417	1baae99c-637a-4ce0-9617-6ab9c9c40072	609823840427	eu-central-1	no	-	-	-
+DI FA DSP - DPP	ad02d1f6-14e2-4fbe-bb90-469b71335755	bp-blo-422	7e49f605-7dcc-4354-8759-df226be3c5b0	609823840427	eu-central-1	no	-	-	-
+DI FA DSP - DPP	ad02d1f6-14e2-4fbe-bb90-469b71335755	bp-dev	b2ffa852-cc83-42d7-afd2-cb842f9310d5	609823840427	eu-central-1	no	-	-	-
+FT FDS CES	9422d16a-1054-4028-b532-d1bbf0f83cc5	iemc-cluster-alpha	59ac1d97-4402-4d34-8220-e4b708484f28	464383546700	eu-central-1	no	-	-	-
+FT FDS CES	9422d16a-1054-4028-b532-d1bbf0f83cc5	iemc-cluster-dev	dd0b548e-f6e0-4b50-b14c-13b2cc26ba48	251950426335	eu-central-1	no	-	-	-
+FT FDS CES	9422d16a-1054-4028-b532-d1bbf0f83cc5	iemc-cluster-int	25c0a174-d4b6-48d7-9459-f3240f97a1a8	104217848981	eu-central-1	no	-	-	-
+FT FDS CES	9422d16a-1054-4028-b532-d1bbf0f83cc5	iemc-cluster-ipcei	198cb29e-083a-4a28-bfda-ba1c1b997c08	010928208160	eu-central-1	no	-	-	-
+FT FDS CES	9422d16a-1054-4028-b532-d1bbf0f83cc5	iemc-cluster-ipcei-test	6f77cf09-c22b-46ba-8e41-3ea270f65c26	010928208160	eu-central-1	no	-	-	-
+FT FDS CES	9422d16a-1054-4028-b532-d1bbf0f83cc5	iemc-cluster-prod	6d05a5b0-a4e1-4761-a19c-806c0069042c	464383546700	eu-central-1	no	-	-	-
+IT DA	b23a67b1-11d9-4d51-8ee8-54b7fb94c3a4	knime-test	15ee812d-5ebf-4c69-a64c-681f1da39c97	890742596841	eu-west-1	no	-	-	-
+Pillar#1	fce58d3c-0345-465e-9257-f5c31f29a810	console-eks-integ	d909c528-e5d0-4ebd-8c1a-77ad9b76a54b	238720913587	us-east-1	no	-	-	-
+Pillar#1	fce58d3c-0345-465e-9257-f5c31f29a810	console-eks-preprod	a8129ccd-1dd4-441c-aaee-babd56ea5dc3	477662162423	eu-central-1	no	-	-	-
+Pillar#1	fce58d3c-0345-465e-9257-f5c31f29a810	fds-sdk-testing	802629ad-ca96-4ee5-aa19-a253788f96d3	238720913587	us-east-1	no	-	-	-
+Pillar#1	fce58d3c-0345-465e-9257-f5c31f29a810	fgac-eks-integ	b97e51e0-b4d7-42b3-a50a-ad29b9ab6b4d	238720913587	us-east-1	no	-	-	-
+Pillar#1	fce58d3c-0345-465e-9257-f5c31f29a810	fgac-eks-preprod	cce8c41d-bf31-4c7e-bfff-dd2f8f0cd519	477662162423	eu-central-1	no	-	-	-
+Pillar#1	fce58d3c-0345-465e-9257-f5c31f29a810	gw-eks-integ	514bf38c-5235-44b6-a951-8e69528b5943	238720913587	us-east-1	no	-	-	-
+Pillar#1	fce58d3c-0345-465e-9257-f5c31f29a810	gw-eks-preprod	c086341f-ab62-4abc-90c8-a9ace1b45426	477662162423	eu-central-1	no	-	-	-
+Pillar#1	fce58d3c-0345-465e-9257-f5c31f29a810	nfr-eks-integ-3	7743765a-2915-4699-97cd-06bb897acc09	238720913587	eu-central-1	no	-	-	-
+Pillar#1	fce58d3c-0345-465e-9257-f5c31f29a810	nfr-eks-preprod	04f26ee9-6fe7-4467-a222-061cee09011f	477662162423	eu-central-1	no	-	-	-
+SMO Railigent X	f15f33b9-20ad-4128-8289-da529844d3f0	k8s	5771ec22-fb0e-4fd8-a73a-fdf451ab0741	180820707530	ap-south-1	no	-	-	-
+SMO Railigent X	f15f33b9-20ad-4128-8289-da529844d3f0	k8s	cf62a8e1-1f1e-40dc-bd90-1b5c84dfa9df	459423884365	eu-central-1	no	-	-	-
+SMO Railigent X	f15f33b9-20ad-4128-8289-da529844d3f0	k8s	0e277bb2-036d-485f-8690-4bf22720af9f	676024189872	eu-central-1	no	-	-	-
+SMO Railigent X	f15f33b9-20ad-4128-8289-da529844d3f0	k8s	7eb37770-9c35-460d-a896-910949ae0ea6	251646500960	ap-south-1	no	-	-	-
+SMO Railigent X	f15f33b9-20ad-4128-8289-da529844d3f0	k8s	f8dd5b4f-3cf4-48e2-b453-7be4562e36cb	353401772001	eu-central-1	no	-	-	-
+SMO Railigent X	f15f33b9-20ad-4128-8289-da529844d3f0	k8s	d0c7a7a5-72d2-4c09-a9f6-1b173c64d0a8	524840132901	eu-central-1	no	-	-	-
+SMO Railigent X	f15f33b9-20ad-4128-8289-da529844d3f0	k8s	4952c4ce-6a3a-44f4-9b3c-9794ca9ddbc9	978814483201	eu-central-1	no	-	-	-
+SMO Railigent X	f15f33b9-20ad-4128-8289-da529844d3f0	k8s-andreas	d03690cb-2ba4-4ff5-9519-27013515aba7	484253082938	eu-central-1	no	-	-	-
+SMO Railigent X	f15f33b9-20ad-4128-8289-da529844d3f0	rhx-test	35c0f9b5-25f1-49bb-aa2a-ec49915352b3	-	unknown	no	-	-	-
+SMO Railigent X	f15f33b9-20ad-4128-8289-da529844d3f0	staging	ae3e22a4-6e7a-487d-9c95-2c0fb3bb8f35	978814483201	eu-central-1	no	-	-	-
+SPICE	fceff786-03f9-4d22-80be-5eda2b16b223	spice-100794-sbox-tooling-01	8dbcf70a-ea6f-4059-90a1-2f6d9246a9c6	305634968973	eu-central-1	no	-	-	-

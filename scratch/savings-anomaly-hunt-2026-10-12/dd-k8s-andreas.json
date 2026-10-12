@@ -1,0 +1,97 @@
+{
+ "window": {
+  "st": "2026-10-05T00:00:00.000Z",
+  "en": "2026-10-12T00:00:00.000Z"
+ },
+ "baselineParams": {
+  "status": 200,
+  "body": {
+   "cpuOverprovisioningFactor": 169.58215697737756,
+   "memoryOverprovisioningFactor": 35.444140636683834,
+   "costPerCpuCoreHourly": 0.029356507112324532,
+   "costPerMemoryGibHourly": 0.005328127741116751,
+   "baselinePeriodStartTime": "2026-04-15T00:00:00Z",
+   "baselinePeriodEndTime": "2026-04-16T00:00:00Z",
+   "baselineType": "INDUSTRY_AVERAGE",
+   "updateTime": "2026-04-16T08:00:50Z"
+  }
+ },
+ "vr": {
+  "status": 200,
+  "body": {
+   "items": [
+    {
+     "clusterId": "d03690cb-2ba4-4ff5-9519-27013515aba7",
+     "clusterName": "k8s-andreas",
+     "clusterStatus": "ready",
+     "baselineType": "INDUSTRY_AVERAGE",
+     "cost": {
+      "actualCost": 185.46110763734958,
+      "projectedCost": 33867.147634649315,
+      "autoscalerSavings": 33681.68652701196,
+      "workloadAutoscalerSavings": 134.59266505053944,
+      "totalSavings": 33681.68652701196
+     },
+     "cpu": {
+      "actualCost": 128.78205736052342,
+      "projectedCost": 29709.865872707927,
+      "provisionedCoresHourly": 57.372,
+      "projectedCoresHourly": 6777.727,
+      "requestedCoresHourly": 18.554,
+      "provisionedCoreHours": 8320.026,
+      "projectedCoreHours": 986165.502,
+      "requestedCoreHours": 2699.675,
+      "provisionedCores": 57.31361194029851,
+      "projectedCores": 6793.332964408726,
+      "requestedCores": 18.597072330654424
+     },
+     "memory": {
+      "actualCost": 56.679050276826146,
+      "projectedCost": 4157.281761941386,
+      "provisionedBytesHourly": 191705896663,
+      "projectedBytesHourly": 5413689239447,
+      "requestedBytesHourly": 99753190310,
+      "provisionedByteHours": 27565653448944,
+      "projectedByteHours": 789212596042346,
+      "requestedByteHours": 14445778355721,
+      "provisionedGib": 176.84855573613254,
+      "projectedGib": 5063.225075993961,
+      "requestedGib": 92.67747065837867
+     },
+     "woopAdopted": true,
+     "autoscalerAdopted": true
+    }
+   ],
+   "nextPageCursor": ""
+  }
+ },
+ "classic": {
+  "status": 400,
+  "body": {
+   "message": "this API is not available for cluster \"d03690cb-2ba4-4ff5-9519-27013515aba7\": cluster is read-only",
+   "fieldViolations": []
+  }
+ },
+ "woopSummary": {
+  "status": 200,
+  "body": {
+   "totalCount": 88,
+   "optimizedCount": 79,
+   "hpaOptimizedCount": 0,
+   "vpaOptimizedCount": 79,
+   "hpaVpaOptimizedCount": 0,
+   "apiManagedCount": 85,
+   "annotationManagedCount": 3,
+   "recommendedCpuCores": 8.468,
+   "requestedCpuCores": 9.451,
+   "cpuCoresDifference": 0.9830000000000005,
+   "recommendedMemory": 49.3681640625,
+   "requestedMemory": 54.662109333090484,
+   "memoryDifference": 5.293945270590484,
+   "originalRequestedCpuCores": 28.565,
+   "originalRequestedMemoryGibs": 99.1650390625,
+   "usageCpuCores": 3.937,
+   "usageMemoryGibs": 25.48233413696289
+  }
+ }
+}

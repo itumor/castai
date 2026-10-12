@@ -1,0 +1,9 @@
+cluster_name,cluster_id,castai_cluster_id,region,aws_account_id,actual_usd,projected_usd,gross_savings_usd,billable_vcpu_phase2,fee_usd_at_5.00,fee_usd_at_5.70,net_usd_at_5.00,net_usd_at_5.70
+ngm-helios-eks,ngm-helios-eks#600442974479#eu-central-1,419c39e4-66bf-4d61-b833-4562968a61c7,eu-central-1,600442974479,45121.35,51789.61,6668.27,1850.511,9252.56,10547.91,-2584.29,-3879.65
+ngm-integ-eks,ngm-integ-eks#600442974479#eu-central-1,1ad1a0bf-defe-4f51-acea-cbebb3d3fc3f,eu-central-1,600442974479,22030.68,30738.67,8708.0,1049.915,5249.57,5984.52,3458.42,2723.48
+ngm-sim-eks,ngm-sim-eks#894875834901#eu-central-1,51dd234c-a5bf-4f99-a884-b79956de8f94,eu-central-1,894875834901,8051.07,47376.87,39325.8,359.195,1795.98,2047.41,37529.82,37278.39
+alliander-demo-eks,alliander-demo-eks#721233634880#eu-central-1,c686f800-f17f-4b9a-8b7e-7655f209e07f,eu-central-1,721233634880,3744.21,13922.55,10178.34,,,,10178.34,10178.34
+baseline-clo-eks,baseline-clo-eks#110201440604#eu-central-1,02810f4b-b793-4ef2-95f1-e902af61d9e3,eu-central-1,110201440604,2542.46,21638.56,19096.1,114.793,573.96,654.32,18522.13,18441.78
+ngm-sim2-eks,ngm-sim2-eks#894875834901#eu-central-1,8bd361b0-fcbf-491d-beac-af92fb7d6b46,eu-central-1,894875834901,2046.78,11624.7,9577.92,67.216,336.08,383.13,9241.84,9194.79
+ngm-kronos-eks,ngm-kronos-eks#600442974479#eu-central-1,6d20eb8e-a1e5-4411-b4c8-5346ac3291b0,eu-central-1,600442974479,1939.08,7329.63,5390.56,89.686,448.43,511.21,4942.13,4879.35
+ngm-data-eks,ngm-data-eks#595960695089#eu-south-1,9b9d2d51-ec75-46d4-bac0-ba38253cb8d9,eu-south-1,595960695089,1102.6,775.75,-326.85,,,,-326.85,-326.85

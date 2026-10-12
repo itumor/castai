@@ -1,0 +1,142 @@
+{
+  "items": [
+    {
+      "id": "2e4161f0-7ec8-4641-aa5f-32a52dd32ccb",
+      "name": "sdcstreaming-eks-cluster-prod",
+      "organizationId": "58e0c2b6-bb36-4bf9-b99f-879fa1ebc52d",
+      "credentialsId": "",
+      "createdAt": "2026-08-17T07:35:13.518274Z",
+      "region": {
+        "name": "eu-west-1",
+        "displayName": "EU (Ireland)"
+      },
+      "status": "ready",
+      "agentSnapshotReceivedAt": "2026-10-12T13:58:10.337057Z",
+      "agentStatus": "online",
+      "providerType": "eks",
+      "tags": {},
+      "eks": {
+        "clusterName": "sdcstreaming-eks-cluster-prod",
+        "region": "eu-west-1",
+        "accountId": "203918863837",
+        "assumeRoleArn": "",
+        "subnets": [],
+        "securityGroups": [],
+        "instanceProfileArn": "",
+        "tags": {},
+        "dnsClusterIp": ""
+      },
+      "subnets": [],
+      "zones": [],
+      "clusterNameId": "sdcstreaming-eks-cluster-prod-2e4161f0",
+      "allRegionZones": [],
+      "providerNamespaceId": "203918863837",
+      "managedBy": "terraform/8.39.2",
+      "firstOperationAt": null,
+      "reconcileInfo": {
+        "errorCount": 0,
+        "mode": "paused"
+      },
+      "isPhase2": false,
+      "castwareInstallMethod": "CASTWARE_INSTALL_METHOD_UNSPECIFIED",
+      "attributes": {
+        "karpenter": {
+          "kentEligibility": "NOT_SUPPORTED",
+          "controllerMode": "SELF_HOSTED"
+        }
+      }
+    },
+    {
+      "id": "46aef6f3-c89e-4ece-a114-53d5b329cdea",
+      "name": "sdcstreaming-eks-cluster-qa",
+      "organizationId": "58e0c2b6-bb36-4bf9-b99f-879fa1ebc52d",
+      "credentialsId": "",
+      "createdAt": "2026-08-14T12:56:54.558268Z",
+      "region": {
+        "name": "eu-west-1",
+        "displayName": "EU (Ireland)"
+      },
+      "status": "ready",
+      "agentSnapshotReceivedAt": "2026-10-12T13:57:52.106838Z",
+      "agentStatus": "online",
+      "providerType": "eks",
+      "tags": {},
+      "eks": {
+        "clusterName": "sdcstreaming-eks-cluster-qa",
+        "region": "eu-west-1",
+        "accountId": "203918863837",
+        "assumeRoleArn": "",
+        "subnets": [],
+        "securityGroups": [],
+        "instanceProfileArn": "",
+        "tags": {},
+        "dnsClusterIp": ""
+      },
+      "subnets": [],
+      "zones": [],
+      "clusterNameId": "sdcstreaming-eks-cluster-qa-46aef6f3",
+      "allRegionZones": [],
+      "providerNamespaceId": "203918863837",
+      "managedBy": "terraform/8.39.2",
+      "firstOperationAt": null,
+      "reconcileInfo": {
+        "errorCount": 0,
+        "mode": "paused"
+      },
+      "isPhase2": false,
+      "castwareInstallMethod": "CASTWARE_INSTALL_METHOD_UNSPECIFIED",
+      "attributes": {
+        "karpenter": {
+          "kentEligibility": "NOT_SUPPORTED",
+          "controllerMode": "SELF_HOSTED"
+        }
+      }
+    },
+    {
+      "id": "30861ed2-5d64-4c77-9f03-1f8b04eb2911",
+      "name": "sdcstreaming-eks-cluster-dev",
+      "organizationId": "58e0c2b6-bb36-4bf9-b99f-879fa1ebc52d",
+      "credentialsId": "",
+      "createdAt": "2026-08-14T09:57:28.039330Z",
+      "region": {
+        "name": "eu-west-1",
+        "displayName": "EU (Ireland)"
+      },
+      "status": "ready",
+      "agentSnapshotReceivedAt": "2026-10-12T13:58:31.877331Z",
+      "agentStatus": "online",
+      "providerType": "eks",
+      "tags": {},
+      "eks": {
+        "clusterName": "sdcstreaming-eks-cluster-dev",
+        "region": "eu-west-1",
+        "accountId": "203918863837",
+        "assumeRoleArn": "",
+        "subnets": [],
+        "securityGroups": [],
+        "instanceProfileArn": "",
+        "tags": {},
+        "dnsClusterIp": ""
+      },
+      "subnets": [],
+      "zones": [],
+      "clusterNameId": "sdcstreaming-eks-cluster-dev-30861ed2",
+      "allRegionZones": [],
+      "providerNamespaceId": "203918863837",
+      "managedBy": "terraform/8.39.2",
+      "firstOperationAt": null,
+      "reconcileInfo": {
+        "errorCount": 0,
+        "mode": "paused"
+      },
+      "isPhase2": false,
+      "castwareInstallMethod": "CASTWARE_INSTALL_METHOD_UNSPECIFIED",
+      "attributes": {
+        "karpenter": {
+          "kentEligibility": "NOT_SUPPORTED",
+          "controllerMode": "SELF_HOSTED"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+Siemens Dev	43b8288a-7bc4-4f6b-a008-dcd9e1d5e7d2	aks-castai-demo	d1bf9c35-07ac-4c4b-9d7a-ac41473c3b10	-	westeurope
+Siemens Dev	43b8288a-7bc4-4f6b-a008-dcd9e1d5e7d2	sp-tofu-simple	dac52e3e-1576-479c-b61e-f33589de026f	027851298014	eu-central-1
+Siemens Dev	43b8288a-7bc4-4f6b-a008-dcd9e1d5e7d2	dev-vlab-cluster	172021b8-c68a-4ddb-9658-01e4c44a561e	488218212374	ap-southeast-1
+Siemens Dev	43b8288a-7bc4-4f6b-a008-dcd9e1d5e7d2	dev-vlab-cluster	83d2c65c-e0d7-46db-8bb8-bf5f0d368754	488218212374	us-west-2
+Siemens Dev	43b8288a-7bc4-4f6b-a008-dcd9e1d5e7d2	pfm-eks-cluster	de02aae4-1fd1-401a-ad47-345711d4d7b3	955761008245	eu-west-1
+Siemens Dev	43b8288a-7bc4-4f6b-a008-dcd9e1d5e7d2	dev-vlab-cluster	0528411e-4d89-4fcf-af04-1b496541025d	488218212374	eu-central-1
+Siemens Dev	43b8288a-7bc4-4f6b-a008-dcd9e1d5e7d2	shared-services-us-east-1-eks	91649234-53f9-44b1-a883-5eae8fe0afbe	354567316383	us-east-1
+Siemens Dev	43b8288a-7bc4-4f6b-a008-dcd9e1d5e7d2	dev	4dee25ab-9f1c-494f-bef0-b7190dddb3eb	153524503100	us-west-2
+DI IT DEX CLD	266bd590-8f05-4d3c-80d8-8170db62f74b	gspkafka-k8s-dev	99b2dce3-a9ef-4b75-898f-3c375b253f8e	203629096770	eu-central-1
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	cloudcore02	56d5ca2d-a5b7-4223-97f2-75f2af35b242	043203988634	eu-central-1
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	mof	66723d08-943f-4b85-9f75-80d9bd5c4511	188289743005	us-east-2
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	mof-staging	4aaa7671-3d83-454d-a7aa-449df17c10d3	493565080783	us-east-2
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	kafka-test	06a44e72-8f49-4f6f-a2f5-2092d14cffe4	187494036103	eu-central-1
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	aks-dios-weu-prod-001	b5d4cd12-98b2-4e9f-90a1-4db0134337c4	-	westeurope
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	aks-dios-weu-test-001	b01c58a4-4ad2-4756-b729-e0cf07b8fba6	-	westeurope
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	aks-neobot-weu-prod-001	c66abc3b-7ffb-4576-b65e-9fa96ef14147	-	westeurope
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	aks-neobot-weu-test-001	43d2436d-2f2d-44cb-99f5-6ed799511dac	-	westeurope
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	aks-n8n-weu-prod-001	285a5dae-36f4-4fa3-9e42-27948f0c06dd	-	westeurope
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	ea-admin-management-cluster	51b3e19e-eb6d-421c-b8dc-6587aae498ba	-	westeurope
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	aks-n8n-weu-test-001	78deb4c6-46e8-4512-8a1e-92d9416cb34f	-	westeurope
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	pioneer-tcx	a4ee9bce-da9e-4cae-8eda-caeb0b5ab20a	136905788720	eu-central-1
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	staging-sec	83ce9be7-78b8-4d5c-a49c-4e1584f93251	500412134877	eu-west-1
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	eleX01in	cf027570-8275-4d1d-a2e1-f9ffbb713f9e	637423451488	ap-south-1
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	eleX01	f0fa2ea7-48db-4473-b6b3-c73123fa0dac	576061914293	eu-central-1
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	eleX01p	823f9475-109e-4a8a-bed1-c1fba8441882	976594908632	eu-central-1
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	eleX01	7b646d74-cc78-4703-a14f-865b3c0451bf	546544527727	us-east-2
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	shared01	cd7be1fb-81c3-4c01-8d22-efe977e629bd	474569730283	eu-central-1
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	dev-sec	6bb5a236-875d-4158-9c5c-a1d66e08ac83	195384726758	eu-west-1
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	iec-tcx-flat	c783a2f5-d6c9-4c93-9bbe-216d2c614903	987708558949	eu-central-1
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	eagle-kafka01	ef65cdd5-853a-46d3-9694-6d93edd6ad2d	897825492946	eu-central-1
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	bx-edex-prod-eu	ce86ecf0-1c17-4d02-936b-dd239411ea0a	577638380263	eu-west-1
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	bx-edex-int-eu	bc30a320-2cc9-4fa1-8423-67cb45fb4776	713881807618	eu-west-1
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	bx-edex-dev-eu	4f9d90bf-10e7-4bd8-8b18-a094484eaf68	287526491081	eu-west-1
+IT IPS	c67df1a0-06e0-46f9-a84e-27c14958d564	cloudcore01	e16fc060-803a-47e2-985e-f0c15058a6c9	040286887818	eu-central-1
+SI B SW	f872efe0-08ae-47df-b5ff-1e84187f8d72	fgeks-blue-eks-cluster	3782e6c8-4780-42cb-bada-97b096ee21f7	675913176182	eu-west-1
+SI B SW	f872efe0-08ae-47df-b5ff-1e84187f8d72	fgeks-blue-eks-cluster	99cb56e0-50f9-4ad7-a803-d03da4d95513	877314709291	us-east-1
+SI B SW	f872efe0-08ae-47df-b5ff-1e84187f8d72	fgeks-blue-eks-cluster	dc42abdf-7485-4115-a23e-a623f63fc12f	018471890419	us-east-1
+SI B SW	f872efe0-08ae-47df-b5ff-1e84187f8d72	fgeks-blue-eks-cluster	01c18e7a-ce06-4c12-b921-c93e612d3bf0	018471890419	eu-west-1
+SI B SW	f872efe0-08ae-47df-b5ff-1e84187f8d72	fgeks-blue-eks-cluster	fd1ca573-4982-4133-89ce-bfd4df4f5d7b	183098873491	eu-west-1
+SI B SW	f872efe0-08ae-47df-b5ff-1e84187f8d72	fgeks-blue-eks-cluster	e3c91abe-69ae-4a79-b362-90f42e1917c0	380349240159	us-east-2
+SI B SW	f872efe0-08ae-47df-b5ff-1e84187f8d72	fgeks-blue-eks-cluster	6c94cd80-978f-4d9c-926e-df0e43dbb93f	380349240159	eu-west-1
+SI B SW	f872efe0-08ae-47df-b5ff-1e84187f8d72	fgeks-blue-eks-cluster	dc10bd6a-1552-4c4b-9173-fc11b50c610f	972571274142	eu-west-1
+SI B SW	f872efe0-08ae-47df-b5ff-1e84187f8d72	fgeks-blue-eks-cluster	1b0450f7-5532-4edd-af65-a754ff33ff40	023510080489	eu-west-1
+SI B SW	f872efe0-08ae-47df-b5ff-1e84187f8d72	fgeks-blue-eks-cluster	6436c787-9169-4b3a-907c-d18776efeb19	290851856511	eu-west-1
+HAFAS H&O	3d933189-4e1d-42ee-9cca-f7458e8fadab	eks	8a9c0f55-86fc-4142-8f72-17ae6171a3aa	933753214448	eu-central-1
+HAFAS H&O	3d933189-4e1d-42ee-9cca-f7458e8fadab	eks	953f87e7-9175-435b-ad3b-1a3b8a4e7cad	688967701480	eu-central-1
+HAFAS H&O	3d933189-4e1d-42ee-9cca-f7458e8fadab	eks	22bf2472-d9ba-4cb3-b6ec-1f7aab50cb3f	106391900725	eu-central-1
+HAFAS H&O	3d933189-4e1d-42ee-9cca-f7458e8fadab	argocd-demo	b2dabc79-3aaa-4596-acd9-d3f17e3a222a	132915311757	eu-central-1
+HAFAS H&O	3d933189-4e1d-42ee-9cca-f7458e8fadab	timemachine	7147d0b6-25e5-47b5-b193-a50c64a96291	488305652903	eu-central-1
+HAFAS H&O	3d933189-4e1d-42ee-9cca-f7458e8fadab	renfe-prod	553b905a-2334-4cb5-a059-ec58c616a8ae	488305652903	eu-central-1
+HAFAS H&O	3d933189-4e1d-42ee-9cca-f7458e8fadab	sales-platform	9e18000c-a738-4745-8f8a-524c97a9376e	488305652903	eu-central-1
+HAFAS H&O	3d933189-4e1d-42ee-9cca-f7458e8fadab	renfe-int	14c6bd24-75fd-46e5-98be-2b6e985edfb5	488305652903	eu-central-1
+HAFAS H&O	3d933189-4e1d-42ee-9cca-f7458e8fadab	rivier	fcdc7184-a5a1-4b5d-a225-92e3fbfd8350	488305652903	eu-central-1
+HAFAS H&O	3d933189-4e1d-42ee-9cca-f7458e8fadab	eks-prod-apse2	aebceffe-11d4-4e34-973b-d9ad0c54c03b	488305652903	ap-southeast-2
+HAFAS H&O	3d933189-4e1d-42ee-9cca-f7458e8fadab	eks-prod-use1	fed60fe2-25bb-4a1f-9b1d-a19497a5d4c2	488305652903	us-east-1
+HAFAS H&O	3d933189-4e1d-42ee-9cca-f7458e8fadab	eks-prod-euc1	90d11c07-a938-4dc4-ab73-c9288880b240	488305652903	eu-central-1
+HAFAS H&O	3d933189-4e1d-42ee-9cca-f7458e8fadab	eks-fat-euc1	76246d36-88b0-41b7-bf98-0f6bbdde094a	488305652903	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	ngm-vsdev-eks	0ec063fc-f9ec-45e2-9d31-ea584a70f3bd	600442974479	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	ngm-vsinteg-eks	bd3aaf10-963c-4c66-b6f1-d9ded41b4a4a	600442974479	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	ngm-sim3-eks	5efe373e-d2fe-43b1-a464-60ebcf16623a	894875834901	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	ngm-sim2-eks	8bd361b0-fcbf-491d-beac-af92fb7d6b46	894875834901	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	shire-demo-eks	6130ca25-a9aa-4bb4-98d2-402785f13317	843594798263	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	ngm-data-eks	9b9d2d51-ec75-46d4-bac0-ba38253cb8d9	595960695089	eu-south-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	alliander-demo-eks	c686f800-f17f-4b9a-8b7e-7655f209e07f	721233634880	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	shire-qa-eks	c7498a9f-12f3-4153-ac33-540c0594ad48	843594798263	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	clo-master-eks	9cabe4ee-c3cb-4877-a6e6-a464b3dd388a	115928806288	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	workbench-preprodeu-eks	7eb74f76-a62c-482e-bb8a-14557d095d22	136730153639	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	shire-dev-eks	2a8cfae0-d269-4ccd-bdbd-0ee405f54d64	843594798263	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	ngm-integ-eks	1ad1a0bf-defe-4f51-acea-cbebb3d3fc3f	600442974479	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	ngm-kronos-eks	6d20eb8e-a1e5-4411-b4c8-5346ac3291b0	600442974479	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	ngm-helios-eks	419c39e4-66bf-4d61-b833-4562968a61c7	600442974479	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	ngm-demo-eks	19336022-f195-4dda-b832-2b76d1a1c29c	600442974479	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	hermes-val-eks	101ea9a6-02e5-45af-8ea0-6915a955c420	275315285795	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	ngm-test-eks	7290695f-e216-47df-ba5a-ca97ebb90045	600442974479	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	iands-sales2-eks	34e3e0bb-53d7-4b68-9e9d-17b0d79dfcf8	547787420222	us-east-2
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	ngm-sim-eks	51dd234c-a5bf-4f99-a884-b79956de8f94	894875834901	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	onboard-sales1-eks	1b97084a-82d3-45e1-b88f-db0c6f19191d	547787420222	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	onboard-delivery-eks	71ad083b-adec-4379-9881-e4901cbf0a85	547787420222	eu-central-1
+SI GSW CLO	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	baseline-clo-eks	02810f4b-b793-4ef2-95f1-e902af61d9e3	110201440604	eu-central-1
+SFS IT CDO	7bff4bde-cc60-49a5-9402-85a04efcb90e	rg-ssm-p-base-aks-internal	6c3203a2-aa17-4e51-8979-8e17ee37ea61	-	germanywestcentral
+SFS IT CDO	7bff4bde-cc60-49a5-9402-85a04efcb90e	rg-api-p-base-aks-internal	3f92e1ce-6b2c-414e-bb1b-439bf7e60a60	-	westeurope
+SFS IT CDO	7bff4bde-cc60-49a5-9402-85a04efcb90e	rg-app-p-base-aks-internal	05ce573b-ea5b-4285-bb7b-460e9ae79d18	-	westeurope
+SFS IT CDO	7bff4bde-cc60-49a5-9402-85a04efcb90e	rg-sca-p-base-aks-internal	dde550bb-9344-4f70-ad6e-e8ac3764f16a	-	westeurope
+SFS IT CDO	7bff4bde-cc60-49a5-9402-85a04efcb90e	rg-cdb-p-base-aks-internal	57894164-7fdb-4788-9056-96099275e454	-	westeurope
+SFS IT CDO	7bff4bde-cc60-49a5-9402-85a04efcb90e	rg-cdo-p-base-aks-internal	a91ae711-2b6a-4523-a489-737da2ba6bfa	-	westeurope
+SFS IT CDO	7bff4bde-cc60-49a5-9402-85a04efcb90e	rg-api-t-base-aks-internal	1ff6bb42-5db9-4faa-aa02-10598451ca86	-	westeurope
+SFS IT CDO	7bff4bde-cc60-49a5-9402-85a04efcb90e	rg-ssm-t-base-aks-internal	c7cdffef-005a-44a6-8666-0592c563fc3a	-	germanywestcentral
+SFS IT CDO	7bff4bde-cc60-49a5-9402-85a04efcb90e	rg-sca-t-base-aks-internal	040b3b0f-af98-42a7-a7aa-31756738c153	-	westeurope
+SFS IT CDO	7bff4bde-cc60-49a5-9402-85a04efcb90e	rg-app-t-base-aks-internal	78288773-5d1c-470e-a4fd-768ef1eb93ad	-	westeurope
+SFS IT CDO	7bff4bde-cc60-49a5-9402-85a04efcb90e	rg-cdb-t-base-aks-internal	65cb617a-bd85-4a6e-9693-97107d9d5c6f	-	westeurope
+SFS IT CDO	7bff4bde-cc60-49a5-9402-85a04efcb90e	rg-cdb-d-base-aks-internal	bebbf9ac-421f-4af4-ad57-7a440b232e31	-	westeurope
+SFS IT CDO	7bff4bde-cc60-49a5-9402-85a04efcb90e	rg-app-d-base-aks-internal	ae7e2c93-1e26-41fd-8162-432179915e59	-	westeurope
+SFS IT CDO	7bff4bde-cc60-49a5-9402-85a04efcb90e	rg-sca-d-base-aks-internal	5e07a6bf-f90c-49c7-bbf1-a7712a377925	-	westeurope
+SFS IT CDO	7bff4bde-cc60-49a5-9402-85a04efcb90e	rg-ssm-d-base-aks-internal	7c135e57-5de7-4a68-b180-fddce5f975d8	-	germanywestcentral
+SFS IT CDO	7bff4bde-cc60-49a5-9402-85a04efcb90e	rg-cdo-d-base-aks-internal	f8dcbc80-7524-47a6-90f8-8e6fe795d3aa	-	westeurope
+CPS	5e413e89-eb67-48fb-b81c-6172baa988ed	dema-platform-services	5dc3bf31-a263-4c6b-88bb-e95b6403aa51	373270804851	eu-central-1
+CPS	5e413e89-eb67-48fb-b81c-6172baa988ed	dema-platform-services-test	00ee8944-67f6-43d5-8517-c270951ec02c	373270804851	eu-central-1
+DAI R SDE	8fff8757-1656-4d09-80c3-ccedc3302ef8	ipae-climatix	50a316f7-ee63-4667-9fde-00faa11339f5	187692088554	eu-central-1
+DAI R SDE	8fff8757-1656-4d09-80c3-ccedc3302ef8	ipae-sandbox-audi	866f76b5-d39d-450b-9d40-31a52a6c2688	187692088554	eu-central-1
+DAI R SDE	8fff8757-1656-4d09-80c3-ccedc3302ef8	ipae-dtac-sandbox	241cb12c-c4b0-4756-a82f-7530c7c26c38	187692088554	eu-central-1
+SI EA electrificationx	259169ff-616b-4c53-9641-ae46235ace26	eks-Cluster1	1ca6667a-06af-497f-a7ae-b9e7748c9493	955761008245	eu-north-1
+SI EA electrificationx	259169ff-616b-4c53-9641-ae46235ace26	eks-Cluster1	f31e9de1-7884-470e-95ce-11c9f5dcfe0d	129753847697	eu-central-1
+SI EA electrificationx	259169ff-616b-4c53-9641-ae46235ace26	eks-Cluster1	c6cdf969-f81c-4324-a498-89008dce1351	955761008245	eu-central-1
+SMO NEE RC-CH RI ADC 4 3	4ceb3f2b-e108-4f55-8353-4a439602e8f1	trackops-new	e4d86f6e-8076-423e-9a28-43f3514d755e	174252647481	eu-central-1
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	toolingprod-euwe1-100786-01-green-mc	1adce851-4a4f-4f78-bcf5-f825aaa96d48	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	mallprod-euwe1-100195-01-blue-mc	dacd06e7-b50e-4754-bd62-877abc645116	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	rproxyprod-euwe1-100708-01-green-mc	27c3fbb7-dd62-4040-9441-c268a063afc4	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	siosprod-euwe1-100320-01-green-mc	3f99feb3-28a0-4a1d-b596-c057683045c1	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	mallprod-euwe1-100195-01-green-mc	5f6a2f04-3875-409e-a54e-475ba0dc3536	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	rproxyprod-euwe1-100708-01-blue-mc	ceebaf20-6463-437e-bf1b-28bdf245f897	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	siosprod-euwe1-100320-01-blue-mc	a35c3b26-da1a-4223-bf6d-7850a42a824b	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	toolingprod-euwe1-100786-01-blue-mc	32340d3c-5c5c-4887-a7cb-fcfbf779e462	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	sieportalprod-euwe1-100188-01-green-mc	c4de1c87-2373-4dc6-b5b3-77baea247f3f	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	sieportalprod-euwe1-100188-01-blue-mc	66cf9eff-5864-452a-a886-7496bd6fe7c8	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	siosqa-euwe1-100320-01-blue-mc	42f33a8f-d6dc-4c3a-acad-e679123b939c	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	rproxyqa-euwe1-100708-01-blue-mc	79828df6-8410-49d0-b5a3-454222d5a64d	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	sieportalsbox100188blue	7cb4d31e-ce8c-4f40-9276-b2586578dd92	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	mallsbox100195blue	c9ea106b-512a-4d17-a805-b7565c5e2dd5	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	rproxysbox100708blue	028c4376-8af3-4674-bc4a-a5c3db1b3504	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	toolingqa-euwe1-100786-01-blue-mc	badc4a28-8c0a-4ce0-8951-7db286b0d173	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	toolingsbox100786blue	a87dbfd1-df28-4285-9be5-a8d7f61787c7	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	sieportalsbox100188green	86e49019-e316-4d92-b8d1-9af8623e3f1c	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	toolingqa-euwe1-100786-01-green-mc	17641bc9-9aa6-47ba-9365-97ff5ec3f3ae	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	toolingsbox100786green	51368361-0714-48f4-8714-6924102d7c16	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	rproxyqa-euwe1-100708-01-green-mc	180e18b9-0a9c-4f0e-9a35-4145798be779	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	rproxysbox100708green	8bfdba94-15a2-439b-8a4f-498e45ef1d62	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	siosqa-euwe1-100320-01-green-mc	164913a8-a215-43c7-9d38-cae10f830b67	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	mallsbox100195green	772676f3-6d69-414f-b831-63d8de1546e8	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	mallqa-euwe1-100195-01-green-mc	ed332354-a655-45d4-af62-30dae157bb98	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	mallqa-euwe1-100195-01-blue-mc	d532ceed-013a-4e78-bf38-aa967ed540ae	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	sieportalqa-euwe1-100188-01-blue-mc	65d298c2-b28f-450b-a754-ac621076125f	-	westeurope
+SiePortal	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	sieportalqa-euwe1-100188-01-green-mc	64d18bf6-9789-4252-aa77-e6226d7740d7	-	westeurope
+DI SW PLM DM DDM	8ee5e5ee-b336-4faa-a484-3f822237d189	ihubinteg-aks	1c5f7938-e5e2-4678-a623-74dc891d26b0	-	westeurope
+DI SW PLM DM DDM	8ee5e5ee-b336-4faa-a484-3f822237d189	ih-dev	ac73fd44-4ed9-469a-b4ff-74b3acad246e	611263670956	eu-central-1
+DI SW PLM DM DDM	8ee5e5ee-b336-4faa-a484-3f822237d189	ops-common-integ	d76acc05-25f7-4924-94bd-db2c8aa38f7d	464255417364	eu-central-1
+FT FDS CDS	df2e906b-1942-47c3-9ff4-6e8d9304612c	cds-integ-us	c1195c4e-f818-4a38-b800-e3a017f22cd2	891376965814	us-east-1
+FT FDS CDS	df2e906b-1942-47c3-9ff4-6e8d9304612c	cds-integ	efd0470a-7bad-4bf8-b121-fc3c5797f908	891376965814	eu-central-1

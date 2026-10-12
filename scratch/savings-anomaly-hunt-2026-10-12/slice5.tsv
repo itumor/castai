@@ -1,0 +1,15 @@
+SI B SW	fgeks-blue-eks-cluster	3782e6c8-4780-42cb-bada-97b096ee21f7	2026-10-08T13:31:52.380560Z	32.54	6.79	0.97	4.65	0.21
+SI B SW	fgeks-blue-eks-cluster	99cb56e0-50f9-4ad7-a803-d03da4d95513	-	68.34	0.00	0.00	9.76	0.00
+SI B SW	fgeks-blue-eks-cluster	dc42abdf-7485-4115-a23e-a623f63fc12f	2026-10-09T06:29:51.769711Z	54.41	3.39	0.48	7.77	0.06
+SI B SW	fgeks-blue-eks-cluster	01c18e7a-ce06-4c12-b921-c93e612d3bf0	2026-07-09T09:20:22.687698Z	67.50	1.87	0.27	9.64	0.03
+SI B SW	fgeks-blue-eks-cluster	fd1ca573-4982-4133-89ce-bfd4df4f5d7b	2026-07-06T10:23:57.191790Z	39.02	0.00	0.00	5.57	0.00
+SI B SW	fgeks-blue-eks-cluster	e3c91abe-69ae-4a79-b362-90f42e1917c0	2026-02-05T09:32:03.041845Z	0.00	0.00	0.00	0.00	NA
+SI B SW	fgeks-blue-eks-cluster	6c94cd80-978f-4d9c-926e-df0e43dbb93f	-	73.85	0.00	0.00	10.55	0.00
+SI B SW	fgeks-blue-eks-cluster	dc10bd6a-1552-4c4b-9173-fc11b50c610f	2026-03-30T09:43:10.432920Z	0.00	0.00	0.00	0.00	NA
+SI B SW	fgeks-blue-eks-cluster	1b0450f7-5532-4edd-af65-a754ff33ff40	2026-01-30T22:49:37.283216Z	0.00	0.00	0.00	0.00	NA
+SI B SW	fgeks-blue-eks-cluster	6436c787-9169-4b3a-907c-d18776efeb19	2026-02-17T10:14:53.254004Z	50.41	0.00	0.00	7.20	0.00
+SMO NEE RC-CH RI ADC 4 3	trackops-new	e4d86f6e-8076-423e-9a28-43f3514d755e	-	ERR	GET /v1/cost-reports/clusters/e4d86f6e-8076-423e-9a28-43f3514d755e/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+SPICE	spice-100794-sbox-tooling-01	8dbcf70a-ea6f-4059-90a1-2f6d9246a9c6	-	ERR	GET /v1/cost-reports/clusters/8dbcf70a-ea6f-4059-90a1-2f6d9246a9c6/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+Botanica	kubernetes	71ddd440-4ff4-4f4d-9a0d-6be345000920	-	ERR	GET /v1/cost-reports/clusters/71ddd440-4ff4-4f4d-9a0d-6be345000920/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+Botanica	kubernetes	a8161722-2e3a-4d33-8c91-8684fa751ffe	-	ERR	GET /v1/cost-reports/clusters/a8161722-2e3a-4d33-8c91-8684fa751ffe/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-
+DI-SW-RAPIDMINER-GRAPH	graph-dev-qa-eks	49987821-c6b8-414a-8ec9-dd5b59d4042c	-	ERR	GET /v1/cost-reports/clusters/49987821-c6b8-414a-8ec9-dd5b59d4042c/savings?startTime=2026-10-05T00%3A00%3A00.000Z&endTime=2026-10-12T00%3A00%3A00.000Z -> 400	-	-	-

@@ -1,0 +1,152 @@
+{
+  "items": [
+    {
+      "id": "893e4362-bb07-417a-b53c-f9b011b4240d",
+      "name": "Posit",
+      "organizationId": "82534a6e-c2fc-4fd5-ab88-4326966e37fb",
+      "credentialsId": "5cd236ae-0cb0-43d5-81bd-b950c0bdfdb3",
+      "createdAt": "2026-08-13T12:11:42.065585Z",
+      "region": {
+        "name": "us-east-1",
+        "displayName": "US East (N. Virginia)"
+      },
+      "status": "ready",
+      "agentSnapshotReceivedAt": "2026-10-12T13:58:16.908994Z",
+      "agentStatus": "online",
+      "providerType": "eks",
+      "tags": {
+        "alpha.eksctl.io/cluster-oidc-enabled": "true"
+      },
+      "eks": {
+        "clusterName": "Posit",
+        "region": "us-east-1",
+        "accountId": "483428953713",
+        "assumeRoleArn": "arn:aws:iam::483428953713:role/cast-eks-Posit-cluster-role-893e4362",
+        "subnets": [],
+        "securityGroups": [],
+        "instanceProfileArn": "",
+        "tags": {},
+        "dnsClusterIp": ""
+      },
+      "subnets": [
+        {
+          "id": "subnet-0013c0c01fc77bd7f",
+          "name": "",
+          "zoneName": "us-east-1b",
+          "cidr": "10.0.16.0/20",
+          "public": true
+        },
+        {
+          "id": "subnet-02a4fe73c6e1b7407",
+          "name": "",
+          "zoneName": "us-east-1a",
+          "cidr": "10.0.0.0/20",
+          "public": true
+        }
+      ],
+      "zones": [
+        {
+          "id": "use1-az2",
+          "name": "us-east-1b"
+        },
+        {
+          "id": "use1-az1",
+          "name": "us-east-1a"
+        }
+      ],
+      "clusterNameId": "Posit-893e4362",
+      "allRegionZones": [
+        {
+          "id": "use1-az1",
+          "name": "us-east-1a"
+        },
+        {
+          "id": "use1-az2",
+          "name": "us-east-1b"
+        },
+        {
+          "id": "use1-az4",
+          "name": "us-east-1c"
+        },
+        {
+          "id": "use1-az6",
+          "name": "us-east-1d"
+        },
+        {
+          "id": "use1-az3",
+          "name": "us-east-1e"
+        },
+        {
+          "id": "use1-az5",
+          "name": "us-east-1f"
+        }
+      ],
+      "providerNamespaceId": "483428953713",
+      "kubernetesVersion": "1.35",
+      "managedBy": "console",
+      "firstOperationAt": "2026-08-13T12:34:20.308789Z",
+      "reconciledAt": "2026-10-12T13:49:58.116779Z",
+      "reconcileInfo": {
+        "reconciledAt": "2026-10-12T13:49:58.116779Z",
+        "startedAt": "2026-10-12T13:49:53.838684Z",
+        "errorCount": 0,
+        "status": "ok",
+        "mode": "enabled"
+      },
+      "isPhase2": true,
+      "castwareInstallMethod": "CASTWARE_INSTALL_METHOD_UNSPECIFIED",
+      "attributes": {
+        "karpenter": {
+          "kentEligibility": "NOT_SUPPORTED",
+          "controllerMode": "SELF_HOSTED"
+        }
+      }
+    },
+    {
+      "id": "96b41307-2647-44ad-9185-da143f346928",
+      "name": "SLC-SS",
+      "organizationId": "82534a6e-c2fc-4fd5-ab88-4326966e37fb",
+      "credentialsId": "",
+      "createdAt": "2026-08-13T12:10:09.404996Z",
+      "region": {
+        "name": "us-east-1",
+        "displayName": "US East (N. Virginia)"
+      },
+      "status": "ready",
+      "agentSnapshotReceivedAt": "2026-10-12T13:58:33.346261Z",
+      "agentStatus": "online",
+      "providerType": "eks",
+      "tags": {},
+      "eks": {
+        "clusterName": "SLC-SS",
+        "region": "us-east-1",
+        "accountId": "483428953713",
+        "assumeRoleArn": "",
+        "subnets": [],
+        "securityGroups": [],
+        "instanceProfileArn": "",
+        "tags": {},
+        "dnsClusterIp": ""
+      },
+      "subnets": [],
+      "zones": [],
+      "clusterNameId": "SLC-SS-96b41307",
+      "allRegionZones": [],
+      "providerNamespaceId": "483428953713",
+      "managedBy": "console",
+      "firstOperationAt": null,
+      "reconcileInfo": {
+        "errorCount": 0,
+        "mode": "paused"
+      },
+      "isPhase2": false,
+      "castwareInstallMethod": "CASTWARE_INSTALL_METHOD_UNSPECIFIED",
+      "attributes": {
+        "karpenter": {
+          "kentEligibility": "NOT_SUPPORTED",
+          "controllerMode": "SELF_HOSTED"
+        }
+      }
+    }
+  ]
+}

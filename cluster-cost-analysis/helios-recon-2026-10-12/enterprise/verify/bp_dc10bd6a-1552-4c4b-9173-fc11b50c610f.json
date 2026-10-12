@@ -1,0 +1,1 @@
+{"cpuOverprovisioningFactor":58.2924873136032,"memoryOverprovisioningFactor":87.49527045873302,"costPerCpuCoreHourly":0.011465897945263521,"costPerMemoryGibHourly":0.0015351071894514985,"baselinePeriodStartTime":"2026-01-14T13:03:12Z","baselinePeriodEndTime":"2026-03-30T00:00:00Z","baselineType":"CLUSTER_HISTORY","updateTime":"2026-03-31T08:00:28Z"}

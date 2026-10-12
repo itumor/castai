@@ -1,0 +1,71 @@
+00ee8944-67f6-43d5-8517-c270951ec02c	5e413e89-eb67-48fb-b81c-6172baa988ed	CPS	dema-platform-services-test
+01c18e7a-ce06-4c12-b921-c93e612d3bf0	f872efe0-08ae-47df-b5ff-1e84187f8d72	SI B SW	fgeks-blue-eks-cluster
+02810f4b-b793-4ef2-95f1-e902af61d9e3	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	SI GSW CLO	baseline-clo-eks
+028c4376-8af3-4674-bc4a-a5c3db1b3504	fc21737c-0c72-4cd0-b4bf-1236e5e4a73a	SiePortal	rproxysbox100708blue
+0528411e-4d89-4fcf-af04-1b496541025d	43b8288a-7bc4-4f6b-a008-dcd9e1d5e7d2	Siemens Dev	dev-vlab-cluster
+06a44e72-8f49-4f6f-a2f5-2092d14cffe4	c67df1a0-06e0-46f9-a84e-27c14958d564	IT IPS	kafka-test
+06cbc64f-209b-43af-8037-089966f2368b	?	?	?
+0e277bb2-036d-485f-8690-4bf22720af9f	f15f33b9-20ad-4128-8289-da529844d3f0	SMO Railigent X	k8s
+1ad1a0bf-defe-4f51-acea-cbebb3d3fc3f	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	SI GSW CLO	ngm-integ-eks
+1b0450f7-5532-4edd-af65-a754ff33ff40	f872efe0-08ae-47df-b5ff-1e84187f8d72	SI B SW	fgeks-blue-eks-cluster
+1ca6667a-06af-497f-a7ae-b9e7748c9493	259169ff-616b-4c53-9641-ae46235ace26	SI EA electrificationx	eks-Cluster1
+22bf2472-d9ba-4cb3-b6ec-1f7aab50cb3f	3d933189-4e1d-42ee-9cca-f7458e8fadab	HAFAS H&O	eks
+25c0a174-d4b6-48d7-9459-f3240f97a1a8	9422d16a-1054-4028-b532-d1bbf0f83cc5	FT FDS CES	iemc-cluster-int
+31864129-b09c-47b2-a8df-c616f98d65b7	ac3cfa8c-c094-4f06-b96a-6aa86f218e66	evosoft IT MIS	ITMIS
+3782e6c8-4780-42cb-bada-97b096ee21f7	f872efe0-08ae-47df-b5ff-1e84187f8d72	SI B SW	fgeks-blue-eks-cluster
+419c39e4-66bf-4d61-b833-4562968a61c7	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	SI GSW CLO	ngm-helios-eks
+4952c4ce-6a3a-44f4-9b3c-9794ca9ddbc9	f15f33b9-20ad-4128-8289-da529844d3f0	SMO Railigent X	k8s
+514bf38c-5235-44b6-a951-8e69528b5943	fce58d3c-0345-465e-9257-f5c31f29a810	Pillar#1	gw-eks-integ
+51dd234c-a5bf-4f99-a884-b79956de8f94	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	SI GSW CLO	ngm-sim-eks
+54535938-4437-42d5-b5f5-bc4a2f90ce8b	e649ef84-37ee-47a1-b4fc-91a54f00182e	FT-RDP-SSP-DEVOPSFF-EKS-DEV	eks-dev
+5771ec22-fb0e-4fd8-a73a-fdf451ab0741	f15f33b9-20ad-4128-8289-da529844d3f0	SMO Railigent X	k8s
+5dc3bf31-a263-4c6b-88bb-e95b6403aa51	5e413e89-eb67-48fb-b81c-6172baa988ed	CPS	dema-platform-services
+62aa894c-1d41-4a7a-98ed-e181e289e173	74f0fa85-eab8-4d16-b229-73d7e9e43337	FT-FT RPD CED SSI-IIP	CDM-EKS-Cluster
+6436c787-9169-4b3a-907c-d18776efeb19	f872efe0-08ae-47df-b5ff-1e84187f8d72	SI B SW	fgeks-blue-eks-cluster
+67a9bd91-0edf-40f9-8429-e14f3707a750	46ec1fa6-2521-4a17-8d27-aa0bc3e30599	SI-EP-EMS-R&D	cluster
+6c94cd80-978f-4d9c-926e-df0e43dbb93f	f872efe0-08ae-47df-b5ff-1e84187f8d72	SI B SW	fgeks-blue-eks-cluster
+6d20eb8e-a1e5-4411-b4c8-5346ac3291b0	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	SI GSW CLO	ngm-kronos-eks
+6f77cf09-c22b-46ba-8e41-3ea270f65c26	9422d16a-1054-4028-b532-d1bbf0f83cc5	FT FDS CES	iemc-cluster-ipcei-test
+7b646d74-cc78-4703-a14f-865b3c0451bf	c67df1a0-06e0-46f9-a84e-27c14958d564	IT IPS	eleX01
+7d062a35-e537-459e-8412-d4089161c0ee	?	?	?
+7e04bd70-0513-4c6b-8b38-42b6c46905d9	d7534e71-612b-4963-89c8-22304c7a9d3d	DI AUT PI APF	dev-cluster
+7eb37770-9c35-460d-a896-910949ae0ea6	f15f33b9-20ad-4128-8289-da529844d3f0	SMO Railigent X	k8s
+823f9475-109e-4a8a-bed1-c1fba8441882	c67df1a0-06e0-46f9-a84e-27c14958d564	IT IPS	eleX01p
+893e4362-bb07-417a-b53c-f9b011b4240d	82534a6e-c2fc-4fd5-ab88-4326966e37fb	DI SW PRS AMER SLC	Posit
+8a9c0f55-86fc-4142-8f72-17ae6171a3aa	3d933189-4e1d-42ee-9cca-f7458e8fadab	HAFAS H&O	eks
+8bd361b0-fcbf-491d-beac-af92fb7d6b46	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	SI GSW CLO	ngm-sim2-eks
+95276912-9b38-42d6-91d5-a388fc0280d2	46ec1fa6-2521-4a17-8d27-aa0bc3e30599	SI-EP-EMS-R&D	cluster
+953f87e7-9175-435b-ad3b-1a3b8a4e7cad	3d933189-4e1d-42ee-9cca-f7458e8fadab	HAFAS H&O	eks
+95bf32c8-ced4-4a81-9665-f3c6278f5f57	3d956ed7-719e-4438-99b6-7aa2a62c425b	CYS - CNAPP	wiz-outpost-lite
+99b2dce3-a9ef-4b75-898f-3c375b253f8e	266bd590-8f05-4d3c-80d8-8170db62f74b	DI IT DEX CLD	gspkafka-k8s-dev
+99cb56e0-50f9-4ad7-a803-d03da4d95513	f872efe0-08ae-47df-b5ff-1e84187f8d72	SI B SW	fgeks-blue-eks-cluster
+9b9d2d51-ec75-46d4-bac0-ba38253cb8d9	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	SI GSW CLO	ngm-data-eks
+a4ee9bce-da9e-4cae-8eda-caeb0b5ab20a	c67df1a0-06e0-46f9-a84e-27c14958d564	IT IPS	pioneer-tcx
+a8129ccd-1dd4-441c-aaee-babd56ea5dc3	fce58d3c-0345-465e-9257-f5c31f29a810	Pillar#1	console-eks-preprod
+ae3e22a4-6e7a-487d-9c95-2c0fb3bb8f35	f15f33b9-20ad-4128-8289-da529844d3f0	SMO Railigent X	staging
+b01c58a4-4ad2-4756-b729-e0cf07b8fba6	c67df1a0-06e0-46f9-a84e-27c14958d564	IT IPS	aks-dios-weu-test-001
+b5d4cd12-98b2-4e9f-90a1-4db0134337c4	c67df1a0-06e0-46f9-a84e-27c14958d564	IT IPS	aks-dios-weu-prod-001
+b97e51e0-b4d7-42b3-a50a-ad29b9ab6b4d	fce58d3c-0345-465e-9257-f5c31f29a810	Pillar#1	fgac-eks-integ
+c086341f-ab62-4abc-90c8-a9ace1b45426	fce58d3c-0345-465e-9257-f5c31f29a810	Pillar#1	gw-eks-preprod
+c686f800-f17f-4b9a-8b7e-7655f209e07f	07aa3c29-3e1f-44bc-ad60-ceedb878d99a	SI GSW CLO	alliander-demo-eks
+c6cdf969-f81c-4324-a498-89008dce1351	259169ff-616b-4c53-9641-ae46235ace26	SI EA electrificationx	eks-Cluster1
+c783a2f5-d6c9-4c93-9bbe-216d2c614903	c67df1a0-06e0-46f9-a84e-27c14958d564	IT IPS	iec-tcx-flat
+cce8c41d-bf31-4c7e-bfff-dd2f8f0cd519	fce58d3c-0345-465e-9257-f5c31f29a810	Pillar#1	fgac-eks-preprod
+cf027570-8275-4d1d-a2e1-f9ffbb713f9e	c67df1a0-06e0-46f9-a84e-27c14958d564	IT IPS	eleX01in
+cf62a8e1-1f1e-40dc-bd90-1b5c84dfa9df	f15f33b9-20ad-4128-8289-da529844d3f0	SMO Railigent X	k8s
+d03690cb-2ba4-4ff5-9519-27013515aba7	f15f33b9-20ad-4128-8289-da529844d3f0	SMO Railigent X	k8s-andreas
+d0c7a7a5-72d2-4c09-a9f6-1b173c64d0a8	f15f33b9-20ad-4128-8289-da529844d3f0	SMO Railigent X	k8s
+d119d612-84ad-4c79-9992-a120b7206f15	a414d7cc-c2bf-4e6e-9591-ca75f26a0ccf	SMO-SW-PDH-TPS	eks-tpslive-dev
+d909c528-e5d0-4ebd-8c1a-77ad9b76a54b	fce58d3c-0345-465e-9257-f5c31f29a810	Pillar#1	console-eks-integ
+dac52e3e-1576-479c-b61e-f33589de026f	43b8288a-7bc4-4f6b-a008-dcd9e1d5e7d2	Siemens Dev	sp-tofu-simple
+dc10bd6a-1552-4c4b-9173-fc11b50c610f	f872efe0-08ae-47df-b5ff-1e84187f8d72	SI B SW	fgeks-blue-eks-cluster
+dc42abdf-7485-4115-a23e-a623f63fc12f	f872efe0-08ae-47df-b5ff-1e84187f8d72	SI B SW	fgeks-blue-eks-cluster
+dd0b548e-f6e0-4b50-b14c-13b2cc26ba48	9422d16a-1054-4028-b532-d1bbf0f83cc5	FT FDS CES	iemc-cluster-dev
+de02aae4-1fd1-401a-ad47-345711d4d7b3	43b8288a-7bc4-4f6b-a008-dcd9e1d5e7d2	Siemens Dev	pfm-eks-cluster
+e3c91abe-69ae-4a79-b362-90f42e1917c0	f872efe0-08ae-47df-b5ff-1e84187f8d72	SI B SW	fgeks-blue-eks-cluster
+ef2ddd68-7577-4b2b-a1fc-34dc18392249	2dafa4dc-9364-4bfb-8b9a-542fcdf3ac4f	CASE	shining-star
+ef65cdd5-853a-46d3-9694-6d93edd6ad2d	c67df1a0-06e0-46f9-a84e-27c14958d564	IT IPS	eagle-kafka01
+f0fa2ea7-48db-4473-b6b3-c73123fa0dac	c67df1a0-06e0-46f9-a84e-27c14958d564	IT IPS	eleX01
+f31e9de1-7884-470e-95ce-11c9f5dcfe0d	259169ff-616b-4c53-9641-ae46235ace26	SI EA electrificationx	eks-Cluster1
+f8dd5b4f-3cf4-48e2-b453-7be4562e36cb	f15f33b9-20ad-4128-8289-da529844d3f0	SMO Railigent X	k8s
+fd1ca573-4982-4133-89ce-bfd4df4f5d7b	f872efe0-08ae-47df-b5ff-1e84187f8d72	SI B SW	fgeks-blue-eks-cluster

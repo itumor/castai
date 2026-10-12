@@ -1,0 +1,268 @@
+organization,cluster_name,cluster_id,castai_cluster_id,region,actual_usd,projected_usd,gross_savings_usd,billable_vcpu_phase2,fee_usd_at_5.00,fee_usd_at_5.70,net_usd_at_5.00,net_usd_at_5.70,has_vr
+APM0000770 - DUVE Web,aks-duve-nonprod-01,13a264ef-f7a3-484b-a2fe-369eee3bdc65,13a264ef-f7a3-484b-a2fe-369eee3bdc65,westeurope,,,,,,,,,no
+APM0000770 - DUVE Web,aks-duve-prod-01,5826960c-691c-45be-b54a-f715b8743802,5826960c-691c-45be-b54a-f715b8743802,westeurope,,,,,,,,,no
+APM0002714 - GSP Kafka,gspkafka-k8s-dev,gspkafka-k8s-dev#203629096770#eu-central-1,529d60a3-9950-452d-8cc9-a8fd9070522f,eu-central-1,,,,,,,,,no
+APM0002714 - GSP Kafka,gspkafka-k8s-prod,gspkafka-k8s-prod#203629096770#eu-central-1,069c6305-e281-40a6-a9fe-702db92b56be,eu-central-1,,,,,,,,,no
+APM0006869 - PKN - Product Knowledge Network,pkn-nonprod-eks-1985,pkn-nonprod-eks-1985#522706696288#eu-central-1,43f6e766-d18d-4440-ac98-15e23f33871c,eu-central-1,,,,,,,,,no
+APM0006869 - PKN - Product Knowledge Network,pkn-prod-eks-1985,pkn-prod-eks-1985#997599126409#eu-central-1,0af93eb7-eb8b-48a4-8332-462b5d70da62,eu-central-1,,,,,,,,,no
+APM0022732 - PCIS - Product Class Infostructure,pcis-nonprod-eks-9841,pcis-nonprod-eks-9841#131871546785#eu-central-1,30b1d039-cb59-4c57-96f9-a0a9c6a2c09c,eu-central-1,,,,,,,,,no
+APM0022732 - PCIS - Product Class Infostructure,pcis-prod-eks-9841,pcis-prod-eks-9841#090877363637#eu-central-1,7432b4fb-e6eb-4639-8f23-4d8eec172cbb,eu-central-1,,,,,,,,,no
+APM0029033 - CIC API Management - KONG,case-k8s-private-dev-1,case-k8s-private-dev-1#203629096770#eu-central-1,2ec364da-c551-42ba-a3c9-5f48e5aa27ac,eu-central-1,,,,,,,,,no
+APM0029033 - CIC API Management - KONG,case-k8s-private-prod-fargate,case-k8s-private-prod-fargate#203629096770#eu-central-1,1ae6f85c-c34d-40b6-9581-f9097dd5a38f,eu-central-1,,,,,,,,,no
+APM0271596 - PSE Consulting,pse-consulting-eks-shared,pse-consulting-eks-shared#135808938578#eu-west-2,67726d70-3a2d-4246-a303-2244240eb3eb,eu-west-2,,,,,,,,,no
+APM0414470 - SiBase X,eks-cluster,eks-cluster#790776864453#eu-central-1,598b4c17-3950-4578-8691-9ca4d2da8d74,eu-central-1,,,,,,,,,no
+APM0414470 - SiBase X,eks-cluster,eks-cluster#851725647785#eu-central-1,9d404cbd-46a1-46b3-a160-b9e046b80710,eu-central-1,,,,,,,,,no
+APM0414470 - SiBase X,eks-cluster,eks-cluster#992382623068#eu-central-1,b0c2741c-659d-4ebc-9ec9-9927c6719f9a,eu-central-1,,,,,,,,,no
+APM0414470 - SiBase X,eks-cluster,eks-cluster#851725572881#eu-central-1,e76350af-1ffb-4849-84ad-8ac0838c6143,eu-central-1,,,,,,,,,no
+APM0423755 - Azure Platform Service,rg-lab-aks-nodes-prod,c88a141b-4ebf-47f9-8245-da64ad0c3dad,c88a141b-4ebf-47f9-8245-da64ad0c3dad,westeurope,,,,,,,,,no
+Botanica,kubernetes,71ddd440-4ff4-4f4d-9a0d-6be345000920,71ddd440-4ff4-4f4d-9a0d-6be345000920,westeurope,,,,,,,,,no
+Botanica,kubernetes,a8161722-2e3a-4d33-8c91-8684fa751ffe,a8161722-2e3a-4d33-8c91-8684fa751ffe,westeurope,,,,,,,,,no
+CASE,shining-star,shining-star#641078483763#eu-central-1,ef2ddd68-7577-4b2b-a1fc-34dc18392249,eu-central-1,,,,0.000,0.00,0.00,,,no
+CPS,dema-platform-services,dema-platform-services#373270804851#eu-central-1,5dc3bf31-a263-4c6b-88bb-e95b6403aa51,eu-central-1,17045.38,28729.94,11684.56,527.545,2637.72,3007.01,9046.84,8677.56,yes
+CPS,dema-platform-services-test,dema-platform-services-test#373270804851#eu-central-1,00ee8944-67f6-43d5-8517-c270951ec02c,eu-central-1,464.83,666.44,201.61,16.890,84.45,96.27,117.16,105.34,yes
+CYS - CNAPP,wiz-outpost-lite,wiz-outpost-lite#890988596583#eu-central-1,95bf32c8-ced4-4a81-9665-f3c6278f5f57,eu-central-1,192.29,339.55,147.26,9.606,48.03,54.75,99.23,92.51,yes
+DAI R SDE,ipae-climatix,ipae-climatix#187692088554#eu-central-1,50a316f7-ee63-4667-9fde-00faa11339f5,eu-central-1,,,,,,,,,no
+DAI R SDE,ipae-dtac-sandbox,ipae-dtac-sandbox#187692088554#eu-central-1,241cb12c-c4b0-4756-a82f-7530c7c26c38,eu-central-1,,,,,,,,,no
+DAI R SDE,ipae-sandbox-audi,ipae-sandbox-audi#187692088554#eu-central-1,866f76b5-d39d-450b-9d40-31a52a6c2688,eu-central-1,,,,,,,,,no
+DAI-R-SMR,data-vault,data-vault#607929492083#eu-central-1,e5a947d7-275a-4e2c-8ef8-e003a01ca0da,eu-central-1,,,,,,,,,no
+DDI SW MNDX PRO&TECH,central-accp,central-accp#311800285949#eu-central-1,c42d0d42-e7e4-4f9a-b8e3-2cb4dcc44e8f,eu-central-1,,,,,,,,,no
+DDI SW MNDX PRO&TECH,central-test,central-test#407331438481#eu-central-1,70984162-3989-4311-9b06-29e60edf5dbf,eu-central-1,,,,,,,,,no
+DDI SW MNDX PRO&TECH,gp-us-1-test,gp-us-1-test#407331438481#us-east-1,2ad94570-45a2-4401-bdf8-b42c410a7970,us-east-1,,,,,,,,,no
+DDI SW MNDX PRO&TECH,internal-dev,internal-dev#473076314459#eu-central-1,ce85dc32-5f2b-4ad2-b2b1-674ee5a24ca3,eu-central-1,,,,,,,,,no
+DDI SW MNDX PRO&TECH,nonprod-2-eks,nonprod-2-eks#147868785316#eu-west-1,1e712207-9f93-4d66-a848-83dc87403f04,eu-west-1,,,,,,,,,no
+DDI SW MNDX PRO&TECH,nonprod-4-eks,nonprod-4-eks#147868785316#eu-central-1,88bdcb08-d7b9-4643-b7ee-8c987e6b3e6b,eu-central-1,,,,,,,,,no
+DDI SW MNDX PRO&TECH,nonprod-5-eks,nonprod-5-eks#244720914069#eu-west-1,ef108bbf-a7a1-4a06-b8bc-209e40ffa595,eu-west-1,,,,,,,,,no
+DDI SW MNDX PRO&TECH,pipeline-accp,pipeline-accp#311800285949#eu-central-1,a2f426eb-fd4a-448c-b6ca-d4691da80e4c,eu-central-1,,,,,,,,,no
+DDI SW MNDX PRO&TECH,pipeline-test,pipeline-test#407331438481#eu-central-1,4a5813f2-a222-4753-a0d5-1f74417a5719,eu-central-1,,,,,,,,,no
+DDI SW MNDX PRO&TECH,public-cloud-cd-nonprod,public-cloud-cd-nonprod#767397904780#eu-central-1,4a53a7e9-6150-45e4-9f19-93b8ee38990f,eu-central-1,,,,,,,,,no
+DDI SW MNDX PRO&TECH,synthia-test-2,synthia-test-2#044911596899#eu-central-1,d0de1275-62ef-40bc-9272-c8e5547e7040,eu-central-1,,,,,,,,,no
+DDI SW MNDX PRO&TECH,ucp-cd-nonprod,ucp-cd-nonprod#767397904780#eu-central-1,14beb823-ce64-4841-a2e1-10ffb384aaa8,eu-central-1,,,,,,,,,no
+DI AUT PI APF,dev-cluster,dev-cluster#660922352913#eu-central-1,7e04bd70-0513-4c6b-8b38-42b6c46905d9,eu-central-1,649.52,595.70,-53.82,26.424,132.12,150.62,-185.94,-204.43,yes
+DI FA DSP - DPP,bp-blo-260,bp-blo-260#609823840427#eu-central-1,a73f3484-8c34-4a5a-9743-9fc2f36bfc71,eu-central-1,,,,,,,,,no
+DI FA DSP - DPP,bp-blo-359,bp-blo-359#609823840427#eu-central-1,6c756141-5a54-4e8f-a995-cbe71a4766ee,eu-central-1,,,,,,,,,no
+DI FA DSP - DPP,bp-blo-379t,bp-blo-379t#609823840427#eu-central-1,886df315-be86-4d8e-acf2-e4864390113f,eu-central-1,,,,,,,,,no
+DI FA DSP - DPP,bp-blo-408,bp-blo-408#609823840427#eu-central-1,7594bd20-39fd-4b31-a81e-8d570c4f331a,eu-central-1,,,,,,,,,no
+DI FA DSP - DPP,bp-blo-417,bp-blo-417#609823840427#eu-central-1,1baae99c-637a-4ce0-9617-6ab9c9c40072,eu-central-1,,,,,,,,,no
+DI FA DSP - DPP,bp-blo-422,bp-blo-422#609823840427#eu-central-1,7e49f605-7dcc-4354-8759-df226be3c5b0,eu-central-1,,,,,,,,,no
+DI FA DSP - DPP,bp-dev,bp-dev#609823840427#eu-central-1,b2ffa852-cc83-42d7-afd2-cb842f9310d5,eu-central-1,,,,,,,,,no
+DI FA HMI URT PRC2,iowa-tools-cluster,iowa-tools-cluster#057303604274#eu-central-1,2b77e149-f440-4ea8-8349-a5e008f72e18,eu-central-1,,,,,,,,,no
+DI IT DEX CLD,gspkafka-k8s-dev,gspkafka-k8s-dev#203629096770#eu-central-1,99b2dce3-a9ef-4b75-898f-3c375b253f8e,eu-central-1,,,,0.000,0.00,0.00,,,no
+DI SW PLM DM DDM,ih-dev,ih-dev#611263670956#eu-central-1,ac73fd44-4ed9-469a-b4ff-74b3acad246e,eu-central-1,,,,,,,,,no
+DI SW PLM DM DDM,ihubinteg-aks,1c5f7938-e5e2-4678-a623-74dc891d26b0,1c5f7938-e5e2-4678-a623-74dc891d26b0,westeurope,,,,,,,,,no
+DI SW PLM DM DDM,ops-common-integ,ops-common-integ#464255417364#eu-central-1,d76acc05-25f7-4924-94bd-db2c8aa38f7d,eu-central-1,,,,,,,,,no
+DI SW PRS AMER SLC,SLC-SS,SLC-SS#483428953713#us-east-1,96b41307-2647-44ad-9185-da143f346928,us-east-1,,,,,,,,,no
+DI SW PRS AMER SLC,Posit,Posit#483428953713#us-east-1,893e4362-bb07-417a-b53c-f9b011b4240d,us-east-1,847.20,250.31,-596.88,41.280,206.40,235.30,-803.28,-832.18,yes
+DI-SW-RAPIDMINER-GRAPH,graph-dev-qa-eks,graph-dev-qa-eks#119233636320#us-east-1,49987821-c6b8-414a-8ec9-dd5b59d4042c,us-east-1,,,,,,,,,no
+DISW-SERVICES-LM,teamcenter,teamcenter#044658676544#us-east-1,ec18afd9-80bf-4362-9e08-652a63987fd4,us-east-1,,,,,,,,,no
+evosoft IT MIS,ITMIS,ITMIS#864981718205#eu-central-1,31864129-b09c-47b2-a8df-c616f98d65b7,eu-central-1,492.60,645.68,153.08,22.700,113.50,129.39,39.58,23.69,yes
+FT FDS CDS,cds-integ,cds-integ#891376965814#eu-central-1,efd0470a-7bad-4bf8-b121-fc3c5797f908,eu-central-1,,,,,,,,,no
+FT FDS CDS,cds-integ-us,cds-integ-us#891376965814#us-east-1,c1195c4e-f818-4a38-b800-e3a017f22cd2,us-east-1,,,,,,,,,no
+FT FDS CES,iemc-cluster-int,iemc-cluster-int#104217848981#eu-central-1,25c0a174-d4b6-48d7-9459-f3240f97a1a8,eu-central-1,464.91,885.11,420.20,,,,420.20,420.20,yes
+FT FDS CES,iemc-cluster-dev,iemc-cluster-dev#251950426335#eu-central-1,dd0b548e-f6e0-4b50-b14c-13b2cc26ba48,eu-central-1,574.92,925.13,350.21,0.008,0.04,0.05,350.17,350.17,yes
+FT FDS CES,iemc-cluster-ipcei-test,iemc-cluster-ipcei-test#010928208160#eu-central-1,6f77cf09-c22b-46ba-8e41-3ea270f65c26,eu-central-1,134.25,142.31,8.06,,,,8.06,8.06,yes
+FT FDS CES,iemc-cluster-alpha,iemc-cluster-alpha#464383546700#eu-central-1,59ac1d97-4402-4d34-8220-e4b708484f28,eu-central-1,,,,,,,,,no
+FT FDS CES,iemc-cluster-ipcei,iemc-cluster-ipcei#010928208160#eu-central-1,198cb29e-083a-4a28-bfda-ba1c1b997c08,eu-central-1,,,,,,,,,no
+FT FDS CES,iemc-cluster-prod,iemc-cluster-prod#464383546700#eu-central-1,6d05a5b0-a4e1-4761-a19c-806c0069042c,eu-central-1,,,,,,,,,no
+FT-FT RPD CED SSI-IIP,CDM-EKS-Cluster,CDM-EKS-Cluster#904494280429#eu-central-1,62aa894c-1d41-4a7a-98ed-e181e289e173,eu-central-1,36.38,116.39,80.00,4.119,20.59,23.48,59.41,56.53,yes
+FT-RDP-SSP-DEVOPSFF-EKS-DEV,eks-dev,eks-dev#096367275314#eu-central-1,54535938-4437-42d5-b5f5-bc4a2f90ce8b,eu-central-1,,,,0.000,0.00,0.00,,,no
+HAFAS H&O,eks,eks#688967701480#eu-central-1,953f87e7-9175-435b-ad3b-1a3b8a4e7cad,eu-central-1,12019.52,32852.96,20833.43,446.247,2231.24,2543.61,18602.20,18289.83,yes
+HAFAS H&O,eks,eks#106391900725#eu-central-1,22bf2472-d9ba-4cb3-b6ec-1f7aab50cb3f,eu-central-1,769.32,4025.52,3256.20,39.996,199.98,227.98,3056.22,3028.22,yes
+HAFAS H&O,eks,eks#933753214448#eu-central-1,8a9c0f55-86fc-4142-8f72-17ae6171a3aa,eu-central-1,3023.89,3355.72,331.84,144.089,720.44,821.31,-388.61,-489.47,yes
+HAFAS H&O,argocd-demo,argocd-demo#132915311757#eu-central-1,b2dabc79-3aaa-4596-acd9-d3f17e3a222a,eu-central-1,,,,,,,,,no
+HAFAS H&O,eks-fat-euc1,eks-fat-euc1#488305652903#eu-central-1,76246d36-88b0-41b7-bf98-0f6bbdde094a,eu-central-1,,,,,,,,,no
+HAFAS H&O,eks-prod-apse2,eks-prod-apse2#488305652903#ap-southeast-2,aebceffe-11d4-4e34-973b-d9ad0c54c03b,ap-southeast-2,,,,,,,,,no
+HAFAS H&O,eks-prod-euc1,eks-prod-euc1#488305652903#eu-central-1,90d11c07-a938-4dc4-ab73-c9288880b240,eu-central-1,,,,,,,,,no
+HAFAS H&O,eks-prod-use1,eks-prod-use1#488305652903#us-east-1,fed60fe2-25bb-4a1f-9b1d-a19497a5d4c2,us-east-1,,,,,,,,,no
+HAFAS H&O,renfe-int,renfe-int#488305652903#eu-central-1,14c6bd24-75fd-46e5-98be-2b6e985edfb5,eu-central-1,,,,,,,,,no
+HAFAS H&O,renfe-prod,renfe-prod#488305652903#eu-central-1,553b905a-2334-4cb5-a059-ec58c616a8ae,eu-central-1,,,,,,,,,no
+HAFAS H&O,rivier,rivier#488305652903#eu-central-1,fcdc7184-a5a1-4b5d-a225-92e3fbfd8350,eu-central-1,,,,,,,,,no
+HAFAS H&O,sales-platform,sales-platform#488305652903#eu-central-1,9e18000c-a738-4745-8f8a-524c97a9376e,eu-central-1,,,,,,,,,no
+HAFAS H&O,timemachine,timemachine#488305652903#eu-central-1,7147d0b6-25e5-47b5-b193-a50c64a96291,eu-central-1,,,,,,,,,no
+IT DA,knime-test,knime-test#890742596841#eu-west-1,15ee812d-5ebf-4c69-a64c-681f1da39c97,eu-west-1,,,,,,,,,no
+IT DA PL IP - SDC.Streaming,sdcstreaming-eks-cluster-dev,sdcstreaming-eks-cluster-dev#203918863837#eu-west-1,30861ed2-5d64-4c77-9f03-1f8b04eb2911,eu-west-1,,,,,,,,,no
+IT DA PL IP - SDC.Streaming,sdcstreaming-eks-cluster-prod,sdcstreaming-eks-cluster-prod#203918863837#eu-west-1,2e4161f0-7ec8-4641-aa5f-32a52dd32ccb,eu-west-1,,,,,,,,,no
+IT DA PL IP - SDC.Streaming,sdcstreaming-eks-cluster-qa,sdcstreaming-eks-cluster-qa#203918863837#eu-west-1,46aef6f3-c89e-4ece-a114-53d5b329cdea,eu-west-1,,,,,,,,,no
+IT DF COL UC 2,siemenstest-siemenstest-1,siemenstest-siemenstest-1#951463557399#eu-west-1,36575565-7149-431b-b5f6-71f43f18ef3f,eu-west-1,,,,,,,,,no
+IT IPS,pioneer-tcx,pioneer-tcx#136905788720#eu-central-1,a4ee9bce-da9e-4cae-8eda-caeb0b5ab20a,eu-central-1,663.37,3629.31,2965.94,24.561,122.81,140.00,2843.14,2825.94,yes
+IT IPS,aks-dios-weu-prod-001,b5d4cd12-98b2-4e9f-90a1-4db0134337c4,b5d4cd12-98b2-4e9f-90a1-4db0134337c4,westeurope,2592.91,5286.47,2693.56,50.339,251.69,286.93,2441.87,2406.63,yes
+IT IPS,aks-dios-weu-test-001,b01c58a4-4ad2-4756-b729-e0cf07b8fba6,b01c58a4-4ad2-4756-b729-e0cf07b8fba6,westeurope,1221.21,2991.61,1770.40,28.013,140.06,159.67,1630.33,1610.72,yes
+IT IPS,eagle-kafka01,eagle-kafka01#897825492946#eu-central-1,ef65cdd5-853a-46d3-9694-6d93edd6ad2d,eu-central-1,1142.68,2726.30,1583.62,47.530,237.65,270.92,1345.97,1312.70,yes
+IT IPS,eleX01,eleX01#576061914293#eu-central-1,f0fa2ea7-48db-4473-b6b3-c73123fa0dac,eu-central-1,6461.50,7710.00,1248.50,332.684,1663.42,1896.30,-414.92,-647.80,yes
+IT IPS,eleX01,eleX01#546544527727#us-east-2,7b646d74-cc78-4703-a14f-865b3c0451bf,us-east-2,5589.23,6669.57,1080.34,327.003,1635.02,1863.92,-554.67,-783.57,yes
+IT IPS,eleX01in,eleX01in#637423451488#ap-south-1,cf027570-8275-4d1d-a2e1-f9ffbb713f9e,ap-south-1,3300.59,3935.02,634.42,336.342,1681.71,1917.15,-1047.29,-1282.73,yes
+IT IPS,aks-n8n-weu-prod-001,285a5dae-36f4-4fa3-9e42-27948f0c06dd,285a5dae-36f4-4fa3-9e42-27948f0c06dd,westeurope,,,,,,,,,no
+IT IPS,aks-n8n-weu-test-001,78deb4c6-46e8-4512-8a1e-92d9416cb34f,78deb4c6-46e8-4512-8a1e-92d9416cb34f,westeurope,,,,,,,,,no
+IT IPS,aks-neobot-weu-prod-001,c66abc3b-7ffb-4576-b65e-9fa96ef14147,c66abc3b-7ffb-4576-b65e-9fa96ef14147,westeurope,,,,,,,,,no
+IT IPS,aks-neobot-weu-test-001,43d2436d-2f2d-44cb-99f5-6ed799511dac,43d2436d-2f2d-44cb-99f5-6ed799511dac,westeurope,,,,,,,,,no
+IT IPS,bx-edex-dev-eu,bx-edex-dev-eu#287526491081#eu-west-1,4f9d90bf-10e7-4bd8-8b18-a094484eaf68,eu-west-1,,,,,,,,,no
+IT IPS,bx-edex-int-eu,bx-edex-int-eu#713881807618#eu-west-1,bc30a320-2cc9-4fa1-8423-67cb45fb4776,eu-west-1,,,,,,,,,no
+IT IPS,bx-edex-prod-eu,bx-edex-prod-eu#577638380263#eu-west-1,ce86ecf0-1c17-4d02-936b-dd239411ea0a,eu-west-1,,,,,,,,,no
+IT IPS,cloudcore01,cloudcore01#040286887818#eu-central-1,e16fc060-803a-47e2-985e-f0c15058a6c9,eu-central-1,,,,,,,,,no
+IT IPS,cloudcore02,cloudcore02#043203988634#eu-central-1,56d5ca2d-a5b7-4223-97f2-75f2af35b242,eu-central-1,,,,,,,,,no
+IT IPS,dev-sec,dev-sec#195384726758#eu-west-1,6bb5a236-875d-4158-9c5c-a1d66e08ac83,eu-west-1,,,,,,,,,no
+IT IPS,ea-admin-management-cluster,51b3e19e-eb6d-421c-b8dc-6587aae498ba,51b3e19e-eb6d-421c-b8dc-6587aae498ba,westeurope,,,,,,,,,no
+IT IPS,mof,mof#188289743005#us-east-2,66723d08-943f-4b85-9f75-80d9bd5c4511,us-east-2,,,,,,,,,no
+IT IPS,mof-staging,mof-staging#493565080783#us-east-2,4aaa7671-3d83-454d-a7aa-449df17c10d3,us-east-2,,,,,,,,,no
+IT IPS,shared01,shared01#474569730283#eu-central-1,cd7be1fb-81c3-4c01-8d22-efe977e629bd,eu-central-1,,,,,,,,,no
+IT IPS,staging-sec,staging-sec#500412134877#eu-west-1,83ce9be7-78b8-4d5c-a49c-4e1584f93251,eu-west-1,,,,,,,,,no
+IT IPS,kafka-test,kafka-test#187494036103#eu-central-1,06a44e72-8f49-4f6f-a2f5-2092d14cffe4,eu-central-1,397.79,190.78,-207.00,16.506,82.53,94.08,-289.53,-301.09,yes
+IT IPS,iec-tcx-flat,iec-tcx-flat#987708558949#eu-central-1,c783a2f5-d6c9-4c93-9bbe-216d2c614903,eu-central-1,1106.38,687.17,-419.21,33.042,165.21,188.34,-584.42,-607.55,yes
+IT IPS,eleX01p,eleX01p#976594908632#eu-central-1,823f9475-109e-4a8a-bed1-c1fba8441882,eu-central-1,12912.30,9646.94,-3265.35,540.227,2701.13,3079.29,-5966.49,-6344.65,yes
+IT-APS-DEV-ACO,grafana-poc,grafana-poc#905418411996#eu-central-1,c368fd84-274b-47dd-bf2b-46394ce25f78,eu-central-1,,,,,,,,,no
+IT-APS-DEV-ACO,n8n,n8n#567316078005#eu-west-1,46d4d358-f816-4b89-a7ba-79f8feeeb84e,eu-west-1,,,,,,,,,no
+LCB-IT,aks-bricks-prod,df91fa24-43eb-45e4-ba64-dcbf46756d45,df91fa24-43eb-45e4-ba64-dcbf46756d45,northeurope,,,,,,,,,no
+Pillar#1,console-eks-integ,console-eks-integ#238720913587#us-east-1,d909c528-e5d0-4ebd-8c1a-77ad9b76a54b,us-east-1,2995.12,2995.12,0.00,5.024,25.12,28.64,-25.12,-28.64,yes
+Pillar#1,console-eks-preprod,console-eks-preprod#477662162423#eu-central-1,a8129ccd-1dd4-441c-aaee-babd56ea5dc3,eu-central-1,2547.37,2547.37,0.00,,,,0.00,0.00,yes
+Pillar#1,fds-sdk-testing,fds-sdk-testing#238720913587#us-east-1,802629ad-ca96-4ee5-aa19-a253788f96d3,us-east-1,,,,,,,,,no
+Pillar#1,fgac-eks-integ,fgac-eks-integ#238720913587#us-east-1,b97e51e0-b4d7-42b3-a50a-ad29b9ab6b4d,us-east-1,818.67,818.67,0.00,,,,0.00,0.00,yes
+Pillar#1,fgac-eks-preprod,fgac-eks-preprod#477662162423#eu-central-1,cce8c41d-bf31-4c7e-bfff-dd2f8f0cd519,eu-central-1,727.51,727.51,0.00,,,,0.00,0.00,yes
+Pillar#1,gw-eks-integ,gw-eks-integ#238720913587#us-east-1,514bf38c-5235-44b6-a951-8e69528b5943,us-east-1,380.94,380.94,0.00,,,,0.00,0.00,yes
+Pillar#1,gw-eks-preprod,gw-eks-preprod#477662162423#eu-central-1,c086341f-ab62-4abc-90c8-a9ace1b45426,eu-central-1,833.09,833.09,0.00,,,,0.00,0.00,yes
+Pillar#1,nfr-eks-integ-3,nfr-eks-integ-3#238720913587#eu-central-1,7743765a-2915-4699-97cd-06bb897acc09,eu-central-1,,,,,,,,,no
+Pillar#1,nfr-eks-preprod,nfr-eks-preprod#477662162423#eu-central-1,04f26ee9-6fe7-4467-a222-061cee09011f,eu-central-1,,,,,,,,,no
+Pillar#2,console-eks-integ,console-eks-integ#238720913587#us-east-1,cb5c93cd-1be6-4c00-8b58-ba292201d5d1,us-east-1,,,,,,,,,no
+RC-IT DI S TSP ARCH,eks-iem-ita,eks-iem-ita#009234154371#eu-south-1,151856f9-7a15-4a05-8cdb-37bd441242ae,eu-south-1,,,,,,,,,no
+SFS IT CDO,rg-api-p-base-aks-internal,3f92e1ce-6b2c-414e-bb1b-439bf7e60a60,3f92e1ce-6b2c-414e-bb1b-439bf7e60a60,westeurope,,,,,,,,,no
+SFS IT CDO,rg-api-t-base-aks-internal,1ff6bb42-5db9-4faa-aa02-10598451ca86,1ff6bb42-5db9-4faa-aa02-10598451ca86,westeurope,,,,,,,,,no
+SFS IT CDO,rg-app-d-base-aks-internal,ae7e2c93-1e26-41fd-8162-432179915e59,ae7e2c93-1e26-41fd-8162-432179915e59,westeurope,,,,,,,,,no
+SFS IT CDO,rg-app-p-base-aks-internal,05ce573b-ea5b-4285-bb7b-460e9ae79d18,05ce573b-ea5b-4285-bb7b-460e9ae79d18,westeurope,,,,,,,,,no
+SFS IT CDO,rg-app-t-base-aks-internal,78288773-5d1c-470e-a4fd-768ef1eb93ad,78288773-5d1c-470e-a4fd-768ef1eb93ad,westeurope,,,,,,,,,no
+SFS IT CDO,rg-cdb-d-base-aks-internal,bebbf9ac-421f-4af4-ad57-7a440b232e31,bebbf9ac-421f-4af4-ad57-7a440b232e31,westeurope,,,,,,,,,no
+SFS IT CDO,rg-cdb-p-base-aks-internal,57894164-7fdb-4788-9056-96099275e454,57894164-7fdb-4788-9056-96099275e454,westeurope,,,,,,,,,no
+SFS IT CDO,rg-cdb-t-base-aks-internal,65cb617a-bd85-4a6e-9693-97107d9d5c6f,65cb617a-bd85-4a6e-9693-97107d9d5c6f,westeurope,,,,,,,,,no
+SFS IT CDO,rg-cdo-d-base-aks-internal,f8dcbc80-7524-47a6-90f8-8e6fe795d3aa,f8dcbc80-7524-47a6-90f8-8e6fe795d3aa,westeurope,,,,,,,,,no
+SFS IT CDO,rg-cdo-p-base-aks-internal,a91ae711-2b6a-4523-a489-737da2ba6bfa,a91ae711-2b6a-4523-a489-737da2ba6bfa,westeurope,,,,,,,,,no
+SFS IT CDO,rg-sca-d-base-aks-internal,5e07a6bf-f90c-49c7-bbf1-a7712a377925,5e07a6bf-f90c-49c7-bbf1-a7712a377925,westeurope,,,,,,,,,no
+SFS IT CDO,rg-sca-p-base-aks-internal,dde550bb-9344-4f70-ad6e-e8ac3764f16a,dde550bb-9344-4f70-ad6e-e8ac3764f16a,westeurope,,,,,,,,,no
+SFS IT CDO,rg-sca-t-base-aks-internal,040b3b0f-af98-42a7-a7aa-31756738c153,040b3b0f-af98-42a7-a7aa-31756738c153,westeurope,,,,,,,,,no
+SFS IT CDO,rg-ssm-d-base-aks-internal,7c135e57-5de7-4a68-b180-fddce5f975d8,7c135e57-5de7-4a68-b180-fddce5f975d8,germanywestcentral,,,,,,,,,no
+SFS IT CDO,rg-ssm-p-base-aks-internal,6c3203a2-aa17-4e51-8979-8e17ee37ea61,6c3203a2-aa17-4e51-8979-8e17ee37ea61,germanywestcentral,,,,,,,,,no
+SFS IT CDO,rg-ssm-t-base-aks-internal,c7cdffef-005a-44a6-8666-0592c563fc3a,c7cdffef-005a-44a6-8666-0592c563fc3a,germanywestcentral,,,,,,,,,no
+SI B SER DSC TEI CLO,sdlc,sdlc#010928208292#eu-central-1,6f2c0faa-b005-46d0-be6d-d78990660fcb,eu-central-1,,,,,,,,,no
+SI B SW,fgeks-blue-eks-cluster,fgeks-blue-eks-cluster#972571274142#eu-west-1,dc10bd6a-1552-4c4b-9173-fc11b50c610f,eu-west-1,406.87,12150.03,11743.15,29.170,145.85,166.27,11597.30,11576.88,yes
+SI B SW,fgeks-blue-eks-cluster,fgeks-blue-eks-cluster#018471890419#eu-west-1,01c18e7a-ce06-4c12-b921-c93e612d3bf0,eu-west-1,239.15,2467.08,2227.93,11.342,56.71,64.65,2171.22,2163.28,yes
+SI B SW,fgeks-blue-eks-cluster,fgeks-blue-eks-cluster#380349240159#eu-west-1,6c94cd80-978f-4d9c-926e-df0e43dbb93f,eu-west-1,172.06,1179.18,1007.12,6.379,31.90,36.36,975.22,970.76,yes
+SI B SW,fgeks-blue-eks-cluster,fgeks-blue-eks-cluster#877314709291#us-east-1,99cb56e0-50f9-4ad7-a803-d03da4d95513,us-east-1,190.04,821.25,631.21,5.879,29.40,33.51,601.81,597.69,yes
+SI B SW,fgeks-blue-eks-cluster,fgeks-blue-eks-cluster#183098873491#eu-west-1,fd1ca573-4982-4133-89ce-bfd4df4f5d7b,eu-west-1,171.62,513.73,342.11,8.268,41.34,47.13,300.77,294.99,yes
+SI B SW,fgeks-blue-eks-cluster,fgeks-blue-eks-cluster#290851856511#eu-west-1,6436c787-9169-4b3a-907c-d18776efeb19,eu-west-1,194.66,503.46,308.80,9.368,46.84,53.40,261.96,255.41,yes
+SI B SW,fgeks-blue-eks-cluster,fgeks-blue-eks-cluster#023510080489#eu-west-1,1b0450f7-5532-4edd-af65-a754ff33ff40,eu-west-1,,,,0.000,0.00,0.00,,,no
+SI B SW,fgeks-blue-eks-cluster,fgeks-blue-eks-cluster#675913176182#eu-west-1,3782e6c8-4780-42cb-bada-97b096ee21f7,eu-west-1,68.74,68.74,0.00,,,,0.00,0.00,yes
+SI B SW,fgeks-blue-eks-cluster,fgeks-blue-eks-cluster#018471890419#us-east-1,dc42abdf-7485-4115-a23e-a623f63fc12f,us-east-1,191.61,191.61,0.00,,,,0.00,0.00,yes
+SI B SW,fgeks-blue-eks-cluster,fgeks-blue-eks-cluster#380349240159#us-east-2,e3c91abe-69ae-4a79-b362-90f42e1917c0,us-east-2,,,,0.000,0.00,0.00,,,no
+SI EA electrificationx,eks-Cluster1,eks-Cluster1#955761008245#eu-central-1,c6cdf969-f81c-4324-a498-89008dce1351,eu-central-1,4067.62,7864.87,3797.25,369.753,1848.76,2107.59,1948.49,1689.66,yes
+SI EA electrificationx,eks-Cluster1,eks-Cluster1#129753847697#eu-central-1,f31e9de1-7884-470e-95ce-11c9f5dcfe0d,eu-central-1,2977.54,5834.77,2857.23,264.667,1323.34,1508.60,1533.89,1348.62,yes
+SI EA electrificationx,eks-Cluster1,eks-Cluster1#955761008245#eu-north-1,1ca6667a-06af-497f-a7ae-b9e7748c9493,eu-north-1,187.38,178.68,-8.70,6.311,31.56,35.97,-40.26,-44.68,yes
+SI GSW CLO,ngm-sim-eks,ngm-sim-eks#894875834901#eu-central-1,51dd234c-a5bf-4f99-a884-b79956de8f94,eu-central-1,8051.07,47376.87,39325.80,359.195,1795.97,2047.41,37529.82,37278.39,yes
+SI GSW CLO,baseline-clo-eks,baseline-clo-eks#110201440604#eu-central-1,02810f4b-b793-4ef2-95f1-e902af61d9e3,eu-central-1,2542.46,21638.56,19096.10,114.793,573.96,654.32,18522.13,18441.78,yes
+SI GSW CLO,alliander-demo-eks,alliander-demo-eks#721233634880#eu-central-1,c686f800-f17f-4b9a-8b7e-7655f209e07f,eu-central-1,3744.21,13922.55,10178.34,,,,10178.34,10178.34,yes
+SI GSW CLO,ngm-sim2-eks,ngm-sim2-eks#894875834901#eu-central-1,8bd361b0-fcbf-491d-beac-af92fb7d6b46,eu-central-1,2046.78,11624.70,9577.92,67.216,336.08,383.13,9241.84,9194.79,yes
+SI GSW CLO,ngm-integ-eks,ngm-integ-eks#600442974479#eu-central-1,1ad1a0bf-defe-4f51-acea-cbebb3d3fc3f,eu-central-1,22030.68,30738.67,8708.00,1049.915,5249.58,5984.52,3458.42,2723.48,yes
+SI GSW CLO,ngm-helios-eks,ngm-helios-eks#600442974479#eu-central-1,419c39e4-66bf-4d61-b833-4562968a61c7,eu-central-1,45121.35,51789.61,6668.27,1850.511,9252.56,10547.91,-2584.29,-3879.65,yes
+SI GSW CLO,ngm-kronos-eks,ngm-kronos-eks#600442974479#eu-central-1,6d20eb8e-a1e5-4411-b4c8-5346ac3291b0,eu-central-1,1939.08,7329.63,5390.56,89.686,448.43,511.21,4942.13,4879.35,yes
+SI GSW CLO,clo-master-eks,clo-master-eks#115928806288#eu-central-1,9cabe4ee-c3cb-4877-a6e6-a464b3dd388a,eu-central-1,,,,,,,,,no
+SI GSW CLO,hermes-val-eks,hermes-val-eks#275315285795#eu-central-1,101ea9a6-02e5-45af-8ea0-6915a955c420,eu-central-1,,,,,,,,,no
+SI GSW CLO,iands-sales2-eks,iands-sales2-eks#547787420222#us-east-2,34e3e0bb-53d7-4b68-9e9d-17b0d79dfcf8,us-east-2,,,,,,,,,no
+SI GSW CLO,ngm-demo-eks,ngm-demo-eks#600442974479#eu-central-1,19336022-f195-4dda-b832-2b76d1a1c29c,eu-central-1,,,,,,,,,no
+SI GSW CLO,ngm-sim3-eks,ngm-sim3-eks#894875834901#eu-central-1,5efe373e-d2fe-43b1-a464-60ebcf16623a,eu-central-1,,,,,,,,,no
+SI GSW CLO,ngm-test-eks,ngm-test-eks#600442974479#eu-central-1,7290695f-e216-47df-ba5a-ca97ebb90045,eu-central-1,,,,,,,,,no
+SI GSW CLO,ngm-vsdev-eks,ngm-vsdev-eks#600442974479#eu-central-1,0ec063fc-f9ec-45e2-9d31-ea584a70f3bd,eu-central-1,,,,,,,,,no
+SI GSW CLO,ngm-vsinteg-eks,ngm-vsinteg-eks#600442974479#eu-central-1,bd3aaf10-963c-4c66-b6f1-d9ded41b4a4a,eu-central-1,,,,,,,,,no
+SI GSW CLO,onboard-delivery-eks,onboard-delivery-eks#547787420222#eu-central-1,71ad083b-adec-4379-9881-e4901cbf0a85,eu-central-1,,,,,,,,,no
+SI GSW CLO,onboard-sales1-eks,onboard-sales1-eks#547787420222#eu-central-1,1b97084a-82d3-45e1-b88f-db0c6f19191d,eu-central-1,,,,,,,,,no
+SI GSW CLO,shire-demo-eks,shire-demo-eks#843594798263#eu-central-1,6130ca25-a9aa-4bb4-98d2-402785f13317,eu-central-1,,,,,,,,,no
+SI GSW CLO,shire-dev-eks,shire-dev-eks#843594798263#eu-central-1,2a8cfae0-d269-4ccd-bdbd-0ee405f54d64,eu-central-1,,,,,,,,,no
+SI GSW CLO,shire-qa-eks,shire-qa-eks#843594798263#eu-central-1,c7498a9f-12f3-4153-ac33-540c0594ad48,eu-central-1,,,,,,,,,no
+SI GSW CLO,workbench-preprodeu-eks,workbench-preprodeu-eks#136730153639#eu-central-1,7eb74f76-a62c-482e-bb8a-14557d095d22,eu-central-1,,,,,,,,,no
+SI GSW CLO,ngm-data-eks,ngm-data-eks#595960695089#eu-south-1,9b9d2d51-ec75-46d4-bac0-ba38253cb8d9,eu-south-1,1102.60,775.75,-326.85,,,,-326.85,-326.85,yes
+SI-B-BTWIN,fgeks-blue-eks-cluster,fgeks-blue-eks-cluster#982081074643#eu-west-1,b6c391dd-268c-4acb-937d-25748d7d2554,eu-west-1,,,,,,,,,no
+SI-EP-EMS-R&D,cluster,cluster#480007738569#eu-west-1,95276912-9b38-42d6-91d5-a388fc0280d2,eu-west-1,473.93,1014.28,540.35,18.581,92.91,105.91,447.44,434.44,yes
+SI-EP-EMS-R&D,cluster,cluster#471112794282#eu-central-1,67a9bd91-0edf-40f9-8429-e14f3707a750,eu-central-1,788.66,1089.42,300.77,9.435,47.17,53.78,253.59,246.99,yes
+SI-SI EP EMS FIN IT CSS-CTDM,CDM-EKS-Cluster,CDM-EKS-Cluster#758072121589#eu-central-1,b4ace8af-aecd-4561-85bb-3b08efe74437,eu-central-1,,,,,,,,,no
+Siemens Dev,pfm-eks-cluster,pfm-eks-cluster#955761008245#eu-west-1,de02aae4-1fd1-401a-ad47-345711d4d7b3,eu-west-1,905.78,1669.73,763.95,71.969,359.84,410.22,404.11,353.73,yes
+Siemens Dev,dev-vlab-cluster,dev-vlab-cluster#488218212374#eu-central-1,0528411e-4d89-4fcf-af04-1b496541025d,eu-central-1,306.85,495.18,188.34,,,,188.34,188.34,yes
+Siemens Dev,aks-castai-demo,d1bf9c35-07ac-4c4b-9d7a-ac41473c3b10,d1bf9c35-07ac-4c4b-9d7a-ac41473c3b10,westeurope,,,,,,,,,no
+Siemens Dev,dev,dev#153524503100#us-west-2,4dee25ab-9f1c-494f-bef0-b7190dddb3eb,us-west-2,,,,,,,,,no
+Siemens Dev,dev-vlab-cluster,dev-vlab-cluster#488218212374#ap-southeast-1,172021b8-c68a-4ddb-9658-01e4c44a561e,ap-southeast-1,,,,,,,,,no
+Siemens Dev,dev-vlab-cluster,dev-vlab-cluster#488218212374#us-west-2,83d2c65c-e0d7-46db-8bb8-bf5f0d368754,us-west-2,,,,,,,,,no
+Siemens Dev,shared-services-us-east-1-eks,shared-services-us-east-1-eks#354567316383#us-east-1,91649234-53f9-44b1-a883-5eae8fe0afbe,us-east-1,,,,,,,,,no
+Siemens Dev,sp-tofu-simple,sp-tofu-simple#027851298014#eu-central-1,dac52e3e-1576-479c-b61e-f33589de026f,eu-central-1,,,,0.000,0.00,0.00,,,no
+SiePortal,mallprod-euwe1-100195-01-blue-mc,dacd06e7-b50e-4754-bd62-877abc645116,dacd06e7-b50e-4754-bd62-877abc645116,westeurope,,,,,,,,,no
+SiePortal,mallprod-euwe1-100195-01-green-mc,5f6a2f04-3875-409e-a54e-475ba0dc3536,5f6a2f04-3875-409e-a54e-475ba0dc3536,westeurope,,,,,,,,,no
+SiePortal,mallqa-euwe1-100195-01-blue-mc,d532ceed-013a-4e78-bf38-aa967ed540ae,d532ceed-013a-4e78-bf38-aa967ed540ae,westeurope,,,,,,,,,no
+SiePortal,mallqa-euwe1-100195-01-green-mc,ed332354-a655-45d4-af62-30dae157bb98,ed332354-a655-45d4-af62-30dae157bb98,westeurope,,,,,,,,,no
+SiePortal,mallsbox100195blue,c9ea106b-512a-4d17-a805-b7565c5e2dd5,c9ea106b-512a-4d17-a805-b7565c5e2dd5,westeurope,,,,,,,,,no
+SiePortal,mallsbox100195green,772676f3-6d69-414f-b831-63d8de1546e8,772676f3-6d69-414f-b831-63d8de1546e8,westeurope,,,,,,,,,no
+SiePortal,rproxyprod-euwe1-100708-01-blue-mc,ceebaf20-6463-437e-bf1b-28bdf245f897,ceebaf20-6463-437e-bf1b-28bdf245f897,westeurope,,,,,,,,,no
+SiePortal,rproxyprod-euwe1-100708-01-green-mc,27c3fbb7-dd62-4040-9441-c268a063afc4,27c3fbb7-dd62-4040-9441-c268a063afc4,westeurope,,,,,,,,,no
+SiePortal,rproxyqa-euwe1-100708-01-blue-mc,79828df6-8410-49d0-b5a3-454222d5a64d,79828df6-8410-49d0-b5a3-454222d5a64d,westeurope,,,,,,,,,no
+SiePortal,rproxyqa-euwe1-100708-01-green-mc,180e18b9-0a9c-4f0e-9a35-4145798be779,180e18b9-0a9c-4f0e-9a35-4145798be779,westeurope,,,,,,,,,no
+SiePortal,rproxysbox100708blue,028c4376-8af3-4674-bc4a-a5c3db1b3504,028c4376-8af3-4674-bc4a-a5c3db1b3504,westeurope,,,,0.000,0.00,0.00,,,no
+SiePortal,rproxysbox100708green,8bfdba94-15a2-439b-8a4f-498e45ef1d62,8bfdba94-15a2-439b-8a4f-498e45ef1d62,westeurope,,,,,,,,,no
+SiePortal,sieportalprod-euwe1-100188-01-blue-mc,66cf9eff-5864-452a-a886-7496bd6fe7c8,66cf9eff-5864-452a-a886-7496bd6fe7c8,westeurope,,,,,,,,,no
+SiePortal,sieportalprod-euwe1-100188-01-green-mc,c4de1c87-2373-4dc6-b5b3-77baea247f3f,c4de1c87-2373-4dc6-b5b3-77baea247f3f,westeurope,,,,,,,,,no
+SiePortal,sieportalqa-euwe1-100188-01-blue-mc,65d298c2-b28f-450b-a754-ac621076125f,65d298c2-b28f-450b-a754-ac621076125f,westeurope,,,,,,,,,no
+SiePortal,sieportalqa-euwe1-100188-01-green-mc,64d18bf6-9789-4252-aa77-e6226d7740d7,64d18bf6-9789-4252-aa77-e6226d7740d7,westeurope,,,,,,,,,no
+SiePortal,sieportalsbox100188blue,7cb4d31e-ce8c-4f40-9276-b2586578dd92,7cb4d31e-ce8c-4f40-9276-b2586578dd92,westeurope,,,,,,,,,no
+SiePortal,sieportalsbox100188green,86e49019-e316-4d92-b8d1-9af8623e3f1c,86e49019-e316-4d92-b8d1-9af8623e3f1c,westeurope,,,,,,,,,no
+SiePortal,siosprod-euwe1-100320-01-blue-mc,a35c3b26-da1a-4223-bf6d-7850a42a824b,a35c3b26-da1a-4223-bf6d-7850a42a824b,westeurope,,,,,,,,,no
+SiePortal,siosprod-euwe1-100320-01-green-mc,3f99feb3-28a0-4a1d-b596-c057683045c1,3f99feb3-28a0-4a1d-b596-c057683045c1,westeurope,,,,,,,,,no
+SiePortal,siosqa-euwe1-100320-01-blue-mc,42f33a8f-d6dc-4c3a-acad-e679123b939c,42f33a8f-d6dc-4c3a-acad-e679123b939c,westeurope,,,,,,,,,no
+SiePortal,siosqa-euwe1-100320-01-green-mc,164913a8-a215-43c7-9d38-cae10f830b67,164913a8-a215-43c7-9d38-cae10f830b67,westeurope,,,,,,,,,no
+SiePortal,toolingprod-euwe1-100786-01-blue-mc,32340d3c-5c5c-4887-a7cb-fcfbf779e462,32340d3c-5c5c-4887-a7cb-fcfbf779e462,westeurope,,,,,,,,,no
+SiePortal,toolingprod-euwe1-100786-01-green-mc,1adce851-4a4f-4f78-bcf5-f825aaa96d48,1adce851-4a4f-4f78-bcf5-f825aaa96d48,westeurope,,,,,,,,,no
+SiePortal,toolingqa-euwe1-100786-01-blue-mc,badc4a28-8c0a-4ce0-8951-7db286b0d173,badc4a28-8c0a-4ce0-8951-7db286b0d173,westeurope,,,,,,,,,no
+SiePortal,toolingqa-euwe1-100786-01-green-mc,17641bc9-9aa6-47ba-9365-97ff5ec3f3ae,17641bc9-9aa6-47ba-9365-97ff5ec3f3ae,westeurope,,,,,,,,,no
+SiePortal,toolingsbox100786blue,a87dbfd1-df28-4285-9be5-a8d7f61787c7,a87dbfd1-df28-4285-9be5-a8d7f61787c7,westeurope,,,,,,,,,no
+SiePortal,toolingsbox100786green,51368361-0714-48f4-8714-6924102d7c16,51368361-0714-48f4-8714-6924102d7c16,westeurope,,,,,,,,,no
+SMO CS DS EAM - CORMAP,cormap-utilities-eks,cormap-utilities-eks#872515263587#eu-central-1,3d1340c5-8316-417f-b108-2a8cda7f288c,eu-central-1,,,,,,,,,no
+SMO NEE RC-CH RI ADC 4 3,trackops-new,trackops-new#174252647481#eu-central-1,e4d86f6e-8076-423e-9a28-43f3514d755e,eu-central-1,,,,,,,,,no
+SMO Railigent X,k8s-andreas,k8s-andreas#484253082938#eu-central-1,d03690cb-2ba4-4ff5-9519-27013515aba7,eu-central-1,753.89,159492.01,158738.12,45.247,226.23,257.91,158511.88,158480.21,yes
+SMO Railigent X,k8s,k8s#180820707530#ap-south-1,5771ec22-fb0e-4fd8-a73a-fdf451ab0741,ap-south-1,560.77,560.77,0.00,,,,0.00,0.00,yes
+SMO Railigent X,k8s,k8s#459423884365#eu-central-1,cf62a8e1-1f1e-40dc-bd90-1b5c84dfa9df,eu-central-1,16895.06,16895.06,0.00,35.319,176.60,201.32,-176.60,-201.32,yes
+SMO Railigent X,k8s,k8s#676024189872#eu-central-1,0e277bb2-036d-485f-8690-4bf22720af9f,eu-central-1,560.91,560.91,0.00,,,,0.00,0.00,yes
+SMO Railigent X,k8s,k8s#251646500960#ap-south-1,7eb37770-9c35-460d-a896-910949ae0ea6,ap-south-1,477.88,477.88,0.00,2.732,13.66,15.57,-13.66,-15.57,yes
+SMO Railigent X,k8s,k8s#353401772001#eu-central-1,f8dd5b4f-3cf4-48e2-b453-7be4562e36cb,eu-central-1,544.25,544.25,0.00,,,,0.00,0.00,yes
+SMO Railigent X,k8s,k8s#524840132901#eu-central-1,d0c7a7a5-72d2-4c09-a9f6-1b173c64d0a8,eu-central-1,18790.17,18790.17,0.00,47.837,239.19,272.67,-239.19,-272.67,yes
+SMO Railigent X,k8s,k8s#978814483201#eu-central-1,4952c4ce-6a3a-44f4-9b3c-9794ca9ddbc9,eu-central-1,24289.92,24289.92,0.00,1073.157,5365.78,6116.99,-5365.78,-6116.99,yes
+SMO Railigent X,rhx-test,35c0f9b5-25f1-49bb-aa2a-ec49915352b3,35c0f9b5-25f1-49bb-aa2a-ec49915352b3,unknown,,,,,,,,,no
+SMO Railigent X,staging,staging#978814483201#eu-central-1,ae3e22a4-6e7a-487d-9c95-2c0fb3bb8f35,eu-central-1,1225.99,1225.99,0.00,61.177,305.88,348.71,-305.88,-348.71,yes
+SMO-RI-CSX-CS,csx-amparo-test,csx-amparo-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,d3e43266-2892-4915-911e-f5c731bd8af6,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-anitha-test,csx-anitha-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,75dd56a5-9275-43e6-ba61-27d77484c47a,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-ashik-devops,csx-ashik-devops#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,53b50b4a-6fab-48d2-894f-f037a94da7a7,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-ashish-devops,csx-ashish-devops#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,d307c10c-b1b1-46ba-829b-bde3adbec693,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-carlos-test,csx-carlos-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,5a4e397f-0180-4d28-9bbd-6d40f6c45168,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-chaitanya-test,csx-chaitanya-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,ba441a9f-608e-4892-88c1-1bad6876344c,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-demo,csx-demo#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,513dbd8a-a053-4462-a831-655d5fc06983,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-dev-chessie,csx-dev-chessie#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,c2dcb472-20f5-4989-92e6-cbf60c27356c,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-dev-yardbirds,csx-dev-yardbirds#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,2a037afa-b894-470d-8129-faeed984eac6,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-eva-test,csx-eva-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,33c66e64-8384-49b8-b0c9-dbb26c7c29cd,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-georgi-vnv,csx-georgi-vnv#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,5377fe69-c0d2-428f-8366-1a3c79e834d6,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-jenny-test,csx-jenny-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,ac746b18-7800-46ff-b5e7-9a068ab59d9b,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-mathias-test,csx-mathias-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,86ceae63-3cc4-434a-8bc2-30e8813dd8b8,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-mike-test,csx-mike-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,b5fed326-33d7-400e-a332-9f43e890b87f,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-parisa-test,csx-parisa-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,4d239b69-3264-4484-af4a-7fe84c314607,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-patrick-test,csx-patrick-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,68fb4764-a9a8-4cb7-9411-b467ff9a98fd,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-performance-test,csx-performance-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,fb9fb11b-10a1-438f-9a16-eb3652ab02f8,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-pradeep-test,csx-pradeep-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,fa02c361-3bde-49b5-ac9f-18ed832d581f,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-production-replica,csx-production-replica#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,b8210d72-1d68-403f-8ead-ec30cefa0b0b,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-raghu-test,csx-raghu-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,6eb615cc-411c-46bd-885e-33aa64a012ec,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-simulator-test,csx-simulator-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,8746020f-90ed-4a8e-af38-f2e1f4d090f2,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-snigdha-devops,csx-snigdha-devops#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,9b5e6c1c-90ed-406c-b16c-d2ff49c7aac2,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-spain-1-test,csx-spain-1-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,94ce07dc-9574-4e9e-a800-63077c8ea7a9,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-spain-2-test,csx-spain-2-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,ddb8ead4-6b5a-463b-b26d-e22022dbb4c0,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-spain-3-sim-test,csx-spain-3-sim-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,673d43a9-591a-487e-a9dd-6681eee0f10c,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-spain-4-sim-test,csx-spain-4-sim-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,6f429916-c02a-4193-a011-e3efcbddae42,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-spain-5-test,csx-spain-5-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,c5b1e9d8-b0a6-47bf-9cc5-b6bc6bc83afb,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-sreerag-test,csx-sreerag-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,b99217e7-11c0-404b-aef3-1b65b99329bd,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-sunil-test,csx-sunil-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,d9874265-f331-43cb-812c-2c63d419faa8,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,csx-yogesh-test,csx-yogesh-test#af2d8d06-0f87-44bd-885e-518a235f26e4#eastus,6e4a27ed-598f-4d6c-b5b2-af695188b6eb,eastus,,,,,,,,,no
+SMO-RI-CSX-CS,gitlab-runner-cs-services,gitlab-runner-cs-services#883153402843#us-east-1,6935071e-885e-4a18-bbe0-addf4b64ae17,us-east-1,,,,,,,,,no
+SMO-RI-CSX-CS,gitlab-runner-eks,gitlab-runner-eks#883153402843#us-east-1,67b85f02-b73c-49da-b8f4-8699ae8e6184,us-east-1,,,,,,,,,no
+SMO-RI-CSX-CS,sunil-2-tst,sunil-2-tst#883153402843#us-east-1,e6aabe1a-54f4-47c0-9ca4-16a1b84f1099,us-east-1,,,,,,,,,no
+SMO-RI-CSX-CS,ui-automation,ui-automation#883153402843#us-east-1,16eee82f-5cbe-4e80-a85e-982ac3a4da23,us-east-1,,,,,,,,,no
+SMO-RS-EEC-EN-CCI-DE-CD-Kodex,eks-tools,eks-tools#835807883543#eu-central-1,43c58c97-3565-473d-8b87-6c8e49cbad0c,eu-central-1,,,,,,,,,no
+SMO-SW-MAAS-HACON-TEC-OBS-ANALTICS,cnpg-poc-cluster,cnpg-poc-cluster#698715940080#eu-central-1,8b295cd2-ba61-4ed2-abc7-498d2d7cc013,eu-central-1,,,,,,,,,no
+SMO-SW-PDH-TPS,eks-tpslive-dev,eks-tpslive-dev#522814722959#eu-central-1,d119d612-84ad-4c79-9992-a120b7206f15,eu-central-1,66.56,116.96,50.41,4.241,21.21,24.17,29.20,26.23,yes
+SMO-SW-PDH-TPS,tps-eks-cluster-master,tps-eks-cluster-master#730335428681#eu-central-1,2ec5dafa-7a81-44fe-b42f-16d4d9f4b76d,eu-central-1,,,,,,,,,no
+SPICE,spice-100794-sbox-tooling-01,spice-100794-sbox-tooling-01#305634968973#eu-central-1,8dbcf70a-ea6f-4059-90a1-2f6d9246a9c6,eu-central-1,,,,,,,,,no
+TeamLeonis,pssp-k8s-cluster,9f2969e9-3e86-4a17-8352-44f8d65e1e84,9f2969e9-3e86-4a17-8352-44f8d65e1e84,westeurope,,,,,,,,,no

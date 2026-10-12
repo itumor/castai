@@ -1,0 +1,46 @@
+{
+  "format": "xlsx",
+  "verdict": "pass",
+  "checks": [
+    {
+      "id": "package",
+      "status": "pass"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "SI GSW CLO"
+    },
+    {
+      "id": "contains",
+      "status": "pass",
+      "text": "SMO Railigent X"
+    },
+    {
+      "id": "count",
+      "status": "pass",
+      "expected": 3,
+      "actual": 3
+    }
+  ],
+  "summary": {
+    "sheets": [
+      {
+        "name": "Org roll-up",
+        "cells": 210,
+        "formulas": 0
+      },
+      {
+        "name": "All clusters",
+        "cells": 3753,
+        "formulas": 0
+      },
+      {
+        "name": "Notes & provenance",
+        "cells": 16,
+        "formulas": 0
+      }
+    ],
+    "formulas_evaluated": false
+  }
+}

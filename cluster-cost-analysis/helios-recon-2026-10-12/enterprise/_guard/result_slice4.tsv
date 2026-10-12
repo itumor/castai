@@ -1,0 +1,13 @@
+ORG_NAME	ORG_ID	CLUSTER_NAME	CLUSTER_UUID	ACCOUNT	REGION	HAS_VR	ACTUAL	PROJECTED	SAVINGS
+DI SW PRS AMER SLC 	82534a6e-c2fc-4fd5-ab88-4326966e37fb	Posit	893e4362-bb07-417a-b53c-f9b011b4240d	483428953713	us-east-1	no	-	-	-
+DI SW PRS AMER SLC 	82534a6e-c2fc-4fd5-ab88-4326966e37fb	SLC-SS	96b41307-2647-44ad-9185-da143f346928	483428953713	us-east-1	no	-	-	-
+DI-SW-RAPIDMINER-GRAPH	b8d883e1-295f-449a-839a-94b40b6d8025	graph-dev-qa-eks	49987821-c6b8-414a-8ec9-dd5b59d4042c	119233636320	us-east-1	no	-	-	-
+FT-FT RPD CED SSI-IIP	74f0fa85-eab8-4d16-b229-73d7e9e43337	CDM-EKS-Cluster	62aa894c-1d41-4a7a-98ed-e181e289e173	904494280429	eu-central-1	no	-	-	-
+IT DA PL IP - SDC.Streaming	58e0c2b6-bb36-4bf9-b99f-879fa1ebc52d	sdcstreaming-eks-cluster-dev	30861ed2-5d64-4c77-9f03-1f8b04eb2911	203918863837	eu-west-1	no	-	-	-
+IT DA PL IP - SDC.Streaming	58e0c2b6-bb36-4bf9-b99f-879fa1ebc52d	sdcstreaming-eks-cluster-prod	2e4161f0-7ec8-4641-aa5f-32a52dd32ccb	203918863837	eu-west-1	no	-	-	-
+IT DA PL IP - SDC.Streaming	58e0c2b6-bb36-4bf9-b99f-879fa1ebc52d	sdcstreaming-eks-cluster-qa	46aef6f3-c89e-4ece-a114-53d5b329cdea	203918863837	eu-west-1	no	-	-	-
+IT-APS-DEV-ACO	7fb85a13-7d1e-443f-bd19-1e2666a90fe3	grafana-poc	c368fd84-274b-47dd-bf2b-46394ce25f78	905418411996	eu-central-1	no	-	-	-
+IT-APS-DEV-ACO	7fb85a13-7d1e-443f-bd19-1e2666a90fe3	n8n	46d4d358-f816-4b89-a7ba-79f8feeeb84e	567316078005	eu-west-1	no	-	-	-
+Pillar#2	29b520aa-93fc-4413-bbb7-4fcf7fc0d766	console-eks-integ	cb5c93cd-1be6-4c00-8b58-ba292201d5d1	238720913587	us-east-1	no	-	-	-
+RC-IT DI S TSP ARCH	0ef32d6e-6463-4072-8361-608a33a4d07a	eks-iem-ita	151856f9-7a15-4a05-8cdb-37bd441242ae	009234154371	eu-south-1	no	-	-	-
+SI-SI EP EMS FIN IT CSS-CTDM	4a3db23d-5e70-42a5-9d61-145128ec4917	CDM-EKS-Cluster	b4ace8af-aecd-4561-85bb-3b08efe74437	758072121589	eu-central-1	no	-	-	-

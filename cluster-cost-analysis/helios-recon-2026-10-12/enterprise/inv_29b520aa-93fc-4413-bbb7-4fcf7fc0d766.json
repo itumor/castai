@@ -1,0 +1,44 @@
+{
+  "items": [
+    {
+      "id": "cb5c93cd-1be6-4c00-8b58-ba292201d5d1",
+      "name": "console-eks-integ",
+      "organizationId": "29b520aa-93fc-4413-bbb7-4fcf7fc0d766",
+      "credentialsId": "",
+      "createdAt": "2026-08-17T12:13:00.624334Z",
+      "region": {
+        "name": "us-east-1",
+        "displayName": "US East (N. Virginia)"
+      },
+      "status": "ready",
+      "agentSnapshotReceivedAt": null,
+      "agentStatus": "waiting-connection",
+      "providerType": "eks",
+      "tags": {},
+      "eks": {
+        "clusterName": "console-eks-integ",
+        "region": "us-east-1",
+        "accountId": "238720913587",
+        "assumeRoleArn": "",
+        "subnets": [],
+        "securityGroups": [],
+        "instanceProfileArn": "",
+        "tags": {},
+        "dnsClusterIp": ""
+      },
+      "subnets": [],
+      "zones": [],
+      "clusterNameId": "console-eks-integ-cb5c93cd",
+      "allRegionZones": [],
+      "providerNamespaceId": "238720913587",
+      "managedBy": "console",
+      "firstOperationAt": null,
+      "reconcileInfo": {
+        "errorCount": 0,
+        "mode": "paused"
+      },
+      "isPhase2": false,
+      "castwareInstallMethod": "CASTWARE_INSTALL_METHOD_UNSPECIFIED"
+    }
+  ]
+}

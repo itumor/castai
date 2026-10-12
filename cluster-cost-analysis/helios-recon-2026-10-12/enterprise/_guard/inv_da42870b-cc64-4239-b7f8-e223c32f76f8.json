@@ -1,0 +1,192 @@
+{
+  "items": [
+    {
+      "id": "598b4c17-3950-4578-8691-9ca4d2da8d74",
+      "name": "eks-cluster",
+      "organizationId": "da42870b-cc64-4239-b7f8-e223c32f76f8",
+      "credentialsId": "",
+      "createdAt": "2026-10-01T12:51:03.025227Z",
+      "region": {
+        "name": "eu-central-1",
+        "displayName": "EU (Frankfurt)"
+      },
+      "status": "ready",
+      "agentSnapshotReceivedAt": "2026-10-12T13:59:16.818173Z",
+      "agentStatus": "online",
+      "providerType": "eks",
+      "tags": {},
+      "eks": {
+        "clusterName": "eks-cluster",
+        "region": "eu-central-1",
+        "accountId": "790776864453",
+        "assumeRoleArn": "",
+        "subnets": [],
+        "securityGroups": [],
+        "instanceProfileArn": "",
+        "tags": {},
+        "dnsClusterIp": ""
+      },
+      "subnets": [],
+      "zones": [],
+      "clusterNameId": "eks-cluster-598b4c17",
+      "allRegionZones": [],
+      "providerNamespaceId": "790776864453",
+      "managedBy": "console",
+      "firstOperationAt": null,
+      "reconcileInfo": {
+        "errorCount": 0,
+        "mode": "paused"
+      },
+      "isPhase2": false,
+      "castwareInstallMethod": "CASTWARE_INSTALL_METHOD_UNSPECIFIED",
+      "attributes": {
+        "karpenter": {
+          "version": "1.10.0",
+          "kentEligibility": "ELIGIBLE",
+          "controllerMode": "SELF_HOSTED"
+        }
+      }
+    },
+    {
+      "id": "b0c2741c-659d-4ebc-9ec9-9927c6719f9a",
+      "name": "eks-cluster",
+      "organizationId": "da42870b-cc64-4239-b7f8-e223c32f76f8",
+      "credentialsId": "",
+      "createdAt": "2026-10-01T12:48:46.333337Z",
+      "region": {
+        "name": "eu-central-1",
+        "displayName": "EU (Frankfurt)"
+      },
+      "status": "ready",
+      "agentSnapshotReceivedAt": "2026-10-12T13:58:41.459248Z",
+      "agentStatus": "online",
+      "providerType": "eks",
+      "tags": {},
+      "eks": {
+        "clusterName": "eks-cluster",
+        "region": "eu-central-1",
+        "accountId": "992382623068",
+        "assumeRoleArn": "",
+        "subnets": [],
+        "securityGroups": [],
+        "instanceProfileArn": "",
+        "tags": {},
+        "dnsClusterIp": ""
+      },
+      "subnets": [],
+      "zones": [],
+      "clusterNameId": "eks-cluster-b0c2741c",
+      "allRegionZones": [],
+      "providerNamespaceId": "992382623068",
+      "managedBy": "console",
+      "firstOperationAt": null,
+      "reconcileInfo": {
+        "errorCount": 0,
+        "mode": "paused"
+      },
+      "isPhase2": false,
+      "castwareInstallMethod": "CASTWARE_INSTALL_METHOD_UNSPECIFIED",
+      "attributes": {
+        "karpenter": {
+          "version": "1.14.1",
+          "kentEligibility": "ELIGIBLE",
+          "controllerMode": "SELF_HOSTED"
+        }
+      }
+    },
+    {
+      "id": "e76350af-1ffb-4849-84ad-8ac0838c6143",
+      "name": "eks-cluster",
+      "organizationId": "da42870b-cc64-4239-b7f8-e223c32f76f8",
+      "credentialsId": "",
+      "createdAt": "2026-10-01T12:45:05.901701Z",
+      "region": {
+        "name": "eu-central-1",
+        "displayName": "EU (Frankfurt)"
+      },
+      "status": "ready",
+      "agentSnapshotReceivedAt": "2026-10-12T13:58:43.650998Z",
+      "agentStatus": "online",
+      "providerType": "eks",
+      "tags": {},
+      "eks": {
+        "clusterName": "eks-cluster",
+        "region": "eu-central-1",
+        "accountId": "851725572881",
+        "assumeRoleArn": "",
+        "subnets": [],
+        "securityGroups": [],
+        "instanceProfileArn": "",
+        "tags": {},
+        "dnsClusterIp": ""
+      },
+      "subnets": [],
+      "zones": [],
+      "clusterNameId": "eks-cluster-e76350af",
+      "allRegionZones": [],
+      "providerNamespaceId": "851725572881",
+      "managedBy": "console",
+      "firstOperationAt": null,
+      "reconcileInfo": {
+        "errorCount": 0,
+        "mode": "paused"
+      },
+      "isPhase2": false,
+      "castwareInstallMethod": "CASTWARE_INSTALL_METHOD_UNSPECIFIED",
+      "attributes": {
+        "karpenter": {
+          "version": "1.14.1",
+          "kentEligibility": "ELIGIBLE",
+          "controllerMode": "SELF_HOSTED"
+        }
+      }
+    },
+    {
+      "id": "9d404cbd-46a1-46b3-a160-b9e046b80710",
+      "name": "eks-cluster",
+      "organizationId": "da42870b-cc64-4239-b7f8-e223c32f76f8",
+      "credentialsId": "",
+      "createdAt": "2026-10-01T12:41:41.413541Z",
+      "region": {
+        "name": "eu-central-1",
+        "displayName": "EU (Frankfurt)"
+      },
+      "status": "ready",
+      "agentSnapshotReceivedAt": "2026-10-12T13:58:39.168577Z",
+      "agentStatus": "online",
+      "providerType": "eks",
+      "tags": {},
+      "eks": {
+        "clusterName": "eks-cluster",
+        "region": "eu-central-1",
+        "accountId": "851725647785",
+        "assumeRoleArn": "",
+        "subnets": [],
+        "securityGroups": [],
+        "instanceProfileArn": "",
+        "tags": {},
+        "dnsClusterIp": ""
+      },
+      "subnets": [],
+      "zones": [],
+      "clusterNameId": "eks-cluster-9d404cbd",
+      "allRegionZones": [],
+      "providerNamespaceId": "851725647785",
+      "managedBy": "console",
+      "firstOperationAt": null,
+      "reconcileInfo": {
+        "errorCount": 0,
+        "mode": "paused"
+      },
+      "isPhase2": false,
+      "castwareInstallMethod": "CASTWARE_INSTALL_METHOD_UNSPECIFIED",
+      "attributes": {
+        "karpenter": {
+          "version": "1.14.1",
+          "kentEligibility": "ELIGIBLE",
+          "controllerMode": "SELF_HOSTED"
+        }
+      }
+    }
+  ]
+}
