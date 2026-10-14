@@ -43,6 +43,8 @@ and engineering support operation.
 
 ## Key knowledge notes
 
+- [[Siemens People]] — stakeholder roster; standing prefs (e.g. Sergej: CC on
+  all REST API threads)
 - [[Siemens Fleet]] — live fleet facts, top orgs, agent health
 - [[SI GSW ngm Cost Case]] — ngm-helios-eks / ngm-integ-eks high-cost analysis:
   billable-CPU basis verified; levers are 0% spot + over-requested workloads
