@@ -1,0 +1,15 @@
+{
+  "name": "castai-superteam",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CAST AI Superteam — supervisor-led DSH agent team (cost, cluster health, support triage, docs/memory, MCP/API ops) with installable preset and self-contained role files.",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "test": "node scripts/check-blueprint.mjs",
+    "install:dsh": "node scripts/install-dsh-preset.mjs"
+  },
+  "license": "UNLICENSED"
+}

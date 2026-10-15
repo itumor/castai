@@ -1,0 +1,4 @@
+interface:
+  default_prompt: Investigate a CAST AI issue with read-only checks and official references.
+  display_name: CAST AI Support Engineer v2
+  short_description: Evidence-based CAST AI troubleshooting with 9 focused skills

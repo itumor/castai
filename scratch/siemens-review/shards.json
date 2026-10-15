@@ -1,0 +1,308 @@
+{
+ "shard1": [
+  {
+   "orgId": "f2806a31-e339-4309-ba5a-e2518d1623d8",
+   "orgName": "SMO-RI-CSX-CS",
+   "clusters": 34
+  }
+ ],
+ "shard2": [
+  {
+   "orgId": "fc21737c-0c72-4cd0-b4bf-1236e5e4a73a",
+   "orgName": "SiePortal",
+   "clusters": 28
+  },
+  {
+   "orgId": "a414d7cc-c2bf-4e6e-9591-ca75f26a0ccf",
+   "orgName": "SMO-SW-PDH-TPS",
+   "clusters": 2
+  },
+  {
+   "orgId": "61dac8dd-277d-4f65-99ee-3cb22c290a44",
+   "orgName": "LCB-IT",
+   "clusters": 1
+  },
+  {
+   "orgId": "4a3db23d-5e70-42a5-9d61-145128ec4917",
+   "orgName": "SI-SI EP EMS FIN IT CSS-CTDM",
+   "clusters": 1
+  },
+  {
+   "orgId": "0f1cfff3-e3c2-4363-b5ae-a61d168f1308",
+   "orgName": "DI FA HMI URT PRC2",
+   "clusters": 1
+  },
+  {
+   "orgId": "e649ef84-37ee-47a1-b4fc-91a54f00182e",
+   "orgName": "FT-RDP-SSP-DEVOPSFF-EKS-DEV",
+   "clusters": 1
+  }
+ ],
+ "shard3": [
+  {
+   "orgId": "c67df1a0-06e0-46f9-a84e-27c14958d564",
+   "orgName": "IT IPS",
+   "clusters": 25
+  },
+  {
+   "orgId": "5e413e89-eb67-48fb-b81c-6172baa988ed",
+   "orgName": "CPS",
+   "clusters": 2
+  },
+  {
+   "orgId": "ebb6beff-3cce-4ef2-929d-d32719d80fd5",
+   "orgName": "APM0029033 - CIC API Management - KONG",
+   "clusters": 2
+  },
+  {
+   "orgId": "2b9d9744-f37d-4a22-b9c6-2f1857a5417d",
+   "orgName": "IT DF COL UC 2",
+   "clusters": 1
+  },
+  {
+   "orgId": "3d956ed7-719e-4438-99b6-7aa2a62c425b",
+   "orgName": "CYS - CNAPP",
+   "clusters": 1
+  },
+  {
+   "orgId": "3669a87b-bca6-47e9-bbb0-8a369bdadbe0",
+   "orgName": "DISW-SERVICES-LM",
+   "clusters": 1
+  },
+  {
+   "orgId": "667a7a84-854a-44a8-8705-e97a0dec27f3",
+   "orgName": "SI B SER DSC TEI CLO",
+   "clusters": 1
+  },
+  {
+   "orgId": "c92fab54-ba6b-41ee-bdc4-e7516759ec64",
+   "orgName": "TeamLeonis",
+   "clusters": 1
+  }
+ ],
+ "shard4": [
+  {
+   "orgId": "07aa3c29-3e1f-44bc-ad60-ceedb878d99a",
+   "orgName": "SI GSW CLO",
+   "clusters": 22
+  },
+  {
+   "orgId": "58e0c2b6-bb36-4bf9-b99f-879fa1ebc52d",
+   "orgName": "IT DA PL IP - SDC.Streaming",
+   "clusters": 3
+  },
+  {
+   "orgId": "7fb85a13-7d1e-443f-bd19-1e2666a90fe3",
+   "orgName": "IT-APS-DEV-ACO",
+   "clusters": 2
+  },
+  {
+   "orgId": "82534a6e-c2fc-4fd5-ab88-4326966e37fb",
+   "orgName": "DI SW PRS AMER SLC ",
+   "clusters": 2
+  },
+  {
+   "orgId": "b8d883e1-295f-449a-839a-94b40b6d8025",
+   "orgName": "DI-SW-RAPIDMINER-GRAPH",
+   "clusters": 1
+  },
+  {
+   "orgId": "74f0fa85-eab8-4d16-b229-73d7e9e43337",
+   "orgName": "FT-FT RPD CED SSI-IIP",
+   "clusters": 1
+  },
+  {
+   "orgId": "7f5ee921-030c-4a51-9b81-a6a4dc799f15",
+   "orgName": "SI-B-BTWIN",
+   "clusters": 1
+  },
+  {
+   "orgId": "2dafa4dc-9364-4bfb-8b9a-542fcdf3ac4f",
+   "orgName": "CASE",
+   "clusters": 1
+  },
+  {
+   "orgId": "29b520aa-93fc-4413-bbb7-4fcf7fc0d766",
+   "orgName": "Pillar#2",
+   "clusters": 1
+  }
+ ],
+ "shard5": [
+  {
+   "orgId": "7bff4bde-cc60-49a5-9402-85a04efcb90e",
+   "orgName": "SFS IT CDO",
+   "clusters": 16
+  },
+  {
+   "orgId": "ad02d1f6-14e2-4fbe-bb90-469b71335755",
+   "orgName": "DI FA DSP - DPP",
+   "clusters": 7
+  },
+  {
+   "orgId": "8ee5e5ee-b336-4faa-a484-3f822237d189",
+   "orgName": "DI SW PLM DM DDM",
+   "clusters": 3
+  },
+  {
+   "orgId": "6496eed4-60d7-4cac-bab2-5f2e422cec85",
+   "orgName": "APM0000770 - DUVE Web",
+   "clusters": 2
+  },
+  {
+   "orgId": "46ec1fa6-2521-4a17-8d27-aa0bc3e30599",
+   "orgName": "SI-EP-EMS-R&D",
+   "clusters": 2
+  },
+  {
+   "orgId": "1181330d-6e2a-4734-a75e-593b2ad606a9",
+   "orgName": "SMO CS DS EAM - CORMAP",
+   "clusters": 1
+  },
+  {
+   "orgId": "b23a67b1-11d9-4d51-8ee8-54b7fb94c3a4",
+   "orgName": "IT DA",
+   "clusters": 1
+  },
+  {
+   "orgId": "4ceb3f2b-e108-4f55-8353-4a439602e8f1",
+   "orgName": "SMO NEE RC-CH RI ADC 4 3",
+   "clusters": 1
+  }
+ ],
+ "shard6": [
+  {
+   "orgId": "3d933189-4e1d-42ee-9cca-f7458e8fadab",
+   "orgName": "HAFAS H&O",
+   "clusters": 13
+  },
+  {
+   "orgId": "43b8288a-7bc4-4f6b-a008-dcd9e1d5e7d2",
+   "orgName": "Siemens Dev",
+   "clusters": 8
+  },
+  {
+   "orgId": "da42870b-cc64-4239-b7f8-e223c32f76f8",
+   "orgName": "APM0414470 - SiBase X",
+   "clusters": 4
+  },
+  {
+   "orgId": "b6a79c03-59eb-4823-8686-ca552b850f3e",
+   "orgName": "Botanica",
+   "clusters": 2
+  },
+  {
+   "orgId": "df2e906b-1942-47c3-9ff4-6e8d9304612c",
+   "orgName": "FT FDS CDS",
+   "clusters": 2
+  },
+  {
+   "orgId": "266bd590-8f05-4d3c-80d8-8170db62f74b",
+   "orgName": "DI IT DEX CLD",
+   "clusters": 1
+  },
+  {
+   "orgId": "87908a9e-4599-4087-a7f2-58a60e78b8da",
+   "orgName": "DAI-R-SMR",
+   "clusters": 1
+  },
+  {
+   "orgId": "368d8ecf-b94f-46e3-a17a-a1e7fe594fc4",
+   "orgName": "APM0423755 - Azure Platform Service",
+   "clusters": 1
+  },
+  {
+   "orgId": "6a4fff8c-c6f6-44a2-88fb-03c0e3640842",
+   "orgName": "FT D AA IN SGI EA ECO",
+   "clusters": 1
+  }
+ ],
+ "shard7": [
+  {
+   "orgId": "fc1285f2-f5fb-4e33-8675-9e43142cf6f2",
+   "orgName": "DDI SW MNDX PRO&TECH",
+   "clusters": 12
+  },
+  {
+   "orgId": "fce58d3c-0345-465e-9257-f5c31f29a810",
+   "orgName": "Pillar#1",
+   "clusters": 9
+  },
+  {
+   "orgId": "259169ff-616b-4c53-9641-ae46235ace26",
+   "orgName": "SI EA electrificationx",
+   "clusters": 3
+  },
+  {
+   "orgId": "8fff8757-1656-4d09-80c3-ccedc3302ef8",
+   "orgName": "DAI R SDE",
+   "clusters": 3
+  },
+  {
+   "orgId": "c15c4c5b-211a-4489-be4c-913936b1c113",
+   "orgName": "APM0006869 - PKN - Product Knowledge Network",
+   "clusters": 2
+  },
+  {
+   "orgId": "ac3cfa8c-c094-4f06-b96a-6aa86f218e66",
+   "orgName": "evosoft IT MIS",
+   "clusters": 1
+  },
+  {
+   "orgId": "86b32a7a-c4e8-4070-91f6-12c1ed5c388b",
+   "orgName": "APM0271596 - PSE Consulting",
+   "clusters": 1
+  },
+  {
+   "orgId": "fceff786-03f9-4d22-80be-5eda2b16b223",
+   "orgName": "SPICE",
+   "clusters": 1
+  },
+  {
+   "orgId": "d7534e71-612b-4963-89c8-22304c7a9d3d",
+   "orgName": "DI AUT PI APF",
+   "clusters": 1
+  }
+ ],
+ "shard8": [
+  {
+   "orgId": "f872efe0-08ae-47df-b5ff-1e84187f8d72",
+   "orgName": "SI B SW",
+   "clusters": 10
+  },
+  {
+   "orgId": "f15f33b9-20ad-4128-8289-da529844d3f0",
+   "orgName": "SMO Railigent X",
+   "clusters": 10
+  },
+  {
+   "orgId": "9422d16a-1054-4028-b532-d1bbf0f83cc5",
+   "orgName": "FT FDS CES",
+   "clusters": 6
+  },
+  {
+   "orgId": "ca1dddf7-a0fa-41a5-be72-8d6afe2559ac",
+   "orgName": "APM0002714 - GSP Kafka",
+   "clusters": 2
+  },
+  {
+   "orgId": "84e3a4cf-fae5-4bb7-a0eb-d6f16d9423c2",
+   "orgName": "APM0022732 - PCIS - Product Class Infostructure",
+   "clusters": 2
+  },
+  {
+   "orgId": "8575966e-dc88-4fb7-b15d-66671f8bc3e2",
+   "orgName": "SMO-SW-MAAS-HACON-TEC-OBS-ANALTICS",
+   "clusters": 1
+  },
+  {
+   "orgId": "c0326d64-8b06-4c49-8b1e-fa806fce3bbc",
+   "orgName": "SMO-RS-EEC-EN-CCI-DE-CD-Kodex",
+   "clusters": 1
+  },
+  {
+   "orgId": "0ef32d6e-6463-4072-8361-608a33a4d07a",
+   "orgName": "RC-IT DI S TSP ARCH",
+   "clusters": 1
+  }
+ ]
+}

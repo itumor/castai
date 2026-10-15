@@ -1,0 +1,49 @@
+Meeting prep pack — Friday, October 16, 2026 (5 meetings)
+Prepared Thu Oct 15 evening · All facts verified live (GET-only CAST AI EU API, api.eu.cast.ai, pulls 16:59–17:03 UTC) + Granola notes/transcripts + repo case docs.
+Attached: (1) PDF — full 30-page pack with participant tables, ~45 quotable questions, risk flags, per-meeting tonight-checklists and sources; (2) full markdown source. This email = the digest. Quote API numbers with their pull timestamps.
+
+──────────────────────────────────────
+09:30 · Cast AI & Siemens — Org Structure
+──────────────────────────────────────
+STATE: 127 child orgs as of TODAY (was 126: "FT D AA IN SGI EA ECO" created this morning 09:46Z — live proof that drift outruns manual tagging). ZERO user groups exist at the Siemens enterprise level — BU-group design is greenfield. Org objects have no tag/property field yet → BU property is net-new schema. Analyst role confirmed live (id 7c22c519-a9e7-4f58-90bd-af861d932033). Sep-8 agreement verified in transcript: flat structure, mandatory BU tag, Analyst = FinOps-champion role (Bosko verbatim: "perfectly match"), discounts propagate from enterprise, bulk backfill needed. Two delivery paths from the Oct-14 internal sync: (1) pipeline hook in John's self-service portal — executable NOW with today's public APIs (POST /v1/organizations/{orgId}/role-bindings exists in the public spec); (2) fine-grained service accounts multi-org-scoped — preferred end-state, NOT built.
+⚠ Aleksy's role-binding API validation + Renata's fine-grained-SA timeline were due today — NO recorded outcome. Chase both tonight = prep item #1.
+ASK: lock the BU enum + its owner · who supplies the BU→org backfill mapping (name-parsing fails: 10 APM-numbered orgs incl. template "APMXXXX - APP NAME") · Application ID field: mandatory/unique/CMDB-validated? · which delivery path · Viewer vs Analyst cost visibility · weekly untagged-org report as interim.
+
+──────────────────────────────────────
+10:30 · Cast AI 1 to 1 | IT DF COL UC 2 — Weekly Follow Up (#5)
+──────────────────────────────────────
+STATE (live): cluster siemenstest-siemenstest-1 (36575565-…, EKS, eu-west-1, acct 951463557399), agent ONLINE, reconcile OK, phase-2 done — strong signal the Oct-9 final Helm run completed. BUT 0 of 6 nodes CAST AI-managed → installed, not configured; tomorrow's walkthrough IS the job. Samuel's confirmation email never arrived (searched). Deployer role: siemenstest-siemenstest-ir-admin. Full 31-action operator IAM preflight list + observed extras (iam:TagInstanceProfile/TagRole/RemoveRoleFromInstanceProfile/DetachRolePolicy/DeleteRole) extracted from the official onboarding script — prevents the hand-built-policy churn that caused 3 mid-install failures on Oct 9.
+ASK: did the final run finish green? · authoritative AWS profile/region (kill the split-profile problem) · who holds console access — invite Samuel · prod IAM boundary/SCP diff review · prod target date · rotate token before prod (shared in chat twice).
+TONIGHT: mint fresh cluster token · stage paste-ready IAM policy JSON · conservative first-activation scope (spot/rebalance/hibernation OFF, startup delay ON, StatefulSets excluded).
+
+──────────────────────────────────────
+12:30 · SIEMENS x Cast AI | SMO Railigent X — Alignment & Next Steps
+──────────────────────────────────────
+STATE (live): org f15f33b9, 10 clusters (9 EKS online + rhx-test disconnected since Jun 20 = cleanup candidate). Sept actual spend verified: $73,434.94 total; top-3 (4952c4ce $26.7K, d0c7a7a5 $20.7K, cf62a8e1 $19.0K) ≈ 90%. WOOP track is the clean one: 9/10 clusters have NO baseline record (pure WOOP), classic savings API 400s on all 10 by design. $8,513.97 Sept WOOP (8 clusters) = email-source, not GET-verifiable (VR report is POST-only) — corroborated: $8,983.35 across 9 clusters 30d (Oct-08 pull), $8,363.90 excl. k8s-andreas; 12m cumulative WOOP $28,900.31. k8s-andreas CSU-6233 fix VERIFIED LIVE: ×169.58→×1.88 CPU, CLUSTER_HISTORY, recalculated Oct-14 12:29Z. Andreas Schieb verified via cluster tags as the WOOP activation driver. 7/9 clusters on stale WOOP agent v1.2.5 (v1.14.1 unlocks scoped recommendations). Azure track: 1st test cluster connected Oct 14, 28 pending (CASTAI_IMPERSONATE workaround, no GA date).
+ASK: which number do you put your name to · pilot nomination (suggest staging ae3e22a4 ~$1.9K/mo or f8dd5b4f preprod) · time-off dates + PoC matrix · agent v1.14.1 upgrade owner · include WOOP figure in management report on VR basis? · WOOP-only billing basis · offboard rhx-test?
+⚠ NEVER sum WOOP + node savings (totalSavings == autoscalerSavings). Never quote k8s-andreas pre-fix figures. Don't sell RAM savings on 4952c4ce/d0c7a7a5 (VPA upsized RAM by design).
+
+──────────────────────────────────────
+15:00 · CAST AI 1 to 1 | APM0414470 SiBase X — Follow Up #3
+──────────────────────────────────────
+STATE (live): 4 EKS clusters in org da42870b, all eu-central-1, all read-only (reconcile paused), connected Oct 1. Karpenter SELF_HOSTED on all 4 (1× v1.10.0, 3× v1.14.1) — 3/4 need no upgrade for the Karpenter-Enterprise path. Live gap verified: 304 vCPU provisioned / 177 requested / 111 used = 36% CPU utilization (RAM 48%); worst cluster runs 3.5% of provisioned (already 100% Spot). Estimated savings live: current $8,984.77/mo → −28.2% Layman (~$2,531/mo) → −70.2% SpotOnly. 4 integration options defined Sep-28 with Fabian. ⚠ Sept-30 incident reconstructured: full Karpenter replacement caused ~25-min outage (undersized 2–4 vCPU nodes, no min-CPU constraint) → management rollback → lead with Option 2+3, full replacement only after pilot + min-CPU≥16 + engineering ticket closed. Image-signing requirements: no Granola record, no cosign/Notary page on docs.cast.ai → capture the 5 fields live on the call and log the support ticket same-day.
+ASK: did the security summary land — if not fill the 5 fields now (tool, key mgmt, verification point, admission controller+mode, registry allow-list) · Option 2+3 vs Option 4 for the non-prod benchmark · pilot cluster (avoid the all-Spot one + the v1.10.0 one) · success metrics + window · who owns Karpenter scale-down/rollback · JVM startup-delay policy needed?
+TONIGHT: ticket-template pre-filled (org + 4 cluster IDs) · Karpenter Enterprise docs links ready · re-pull numbers at 14:30 so they're <30 min old.
+
+──────────────────────────────────────
+17:00 · Cast AI Cluster Score Review
+──────────────────────────────────────
+STATE (live): numeric Cluster Score IS GET-able — GET /v1/cost-reports/clusters/{id}/summary → summary.clusterScore (corrects our repo notes; subscores still console-only, numeric efficiency score sits behind POST = blocked read-only). 64/65 clusters pulled: fleet max still exactly 7.9 (ngm-sim-eks, matches Sergej's Oct-9 number); reds at 1.1: clo-master, hermes-val, ngm-vsdev, ngm-vsinteg, iec-tcx-flat. LIVE: ngm-integ + ngm-kronos actively draining nodes at 17:00Z. Deep-red six return 400 "read-only" on savings API = posture, not failure — needs annotation. Evictor OFF verified live on vsinteg. September restated post-CSU-6233: $320,348.65 → $86,106.22 across 36 clusters; WOOP line $14,746.76 quoted separately (never summed). Fee basis: 8,275.94 billable vCPU ≈ €41,379.70 @ €5 (SI GSW) vs CPS 5%-of-positive-gross — never mix. Helios: classic $18,877.78 vs VR $6,667.82 both reproducible; $23.1K/mo potential, rebalance recommended but never executed; eleX01p VR-negative −$3,266.77.
+ASK: does the GET-able score unblock Sergej's automation or are subscores needed? · lock top-10 red list with named DRI + dates · annotate intentional opt-outs · integ/kronos as pilot evidence for scheduled rebalancing · Helios rebalance decision (pilot/window/owner) · quote Sept on restated basis only · score-alerting POC demo · who triggers baseline recalculation fleet-wide?
+TONIGHT: re-pull scores ~30 min before the call · confirm console==API score on Helios live · POC dry-run staged · CC Sergej on all API follow-ups (standing request).
+
+──────────────────────────────────────
+Cross-meeting watch-outs
+──────────────────────────────────────
+· Ahmed usually off Fridays — confirm coverage; escalation Aleksy (SA) → Carl (account).
+· Baseline staleness: every flagged baseline pre-dates the CSU-6233 fix → September anomalies repeat in October until recalculated; owner for fleet recalc is unassigned.
+· Never resurface the withdrawn ROI PDFs ($526,923/$357,285) in any customer context.
+· No spot/WOOP pitch to GSW R&D (ruled out Oct 9, on-prem parity); no list prices to Siemens management (billed basis only).
+· SALP-129 (Aleksy+Carl+Ebrahim): RCA + cluster-by-cluster walkthrough + get-well plan — ask status vs the 2–3 day estimate.
+
+Sources: Granola notes/transcripts (dea2cba7, 81b10bdc, db4f0e91, 056db3bf, f078d18a, 7e2eb50d, 899a37f7, ebb1cc5a, f96617c9, 150ba07d + more), CAST AI EU API live pulls 2026-10-15 16:59–17:03 UTC, .kimchi/docs case files. Full per-meeting source lists in the PDF.

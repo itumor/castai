@@ -225,3 +225,21 @@ Key facts:
 - The previous token stays valid for an extended period (observed ≥60 minutes).
 - Update every secret used by the topology, then restart every component.
 - Organization API keys are for management-API automation only, not as a replacement for the cluster token.
+
+---
+
+## 8. Email identity: CAST AI only
+
+For all work in this repository, use the user's **@cast.ai email address only**
+— never an email from any other company (previous employers, customer domains,
+or personal addresses).
+
+Applies to:
+
+- Drafting replies, ticket responses, and customer-facing communication.
+- Identifying the sender/owner in notes, docs, and commit metadata.
+- Any tool configuration or account lookup that asks for the user's email.
+
+If only a non-cast.ai address is available (e.g., pasted thread shows another
+company domain), do not swap it in — use the cast.ai address or ask the user
+to confirm which address is correct.

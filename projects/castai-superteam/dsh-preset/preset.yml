@@ -1,0 +1,6 @@
+name: CAST AI Superteam
+description: >-
+  Supervisor-led agent team for Siemens CAST AI operations: cost & savings,
+  cluster health, support triage, docs/memory, and MCP/API ops under one
+  coordinator. Read-only posture; spawns as a live DSH Agent Team from
+  projects/castai-superteam.

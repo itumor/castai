@@ -1,0 +1,69 @@
+org	cluster	cluster_id	isPhase2	kent_eligible	woopAdopted	autoscalerAdopted	baseline	actual_usd	vr_total_savings_usd	vr_woop_savings_usd	hibernation_usd	classic_savings_usd
+HAFAS H&O	eks	953f87e7-9175-435b-ad3b-1a3b8a4e7cad	True	False	True	True	OVERRIDDEN_DATA	12032.32	12060.0	1608.13	0	215.32
+CPS	dema-platform-services	5dc3bf31-a263-4c6b-88bb-e95b6403aa51	True	False	True	True	PEER_CLUSTERS	17039.56	11689.75	-80.91	0	1249.1
+SI GSW CLO	ngm-sim-eks	51dd234c-a5bf-4f99-a884-b79956de8f94	True	False	True	True	OVERRIDDEN_DATA	8052.36	11476.95	0	0	442.39
+SI GSW CLO	alliander-demo-eks	c686f800-f17f-4b9a-8b7e-7655f209e07f	False	False	False	True	PEER_CLUSTERS	3726.98	10092.38	0	0	
+SI GSW CLO	ngm-integ-eks	1ad1a0bf-defe-4f51-acea-cbebb3d3fc3f	True	False	True	True	CLUSTER_HISTORY	22047.12	8705.41	0	0	18512.46
+SI GSW CLO	ngm-helios-eks	419c39e4-66bf-4d61-b833-4562968a61c7	True	False	False	True	CLUSTER_HISTORY	45093.48	6667.82	0	0	18877.78
+IT IPS	pioneer-tcx	a4ee9bce-da9e-4cae-8eda-caeb0b5ab20a	True	False	True	True	CLUSTER_HISTORY	663.37	4422.66	71.48	3566.7	300.68
+SI GSW CLO	baseline-clo-eks	02810f4b-b793-4ef2-95f1-e902af61d9e3	True	False	True	True	CLUSTER_HISTORY	2550.32	3731.76	859.14	0	1350.9
+IT IPS	eleX01p	823f9475-109e-4a8a-bed1-c1fba8441882	True	False	False	True	CLUSTER_HISTORY	12913.98	-3266.77	0	0	6.65
+SI EA electrificationx	eks-Cluster1	f31e9de1-7884-470e-95ce-11c9f5dcfe0d	True	False	True	True	OVERRIDDEN_DATA	2977.04	2856.72	0	0	2726.45
+IT IPS	aks-dios-weu-prod-001	b5d4cd12-98b2-4e9f-90a1-4db0134337c4	True	False	True	True	PEER_CLUSTERS	2590.75	2697.92	6.48	0	264.55
+SI GSW CLO	ngm-kronos-eks	6d20eb8e-a1e5-4411-b4c8-5346ac3291b0	True	False	False	True	CLUSTER_HISTORY	1939.3	2551.78	0	0	3501.32
+SI GSW CLO	ngm-sim2-eks	8bd361b0-fcbf-491d-beac-af92fb7d6b46	True	False	True	True	CLUSTER_HISTORY	2051.52	1967.31	978.7	0	435.43
+HAFAS H&O	eks	22bf2472-d9ba-4cb3-b6ec-1f7aab50cb3f	True	False	True	True	OVERRIDDEN_DATA	769.52	1918.01	604.76	0	278.16
+SI EA electrificationx	eks-Cluster1	c6cdf969-f81c-4324-a498-89008dce1351	True	False	True	True	CLUSTER_HISTORY	4068.36	1881.01	0	0	4877.61
+SI B SW	fgeks-blue-eks-cluster	dc10bd6a-1552-4c4b-9173-fc11b50c610f	True	False	True	True	CLUSTER_HISTORY	406.64	1801.33	-1.21	0	2649.81
+IT IPS	aks-dios-weu-test-001	b01c58a4-4ad2-4756-b729-e0cf07b8fba6	True	False	True	True	PEER_CLUSTERS	1221.21	1768.61	-91.17	0	190.02
+IT IPS	eagle-kafka01	ef65cdd5-853a-46d3-9694-6d93edd6ad2d	True	False	False	True	PEER_CLUSTERS	1143.23	1583.32	0	0	36.86
+IT IPS	eleX01	f0fa2ea7-48db-4473-b6b3-c73123fa0dac	True	False	False	True	CLUSTER_HISTORY	6462.79	1246.75	0	0	1037.52
+IT IPS	eleX01	7b646d74-cc78-4703-a14f-865b3c0451bf	True	False	False	True	CLUSTER_HISTORY	5587.52	1081.68	0	0	519.37
+Siemens Dev	pfm-eks-cluster	de02aae4-1fd1-401a-ad47-345711d4d7b3	True	False	True	True	CLUSTER_HISTORY	905.8	763.96	508.22	0	790.1
+SI B SW	fgeks-blue-eks-cluster	99cb56e0-50f9-4ad7-a803-d03da4d95513	True	False	True	True	PEER_CLUSTERS	190.86	634.18	3.82	0	1.81
+IT IPS	eleX01in	cf027570-8275-4d1d-a2e1-f9ffbb713f9e	True	False	False	True	CLUSTER_HISTORY	3301.13	633.76	0	0	376.52
+DI SW PRS AMER SLC 	Posit	893e4362-bb07-417a-b53c-f9b011b4240d	True	False	False	True	INDUSTRY_AVERAGE	847.2	-596.55	0	0	0.0
+SI-EP-EMS-R&D	cluster	95276912-9b38-42d6-91d5-a388fc0280d2	True	False	True	True	CLUSTER_HISTORY	473.93	540.35	-0.01	0	0.0
+SiePortal	rproxysbox100708blue	028c4376-8af3-4674-bc4a-a5c3db1b3504	False	False	True	True	CLUSTER_HISTORY	0	514.95	0	514.95	
+SMO Railigent X	k8s-andreas	d03690cb-2ba4-4ff5-9519-27013515aba7	False	True	True	True	CLUSTER_HISTORY	753.83	444.49	334.21	0	
+FT FDS CES	iemc-cluster-int	25c0a174-d4b6-48d7-9459-f3240f97a1a8	False	False	True	True	INDUSTRY_AVERAGE	468.54	423.54	0	0	
+IT IPS	iec-tcx-flat	c783a2f5-d6c9-4c93-9bbe-216d2c614903	True	False	False	True	PEER_CLUSTERS	1106.38	-419.99	0	0	0.0
+SI B SW	fgeks-blue-eks-cluster	01c18e7a-ce06-4c12-b921-c93e612d3bf0	True	False	True	True	CLUSTER_HISTORY	239.18	415.67	50.45	0	3.22
+SI B SW	fgeks-blue-eks-cluster	fd1ca573-4982-4133-89ce-bfd4df4f5d7b	True	False	True	True	CLUSTER_HISTORY	171.57	404.28	88.64	0	1.58
+FT FDS CES	iemc-cluster-dev	dd0b548e-f6e0-4b50-b14c-13b2cc26ba48	False	False	True	True	INDUSTRY_AVERAGE	578.78	353.0	-0.8	0	
+HAFAS H&O	eks	8a9c0f55-86fc-4142-8f72-17ae6171a3aa	True	False	False	True	INDUSTRY_AVERAGE	3041.67	350.76	0	0	520.38
+SI GSW CLO	ngm-data-eks	9b9d2d51-ec75-46d4-bac0-ba38253cb8d9	False	False	False	True	CLUSTER_HISTORY	1100.77	-325.39	0	0	
+SI-EP-EMS-R&D	cluster	67a9bd91-0edf-40f9-8429-e14f3707a750	True	False	True	True	CLUSTER_HISTORY	787.15	315.1	-0.01	0	19.51
+SI B SW	fgeks-blue-eks-cluster	6436c787-9169-4b3a-907c-d18776efeb19	True	False	True	True	CLUSTER_HISTORY	194.81	308.76	27.08	0	2.71
+IT IPS	kafka-test	06a44e72-8f49-4f6f-a2f5-2092d14cffe4	True	False	False	True	PEER_CLUSTERS	397.79	-207.0	0	0	0.0
+CPS	dema-platform-services-test	00ee8944-67f6-43d5-8517-c270951ec02c	True	False	True	True	CLUSTER_HISTORY	464.4	202.02	-8.89	0	62.01
+Siemens Dev	dev-vlab-cluster	0528411e-4d89-4fcf-af04-1b496541025d	True	False	True	True	CLUSTER_HISTORY	307.05	189.06	4.52	0	23.41
+evosoft IT MIS	ITMIS	31864129-b09c-47b2-a8df-c616f98d65b7	True	False	True	True	PEER_CLUSTERS	492.6	153.08	9.08	0	0.0
+CYS - CNAPP	wiz-outpost-lite	95bf32c8-ced4-4a81-9665-f3c6278f5f57	True	False	True	True	INDUSTRY_AVERAGE	192.44	147.29	-1.5	0	177.72
+FT-FT RPD CED SSI-IIP	CDM-EKS-Cluster	62aa894c-1d41-4a7a-98ed-e181e289e173	True	False	True	True	INDUSTRY_AVERAGE	36.19	79.58	4.23	0	0.0
+Pillar#1	console-eks-integ	d909c528-e5d0-4ebd-8c1a-77ad9b76a54b	True	False	True	True	CLUSTER_HISTORY	2993.59	72.56	625.92	0	358.31
+DI AUT PI APF	dev-cluster	7e04bd70-0513-4c6b-8b38-42b6c46905d9	True	False	True	True	CLUSTER_HISTORY	650.53	-53.08	0.0	0	44.37
+SMO-SW-PDH-TPS	eks-tpslive-dev	d119d612-84ad-4c79-9992-a120b7206f15	True	False	True	True	INDUSTRY_AVERAGE	66.87	49.43	0.0	0	117.3
+SI EA electrificationx	eks-Cluster1	1ca6667a-06af-497f-a7ae-b9e7748c9493	True	False	False	True	PEER_CLUSTERS	188.07	-8.74	0.0	0	0.65
+Pillar#1	gw-eks-integ	514bf38c-5235-44b6-a951-8e69528b5943	False	True	True	True	PEER_CLUSTERS	380.94	8.72	26.44	0	
+FT FDS CES	iemc-cluster-ipcei-test	6f77cf09-c22b-46ba-8e41-3ea270f65c26	False	False	True	True	INDUSTRY_AVERAGE	135.08	8.33	0	0	
+IT DF COL UC 2	siemenstest-siemenstest-1	36575565-7149-431b-b5f6-71f43f18ef3f	True	False	True	False	NONE	56.89	0	0.0	0	
+LCB-IT	aks-bricks-accp	cf8682b4-e7dd-405d-a230-37d367c9eeac	False	False	True	False	NONE	58.67	0	2.05	0	
+Pillar#1	gw-eks-preprod	c086341f-ab62-4abc-90c8-a9ace1b45426	False	True	True	False	NONE	833.09	0	123.85	0	
+Pillar#1	fgac-eks-integ	b97e51e0-b4d7-42b3-a50a-ad29b9ab6b4d	False	True	True	False	NONE	818.78	0	11.12	0	
+Pillar#1	console-eks-preprod	a8129ccd-1dd4-441c-aaee-babd56ea5dc3	False	True	True	False	NONE	2548.06	0	359.24	0	
+Pillar#1	fgac-eks-preprod	cce8c41d-bf31-4c7e-bfff-dd2f8f0cd519	False	True	True	False	NONE	727.51	0	0	0	
+SI B SW	fgeks-blue-eks-cluster	6c94cd80-978f-4d9c-926e-df0e43dbb93f	True	False	True	True	CLUSTER_HISTORY	172.94	0	6.78	0	1.93
+SI B SW	fgeks-blue-eks-cluster	dc42abdf-7485-4115-a23e-a623f63fc12f	True	False	False	True	CLUSTER_HISTORY	192.42	0	0	0	8.19
+SI B SW	fgeks-blue-eks-cluster	3782e6c8-4780-42cb-bada-97b096ee21f7	True	False	True	True	CLUSTER_HISTORY	69.03	0	0	0	8.91
+DI FA DSP - DPP	bp-dev	b2ffa852-cc83-42d7-afd2-cb842f9310d5	True	False	True	False	NONE	247.82	0	0	0	
+SMO-RI-CSX-CS	csx-sunil-test	d9874265-f331-43cb-812c-2c63d419faa8	True	False	True	False	NONE	916.81	0	0	0	
+SMO-RI-CSX-CS	csx-snigdha-devops	9b5e6c1c-90ed-406c-b16c-d2ff49c7aac2	False	False	True	False	NONE	953.07	0	0.03	0	
+SMO Railigent X	k8s	0e277bb2-036d-485f-8690-4bf22720af9f	False	False	True	False	NONE	560.86	0	367.61	0	
+SMO Railigent X	k8s	4952c4ce-6a3a-44f4-9b3c-9794ca9ddbc9	False	True	True	False	NONE	24283.02	0	2406.55	0	
+SMO Railigent X	staging	ae3e22a4-6e7a-487d-9c95-2c0fb3bb8f35	False	True	True	False	NONE	1228.75	0	424.54	0	
+SMO Railigent X	k8s	5771ec22-fb0e-4fd8-a73a-fdf451ab0741	False	True	True	False	NONE	560.77	0	166.16	0	
+SMO Railigent X	k8s	7eb37770-9c35-460d-a896-910949ae0ea6	False	True	True	False	NONE	478.04	0	201.31	0	
+SMO Railigent X	k8s	d0c7a7a5-72d2-4c09-a9f6-1b173c64d0a8	False	True	True	False	NONE	18793.82	0	2701.54	0	
+SMO Railigent X	k8s	f8dd5b4f-3cf4-48e2-b453-7be4562e36cb	False	True	True	False	NONE	544.4	0	434.66	0	
+SMO Railigent X	k8s	cf62a8e1-1f1e-40dc-bd90-1b5c84dfa9df	False	True	True	False	NONE	16896.05	0	1807.99	0	
