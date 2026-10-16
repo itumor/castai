@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CFR mockups — Rebalancer plan explainability (2026-10-16)</title>
+<style>
+  :root{
+    --bg:#f4f6f8; --card:#ffffff; --ink:#1c2530; --muted:#64748b; --line:#e2e8f0;
+    --brand:#19b36b; --brand-d:#0e8a50; --warn:#b45309; --warn-bg:#fef3c7;
+    --hl:#e7f9f0; --hl-line:#34d399; --red:#b91c1c; --blue:#1d4ed8; --chip:#eef2f6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font:14px/1.45 -apple-system,"SF Pro Text",Inter,Segoe UI,Roboto,Helvetica,Arial,sans-serif;padding:28px;}
+  .panel{width:1520px;margin:0 auto 40px;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(15,23,42,.06)}
+  .panel h2{background:#10181f;color:#dbe4ee;font-size:15px;font-weight:600;letter-spacing:.02em;padding:12px 20px}
+  .panel h2 em{color:#7dd3ae;font-style:normal}
+  .panel .body{padding:20px 24px}
+  .cap{color:var(--muted);font-size:12px;margin:14px 2px 0}
+  .cap b{color:#475569}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{text-align:left;color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em;padding:9px 12px;border-bottom:2px solid var(--line)}
+  td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr.sel td{background:var(--hl)}
+  tr.sel td:first-child{border-left:3px solid var(--hl-line)}
+  .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px}
+  .num{font-variant-numeric:tabular-nums;white-space:nowrap}
+  .pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;padding:2px 9px;border-radius:999px;vertical-align:middle}
+  .pill.sel{background:var(--brand);color:#fff}
+  .pill.no{background:var(--chip);color:#64748b}
+  .pill.warn{background:var(--warn-bg);color:var(--warn);border:1px solid #f59e0b55}
+  .pill.info{background:#e0edff;color:var(--blue)}
+  .pill.new{background:var(--brand-d);color:#fff}
+  .why{display:inline-flex;align-items:center;gap:5px;color:var(--brand-d);font-weight:700;font-size:12.5px;cursor:pointer;border:1px solid var(--hl-line);background:#f0fdf6;border-radius:8px;padding:3px 10px}
+  .banner{display:flex;gap:14px;align-items:flex-start;background:linear-gradient(90deg,#f0fdf6,#ffffff);border:1px solid var(--hl-line);border-radius:12px;padding:16px 18px;margin-bottom:18px}
+  .banner .ic{flex:none;width:34px;height:34px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px}
+  .banner h3{font-size:14px;margin-bottom:4px}
+  .banner p{color:#334155;font-size:13px}
+  .banner .math{font-family:ui-monospace,Menlo,monospace;background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin-top:8px;font-size:12.5px;color:#0f172a}
+  .banner .math .win{color:var(--brand-d);font-weight:700}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 36px}
+  .cmp th:first-child{width:240px}
+  .cmp td.decide, .cmp th.decide{background:var(--hl)}
+  .cmp tr.deciding td{background:var(--hl);font-weight:600}
+  .cmp tr.deciding td:first-child{color:var(--brand-d)}
+  .vs{text-align:center;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:700}
+  .foot{margin-top:12px;font-size:12.5px;color:#334155;background:#f8fafc;border:1px dashed var(--line);border-radius:10px;padding:10px 14px}
+  .assump{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--warn-bg);border:1px solid #f59e0b66;border-radius:12px;padding:13px 16px;margin-bottom:16px}
+  .assump .t{font-weight:700;color:#92400e}
+  .assump .chain{color:#78350f;font-size:12.5px}
+  .assump .chain b{background:#fff;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-weight:600}
+  .src{color:var(--muted);font-size:11.5px;display:block;margin-top:2px}
+  .new-col{background:#eefaf3}
+  th .u{display:block;font-weight:500;text-transform:none;letter-spacing:0;color:#94a3b8;font-size:11px}
+  .note{font-size:12px;color:var(--muted);margin-top:10px}
+</style>
+</head>
+<body>
+
+<!-- ============ PANEL 1 — BEFORE ============ -->
+<div class="panel" id="p1">
+  <h2>BEFORE — Rebalance plan <em>5e13…98a3</em> · composition (as captured 2026-10-14, live plan review)</h2>
+  <div class="body">
+    <table>
+      <thead><tr><th>Instance</th><th>CPU</th><th>RAM</th><th>Price</th><th>Monthly</th><th>Availability</th><th>Pods</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">c8in.large</td><td class="num">2 CPU</td><td class="num">4 GiB</td><td class="num">$0.047</td><td class="num">$67.91</td><td>high</td><td class="num">55</td></tr>
+        <tr class="sel"><td class="mono">t3a.xlarge ×22</td><td class="num">4 CPU</td><td class="num">16 GiB</td><td class="num">$0.058</td><td class="num">$168.95</td><td>high</td><td class="num">≤43</td></tr>
+        <tr><td class="mono">c5a.large</td><td class="num">2 CPU</td><td class="num">4 GiB</td><td class="num">$0.026</td><td class="num">$38.13</td><td>high</td><td class="num">—</td></tr>
+        <tr><td class="mono">m8i-flex.2xlarge ×2</td><td class="num">8 CPU</td><td class="num">32 GiB</td><td class="num">$0.122</td><td class="num">$356.20</td><td>high</td><td class="num">—</td></tr>
+      </tbody>
+    </table>
+    <p class="cap"><b>What the customer sees:</b> c8in.large at $67.91 next to same-shape c5a.large at $38.13 (<b>1.78×</b>). No reason, no units ("$0.047" is per-vCPU·h, "$67.91" is per-node·mo), no pod-limit column, no group total. Conclusion drawn in the meeting: <i>“random selection”</i> → CSU-6246.</p>
+  </div>
+</div>
+
+<!-- ============ PANEL 2 — WHY THIS PLAN ============ -->
+<div class="panel" id="p2">
+  <h2>PROPOSED — <em>“Why this plan?”</em> explainer (Ask #1) + group cost (Ask #4) + unit labels (Ask #5)</h2>
+  <div class="body">
+    <div class="banner">
+      <div class="ic">?</div>
+      <div>
+        <h3>Why 1× c8in.large instead of c5a.large for this 55-pod group?</h3>
+        <p>Binding constraint: <b>Max pods per node</b>. A c5a.large node fits <b>29 pods</b> under the planner’s pod limit, so this group would need <b>2 nodes</b>. c8in.large fits <b>78 pods</b> — the whole group on <b>1 node</b>.</p>
+        <div class="math">1 × c8in.large&nbsp;=&nbsp;<span class="win">$67.91/mo</span>&nbsp;&nbsp;beats&nbsp;&nbsp;2 × c5a.large&nbsp;=&nbsp;$76.26/mo&nbsp;&nbsp;→&nbsp;<span class="win">saves $8.35/mo vs the cheapest-looking option</span></div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>Instance</th><th>vCPU</th><th>RAM</th><th>CPU price<span class="u">$/vCPU·h</span></th><th>Node price<span class="u">$/node·mo</span></th><th>Planner max pods</th><th>Nodes</th><th class="new-col">Group cost<span class="u">$/mo</span></th><th></th></tr></thead>
+      <tbody>
+        <tr class="sel">
+          <td class="mono">c8in.large</td><td class="num">2</td><td class="num">4 GiB</td><td class="num">$0.047</td><td class="num">$67.91</td>
+          <td class="num">78 <span class="src">ENI fallback</span></td><td class="num">1</td><td class="num new-col"><b>$67.91</b></td>
+          <td><span class="pill sel">SELECTED</span> <span class="why">ⓘ Why</span></td>
+        </tr>
+        <tr>
+          <td class="mono">c5a.large</td><td class="num">2</td><td class="num">4 GiB</td><td class="num">$0.026</td><td class="num">$38.13</td>
+          <td class="num">29 <span class="src">ENI fallback</span></td><td class="num">2</td><td class="num new-col">$76.26</td>
+          <td><span class="pill no">NOT SELECTED</span> <span class="why">ⓘ Why not</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="foot">Plan totals: <b>$4,853/mo</b> predicted optimized cost · <b>34.8%</b> saving · 59/59 nodes in scope — per-group costs sum to the plan total, so a premium per-instance pick can’t be misread as expensive.</div>
+    <p class="cap">Hover/click <b>ⓘ Why</b> on any row → the explainer card. Always-on columns: planner max pods (with source), nodes needed, group cost; both price columns carry units.</p>
+  </div>
+</div>
+
+<!-- ============ PANEL 3 — COMPARE VIEW ============ -->
+<div class="panel" id="p3">
+  <h2>PROPOSED — <em>Instance compare</em> for any two candidates (Ask #2 — suggested by the customer)</h2>
+  <div class="body">
+    <table class="cmp">
+      <thead><tr><th>Property (optimizer-visible)</th><th class="mono">c8in.large &nbsp;<span class="pill sel">SELECTED</span></th><th class="mono">c5a.large</th><th class="vs">Decided by</th></tr></thead>
+      <tbody>
+        <tr><td>vCPU / RAM</td><td class="num">2 / 4 GiB</td><td class="num">2 / 4 GiB</td><td class="vs">tie</td></tr>
+        <tr><td>Price — on-demand (eu-central-1)</td><td class="num">$0.155/h · $67.91/mo*</td><td class="num">$0.087/h · $38.13/mo*</td><td class="vs">c5a −44%</td></tr>
+        <tr><td>Network bandwidth</td><td class="num">up to 25 Gbps</td><td class="num">up to 10 Gbps</td><td class="vs">c8in</td></tr>
+        <tr><td>EBS bandwidth</td><td class="num">up to 10 Gbps</td><td class="num">up to 3.2 Gbps</td><td class="vs">c8in</td></tr>
+        <tr class="deciding"><td>Planner max pods <span class="pill warn">ENI FALLBACK</span></td><td class="num">78 pods <span class="src">4 ENI × 19 IPs + 2</span></td><td class="num">29 pods <span class="src">3 ENI × 9 IPs + 2</span></td><td class="vs">★ deciding</td></tr>
+        <tr><td>Nodes needed for 55-pod group</td><td class="num">1</td><td class="num">2</td><td class="vs">derived</td></tr>
+        <tr class="deciding"><td>Group cost /mo</td><td class="num"><b>$67.91</b></td><td class="num">$76.26</td><td class="vs">c8in wins</td></tr>
+      </tbody>
+    </table>
+    <div class="foot"><b>Decision:</b> c8in.large wins on <b>max pods</b> — a non-price constraint beats its 1.78× per-node price. *Plan pricing cache (≈0.6× on-demand); both types discounted identically.</div>
+    <p class="cap">A second row set answers the customer’s open question the same way: <b>c8i-flex.8xlarge ($712.30) vs c5a.8xlarge ($610.00)</b> — whichever property bound, it becomes visible here (and Flex picks are labeled as governed by the Flex toggle, not Spot).</p>
+  </div>
+</div>
+
+<!-- ============ PANEL 4 — ASSUMPTIONS / PROVENANCE ============ -->
+<div class="panel" id="p4">
+  <h2>PROPOSED — <em>Planner assumptions</em> strip with provenance + fallback warning (Ask #3)</h2>
+  <div class="body">
+    <div class="assump">
+      <span class="pill warn">⚠ CHECK ASSUMPTION</span>
+      <div>
+        <div class="t">Pod limit source: AWS ENI fallback — not your cluster’s configured limit</div>
+        <div class="chain">Effective max pods = <b>node-config max_pods_per_node_formula</b> (not set) → <b>kubelet maxPods</b> (not set) → <b>ENI fallback</b> ← used by this plan</div>
+        <div class="chain" style="margin-top:4px">Detected CNI: <b>Calico (VXLAN overlay)</b> — pod IPs do not come from VPC ENIs, so the ENI-derived limit is a conservative guess, e.g. t3a.xlarge and t3a.2xlarge both capped at 58 pods, r8id.4xlarge at 394.</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>Instance type (in this plan)</th><th>Planner max pods</th><th>Source at plan time (2026-10-12)</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">c8in.large</td><td class="num">78</td><td><span class="pill warn">ENI fallback</span></td></tr>
+        <tr><td class="mono">c5a.large</td><td class="num">29</td><td><span class="pill warn">ENI fallback</span></td></tr>
+        <tr><td class="mono">t3a.xlarge</td><td class="num">58</td><td><span class="pill warn">ENI fallback</span> <span class="src">same cap as t3a.2xlarge — 2× the size, same pods</span></td></tr>
+        <tr><td class="mono">r8id.4xlarge</td><td class="num">394</td><td><span class="pill warn">ENI fallback</span></td></tr>
+        <tr><td class="mono">after customer fix <span class="mono">math.least(NUM_CPU*16, 250)</span></td><td class="num">64 / 128 / 250</td><td><span class="pill new">node-config formula</span> <span class="src">t3a.xl→64 · t3a.2xl→128 · r8id.4xl→250; next plan: $7,895 → $4,420/mo compute</span></td></tr>
+      </tbody>
+    </table>
+    <div class="foot">Rule: the plan view always shows the assumption <b>as used at plan generation</b> (with its source), not the value after later edits — this reconstruction is the whole reason CSU-6246 was answerable only by engineering.</div>
+    <p class="note">Illustrative reconstruction from the 2026-10-14 CPS evidence package (<span class="mono">.kimchi/docs/2026-10-14-cps-rebalancer-rca/</span>) and CSU-6246 engineering answers — figures are the case’s real numbers.</p>
+  </div>
+</div>
+
+</body>
+</html>

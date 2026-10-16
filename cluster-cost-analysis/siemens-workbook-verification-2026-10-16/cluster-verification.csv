@@ -1,0 +1,268 @@
+sheet,org,name,cid,feat,vcpu,fee,bu_p,bu_s,net,total,woop,vr_total,vr_woop,vr_hib,vr_prov,vr_base,vr_status
+Read-only cluster without Cast,SI GSW CLO,ngm-vsdev-eks,0ec063fc-f9ec-45e2-9d31-ea584a70f3bd,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SI GSW CLO,ngm-vsinteg-eks,bd3aaf10-963c-4c66-b6f1-d9ded41b4a4a,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SI GSW CLO,ngm-sim3-eks,5efe373e-d2fe-43b1-a464-60ebcf16623a,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SI GSW CLO,shire-demo-eks,6130ca25-a9aa-4bb4-98d2-402785f13317,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SI GSW CLO,ngm-data-eks,9b9d2d51-ec75-46d4-bac0-ba38253cb8d9,,0.0,0.0,,,0.0,0.0,0.0,-376.64242443927327,0.0,0.0,66.02324746743851,CLUSTER_HISTORY,ready
+Read-only cluster without Cast,SI GSW CLO,alliander-demo-eks,c686f800-f17f-4b9a-8b7e-7655f209e07f,,0.0,0.0,,,0.0,0.0,0.0,8771.354818285043,0.0,0.0,109.33060972222225,PEER_CLUSTERS,ready
+Read-only cluster without Cast,SI GSW CLO,shire-qa-eks,c7498a9f-12f3-4153-ac33-540c0594ad48,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SI GSW CLO,clo-master-eks,9cabe4ee-c3cb-4877-a6e6-a464b3dd388a,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SI GSW CLO,workbench-preprodeu-eks,7eb74f76-a62c-482e-bb8a-14557d095d22,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SI GSW CLO,shire-dev-eks,2a8cfae0-d269-4ccd-bdbd-0ee405f54d64,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SI GSW CLO,ngm-demo-eks,19336022-f195-4dda-b832-2b76d1a1c29c,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SI GSW CLO,hermes-val-eks,101ea9a6-02e5-45af-8ea0-6915a955c420,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SI GSW CLO,ngm-test-eks,7290695f-e216-47df-ba5a-ca97ebb90045,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SI GSW CLO,iands-sales2-eks,34e3e0bb-53d7-4b68-9e9d-17b0d79dfcf8,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SI GSW CLO,onboard-sales1-eks,1b97084a-82d3-45e1-b88f-db0c6f19191d,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SI GSW CLO,onboard-delivery-eks,71ad083b-adec-4379-9881-e4901cbf0a85,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,RC-IT DI S TSP ARCH,eks-iem-ita,151856f9-7a15-4a05-8cdb-37bd441242ae,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DI FA HMI URT PRC2,iowa-tools-cluster,2b77e149-f440-4ea8-8349-a5e008f72e18,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO CS DS EAM - CORMAP,cormap-utilities-eks,3d1340c5-8316-417f-b108-2a8cda7f288c,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,Pillar#2,console-eks-integ,cb5c93cd-1be6-4c00-8b58-ba292201d5d1,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DISW-SERVICES-LM,teamcenter,ec18afd9-80bf-4362-9e08-652a63987fd4,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,APM0423755 - Azure Platform Service,rg-lab-aks-nodes-prod,c88a141b-4ebf-47f9-8245-da64ad0c3dad,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,HAFAS H&O,argocd-demo,b2dabc79-3aaa-4596-acd9-d3f17e3a222a,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,HAFAS H&O,timemachine,7147d0b6-25e5-47b5-b193-a50c64a96291,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,HAFAS H&O,renfe-prod,553b905a-2334-4cb5-a059-ec58c616a8ae,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,HAFAS H&O,sales-platform,9e18000c-a738-4745-8f8a-524c97a9376e,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,HAFAS H&O,renfe-int,14c6bd24-75fd-46e5-98be-2b6e985edfb5,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,HAFAS H&O,rivier,fcdc7184-a5a1-4b5d-a225-92e3fbfd8350,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,HAFAS H&O,eks-prod-apse2,aebceffe-11d4-4e34-973b-d9ad0c54c03b,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,HAFAS H&O,eks-prod-use1,fed60fe2-25bb-4a1f-9b1d-a19497a5d4c2,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,HAFAS H&O,eks-prod-euc1,90d11c07-a938-4dc4-ab73-c9288880b240,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,HAFAS H&O,eks-fat-euc1,76246d36-88b0-41b7-bf98-0f6bbdde094a,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,Siemens Dev,dev-vlab-cluster,172021b8-c68a-4ddb-9658-01e4c44a561e,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,Siemens Dev,dev-vlab-cluster,83d2c65c-e0d7-46db-8bb8-bf5f0d368754,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,Siemens Dev,shared-services-us-east-1-eks,91649234-53f9-44b1-a883-5eae8fe0afbe,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,Siemens Dev,dev,4dee25ab-9f1c-494f-bef0-b7190dddb3eb,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SI-SI EP EMS FIN IT CSS-CTDM,CDM-EKS-Cluster,b4ace8af-aecd-4561-85bb-3b08efe74437,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO NEE RC-CH RI ADC 4 3,trackops-new,e4d86f6e-8076-423e-9a28-43f3514d755e,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,IT DA PL IP - SDC.Streaming,sdcstreaming-eks-cluster-prod,2e4161f0-7ec8-4641-aa5f-32a52dd32ccb,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,IT DA PL IP - SDC.Streaming,sdcstreaming-eks-cluster-qa,46aef6f3-c89e-4ece-a114-53d5b329cdea,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,IT DA PL IP - SDC.Streaming,sdcstreaming-eks-cluster-dev,30861ed2-5d64-4c77-9f03-1f8b04eb2911,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,LCB-IT,aks-bricks-prod,df91fa24-43eb-45e4-ba64-dcbf46756d45,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,APM0000770 - DUVE Web,aks-duve-prod-01,5826960c-691c-45be-b54a-f715b8743802,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,APM0000770 - DUVE Web,aks-duve-nonprod-01,13a264ef-f7a3-484b-a2fe-369eee3bdc65,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SI B SER DSC TEI CLO,sdlc,6f2c0faa-b005-46d0-be6d-d78990660fcb,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SFS IT CDO,rg-ssm-p-base-aks-internal,6c3203a2-aa17-4e51-8979-8e17ee37ea61,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SFS IT CDO,rg-api-p-base-aks-internal,3f92e1ce-6b2c-414e-bb1b-439bf7e60a60,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SFS IT CDO,rg-app-p-base-aks-internal,05ce573b-ea5b-4285-bb7b-460e9ae79d18,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SFS IT CDO,rg-sca-p-base-aks-internal,dde550bb-9344-4f70-ad6e-e8ac3764f16a,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SFS IT CDO,rg-cdb-p-base-aks-internal,57894164-7fdb-4788-9056-96099275e454,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SFS IT CDO,rg-cdo-p-base-aks-internal,a91ae711-2b6a-4523-a489-737da2ba6bfa,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SFS IT CDO,rg-api-t-base-aks-internal,1ff6bb42-5db9-4faa-aa02-10598451ca86,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SFS IT CDO,rg-ssm-t-base-aks-internal,c7cdffef-005a-44a6-8666-0592c563fc3a,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SFS IT CDO,rg-sca-t-base-aks-internal,040b3b0f-af98-42a7-a7aa-31756738c153,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SFS IT CDO,rg-app-t-base-aks-internal,78288773-5d1c-470e-a4fd-768ef1eb93ad,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SFS IT CDO,rg-cdb-t-base-aks-internal,65cb617a-bd85-4a6e-9693-97107d9d5c6f,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SFS IT CDO,rg-cdb-d-base-aks-internal,bebbf9ac-421f-4af4-ad57-7a440b232e31,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SFS IT CDO,rg-app-d-base-aks-internal,ae7e2c93-1e26-41fd-8162-432179915e59,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SFS IT CDO,rg-sca-d-base-aks-internal,5e07a6bf-f90c-49c7-bbf1-a7712a377925,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SFS IT CDO,rg-ssm-d-base-aks-internal,7c135e57-5de7-4a68-b180-fddce5f975d8,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SFS IT CDO,rg-cdo-d-base-aks-internal,f8dcbc80-7524-47a6-90f8-8e6fe795d3aa,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SI-B-BTWIN,fgeks-blue-eks-cluster,b6c391dd-268c-4acb-937d-25748d7d2554,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,IT-APS-DEV-ACO,n8n,46d4d358-f816-4b89-a7ba-79f8feeeb84e,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,IT-APS-DEV-ACO,grafana-poc,c368fd84-274b-47dd-bf2b-46394ce25f78,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DI SW PRS AMER SLC,SLC-SS,96b41307-2647-44ad-9185-da143f346928,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,APM0022732 - PCIS - Product Class Infostructure,pcis-prod-eks-9841,7432b4fb-e6eb-4639-8f23-4d8eec172cbb,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,APM0022732 - PCIS - Product Class Infostructure,pcis-nonprod-eks-9841,30b1d039-cb59-4c57-96f9-a0a9c6a2c09c,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-SW-MAAS-HACON-TEC-OBS-ANALTICS,cnpg-poc-cluster,8b295cd2-ba61-4ed2-abc7-498d2d7cc013,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,APM0271596 - PSE Consulting,pse-consulting-eks-shared,67726d70-3a2d-4246-a303-2244240eb3eb,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DAI-R-SMR,data-vault,e5a947d7-275a-4e2c-8ef8-e003a01ca0da,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DI SW PLM DM DDM,ihubinteg-aks,1c5f7938-e5e2-4678-a623-74dc891d26b0,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DI SW PLM DM DDM,ih-dev,ac73fd44-4ed9-469a-b4ff-74b3acad246e,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DI SW PLM DM DDM,ops-common-integ,d76acc05-25f7-4924-94bd-db2c8aa38f7d,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DAI R SDE,ipae-climatix,50a316f7-ee63-4667-9fde-00faa11339f5,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DAI R SDE,ipae-sandbox-audi,866f76b5-d39d-450b-9d40-31a52a6c2688,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DAI R SDE,ipae-dtac-sandbox,241cb12c-c4b0-4756-a82f-7530c7c26c38,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,FT FDS CES,iemc-cluster-ipcei,198cb29e-083a-4a28-bfda-ba1c1b997c08,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,FT FDS CES,iemc-cluster-prod,6d05a5b0-a4e1-4761-a19c-806c0069042c,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,FT FDS CES,iemc-cluster-alpha,59ac1d97-4402-4d34-8220-e4b708484f28,,0.0,0.0,,,0.0,0.0,0.0,194.48546824380102,0.0,0.0,24.29806912991657,INDUSTRY_AVERAGE,ready
+Read-only cluster without Cast,FT FDS CES,iemc-cluster-ipcei-test,6f77cf09-c22b-46ba-8e41-3ea270f65c26,,0.0,0.0,,,0.0,0.0,0.0,13.483548139819774,0.0,0.0,12.001603693354394,INDUSTRY_AVERAGE,ready
+Read-only cluster without Cast,FT FDS CES,iemc-cluster-int,25c0a174-d4b6-48d7-9459-f3240f97a1a8,,0.0,0.0,,,0.0,0.0,0.0,943.913688472595,0.0,0.0,54.51669909803343,INDUSTRY_AVERAGE,ready
+Read-only cluster without Cast,SMO-SW-PDH-TPS,tps-eks-cluster-master,2ec5dafa-7a81-44fe-b42f-16d4d9f4b76d,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DI FA DSP - DPP,bp-blo-260,a73f3484-8c34-4a5a-9743-9fc2f36bfc71,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DI FA DSP - DPP,bp-blo-359,6c756141-5a54-4e8f-a995-cbe71a4766ee,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DI FA DSP - DPP,bp-blo-379t,886df315-be86-4d8e-acf2-e4864390113f,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DI FA DSP - DPP,bp-blo-408,7594bd20-39fd-4b31-a81e-8d570c4f331a,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DI FA DSP - DPP,bp-blo-417,1baae99c-637a-4ce0-9617-6ab9c9c40072,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DI FA DSP - DPP,bp-blo-422,7e49f605-7dcc-4354-8759-df226be3c5b0,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,IT DA,knime-test,15ee812d-5ebf-4c69-a64c-681f1da39c97,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,Botanica,kubernetes,71ddd440-4ff4-4f4d-9a0d-6be345000920,,55.1229999999999,220.492,,,-220.492,0.0,0.0,,,,,,
+Read-only cluster without Cast,Botanica,kubernetes,a8161722-2e3a-4d33-8c91-8684fa751ffe,,21.658,86.632,,,-86.632,0.0,0.0,,,,,,
+Read-only cluster without Cast,DI-SW-RAPIDMINER-GRAPH,graph-dev-qa-eks,49987821-c6b8-414a-8ec9-dd5b59d4042c,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RS-EEC-EN-CCI-DE-CD-Kodex,eks-tools,43c58c97-3565-473d-8b87-6c8e49cbad0c,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,APM0006869 - PKN - Product Knowledge Network,pkn-prod-eks-1985,0af93eb7-eb8b-48a4-8332-462b5d70da62,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,APM0006869 - PKN - Product Knowledge Network,pkn-nonprod-eks-1985,43f6e766-d18d-4440-ac98-15e23f33871c,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,IT IPS,aks-neobot-weu-prod-001,c66abc3b-7ffb-4576-b65e-9fa96ef14147,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,IT IPS,aks-neobot-weu-test-001,43d2436d-2f2d-44cb-99f5-6ed799511dac,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,IT IPS,aks-n8n-weu-prod-001,285a5dae-36f4-4fa3-9e42-27948f0c06dd,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,IT IPS,ea-admin-management-cluster,51b3e19e-eb6d-421c-b8dc-6587aae498ba,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,IT IPS,aks-n8n-weu-test-001,78deb4c6-46e8-4512-8a1e-92d9416cb34f,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,IT IPS,staging-sec,83ce9be7-78b8-4d5c-a49c-4e1584f93251,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,IT IPS,shared01,cd7be1fb-81c3-4c01-8d22-efe977e629bd,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,IT IPS,bx-edex-prod-eu,ce86ecf0-1c17-4d02-936b-dd239411ea0a,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,IT IPS,bx-edex-int-eu,bc30a320-2cc9-4fa1-8423-67cb45fb4776,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,IT IPS,bx-edex-dev-eu,4f9d90bf-10e7-4bd8-8b18-a094484eaf68,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,IT IPS,cloudcore01,e16fc060-803a-47e2-985e-f0c15058a6c9,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,TeamLeonis,pssp-k8s-cluster,9f2969e9-3e86-4a17-8352-44f8d65e1e84,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,APM0002714 - GSP Kafka,gspkafka-k8s-prod,069c6305-e281-40a6-a9fe-702db92b56be,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,APM0002714 - GSP Kafka,gspkafka-k8s-dev,529d60a3-9950-452d-8cc9-a8fd9070522f,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,APM0414470 - SiBase X,eks-cluster,598b4c17-3950-4578-8691-9ca4d2da8d74,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,APM0414470 - SiBase X,eks-cluster,b0c2741c-659d-4ebc-9ec9-9927c6719f9a,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,APM0414470 - SiBase X,eks-cluster,e76350af-1ffb-4849-84ad-8ac0838c6143,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,APM0414470 - SiBase X,eks-cluster,9d404cbd-46a1-46b3-a160-b9e046b80710,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,FT FDS CDS,cds-integ-us,c1195c4e-f818-4a38-b800-e3a017f22cd2,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,FT FDS CDS,cds-integ,efd0470a-7bad-4bf8-b121-fc3c5797f908,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,APM0029033 - CIC API Management - KONG,case-k8s-private-prod-fargate,1ae6f85c-c34d-40b6-9581-f9097dd5a38f,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,APM0029033 - CIC API Management - KONG,case-k8s-private-dev-1,2ec364da-c551-42ba-a3c9-5f48e5aa27ac,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO Railigent X,rhx-test,35c0f9b5-25f1-49bb-aa2a-ec49915352b3,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,ui-automation,16eee82f-5cbe-4e80-a85e-982ac3a4da23,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,sunil-2-tst,e6aabe1a-54f4-47c0-9ca4-16a1b84f1099,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,gitlab-runner-cs-services,6935071e-885e-4a18-bbe0-addf4b64ae17,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,gitlab-runner-eks,67b85f02-b73c-49da-b8f4-8699ae8e6184,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-yogesh-test,6e4a27ed-598f-4d6c-b5b2-af695188b6eb,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-sreerag-test,b99217e7-11c0-404b-aef3-1b65b99329bd,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-spain-5-test,c5b1e9d8-b0a6-47bf-9cc5-b6bc6bc83afb,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-spain-4-sim-test,6f429916-c02a-4193-a011-e3efcbddae42,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-spain-3-sim-test,673d43a9-591a-487e-a9dd-6681eee0f10c,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-spain-2-test,ddb8ead4-6b5a-463b-b26d-e22022dbb4c0,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-spain-1-test,94ce07dc-9574-4e9e-a800-63077c8ea7a9,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-simulator-test,8746020f-90ed-4a8e-af38-f2e1f4d090f2,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-raghu-test,6eb615cc-411c-46bd-885e-33aa64a012ec,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-production-replica,b8210d72-1d68-403f-8ead-ec30cefa0b0b,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-pradeep-test,fa02c361-3bde-49b5-ac9f-18ed832d581f,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-patrick-test,68fb4764-a9a8-4cb7-9411-b467ff9a98fd,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-parisa-test,4d239b69-3264-4484-af4a-7fe84c314607,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-mike-test,b5fed326-33d7-400e-a332-9f43e890b87f,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-mathias-test,86ceae63-3cc4-434a-8bc2-30e8813dd8b8,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-jenny-test,ac746b18-7800-46ff-b5e7-9a068ab59d9b,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-eva-test,33c66e64-8384-49b8-b0c9-dbb26c7c29cd,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-dev-yardbirds,2a037afa-b894-470d-8129-faeed984eac6,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-dev-chessie,c2dcb472-20f5-4989-92e6-cbf60c27356c,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-demo,513dbd8a-a053-4462-a831-655d5fc06983,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-chaitanya-test,ba441a9f-608e-4892-88c1-1bad6876344c,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-carlos-test,5a4e397f-0180-4d28-9bbd-6d40f6c45168,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-ashish-devops,d307c10c-b1b1-46ba-829b-bde3adbec693,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-ashik-devops,53b50b4a-6fab-48d2-894f-f037a94da7a7,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-anitha-test,75dd56a5-9275-43e6-ba61-27d77484c47a,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-amparo-test,d3e43266-2892-4915-911e-f5c731bd8af6,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-georgi-vnv,5377fe69-c0d2-428f-8366-1a3c79e834d6,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SMO-RI-CSX-CS,csx-performance-test,fb9fb11b-10a1-438f-9a16-eb3652ab02f8,,2.442,9.768,,,-9.768,0.0,0.0,,,,,,
+Read-only cluster without Cast,DDI SW MNDX PRO&TECH,gp-us-1-test,2ad94570-45a2-4401-bdf8-b42c410a7970,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DDI SW MNDX PRO&TECH,nonprod-2-eks,1e712207-9f93-4d66-a848-83dc87403f04,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DDI SW MNDX PRO&TECH,nonprod-4-eks,88bdcb08-d7b9-4643-b7ee-8c987e6b3e6b,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DDI SW MNDX PRO&TECH,synthia-test-2,d0de1275-62ef-40bc-9272-c8e5547e7040,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DDI SW MNDX PRO&TECH,central-test,70984162-3989-4311-9b06-29e60edf5dbf,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DDI SW MNDX PRO&TECH,ucp-cd-nonprod,14beb823-ce64-4841-a2e1-10ffb384aaa8,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DDI SW MNDX PRO&TECH,pipeline-test,4a5813f2-a222-4753-a0d5-1f74417a5719,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DDI SW MNDX PRO&TECH,internal-dev,ce85dc32-5f2b-4ad2-b2b1-674ee5a24ca3,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DDI SW MNDX PRO&TECH,pipeline-accp,a2f426eb-fd4a-448c-b6ca-d4691da80e4c,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DDI SW MNDX PRO&TECH,public-cloud-cd-nonprod,4a53a7e9-6150-45e4-9f19-93b8ee38990f,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DDI SW MNDX PRO&TECH,central-accp,c42d0d42-e7e4-4f9a-b8e3-2cb4dcc44e8f,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,DDI SW MNDX PRO&TECH,nonprod-5-eks,ef108bbf-a7a1-4a06-b8bc-209e40ffa595,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,toolingprod-euwe1-100786-01-green-mc,1adce851-4a4f-4f78-bcf5-f825aaa96d48,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,mallprod-euwe1-100195-01-blue-mc,dacd06e7-b50e-4754-bd62-877abc645116,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,rproxyprod-euwe1-100708-01-green-mc,27c3fbb7-dd62-4040-9441-c268a063afc4,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,siosprod-euwe1-100320-01-green-mc,3f99feb3-28a0-4a1d-b596-c057683045c1,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,mallprod-euwe1-100195-01-green-mc,5f6a2f04-3875-409e-a54e-475ba0dc3536,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,rproxyprod-euwe1-100708-01-blue-mc,ceebaf20-6463-437e-bf1b-28bdf245f897,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,siosprod-euwe1-100320-01-blue-mc,a35c3b26-da1a-4223-bf6d-7850a42a824b,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,toolingprod-euwe1-100786-01-blue-mc,32340d3c-5c5c-4887-a7cb-fcfbf779e462,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,sieportalprod-euwe1-100188-01-green-mc,c4de1c87-2373-4dc6-b5b3-77baea247f3f,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,sieportalprod-euwe1-100188-01-blue-mc,66cf9eff-5864-452a-a886-7496bd6fe7c8,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,siosqa-euwe1-100320-01-blue-mc,42f33a8f-d6dc-4c3a-acad-e679123b939c,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,rproxyqa-euwe1-100708-01-blue-mc,79828df6-8410-49d0-b5a3-454222d5a64d,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,sieportalsbox100188blue,7cb4d31e-ce8c-4f40-9276-b2586578dd92,,0.0,0.0,,,0.0,0.0,0.0,102.38126778016425,0.0,0.0,18.0,PEER_CLUSTERS,ready
+Read-only cluster without Cast,SiePortal,mallsbox100195blue,c9ea106b-512a-4d17-a805-b7565c5e2dd5,,0.0,0.0,,,0.0,0.0,0.0,91.32813006492998,0.0,0.0,15.99976801087449,CLUSTER_HISTORY,ready
+Read-only cluster without Cast,SiePortal,rproxysbox100708blue,028c4376-8af3-4674-bc4a-a5c3db1b3504,,0.003,0.012,,,-0.012,0.0,0.0,408.80377677472035,0.0,383.66848738379645,12.000000000000002,CLUSTER_HISTORY,ready
+Read-only cluster without Cast,SiePortal,toolingqa-euwe1-100786-01-blue-mc,badc4a28-8c0a-4ce0-8951-7db286b0d173,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,toolingsbox100786blue,a87dbfd1-df28-4285-9be5-a8d7f61787c7,,0.0,0.0,,,0.0,0.0,0.0,160.0437622447012,0.0,0.0,7.999996343692871,PEER_CLUSTERS,ready
+Read-only cluster without Cast,SiePortal,sieportalsbox100188green,86e49019-e316-4d92-b8d1-9af8623e3f1c,,0.0,0.0,,,0.0,0.0,0.0,12.4697371555188,0.0,0.0,9.999767824497258,CLUSTER_HISTORY,ready
+Read-only cluster without Cast,SiePortal,toolingqa-euwe1-100786-01-green-mc,17641bc9-9aa6-47ba-9365-97ff5ec3f3ae,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,toolingsbox100786green,51368361-0714-48f4-8714-6924102d7c16,,0.0,0.0,,,0.0,0.0,0.0,217.7046770637092,0.0,0.0,28.000000000000004,PEER_CLUSTERS,ready
+Read-only cluster without Cast,SiePortal,rproxyqa-euwe1-100708-01-green-mc,180e18b9-0a9c-4f0e-9a35-4145798be779,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,rproxysbox100708green,8bfdba94-15a2-439b-8a4f-498e45ef1d62,,0.0,0.0,,,0.0,0.0,0.0,16.757110381901377,0.0,0.0,8.010926174496646,CLUSTER_HISTORY,ready
+Read-only cluster without Cast,SiePortal,siosqa-euwe1-100320-01-green-mc,164913a8-a215-43c7-9d38-cae10f830b67,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,mallsbox100195green,772676f3-6d69-414f-b831-63d8de1546e8,,0.0,0.0,,,0.0,0.0,0.0,76.12437701235385,0.0,0.0,7.997982775119619,CLUSTER_HISTORY,ready
+Read-only cluster without Cast,SiePortal,mallqa-euwe1-100195-01-green-mc,ed332354-a655-45d4-af62-30dae157bb98,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,mallqa-euwe1-100195-01-blue-mc,d532ceed-013a-4e78-bf38-aa967ed540ae,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,sieportalqa-euwe1-100188-01-blue-mc,65d298c2-b28f-450b-a754-ac621076125f,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SiePortal,sieportalqa-euwe1-100188-01-green-mc,64d18bf6-9789-4252-aa77-e6226d7740d7,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,Pillar#1,fgac-eks-preprod,cce8c41d-bf31-4c7e-bfff-dd2f8f0cd519,,25.3109999999999,101.244,,,-101.244,0.0,0.0,0.0,0.0,0.0,25.69154583333334,BASELINE_TYPE_UNSPECIFIED,ready
+Read-only cluster without Cast,Pillar#1,nfr-eks-preprod,04f26ee9-6fe7-4467-a222-061cee09011f,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,Pillar#1,fds-sdk-testing,802629ad-ca96-4ee5-aa19-a253788f96d3,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,Pillar#1,nfr-eks-integ-3,7743765a-2915-4699-97cd-06bb897acc09,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only cluster without Cast,SPICE,spice-100794-sbox-tooling-01,8dbcf70a-ea6f-4059-90a1-2f6d9246a9c6,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Read-only with WOOP,Siemens Dev,aks-castai-demo,d1bf9c35-07ac-4c4b-9d7a-ac41473c3b10,woop,1.492,5.968,1.4919999999999998,,-2.536706299,0.0,3.43129370053701,0.0,3.431293700537018,0.0,6.0,BASELINE_TYPE_UNSPECIFIED,ready
+Read-only with WOOP,FT FDS CES,iemc-cluster-dev,dd0b548e-f6e0-4b50-b14c-13b2cc26ba48,woop,0.008,0.032,0.07400000000000001,0.07400000000000001,-0.8354359313,0.0,-0.803435931257856,419.2513150173638,-0.8034359312578563,0.0,34.2678962264151,INDUSTRY_AVERAGE,ready
+Read-only with WOOP,SMO Railigent X,k8s,0e277bb2-036d-485f-8690-4bf22720af9f,woop,25.7249999999999,102.9,25.725000000000005,26.572,268.0311495,0.0,370.931149476283,0.0,370.9311494762837,0.0,26.139448611111114,BASELINE_TYPE_UNSPECIFIED,ready
+Read-only with WOOP,SMO-RI-CSX-CS,csx-snigdha-devops,9b5e6c1c-90ed-406c-b16c-d2ff49c7aac2,woop,15.94,63.76,15.94,0.219,-57.22977597,0.0,6.53022402614645,0.0,6.530224026146449,0.0,37.66189722222223,BASELINE_TYPE_UNSPECIFIED,ready
+Read-only with WOOP,Pillar#1,gw-eks-preprod,c086341f-ab62-4abc-90c8-a9ace1b45426,woop,27.039,108.156,27.038999999999998,32.012,19.58748116,0.0,127.743481157402,0.0,127.74348115740283,0.0,27.400470833333337,BASELINE_TYPE_UNSPECIFIED,ready
+Read-only with WOOP,Pillar#1,console-eks-preprod,a8129ccd-1dd4-441c-aaee-babd56ea5dc3,woop,87.827,351.308,87.827,98.911,-144.8430591,0.0,206.464940868194,0.0,206.4649408681945,0.0,89.04220000000001,BASELINE_TYPE_UNSPECIFIED,ready
+Read-only with WOOP,Pillar#1,fgac-eks-integ,b97e51e0-b4d7-42b3-a50a-ad29b9ab6b4d,woop,37.4839999999999,149.936,37.484,35.833999999999996,-138.8069448,0.0,11.129055231692,0.0,11.129055231692016,0.0,38.10036666666667,BASELINE_TYPE_UNSPECIFIED,ready
+Read-only with WOOP,Pillar#1,gw-eks-integ,514bf38c-5235-44b6-a951-8e69528b5943,woop,21.846,87.384,21.846000000000004,22.251,23.61588794,0.0,110.999887944672,145.53014976867738,110.99988794467207,0.0,22.201358333333335,PEER_CLUSTERS,ready
+KENT clusters with WOOP,SMO Railigent X,k8s,5771ec22-fb0e-4fd8-a73a-fdf451ab0741,woop,62.655,250.62,62.655,64.23599999999999,-79.20383704,0.0,171.41616296176,0.0,171.41616296176082,0.0,63.58020972222223,BASELINE_TYPE_UNSPECIFIED,ready
+KENT clusters with WOOP,SMO Railigent X,k8s,cf62a8e1-1f1e-40dc-bd90-1b5c84dfa9df,woop,343.577,1374.308,660.1809999999999,655.0259999999998,404.4755353,0.0,1778.7835352539,0.0,1778.783535253906,0.0,671.183801388889,BASELINE_TYPE_UNSPECIFIED,ready
+KENT clusters with WOOP,SMO Railigent X,k8s,7eb37770-9c35-460d-a896-910949ae0ea6,woop,26.2529999999999,105.012,52.02999999999999,53.307999999999986,94.65455943,0.0,199.666559432578,0.0,199.66655943257842,0.0,52.87348472222223,BASELINE_TYPE_UNSPECIFIED,ready
+KENT clusters with WOOP,SMO Railigent X,k8s,f8dd5b4f-3cf4-48e2-b453-7be4562e36cb,woop,26.844,107.376,26.843999999999994,25.693999999999996,326.1927859,0.0,433.568785910063,0.0,433.5687859100634,0.0,27.316427777777783,BASELINE_TYPE_UNSPECIFIED,ready
+KENT clusters with WOOP,SMO Railigent X,k8s,d0c7a7a5-72d2-4c09-a9f6-1b173c64d0a8,woop,456.331,1825.324,868.647,861.9959999999999,760.825143,0.0,2586.14914304499,0.0,2586.149143044991,0.0,883.2630166666668,BASELINE_TYPE_UNSPECIFIED,ready
+KENT clusters with WOOP,SMO Railigent X,staging,ae3e22a4-6e7a-487d-9c95-2c0fb3bb8f35,woop,66.388,265.552,66.38800000000002,58.605000000000004,175.3568081,0.0,440.908808124228,0.0,440.90880812422876,0.0,67.52081527777779,BASELINE_TYPE_UNSPECIFIED,ready
+KENT clusters with WOOP,SMO Railigent X,k8s,4952c4ce-6a3a-44f4-9b3c-9794ca9ddbc9,woop,1000.69499999999,4002.78,1000.6949999999997,1041.2510000000002,-1967.322225,0.0,2035.45777515576,0.0,2035.45777515577,0.0,1016.485201388889,BASELINE_TYPE_UNSPECIFIED,ready
+KENT clusters with WOOP,SMO Railigent X,k8s-andreas,d03690cb-2ba4-4ff5-9519-27013515aba7,woop,47.309,189.236,,,158.2704141,0.0,347.506414103906,449.76056728119,347.5064141039064,0.0,48.17843194444445,CLUSTER_HISTORY,ready
+Connected clusters without Cast,DI IT DEX CLD,gspkafka-k8s-dev,99b2dce3-a9ef-4b75-898f-3c375b253f8e,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Connected clusters without Cast,CASE,shining-star,ef2ddd68-7577-4b2b-a1fc-34dc18392249,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Connected clusters without Cast,Siemens Dev,sp-tofu-simple,dac52e3e-1576-479c-b61e-f33589de026f,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Connected clusters without Cast,IT IPS,cloudcore02,56d5ca2d-a5b7-4223-97f2-75f2af35b242,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Connected clusters without Cast,IT IPS,mof,66723d08-943f-4b85-9f75-80d9bd5c4511,,2.182,8.728,,,-8.728,0.0,0.0,,,,,,
+Connected clusters without Cast,IT IPS,mof-staging,4aaa7671-3d83-454d-a7aa-449df17c10d3,,2.319,9.276,,,-9.276,0.0,0.0,,,,,,
+Connected clusters without Cast,IT IPS,kafka-test,06a44e72-8f49-4f6f-a2f5-2092d14cffe4,,15.7419999999999,62.968,,,-62.968,0.0,0.0,-207.0832966383386,0.0,0.0,16.00700555555556,PEER_CLUSTERS,ready
+Connected clusters without Cast,IT IPS,dev-sec,6bb5a236-875d-4158-9c5c-a1d66e08ac83,,15.325,61.3,,,-61.3,0.0,0.0,,,,,,
+Connected clusters without Cast,IT IPS,iec-tcx-flat,c783a2f5-d6c9-4c93-9bbe-216d2c614903,,31.485,125.94,,,-125.94,0.0,0.0,-302.9992861042709,0.0,0.0,31.999998611111117,PEER_CLUSTERS,ready
+Connected clusters without Cast,IT IPS,eagle-kafka01,ef65cdd5-853a-46d3-9694-6d93edd6ad2d,,45.57,182.28,,,-182.28,0.0,0.0,1562.1717793335197,0.0,0.0,46.30519027777779,PEER_CLUSTERS,ready
+Connected clusters without Cast,FT-RDP-SSP-DEVOPSFF-EKS-DEV,eks-dev,54535938-4437-42d5-b5f5-bc4a2f90ce8b,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Connected clusters without Cast,SI B SW,fgeks-blue-eks-cluster,e3c91abe-69ae-4a79-b362-90f42e1917c0,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Connected clusters without Cast,SI B SW,fgeks-blue-eks-cluster,1b0450f7-5532-4edd-af65-a754ff33ff40,,0.0,0.0,,,0.0,0.0,0.0,,,,,,
+Connected clusters only WOOP,IT DF COL UC 2,siemenstest-siemenstest-1,36575565-7149-431b-b5f6-71f43f18ef3f,woop,3.013,12.052,7.798000000000002,2.178,-12.05190674,0.0,9.32592202236876e-05,0.0,9.325922022368766e-05,0.0,12.85296855557424,BASELINE_TYPE_UNSPECIFIED,ready
+Connected clusters only WOOP,CYS - CNAPP,wiz-outpost-lite,95bf32c8-ced4-4a81-9665-f3c6278f5f57,woop,8.734,34.936,8.734,9.229000000000001,-39.05671351,0.0,-4.12071350718031,143.63036061990823,-4.1207135071803265,0.0,8.85776527777778,INDUSTRY_AVERAGE,ready
+Connected clusters only WOOP,CPS,dema-platform-services,5dc3bf31-a263-4c6b-88bb-e95b6403aa51,woop,458.039,1832.156,458.0389999999999,510.173,-915.9449748,0.0,916.21102515303,13529.714661541911,916.2110251530302,0.0,464.6584361111112,PEER_CLUSTERS,ready
+Connected clusters only WOOP,FT-FT RPD CED SSI-IIP,CDM-EKS-Cluster,62aa894c-1d41-4a7a-98ed-e181e289e173,woop,3.93,15.72,0.061,2.056,-15.52913181,0.0,0.190868185531598,3.0823995813804697,0.19086818553159893,0.0,4.0,INDUSTRY_AVERAGE,failed
+Connected clusters only WOOP,DI FA DSP - DPP,bp-dev,b2ffa852-cc83-42d7-afd2-cb842f9310d5,woop,0.469,1.876,0.469,,-0.9663824136,0.0,0.909617586382009,0.0,0.9096175863820091,0.0,10.000000000000002,BASELINE_TYPE_UNSPECIFIED,ready
+Connected clusters only WOOP,IT IPS,aks-dios-weu-prod-001,b5d4cd12-98b2-4e9f-90a1-4db0134337c4,woop,53.231,212.924,53.230999999999995,46.118999999999986,-187.6732557,0.0,25.2507442995243,2984.799909035121,25.25074429952438,0.0,54.16373055555556,PEER_CLUSTERS,ready
+Connected clusters only WOOP,IT IPS,aks-dios-weu-test-001,b01c58a4-4ad2-4756-b729-e0cf07b8fba6,woop,24.8749999999999,99.5,24.874999999999993,25.973999999999997,-165.3159721,0.0,-65.8159720504004,1507.5088069155654,-65.81597205040039,0.0,25.283591666666673,PEER_CLUSTERS,ready
+Connected clusters only WOOP,SMO-RI-CSX-CS,csx-sunil-test,d9874265-f331-43cb-812c-2c63d419faa8,woop,2.911,11.644,2.94,,-11.35679882,0.0,0.287201176019359,0.0,0.2872011760193596,0.0,53.1753323271959,BASELINE_TYPE_UNSPECIFIED,ready
+Connected clusters only WOOP,SI B SW,fgeks-blue-eks-cluster,99cb56e0-50f9-4ad7-a803-d03da4d95513,woop,11.297,45.188,,,-33.26181897,0.0,11.9261810283618,1076.2780702782252,11.926181028361851,0.0,12.000000000000002,PEER_CLUSTERS,ready
+Connected clusters only Node Au,SI GSW CLO,ngm-integ-eks,1ad1a0bf-defe-4f51-acea-cbebb3d3fc3f,phase2,1152.308,4609.232,1152.3079999999998,1005.8780000000002,5795.075394,10404.3073944055,0.0,10348.202924241335,0.0,0.0,1168.7835625000002,CLUSTER_HISTORY,ready
+Connected clusters only Node Au,SI GSW CLO,ngm-kronos-eks,6d20eb8e-a1e5-4411-b4c8-5346ac3291b0,phase2,70.131,280.524,70.13100000000001,86.59099999999998,1956.476473,2237.00047317253,0.0,2108.8875330004403,0.0,0.0,71.34583055555557,CLUSTER_HISTORY,ready
+Connected clusters only Node Au,SI GSW CLO,ngm-helios-eks,419c39e4-66bf-4d61-b833-4562968a61c7,phase2,1662.079,6648.316,1662.079,1786.3829999999998,-1193.617182,5454.69881849768,0.0,5542.829447131404,0.0,0.0,1687.2201944444448,CLUSTER_HISTORY,ready
+Connected clusters only Node Au,SI GSW CLO,ngm-sim-eks,51dd234c-a5bf-4f99-a884-b79956de8f94,phase2,344.122999999999,1376.492,344.12300000000005,347.673,9989.178456,11365.670456409,0.0,11217.259674028688,0.0,0.0,349.7809527777778,OVERRIDDEN_DATA,ready
+Connected clusters only Node Au,SI EA electrificationx,eks-Cluster1,1ca6667a-06af-497f-a7ae-b9e7748c9493,phase2,7.992,31.968,7.992000000000002,6.053000000000002,-31.49143234,0.476567655278043,0.0,-15.425780522235499,0.0,0.0,8.119765277777779,PEER_CLUSTERS,ready
+Connected clusters only Node Au,SI EA electrificationx,eks-Cluster1,f31e9de1-7884-470e-95ce-11c9f5dcfe0d,phase2,260.051,1040.204,260.051,256.292,1504.96561,2545.16961041433,0.0,2746.3824714396137,0.0,0.0,264.4125416666667,OVERRIDDEN_DATA,ready
+Connected clusters only Node Au,HAFAS H&O,eks,8a9c0f55-86fc-4142-8f72-17ae6171a3aa,phase2,269.361,1077.444,269.36100000000005,134.28699999999998,109.0429226,1186.48692259661,0.0,1226.7265460360718,0.0,0.0,274.0773777777778,INDUSTRY_AVERAGE,ready
+Connected clusters only Node Au,DI SW PRS AMER SLC,Posit,893e4362-bb07-417a-b53c-f9b011b4240d,phase2,39.3449999999999,157.38,39.344999999999985,39.989999999999974,-173.7917007,-16.4117007357386,0.0,-590.2061826511253,0.0,0.0,40.00000000000001,INDUSTRY_AVERAGE,ready
+Connected clusters only Node Au,IT IPS,eleX01in,cf027570-8275-4d1d-a2e1-f9ffbb713f9e,phase2,322.056,1288.224,322.05600000000004,324.602,-686.3783442,601.845655802826,0.0,604.7169257997609,0.0,0.0,327.39829722222225,CLUSTER_HISTORY,ready
+Connected clusters only Node Au,IT IPS,eleX01,f0fa2ea7-48db-4473-b6b3-c73123fa0dac,phase2,319.702,1278.808,319.702,321.70500000000004,-72.38455283,1206.42344717092,0.0,1211.2390468454137,0.0,0.0,325.03035694444446,CLUSTER_HISTORY,ready
+Connected clusters only Node Au,IT IPS,eleX01p,823f9475-109e-4a8a-bed1-c1fba8441882,phase2,529.388999999999,2117.556,529.3889999999998,522.904,-5659.099313,-3541.54331313686,0.0,-3541.511599933729,0.0,0.0,538.1542708333334,CLUSTER_HISTORY,ready
+Connected clusters only Node Au,IT IPS,eleX01,7b646d74-cc78-4703-a14f-865b3c0451bf,phase2,307.481,1229.924,307.48100000000005,316.97099999999995,-63.88506636,1166.03893363759,0.0,1166.8404224372625,0.0,0.0,312.51376779719874,CLUSTER_HISTORY,ready
+Connected clusters only Node Au,DI AUT PI APF,dev-cluster,7e04bd70-0513-4c6b-8b38-42b6c46905d9,phase2,33.0809999999999,132.324,,,-209.8406804,-77.5166804265719,0.0,-66.3591752917489,0.0,0.0,33.58728472222223,CLUSTER_HISTORY,ready
+Connected clusters only Node Au,SI B SW,fgeks-blue-eks-cluster,dc42abdf-7485-4115-a23e-a623f63fc12f,phase2,1.67299999999999,6.692,,,37.04631803,43.7383180348621,0.0,43.37184912591506,0.0,0.0,10.654795833333335,CLUSTER_HISTORY,ready
+Connected clusters Node + WOOP,SI GSW CLO,ngm-sim2-eks,8bd361b0-fcbf-491d-beac-af92fb7d6b46,phase2,78.895,315.58,78.895,64.38299999999998,2336.304954,2651.88495419589,1399.64753390892,2569.7183726966887,1399.6475339089227,0.0,80.25688750000002,CLUSTER_HISTORY,ready
+Connected clusters Node + WOOP,SI GSW CLO,baseline-clo-eks,02810f4b-b793-4ef2-95f1-e902af61d9e3,phase2,103.080999999999,412.324,103.08099999999999,109.907,3221.766161,3634.09016053683,1084.19420220155,3555.414540394758,1084.1942022015514,0.0,104.80013194444446,CLUSTER_HISTORY,ready
+Connected clusters Node + WOOP,SI EA electrificationx,eks-Cluster1,c6cdf969-f81c-4324-a498-89008dce1351,phase2,318.281999999999,1273.128,318.2819999999999,356.77200000000005,402.8922547,1676.02025468367,138.270456001197,1759.065136382737,138.27045600119754,0.0,322.85273888888895,CLUSTER_HISTORY,ready
+Connected clusters Node + WOOP,HAFAS H&O,eks,953f87e7-9175-435b-ad3b-1a3b8a4e7cad,phase2,467.048,1868.192,467.04799999999994,429.79200000000003,8149.130158,10017.3221575906,991.057696303152,10018.592981174574,991.0576963031527,0.0,474.9061083333334,OVERRIDDEN_DATA,ready
+Connected clusters Node + WOOP,HAFAS H&O,eks,22bf2472-d9ba-4cb3-b6ec-1f7aab50cb3f,phase2,45.561,182.244,45.561,38.257,1672.718075,1854.96207494972,750.516515229649,2161.781847184197,750.5165152296499,0.0,46.41231132731065,OVERRIDDEN_DATA,ready
+Connected clusters Node + WOOP,Siemens Dev,pfm-eks-cluster,de02aae4-1fd1-401a-ad47-345711d4d7b3,phase2,72.108,288.432,72.108,69.643,384.8427865,673.274786517391,489.407518256407,724.945681608641,489.4075182564071,0.0,73.33291111111113,CLUSTER_HISTORY,ready
+Connected clusters Node + WOOP,Siemens Dev,dev-vlab-cluster,0528411e-4d89-4fcf-af04-1b496541025d,phase2,1.462,5.848,1.462,,33.65380048,39.5018004799113,50.8535421876878,248.6188985620808,50.85354218768785,0.0,18.099763572451504,CLUSTER_HISTORY,ready
+Connected clusters Node + WOOP,SI-EP-EMS-R&D,cluster,67a9bd91-0edf-40f9-8429-e14f3707a750,phase2,17.5689999999999,70.276,,,567.0615006,637.337500606276,-0.012330211256376,637.4952855111833,-0.012330211256376226,0.0,18.16691654126635,CLUSTER_HISTORY,ready
+Connected clusters Node + WOOP,SI-EP-EMS-R&D,cluster,95276912-9b38-42d6-91d5-a388fc0280d2,phase2,17.7149999999999,70.86,,,469.6456095,540.50560952177,-0.0581103212266435,540.5056095217703,-0.05811032122664361,0.0,18.000000000000004,CLUSTER_HISTORY,ready
+Connected clusters Node + WOOP,CPS,dema-platform-services-test,00ee8944-67f6-43d5-8517-c270951ec02c,phase2,16.0739999999999,64.296,16.073999999999998,16.471999999999998,146.6202489,210.916248917143,17.190932794944,252.49558092600608,17.19093279494404,0.0,16.317962500000004,CLUSTER_HISTORY,ready
+Connected clusters Node + WOOP,SMO-SW-PDH-TPS,eks-tpslive-dev,d119d612-84ad-4c79-9992-a120b7206f15,phase2,7.48,29.92,,,87.38856436,117.308564362944,0.0436126645920627,99.7687214813738,0.04361266459206272,0.0,7.699760292556329,INDUSTRY_AVERAGE,ready
+Connected clusters Node + WOOP,evosoft IT MIS,ITMIS,31864129-b09c-47b2-a8df-c616f98d65b7,phase2,21.645,86.58,,,66.47797557,153.057975566839,9.06932030795667,153.05797556683908,9.069320307956671,0.0,22.0,PEER_CLUSTERS,ready
+Connected clusters Node + WOOP,IT IPS,pioneer-tcx,a4ee9bce-da9e-4cae-8eda-caeb0b5ab20a,phase2,25.4169999999999,101.668,25.417,23.39,733.5066803,835.174680320922,75.480678010279,4484.049535494542,75.48067801027902,3569.2230992876803,49.21534920988204,CLUSTER_HISTORY,ready
+Connected clusters Node + WOOP,SI B SW,fgeks-blue-eks-cluster,3782e6c8-4780-42cb-bada-97b096ee21f7,phase2,1.718,6.872,,,0.1414385325,7.01343853250764,6.63459735053304,16.104841098933875,6.634597350533153,0.0,4.642245833333334,CLUSTER_HISTORY,ready
+Connected clusters Node + WOOP,SI B SW,fgeks-blue-eks-cluster,01c18e7a-ce06-4c12-b921-c93e612d3bf0,phase2,12.182,48.728,,,372.248222,420.976221951456,53.0045092370826,420.9732746368134,53.00450923708264,0.0,12.386616666666669,CLUSTER_HISTORY,ready
+Connected clusters Node + WOOP,SI B SW,fgeks-blue-eks-cluster,fd1ca573-4982-4133-89ce-bfd4df4f5d7b,phase2,7.767,31.068,,,382.8398433,413.907843295448,90.6101767193337,413.8954758896616,90.61017671933378,0.0,7.8877402777777785,CLUSTER_HISTORY,ready
+Connected clusters Node + WOOP,SI B SW,fgeks-blue-eks-cluster,6c94cd80-978f-4d9c-926e-df0e43dbb93f,phase2,11.404,45.616,,,-37.9698603,7.64613970187063,18.0615340321556,15.303592134538732,18.06153403215568,0.0,11.587256944444448,CLUSTER_HISTORY,ready
+Connected clusters Node + WOOP,SI B SW,fgeks-blue-eks-cluster,dc10bd6a-1552-4c4b-9173-fc11b50c610f,phase2,4.56199999999999,18.248,,,9.456982985,27.704982985278,-0.166356933298879,261.02253332225723,-0.1663569332988794,0.0,57.1503876923077,CLUSTER_HISTORY,failed
+Connected clusters Node + WOOP,SI B SW,fgeks-blue-eks-cluster,6436c787-9169-4b3a-907c-d18776efeb19,phase2,9.84,39.36,,,261.6226053,300.982605313144,27.3864008986279,300.9826053132525,27.386400898633426,0.0,10.000000000000002,CLUSTER_HISTORY,ready
+Connected clusters Node + WOOP,Pillar#1,console-eks-integ,d909c528-e5d0-4ebd-8c1a-77ad9b76a54b,phase2,41.6089999999999,166.436,41.60900000000001,1.905,-157.9238061,8.51219387754305,1116.46034903189,1354.6740754212701,1116.460349031896,0.0,101.26200972222223,CLUSTER_HISTORY,ready

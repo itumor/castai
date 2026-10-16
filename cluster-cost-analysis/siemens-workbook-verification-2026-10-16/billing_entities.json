@@ -1,0 +1,1477 @@
+{
+ "07aa3c29-3e1f-44bc-ad60-ceedb878d99a": {
+  "name": "SI GSW CLO",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 3400.814999999997,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "02810f4b-b793-4ef2-95f1-e902af61d9e3",
+      "entityName": "baseline-clo-eks",
+      "usage": 109.907
+     },
+     {
+      "entityId": "1ad1a0bf-defe-4f51-acea-cbebb3d3fc3f",
+      "entityName": "ngm-integ-eks",
+      "usage": 1005.8780000000002
+     },
+     {
+      "entityId": "419c39e4-66bf-4d61-b833-4562968a61c7",
+      "entityName": "ngm-helios-eks",
+      "usage": 1786.3829999999998
+     },
+     {
+      "entityId": "51dd234c-a5bf-4f99-a884-b79956de8f94",
+      "entityName": "ngm-sim-eks",
+      "usage": 347.673
+     },
+     {
+      "entityId": "6d20eb8e-a1e5-4411-b4c8-5346ac3291b0",
+      "entityName": "ngm-kronos-eks",
+      "usage": 86.59099999999998
+     },
+     {
+      "entityId": "8bd361b0-fcbf-491d-beac-af92fb7d6b46",
+      "entityName": "ngm-sim2-eks",
+      "usage": 64.38299999999998
+     }
+    ]
+   },
+   "phase2_period": {
+    "totalUsage": 3410.6170000000006,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "02810f4b-b793-4ef2-95f1-e902af61d9e3",
+      "entityName": "baseline-clo-eks",
+      "usage": 103.08099999999999
+     },
+     {
+      "entityId": "1ad1a0bf-defe-4f51-acea-cbebb3d3fc3f",
+      "entityName": "ngm-integ-eks",
+      "usage": 1152.3079999999998
+     },
+     {
+      "entityId": "419c39e4-66bf-4d61-b833-4562968a61c7",
+      "entityName": "ngm-helios-eks",
+      "usage": 1662.079
+     },
+     {
+      "entityId": "51dd234c-a5bf-4f99-a884-b79956de8f94",
+      "entityName": "ngm-sim-eks",
+      "usage": 344.12300000000005
+     },
+     {
+      "entityId": "6d20eb8e-a1e5-4411-b4c8-5346ac3291b0",
+      "entityName": "ngm-kronos-eks",
+      "usage": 70.13100000000001
+     },
+     {
+      "entityId": "8bd361b0-fcbf-491d-beac-af92fb7d6b46",
+      "entityName": "ngm-sim2-eks",
+      "usage": 78.895
+     }
+    ]
+   },
+   "woop_sept": {
+    "totalUsage": 3291.035999999999,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "02810f4b-b793-4ef2-95f1-e902af61d9e3",
+      "entityName": "baseline-clo-eks",
+      "usage": 0.164
+     },
+     {
+      "entityId": "1ad1a0bf-defe-4f51-acea-cbebb3d3fc3f",
+      "entityName": "ngm-integ-eks",
+      "usage": 1005.8779999999998
+     },
+     {
+      "entityId": "419c39e4-66bf-4d61-b833-4562968a61c7",
+      "entityName": "ngm-helios-eks",
+      "usage": 1786.383
+     },
+     {
+      "entityId": "51dd234c-a5bf-4f99-a884-b79956de8f94",
+      "entityName": "ngm-sim-eks",
+      "usage": 347.67299999999994
+     },
+     {
+      "entityId": "6d20eb8e-a1e5-4411-b4c8-5346ac3291b0",
+      "entityName": "ngm-kronos-eks",
+      "usage": 86.591
+     },
+     {
+      "entityId": "8bd361b0-fcbf-491d-beac-af92fb7d6b46",
+      "entityName": "ngm-sim2-eks",
+      "usage": 64.347
+     }
+    ]
+   },
+   "woop_period": {
+    "totalUsage": 3307.5359999999996,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "1ad1a0bf-defe-4f51-acea-cbebb3d3fc3f",
+      "entityName": "ngm-integ-eks",
+      "usage": 1152.3079999999998
+     },
+     {
+      "entityId": "419c39e4-66bf-4d61-b833-4562968a61c7",
+      "entityName": "ngm-helios-eks",
+      "usage": 1662.0790000000002
+     },
+     {
+      "entityId": "51dd234c-a5bf-4f99-a884-b79956de8f94",
+      "entityName": "ngm-sim-eks",
+      "usage": 344.12299999999993
+     },
+     {
+      "entityId": "6d20eb8e-a1e5-4411-b4c8-5346ac3291b0",
+      "entityName": "ngm-kronos-eks",
+      "usage": 70.131
+     },
+     {
+      "entityId": "8bd361b0-fcbf-491d-beac-af92fb7d6b46",
+      "entityName": "ngm-sim2-eks",
+      "usage": 78.89500000000001
+     }
+    ]
+   }
+  }
+ },
+ "259169ff-616b-4c53-9641-ae46235ace26": {
+  "name": "SI EA electrificationx",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 619.1170000000002,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "1ca6667a-06af-497f-a7ae-b9e7748c9493",
+      "entityName": "eks-Cluster1",
+      "usage": 6.053000000000002
+     },
+     {
+      "entityId": "c6cdf969-f81c-4324-a498-89008dce1351",
+      "entityName": "eks-Cluster1",
+      "usage": 356.77200000000005
+     },
+     {
+      "entityId": "f31e9de1-7884-470e-95ce-11c9f5dcfe0d",
+      "entityName": "eks-Cluster1",
+      "usage": 256.292
+     }
+    ]
+   },
+   "phase2_period": {
+    "totalUsage": 586.325,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "1ca6667a-06af-497f-a7ae-b9e7748c9493",
+      "entityName": "eks-Cluster1",
+      "usage": 7.992000000000002
+     },
+     {
+      "entityId": "c6cdf969-f81c-4324-a498-89008dce1351",
+      "entityName": "eks-Cluster1",
+      "usage": 318.2819999999999
+     },
+     {
+      "entityId": "f31e9de1-7884-470e-95ce-11c9f5dcfe0d",
+      "entityName": "eks-Cluster1",
+      "usage": 260.051
+     }
+    ]
+   },
+   "woop_sept": {
+    "totalUsage": 613.366,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "1ca6667a-06af-497f-a7ae-b9e7748c9493",
+      "entityName": "eks-Cluster1",
+      "usage": 0.30200000000000005
+     },
+     {
+      "entityId": "c6cdf969-f81c-4324-a498-89008dce1351",
+      "entityName": "eks-Cluster1",
+      "usage": 356.77199999999993
+     },
+     {
+      "entityId": "f31e9de1-7884-470e-95ce-11c9f5dcfe0d",
+      "entityName": "eks-Cluster1",
+      "usage": 256.29200000000003
+     }
+    ]
+   },
+   "woop_period": {
+    "totalUsage": 578.3330000000001,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "c6cdf969-f81c-4324-a498-89008dce1351",
+      "entityName": "eks-Cluster1",
+      "usage": 318.2819999999999
+     },
+     {
+      "entityId": "f31e9de1-7884-470e-95ce-11c9f5dcfe0d",
+      "entityName": "eks-Cluster1",
+      "usage": 260.051
+     }
+    ]
+   }
+  }
+ },
+ "3d933189-4e1d-42ee-9cca-f7458e8fadab": {
+  "name": "HAFAS H&O",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 602.3360000000004,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "06cbc64f-209b-43af-8037-089966f2368b",
+      "entityName": "eks-dev-euc1",
+      "usage": 0
+     },
+     {
+      "entityId": "22bf2472-d9ba-4cb3-b6ec-1f7aab50cb3f",
+      "entityName": "eks",
+      "usage": 38.257
+     },
+     {
+      "entityId": "8a9c0f55-86fc-4142-8f72-17ae6171a3aa",
+      "entityName": "eks",
+      "usage": 134.28699999999998
+     },
+     {
+      "entityId": "953f87e7-9175-435b-ad3b-1a3b8a4e7cad",
+      "entityName": "eks",
+      "usage": 429.79200000000003
+     }
+    ]
+   },
+   "phase2_period": {
+    "totalUsage": 781.97,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "06cbc64f-209b-43af-8037-089966f2368b",
+      "entityName": "eks-dev-euc1",
+      "usage": 0
+     },
+     {
+      "entityId": "22bf2472-d9ba-4cb3-b6ec-1f7aab50cb3f",
+      "entityName": "eks",
+      "usage": 45.561
+     },
+     {
+      "entityId": "8a9c0f55-86fc-4142-8f72-17ae6171a3aa",
+      "entityName": "eks",
+      "usage": 269.36100000000005
+     },
+     {
+      "entityId": "953f87e7-9175-435b-ad3b-1a3b8a4e7cad",
+      "entityName": "eks",
+      "usage": 467.04799999999994
+     }
+    ]
+   },
+   "woop_sept": {
+    "totalUsage": 602.3359999999999,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "22bf2472-d9ba-4cb3-b6ec-1f7aab50cb3f",
+      "entityName": "eks",
+      "usage": 38.257
+     },
+     {
+      "entityId": "8a9c0f55-86fc-4142-8f72-17ae6171a3aa",
+      "entityName": "eks",
+      "usage": 134.28699999999998
+     },
+     {
+      "entityId": "953f87e7-9175-435b-ad3b-1a3b8a4e7cad",
+      "entityName": "eks",
+      "usage": 429.79200000000003
+     }
+    ]
+   },
+   "woop_period": {
+    "totalUsage": 781.9699999999999,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "22bf2472-d9ba-4cb3-b6ec-1f7aab50cb3f",
+      "entityName": "eks",
+      "usage": 45.56100000000001
+     },
+     {
+      "entityId": "8a9c0f55-86fc-4142-8f72-17ae6171a3aa",
+      "entityName": "eks",
+      "usage": 269.361
+     },
+     {
+      "entityId": "953f87e7-9175-435b-ad3b-1a3b8a4e7cad",
+      "entityName": "eks",
+      "usage": 467.048
+     }
+    ]
+   }
+  }
+ },
+ "c67df1a0-06e0-46f9-a84e-27c14958d564": {
+  "name": "IT IPS",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 1678.9419999999977,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "06a44e72-8f49-4f6f-a2f5-2092d14cffe4",
+      "entityName": "kafka-test",
+      "usage": 15.989999999999995
+     },
+     {
+      "entityId": "7b646d74-cc78-4703-a14f-865b3c0451bf",
+      "entityName": "eleX01",
+      "usage": 316.97099999999995
+     },
+     {
+      "entityId": "823f9475-109e-4a8a-bed1-c1fba8441882",
+      "entityName": "eleX01p",
+      "usage": 522.904
+     },
+     {
+      "entityId": "a4ee9bce-da9e-4cae-8eda-caeb0b5ab20a",
+      "entityName": "pioneer-tcx",
+      "usage": 23.39
+     },
+     {
+      "entityId": "b01c58a4-4ad2-4756-b729-e0cf07b8fba6",
+      "entityName": "aks-dios-weu-test-001",
+      "usage": 27.048999999999996
+     },
+     {
+      "entityId": "b5d4cd12-98b2-4e9f-90a1-4db0134337c4",
+      "entityName": "aks-dios-weu-prod-001",
+      "usage": 48.338999999999984
+     },
+     {
+      "entityId": "c783a2f5-d6c9-4c93-9bbe-216d2c614903",
+      "entityName": "iec-tcx-flat",
+      "usage": 32.01
+     },
+     {
+      "entityId": "cf027570-8275-4d1d-a2e1-f9ffbb713f9e",
+      "entityName": "eleX01in",
+      "usage": 324.602
+     },
+     {
+      "entityId": "ef65cdd5-853a-46d3-9694-6d93edd6ad2d",
+      "entityName": "eagle-kafka01",
+      "usage": 45.982000000000006
+     },
+     {
+      "entityId": "f0fa2ea7-48db-4473-b6b3-c73123fa0dac",
+      "entityName": "eleX01",
+      "usage": 321.70500000000004
+     }
+    ]
+   },
+   "phase2_period": {
+    "totalUsage": 1694.7739999999994,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "06a44e72-8f49-4f6f-a2f5-2092d14cffe4",
+      "entityName": "kafka-test",
+      "usage": 15.741999999999997
+     },
+     {
+      "entityId": "4aaa7671-3d83-454d-a7aa-449df17c10d3",
+      "entityName": "mof-staging",
+      "usage": 2.319
+     },
+     {
+      "entityId": "56d5ca2d-a5b7-4223-97f2-75f2af35b242",
+      "entityName": "cloudcore02",
+      "usage": 0
+     },
+     {
+      "entityId": "66723d08-943f-4b85-9f75-80d9bd5c4511",
+      "entityName": "mof",
+      "usage": 2.182
+     },
+     {
+      "entityId": "6bb5a236-875d-4158-9c5c-a1d66e08ac83",
+      "entityName": "dev-sec",
+      "usage": 15.325000000000003
+     },
+     {
+      "entityId": "7b646d74-cc78-4703-a14f-865b3c0451bf",
+      "entityName": "eleX01",
+      "usage": 307.48100000000005
+     },
+     {
+      "entityId": "823f9475-109e-4a8a-bed1-c1fba8441882",
+      "entityName": "eleX01p",
+      "usage": 529.3889999999998
+     },
+     {
+      "entityId": "a4ee9bce-da9e-4cae-8eda-caeb0b5ab20a",
+      "entityName": "pioneer-tcx",
+      "usage": 25.417
+     },
+     {
+      "entityId": "b01c58a4-4ad2-4756-b729-e0cf07b8fba6",
+      "entityName": "aks-dios-weu-test-001",
+      "usage": 24.874999999999996
+     },
+     {
+      "entityId": "b5d4cd12-98b2-4e9f-90a1-4db0134337c4",
+      "entityName": "aks-dios-weu-prod-001",
+      "usage": 53.230999999999995
+     },
+     {
+      "entityId": "c783a2f5-d6c9-4c93-9bbe-216d2c614903",
+      "entityName": "iec-tcx-flat",
+      "usage": 31.485000000000003
+     },
+     {
+      "entityId": "cf027570-8275-4d1d-a2e1-f9ffbb713f9e",
+      "entityName": "eleX01in",
+      "usage": 322.05600000000004
+     },
+     {
+      "entityId": "ef65cdd5-853a-46d3-9694-6d93edd6ad2d",
+      "entityName": "eagle-kafka01",
+      "usage": 45.570000000000014
+     },
+     {
+      "entityId": "f0fa2ea7-48db-4473-b6b3-c73123fa0dac",
+      "entityName": "eleX01",
+      "usage": 319.702
+     }
+    ]
+   },
+   "woop_sept": {
+    "totalUsage": 1675.6469999999986,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "06a44e72-8f49-4f6f-a2f5-2092d14cffe4",
+      "entityName": "kafka-test",
+      "usage": 15.989999999999995
+     },
+     {
+      "entityId": "7b646d74-cc78-4703-a14f-865b3c0451bf",
+      "entityName": "eleX01",
+      "usage": 316.971
+     },
+     {
+      "entityId": "823f9475-109e-4a8a-bed1-c1fba8441882",
+      "entityName": "eleX01p",
+      "usage": 522.9039999999999
+     },
+     {
+      "entityId": "a4ee9bce-da9e-4cae-8eda-caeb0b5ab20a",
+      "entityName": "pioneer-tcx",
+      "usage": 23.389999999999997
+     },
+     {
+      "entityId": "b01c58a4-4ad2-4756-b729-e0cf07b8fba6",
+      "entityName": "aks-dios-weu-test-001",
+      "usage": 25.973999999999997
+     },
+     {
+      "entityId": "b5d4cd12-98b2-4e9f-90a1-4db0134337c4",
+      "entityName": "aks-dios-weu-prod-001",
+      "usage": 46.118999999999986
+     },
+     {
+      "entityId": "c783a2f5-d6c9-4c93-9bbe-216d2c614903",
+      "entityName": "iec-tcx-flat",
+      "usage": 32.01
+     },
+     {
+      "entityId": "cf027570-8275-4d1d-a2e1-f9ffbb713f9e",
+      "entityName": "eleX01in",
+      "usage": 324.6019999999999
+     },
+     {
+      "entityId": "ef65cdd5-853a-46d3-9694-6d93edd6ad2d",
+      "entityName": "eagle-kafka01",
+      "usage": 45.98200000000001
+     },
+     {
+      "entityId": "f0fa2ea7-48db-4473-b6b3-c73123fa0dac",
+      "entityName": "eleX01",
+      "usage": 321.70500000000004
+     }
+    ]
+   },
+   "woop_period": {
+    "totalUsage": 1693.3829999999994,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "06a44e72-8f49-4f6f-a2f5-2092d14cffe4",
+      "entityName": "kafka-test",
+      "usage": 15.741999999999999
+     },
+     {
+      "entityId": "4aaa7671-3d83-454d-a7aa-449df17c10d3",
+      "entityName": "mof-staging",
+      "usage": 2.319
+     },
+     {
+      "entityId": "66723d08-943f-4b85-9f75-80d9bd5c4511",
+      "entityName": "mof",
+      "usage": 2.182
+     },
+     {
+      "entityId": "6bb5a236-875d-4158-9c5c-a1d66e08ac83",
+      "entityName": "dev-sec",
+      "usage": 13.934
+     },
+     {
+      "entityId": "7b646d74-cc78-4703-a14f-865b3c0451bf",
+      "entityName": "eleX01",
+      "usage": 307.48100000000005
+     },
+     {
+      "entityId": "823f9475-109e-4a8a-bed1-c1fba8441882",
+      "entityName": "eleX01p",
+      "usage": 529.3889999999998
+     },
+     {
+      "entityId": "a4ee9bce-da9e-4cae-8eda-caeb0b5ab20a",
+      "entityName": "pioneer-tcx",
+      "usage": 25.416999999999998
+     },
+     {
+      "entityId": "b01c58a4-4ad2-4756-b729-e0cf07b8fba6",
+      "entityName": "aks-dios-weu-test-001",
+      "usage": 24.874999999999993
+     },
+     {
+      "entityId": "b5d4cd12-98b2-4e9f-90a1-4db0134337c4",
+      "entityName": "aks-dios-weu-prod-001",
+      "usage": 53.230999999999995
+     },
+     {
+      "entityId": "c783a2f5-d6c9-4c93-9bbe-216d2c614903",
+      "entityName": "iec-tcx-flat",
+      "usage": 31.485000000000003
+     },
+     {
+      "entityId": "cf027570-8275-4d1d-a2e1-f9ffbb713f9e",
+      "entityName": "eleX01in",
+      "usage": 322.056
+     },
+     {
+      "entityId": "ef65cdd5-853a-46d3-9694-6d93edd6ad2d",
+      "entityName": "eagle-kafka01",
+      "usage": 45.57000000000002
+     },
+     {
+      "entityId": "f0fa2ea7-48db-4473-b6b3-c73123fa0dac",
+      "entityName": "eleX01",
+      "usage": 319.702
+     }
+    ]
+   }
+  }
+ },
+ "fce58d3c-0345-465e-9257-f5c31f29a810": {
+  "name": "Pillar#1",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 1.905,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "d909c528-e5d0-4ebd-8c1a-77ad9b76a54b",
+      "entityName": "console-eks-integ",
+      "usage": 1.905
+     }
+    ]
+   },
+   "phase2_period": {
+    "totalUsage": 41.60900000000001,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "d909c528-e5d0-4ebd-8c1a-77ad9b76a54b",
+      "entityName": "console-eks-integ",
+      "usage": 41.60900000000001
+     }
+    ]
+   },
+   "woop_sept": {
+    "totalUsage": 341.75800000000015,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "514bf38c-5235-44b6-a951-8e69528b5943",
+      "entityName": "gw-eks-integ",
+      "usage": 22.251
+     },
+     {
+      "entityId": "a8129ccd-1dd4-441c-aaee-babd56ea5dc3",
+      "entityName": "console-eks-preprod",
+      "usage": 98.911
+     },
+     {
+      "entityId": "b97e51e0-b4d7-42b3-a50a-ad29b9ab6b4d",
+      "entityName": "fgac-eks-integ",
+      "usage": 35.833999999999996
+     },
+     {
+      "entityId": "c086341f-ab62-4abc-90c8-a9ace1b45426",
+      "entityName": "gw-eks-preprod",
+      "usage": 32.012
+     },
+     {
+      "entityId": "cce8c41d-bf31-4c7e-bfff-dd2f8f0cd519",
+      "entityName": "fgac-eks-preprod",
+      "usage": 27.994
+     },
+     {
+      "entityId": "d909c528-e5d0-4ebd-8c1a-77ad9b76a54b",
+      "entityName": "console-eks-integ",
+      "usage": 124.75600000000001
+     }
+    ]
+   },
+   "woop_period": {
+    "totalUsage": 299.482,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "514bf38c-5235-44b6-a951-8e69528b5943",
+      "entityName": "gw-eks-integ",
+      "usage": 21.846000000000004
+     },
+     {
+      "entityId": "a8129ccd-1dd4-441c-aaee-babd56ea5dc3",
+      "entityName": "console-eks-preprod",
+      "usage": 87.827
+     },
+     {
+      "entityId": "b97e51e0-b4d7-42b3-a50a-ad29b9ab6b4d",
+      "entityName": "fgac-eks-integ",
+      "usage": 37.484
+     },
+     {
+      "entityId": "c086341f-ab62-4abc-90c8-a9ace1b45426",
+      "entityName": "gw-eks-preprod",
+      "usage": 27.038999999999998
+     },
+     {
+      "entityId": "cce8c41d-bf31-4c7e-bfff-dd2f8f0cd519",
+      "entityName": "fgac-eks-preprod",
+      "usage": 25.310999999999993
+     },
+     {
+      "entityId": "d909c528-e5d0-4ebd-8c1a-77ad9b76a54b",
+      "entityName": "console-eks-integ",
+      "usage": 99.97499999999998
+     }
+    ]
+   }
+  }
+ },
+ "43b8288a-7bc4-4f6b-a008-dcd9e1d5e7d2": {
+  "name": "Siemens Dev",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 69.643,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "dac52e3e-1576-479c-b61e-f33589de026f",
+      "entityName": "sp-tofu-simple",
+      "usage": 0
+     },
+     {
+      "entityId": "de02aae4-1fd1-401a-ad47-345711d4d7b3",
+      "entityName": "pfm-eks-cluster",
+      "usage": 69.643
+     }
+    ]
+   },
+   "phase2_period": {
+    "totalUsage": 73.57000000000001,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "0528411e-4d89-4fcf-af04-1b496541025d",
+      "entityName": "dev-vlab-cluster",
+      "usage": 1.462
+     },
+     {
+      "entityId": "dac52e3e-1576-479c-b61e-f33589de026f",
+      "entityName": "sp-tofu-simple",
+      "usage": 0
+     },
+     {
+      "entityId": "de02aae4-1fd1-401a-ad47-345711d4d7b3",
+      "entityName": "pfm-eks-cluster",
+      "usage": 72.108
+     }
+    ]
+   },
+   "woop_sept": {
+    "totalUsage": 71.22200000000001,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "0528411e-4d89-4fcf-af04-1b496541025d",
+      "entityName": "dev-vlab-cluster",
+      "usage": 1.5790000000000002
+     },
+     {
+      "entityId": "de02aae4-1fd1-401a-ad47-345711d4d7b3",
+      "entityName": "pfm-eks-cluster",
+      "usage": 69.643
+     }
+    ]
+   },
+   "woop_period": {
+    "totalUsage": 82.70000000000002,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "0528411e-4d89-4fcf-af04-1b496541025d",
+      "entityName": "dev-vlab-cluster",
+      "usage": 9.099999999999998
+     },
+     {
+      "entityId": "d1bf9c35-07ac-4c4b-9d7a-ac41473c3b10",
+      "entityName": "aks-castai-demo",
+      "usage": 1.4919999999999998
+     },
+     {
+      "entityId": "de02aae4-1fd1-401a-ad47-345711d4d7b3",
+      "entityName": "pfm-eks-cluster",
+      "usage": 72.108
+     }
+    ]
+   }
+  }
+ },
+ "f15f33b9-20ad-4128-8289-da529844d3f0": {
+  "name": "SMO Railigent X",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 1176.415,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "4952c4ce-6a3a-44f4-9b3c-9794ca9ddbc9",
+      "entityName": "k8s",
+      "usage": 1041.2510000000002
+     },
+     {
+      "entityId": "7eb37770-9c35-460d-a896-910949ae0ea6",
+      "entityName": "k8s",
+      "usage": 1.048
+     },
+     {
+      "entityId": "ae3e22a4-6e7a-487d-9c95-2c0fb3bb8f35",
+      "entityName": "staging",
+      "usage": 58.605
+     },
+     {
+      "entityId": "cf62a8e1-1f1e-40dc-bd90-1b5c84dfa9df",
+      "entityName": "k8s",
+      "usage": 13.37
+     },
+     {
+      "entityId": "d03690cb-2ba4-4ff5-9519-27013515aba7",
+      "entityName": "k8s-andreas",
+      "usage": 44.05599999999999
+     },
+     {
+      "entityId": "d0c7a7a5-72d2-4c09-a9f6-1b173c64d0a8",
+      "entityName": "k8s",
+      "usage": 18.085
+     }
+    ]
+   },
+   "phase2_period": {
+    "totalUsage": 1940.5529999999999,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "4952c4ce-6a3a-44f4-9b3c-9794ca9ddbc9",
+      "entityName": "k8s",
+      "usage": 1000.6949999999999
+     },
+     {
+      "entityId": "7eb37770-9c35-460d-a896-910949ae0ea6",
+      "entityName": "k8s",
+      "usage": 26.253
+     },
+     {
+      "entityId": "ae3e22a4-6e7a-487d-9c95-2c0fb3bb8f35",
+      "entityName": "staging",
+      "usage": 66.388
+     },
+     {
+      "entityId": "cf62a8e1-1f1e-40dc-bd90-1b5c84dfa9df",
+      "entityName": "k8s",
+      "usage": 343.57700000000006
+     },
+     {
+      "entityId": "d03690cb-2ba4-4ff5-9519-27013515aba7",
+      "entityName": "k8s-andreas",
+      "usage": 47.30899999999999
+     },
+     {
+      "entityId": "d0c7a7a5-72d2-4c09-a9f6-1b173c64d0a8",
+      "entityName": "k8s",
+      "usage": 456.331
+     }
+    ]
+   },
+   "woop_sept": {
+    "totalUsage": 2786.6879999999996,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "0e277bb2-036d-485f-8690-4bf22720af9f",
+      "entityName": "k8s",
+      "usage": 26.572
+     },
+     {
+      "entityId": "4952c4ce-6a3a-44f4-9b3c-9794ca9ddbc9",
+      "entityName": "k8s",
+      "usage": 1041.2510000000002
+     },
+     {
+      "entityId": "5771ec22-fb0e-4fd8-a73a-fdf451ab0741",
+      "entityName": "k8s",
+      "usage": 64.23599999999999
+     },
+     {
+      "entityId": "7eb37770-9c35-460d-a896-910949ae0ea6",
+      "entityName": "k8s",
+      "usage": 53.307999999999986
+     },
+     {
+      "entityId": "ae3e22a4-6e7a-487d-9c95-2c0fb3bb8f35",
+      "entityName": "staging",
+      "usage": 58.605000000000004
+     },
+     {
+      "entityId": "cf62a8e1-1f1e-40dc-bd90-1b5c84dfa9df",
+      "entityName": "k8s",
+      "usage": 655.0259999999998
+     },
+     {
+      "entityId": "d0c7a7a5-72d2-4c09-a9f6-1b173c64d0a8",
+      "entityName": "k8s",
+      "usage": 861.9959999999999
+     },
+     {
+      "entityId": "f8dd5b4f-3cf4-48e2-b453-7be4562e36cb",
+      "entityName": "k8s",
+      "usage": 25.693999999999996
+     }
+    ]
+   },
+   "woop_period": {
+    "totalUsage": 2763.165,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "0e277bb2-036d-485f-8690-4bf22720af9f",
+      "entityName": "k8s",
+      "usage": 25.725000000000005
+     },
+     {
+      "entityId": "4952c4ce-6a3a-44f4-9b3c-9794ca9ddbc9",
+      "entityName": "k8s",
+      "usage": 1000.6949999999997
+     },
+     {
+      "entityId": "5771ec22-fb0e-4fd8-a73a-fdf451ab0741",
+      "entityName": "k8s",
+      "usage": 62.655
+     },
+     {
+      "entityId": "7eb37770-9c35-460d-a896-910949ae0ea6",
+      "entityName": "k8s",
+      "usage": 52.02999999999999
+     },
+     {
+      "entityId": "ae3e22a4-6e7a-487d-9c95-2c0fb3bb8f35",
+      "entityName": "staging",
+      "usage": 66.38800000000002
+     },
+     {
+      "entityId": "cf62a8e1-1f1e-40dc-bd90-1b5c84dfa9df",
+      "entityName": "k8s",
+      "usage": 660.1809999999999
+     },
+     {
+      "entityId": "d0c7a7a5-72d2-4c09-a9f6-1b173c64d0a8",
+      "entityName": "k8s",
+      "usage": 868.647
+     },
+     {
+      "entityId": "f8dd5b4f-3cf4-48e2-b453-7be4562e36cb",
+      "entityName": "k8s",
+      "usage": 26.843999999999994
+     }
+    ]
+   }
+  }
+ },
+ "5e413e89-eb67-48fb-b81c-6172baa988ed": {
+  "name": "CPS",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 526.6450000000001,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "00ee8944-67f6-43d5-8517-c270951ec02c",
+      "entityName": "dema-platform-services-test",
+      "usage": 16.471999999999998
+     },
+     {
+      "entityId": "5dc3bf31-a263-4c6b-88bb-e95b6403aa51",
+      "entityName": "dema-platform-services",
+      "usage": 510.1730000000001
+     }
+    ]
+   },
+   "phase2_period": {
+    "totalUsage": 474.11300000000006,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "00ee8944-67f6-43d5-8517-c270951ec02c",
+      "entityName": "dema-platform-services-test",
+      "usage": 16.073999999999998
+     },
+     {
+      "entityId": "5dc3bf31-a263-4c6b-88bb-e95b6403aa51",
+      "entityName": "dema-platform-services",
+      "usage": 458.03900000000004
+     }
+    ]
+   },
+   "woop_sept": {
+    "totalUsage": 526.626,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "00ee8944-67f6-43d5-8517-c270951ec02c",
+      "entityName": "dema-platform-services-test",
+      "usage": 16.453
+     },
+     {
+      "entityId": "5dc3bf31-a263-4c6b-88bb-e95b6403aa51",
+      "entityName": "dema-platform-services",
+      "usage": 510.173
+     }
+    ]
+   },
+   "woop_period": {
+    "totalUsage": 474.09399999999994,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "00ee8944-67f6-43d5-8517-c270951ec02c",
+      "entityName": "dema-platform-services-test",
+      "usage": 16.054999999999996
+     },
+     {
+      "entityId": "5dc3bf31-a263-4c6b-88bb-e95b6403aa51",
+      "entityName": "dema-platform-services",
+      "usage": 458.0389999999999
+     }
+    ]
+   }
+  }
+ },
+ "fc21737c-0c72-4cd0-b4bf-1236e5e4a73a": {
+  "name": "SiePortal",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 0,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "028c4376-8af3-4674-bc4a-a5c3db1b3504",
+      "entityName": "rproxysbox100708blue",
+      "usage": 0
+     }
+    ]
+   },
+   "phase2_period": {
+    "totalUsage": 0.003,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "028c4376-8af3-4674-bc4a-a5c3db1b3504",
+      "entityName": "rproxysbox100708blue",
+      "usage": 0.003
+     }
+    ]
+   },
+   "woop_sept": {
+    "totalUsage": 0,
+    "foc": false,
+    "entities": []
+   },
+   "woop_period": {
+    "totalUsage": 0,
+    "foc": false,
+    "entities": []
+   }
+  }
+ },
+ "b6a79c03-59eb-4823-8686-ca552b850f3e": {
+  "name": "Botanica",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 0,
+    "foc": false,
+    "entities": []
+   },
+   "phase2_period": {
+    "totalUsage": 0,
+    "foc": false,
+    "entities": []
+   },
+   "woop_sept": {
+    "totalUsage": 78.04099999999998,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "71ddd440-4ff4-4f4d-9a0d-6be345000920",
+      "entityName": "kubernetes",
+      "usage": 56.03699999999998
+     },
+     {
+      "entityId": "a8161722-2e3a-4d33-8c91-8684fa751ffe",
+      "entityName": "kubernetes",
+      "usage": 22.00400000000001
+     }
+    ]
+   },
+   "woop_period": {
+    "totalUsage": 76.78099999999992,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "71ddd440-4ff4-4f4d-9a0d-6be345000920",
+      "entityName": "kubernetes",
+      "usage": 55.12299999999998
+     },
+     {
+      "entityId": "a8161722-2e3a-4d33-8c91-8684fa751ffe",
+      "entityName": "kubernetes",
+      "usage": 21.65800000000001
+     }
+    ]
+   }
+  }
+ },
+ "f2806a31-e339-4309-ba5a-e2518d1623d8": {
+  "name": "SMO-RI-CSX-CS",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 0,
+    "foc": false,
+    "entities": []
+   },
+   "phase2_period": {
+    "totalUsage": 2.911,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "d9874265-f331-43cb-812c-2c63d419faa8",
+      "entityName": "csx-sunil-test",
+      "usage": 2.911
+     }
+    ]
+   },
+   "woop_sept": {
+    "totalUsage": 3.394,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "9b5e6c1c-90ed-406c-b16c-d2ff49c7aac2",
+      "entityName": "csx-snigdha-devops",
+      "usage": 0.219
+     },
+     {
+      "entityId": "fb9fb11b-10a1-438f-9a16-eb3652ab02f8",
+      "entityName": "csx-performance-test",
+      "usage": 3.1750000000000003
+     }
+    ]
+   },
+   "woop_period": {
+    "totalUsage": 21.322000000000003,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "9b5e6c1c-90ed-406c-b16c-d2ff49c7aac2",
+      "entityName": "csx-snigdha-devops",
+      "usage": 15.94
+     },
+     {
+      "entityId": "d9874265-f331-43cb-812c-2c63d419faa8",
+      "entityName": "csx-sunil-test",
+      "usage": 2.94
+     },
+     {
+      "entityId": "fb9fb11b-10a1-438f-9a16-eb3652ab02f8",
+      "entityName": "csx-performance-test",
+      "usage": 2.442
+     }
+    ]
+   }
+  }
+ },
+ "8fff8757-1656-4d09-80c3-ccedc3302ef8": {
+  "name": "DAI R SDE",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 0,
+    "foc": false,
+    "entities": []
+   },
+   "phase2_period": {
+    "totalUsage": 0,
+    "foc": false,
+    "entities": []
+   },
+   "woop_sept": {
+    "totalUsage": 0,
+    "foc": false,
+    "entities": []
+   },
+   "woop_period": {
+    "totalUsage": 0,
+    "foc": false,
+    "entities": []
+   }
+  }
+ },
+ "9422d16a-1054-4028-b532-d1bbf0f83cc5": {
+  "name": "FT FDS CES",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 0.008,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "dd0b548e-f6e0-4b50-b14c-13b2cc26ba48",
+      "entityName": "iemc-cluster-dev",
+      "usage": 0.008
+     }
+    ]
+   },
+   "phase2_period": {
+    "totalUsage": 0.008,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "dd0b548e-f6e0-4b50-b14c-13b2cc26ba48",
+      "entityName": "iemc-cluster-dev",
+      "usage": 0.008
+     }
+    ]
+   },
+   "woop_sept": {
+    "totalUsage": 0.07400000000000001,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "dd0b548e-f6e0-4b50-b14c-13b2cc26ba48",
+      "entityName": "iemc-cluster-dev",
+      "usage": 0.07400000000000001
+     }
+    ]
+   },
+   "woop_period": {
+    "totalUsage": 0.07400000000000001,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "dd0b548e-f6e0-4b50-b14c-13b2cc26ba48",
+      "entityName": "iemc-cluster-dev",
+      "usage": 0.07400000000000001
+     }
+    ]
+   }
+  }
+ },
+ "2b9d9744-f37d-4a22-b9c6-2f1857a5417d": {
+  "name": "IT DF COL UC 2",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 0,
+    "foc": false,
+    "entities": []
+   },
+   "phase2_period": {
+    "totalUsage": 3.013,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "36575565-7149-431b-b5f6-71f43f18ef3f",
+      "entityName": "siemenstest-siemenstest-1",
+      "usage": 3.013
+     }
+    ]
+   },
+   "woop_sept": {
+    "totalUsage": 2.178,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "36575565-7149-431b-b5f6-71f43f18ef3f",
+      "entityName": "siemenstest-siemenstest-1",
+      "usage": 2.178
+     }
+    ]
+   },
+   "woop_period": {
+    "totalUsage": 7.798000000000002,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "36575565-7149-431b-b5f6-71f43f18ef3f",
+      "entityName": "siemenstest-siemenstest-1",
+      "usage": 7.798000000000002
+     }
+    ]
+   }
+  }
+ },
+ "3d956ed7-719e-4438-99b6-7aa2a62c425b": {
+  "name": "CYS - CNAPP",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 9.228999999999997,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "95bf32c8-ced4-4a81-9665-f3c6278f5f57",
+      "entityName": "wiz-outpost-lite",
+      "usage": 9.228999999999997
+     }
+    ]
+   },
+   "phase2_period": {
+    "totalUsage": 8.734,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "95bf32c8-ced4-4a81-9665-f3c6278f5f57",
+      "entityName": "wiz-outpost-lite",
+      "usage": 8.734
+     }
+    ]
+   },
+   "woop_sept": {
+    "totalUsage": 9.229000000000001,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "95bf32c8-ced4-4a81-9665-f3c6278f5f57",
+      "entityName": "wiz-outpost-lite",
+      "usage": 9.229000000000001
+     }
+    ]
+   },
+   "woop_period": {
+    "totalUsage": 8.734,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "95bf32c8-ced4-4a81-9665-f3c6278f5f57",
+      "entityName": "wiz-outpost-lite",
+      "usage": 8.734
+     }
+    ]
+   }
+  }
+ },
+ "74f0fa85-eab8-4d16-b229-73d7e9e43337": {
+  "name": "FT-FT RPD CED SSI-IIP",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 3.99,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "62aa894c-1d41-4a7a-98ed-e181e289e173",
+      "entityName": "CDM-EKS-Cluster",
+      "usage": 3.99
+     }
+    ]
+   },
+   "phase2_period": {
+    "totalUsage": 3.93,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "62aa894c-1d41-4a7a-98ed-e181e289e173",
+      "entityName": "CDM-EKS-Cluster",
+      "usage": 3.93
+     }
+    ]
+   },
+   "woop_sept": {
+    "totalUsage": 2.056,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "62aa894c-1d41-4a7a-98ed-e181e289e173",
+      "entityName": "CDM-EKS-Cluster",
+      "usage": 2.056
+     }
+    ]
+   },
+   "woop_period": {
+    "totalUsage": 0.061,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "62aa894c-1d41-4a7a-98ed-e181e289e173",
+      "entityName": "CDM-EKS-Cluster",
+      "usage": 0.061
+     }
+    ]
+   }
+  }
+ },
+ "ad02d1f6-14e2-4fbe-bb90-469b71335755": {
+  "name": "DI FA DSP - DPP",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 0,
+    "foc": false,
+    "entities": []
+   },
+   "phase2_period": {
+    "totalUsage": 0.469,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "b2ffa852-cc83-42d7-afd2-cb842f9310d5",
+      "entityName": "bp-dev",
+      "usage": 0.469
+     }
+    ]
+   },
+   "woop_sept": {
+    "totalUsage": 0,
+    "foc": false,
+    "entities": []
+   },
+   "woop_period": {
+    "totalUsage": 0.469,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "b2ffa852-cc83-42d7-afd2-cb842f9310d5",
+      "entityName": "bp-dev",
+      "usage": 0.469
+     }
+    ]
+   }
+  }
+ },
+ "8ee5e5ee-b336-4faa-a484-3f822237d189": {
+  "name": "DI SW PLM DM DDM",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 0,
+    "foc": false,
+    "entities": []
+   },
+   "phase2_period": {
+    "totalUsage": 0,
+    "foc": false,
+    "entities": []
+   },
+   "woop_sept": {
+    "totalUsage": 0,
+    "foc": false,
+    "entities": []
+   },
+   "woop_period": {
+    "totalUsage": 0,
+    "foc": false,
+    "entities": []
+   }
+  }
+ },
+ "82534a6e-c2fc-4fd5-ab88-4326966e37fb": {
+  "name": "DI SW PRS AMER SLC",
+  "features": {
+   "phase2_sept": {
+    "totalUsage": 39.989999999999974,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "893e4362-bb07-417a-b53c-f9b011b4240d",
+      "entityName": "Posit",
+      "usage": 39.989999999999974
+     }
+    ]
+   },
+   "phase2_period": {
+    "totalUsage": 39.344999999999985,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "893e4362-bb07-417a-b53c-f9b011b4240d",
+      "entityName": "Posit",
+      "usage": 39.344999999999985
+     }
+    ]
+   },
+   "woop_sept": {
+    "totalUsage": 39.989999999999974,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "893e4362-bb07-417a-b53c-f9b011b4240d",
+      "entityName": "Posit",
+      "usage": 39.989999999999974
+     }
+    ]
+   },
+   "woop_period": {
+    "totalUsage": 39.34499999999998,
+    "foc": false,
+    "entities": [
+     {
+      "entityId": "893e4362-bb07-417a-b53c-f9b011b4240d",
+      "entityName": "Posit",
+      "usage": 39.34499999999998
+     }
+    ]
+   }
+  }
+ }
+}
