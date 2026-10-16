@@ -895,6 +895,354 @@ app.get('/api/export/savings-potential.xlsx', async (req, res) => {
   res.send(Buffer.from(buffer));
 });
 
+// --- Organization structure overview (enterprise / child orgs / users) ----
+//
+// GET /api/org-overview
+// Aggregates, read-only, the CAST AI organization-management data that backs
+// the console's Enterprise views (docs.cast.ai/docs/organization-management,
+// /enterprise-organizations, /how-to-manage-child-organizations,
+// /how-to-manage-enterprise-users):
+//   - Organizations table: per (child) org counts of users, user groups,
+//     role bindings, connected clusters, and the creation date.
+//   - Users table: every user across the enterprise, deduplicated, with auth
+//     method (SSO vs email/password), organization tags, and last activity.
+//   - User groups with member counts.
+//   - SSO connections (sanitized: client secrets never leave the server).
+//   - Platform usage report (Node/Workload Autoscaler CPU usage).
+// The full fan-out costs ~(orgs x 4) upstream GETs, so the assembled payload
+// is cached for ORG_OVERVIEW_CACHE_TTL_MS (default 5 minutes). Pass
+// ?refresh=1 to bypass the cache.
+
+const ORG_OVERVIEW_CACHE_TTL_MS = (() => {
+  const raw = process.env.DASHBOARD_ORG_CACHE_TTL_MS;
+  const parsed = raw == null ? NaN : Number(raw);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : 300_000;
+})();
+
+const ORG_TYPE_ENTERPRISE = 'ORGANIZATION_TYPE_ENTERPRISE';
+
+// Recursively drop any key that could carry a secret (SSO connections return
+// an `aad.clientSecret` hash). Applied to anything SSO/auth related before it
+// is cached or sent to the browser.
+function stripSecrets(value) {
+  if (Array.isArray(value)) return value.map(stripSecrets);
+  if (value && typeof value === 'object') {
+    const out = {};
+    for (const [key, val] of Object.entries(value)) {
+      if (/secret|password|token|credential|privatekey/i.test(key)) continue;
+      out[key] = stripSecrets(val);
+    }
+    return out;
+  }
+  return value;
+}
+
+// Console shows Auth as "SSO" or "Email". CAST AI's authProvider is "auth0"
+// for database (email/password) accounts and the IdP connection type for SSO.
+function describeAuth(authProvider) {
+  const p = typeof authProvider === 'string' ? authProvider : '';
+  if (p === '' || p === 'auth0') {
+    return { auth: 'Email/password', ssoProvider: null };
+  }
+  const providers = {
+    waad: 'Microsoft Entra ID',
+    'google-apps': 'Google Workspace',
+    adfs: 'ADFS',
+    okta: 'Okta',
+    samlp: 'SAML',
+    oidc: 'OIDC',
+  };
+  return { auth: 'SSO', ssoProvider: providers[p] || p };
+}
+
+async function buildOrgRow(org, kind, probeNote) {
+  const orgId = String(org.id);
+  const row = {
+    id: orgId,
+    name: String(org.name),
+    kind, // 'enterprise' | 'child' | 'standalone'
+    createdAt: org.createdAt != null ? String(org.createdAt) : null,
+    users: null,
+    userGroups: null,
+    roleBindings: null,
+    clusters: null,
+    usersList: [],
+    groupsList: [],
+    errors: [],
+  };
+
+  try {
+    const payload = await castaiGet(`/v1/organizations/${encodeURIComponent(orgId)}/users`, orgId);
+    const list = payload && Array.isArray(payload.users) ? payload.users : [];
+    row.users = list.length;
+    row.usersList = list;
+  } catch (err) {
+    row.errors.push('users');
+    probeNote(row.name, 'users', err);
+  }
+
+  try {
+    const payload = await castaiGet(`/v1/organizations/${encodeURIComponent(orgId)}/groups`, orgId);
+    const list = payload && Array.isArray(payload.groups) ? payload.groups : [];
+    row.userGroups = list.length;
+    row.groupsList = list.map((g) => ({
+      id: g && g.id != null ? String(g.id) : null,
+      name: g && g.name != null ? String(g.name) : null,
+      description: g && g.description != null ? String(g.description) : '',
+      organizationId: orgId,
+      organizationName: row.name,
+      members: g && g.definition && Array.isArray(g.definition.members)
+        ? g.definition.members.length
+        : 0,
+      createdAt: g && g.createdAt != null ? String(g.createdAt) : null,
+    }));
+  } catch (err) {
+    row.errors.push('groups');
+    probeNote(row.name, 'groups', err);
+  }
+
+  try {
+    const payload = await castaiGet(`/v1/organizations/${encodeURIComponent(orgId)}/role-bindings`, orgId);
+    const list = payload && Array.isArray(payload.roleBindings) ? payload.roleBindings : [];
+    row.roleBindings = list.length;
+  } catch (err) {
+    row.errors.push('role-bindings');
+    probeNote(row.name, 'role-bindings', err);
+  }
+
+  try {
+    const payload = await castaiGet('/v1/kubernetes/external-clusters', orgId);
+    row.clusters = extractItems(payload).length;
+  } catch (err) {
+    row.errors.push('clusters');
+    probeNote(row.name, 'clusters', err);
+  }
+
+  return row;
+}
+
+function aggregateUsers(rows) {
+  // One user can belong to many child orgs. Key by user id (email fallback),
+  // merge organization tags, keep the most recent loginAt as "last activity".
+  const byKey = new Map();
+  for (const row of rows) {
+    for (const entry of row.usersList) {
+      if (!entry || typeof entry !== 'object') continue;
+      const u = entry.user && typeof entry.user === 'object' ? entry.user : {};
+      const email = u.email != null ? String(u.email) : '';
+      const id = u.id != null ? String(u.id) : '';
+      const key = id || email.toLowerCase();
+      if (key === '') continue;
+
+      const loginAt = entry.loginAt != null ? String(entry.loginAt) : null;
+      const createdAt = entry.createdAt != null ? String(entry.createdAt) : null;
+      const { auth, ssoProvider } = describeAuth(u.authProvider);
+
+      let agg = byKey.get(key);
+      if (!agg) {
+        agg = {
+          id: id || null,
+          name: u.name != null ? String(u.name) : email,
+          email,
+          auth,
+          ssoProvider,
+          organizations: [],
+          orgIds: new Set(),
+          lastActivity: null,
+          createdAt: null,
+        };
+        byKey.set(key, agg);
+      }
+      if (!agg.orgIds.has(row.id)) {
+        agg.orgIds.add(row.id);
+        agg.organizations.push(row.name);
+      }
+      if (loginAt && (!agg.lastActivity || loginAt > agg.lastActivity)) {
+        agg.lastActivity = loginAt;
+      }
+      if (createdAt && (!agg.createdAt || createdAt < agg.createdAt)) {
+        agg.createdAt = createdAt;
+      }
+      // Prefer SSO classification if any org reports an SSO provider.
+      if (agg.auth !== 'SSO' && auth === 'SSO') {
+        agg.auth = 'SSO';
+        agg.ssoProvider = ssoProvider;
+      }
+    }
+  }
+
+  const users = Array.from(byKey.values()).map((agg) => ({
+    id: agg.id,
+    name: agg.name,
+    email: agg.email,
+    auth: agg.auth,
+    ssoProvider: agg.ssoProvider,
+    organizations: agg.organizations.sort((a, b) => a.localeCompare(b)),
+    lastActivity: agg.lastActivity,
+    createdAt: agg.createdAt,
+  }));
+  users.sort((a, b) =>
+    (a.email || a.name).localeCompare(b.email || b.name, undefined, { sensitivity: 'base' }));
+  return users;
+}
+
+async function buildOrgOverview() {
+  const startedAt = Date.now();
+  const errors = [];
+  const note = (orgName, endpoint, err) =>
+    errors.push({ org: orgName, endpoint, status: err && err.status ? err.status : 502 });
+
+  const orgsPayload = await castaiGet('/v1/organizations');
+  const allOrgs = extractOrgs(orgsPayload)
+    .filter((o) => o && o.id != null && o.name != null)
+    .map((o) => ({
+      id: String(o.id),
+      name: String(o.name),
+      type: o.type != null ? String(o.type) : '',
+      parentId: o.parentId != null ? String(o.parentId) : null,
+      createdAt: o.createdAt != null ? String(o.createdAt) : null,
+    }));
+
+  const enterprises = allOrgs.filter((o) => o.type === ORG_TYPE_ENTERPRISE);
+  const enterpriseIds = new Set(enterprises.map((e) => e.id));
+  const standalone = allOrgs.filter((o) => o.parentId == null && !enterpriseIds.has(o.id));
+
+  const enterpriseSections = [];
+  for (const ent of enterprises) {
+    const children = allOrgs.filter((o) => o.parentId === ent.id);
+
+    const rows = await runPooled(
+      [ent, ...children],
+      6,
+      (org) => buildOrgRow(org, org.id === ent.id ? 'enterprise' : 'child', note),
+    );
+
+    // SSO connections + platform usage are enterprise-scoped reads.
+    let ssoConnections = [];
+    try {
+      const payload = await castaiGet('/v1/sso-connections', ent.id);
+      const list = payload && Array.isArray(payload.connections) ? payload.connections : [];
+      ssoConnections = list.map((c) => stripSecrets(c));
+    } catch (err) {
+      note(ent.name, 'sso-connections', err);
+    }
+
+    let platformUsage = { features: [], subscriptions: [] };
+    try {
+      const payload = await castaiGet('/v1/billing/enterprise/platform-usage-report', ent.id);
+      const clean = stripSecrets(payload || {});
+      platformUsage = {
+        features: Array.isArray(clean.features) ? clean.features : [],
+        subscriptions: Array.isArray(clean.subscriptions) ? clean.subscriptions : [],
+      };
+    } catch (err) {
+      note(ent.name, 'platform-usage-report', err);
+    }
+
+    const byId = (a, b) => (a.kind === 'enterprise' ? -1 : b.kind === 'enterprise' ? 1
+      : a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
+    const organizations = rows
+      .map((r) => ({
+        id: r.id,
+        name: r.name,
+        kind: r.kind,
+        createdAt: r.createdAt,
+        users: r.users,
+        userGroups: r.userGroups,
+        roleBindings: r.roleBindings,
+        clusters: r.clusters,
+        errors: r.errors,
+      }))
+      .sort(byId);
+
+    const users = aggregateUsers(rows);
+    const userGroups = rows
+      .flatMap((r) => r.groupsList)
+      .sort((a, b) =>
+        (a.organizationName || '').localeCompare(b.organizationName || '')
+        || (a.name || '').localeCompare(b.name || ''));
+
+    const sum = (field) => rows.reduce((acc, r) => acc + (typeof r[field] === 'number' ? r[field] : 0), 0);
+    enterpriseSections.push({
+      enterprise: {
+        id: ent.id,
+        name: ent.name,
+        createdAt: ent.createdAt,
+      },
+      totals: {
+        childOrganizations: children.length,
+        users: users.length,
+        userGroups: sum('userGroups'),
+        roleBindings: sum('roleBindings'),
+        clusters: sum('clusters'),
+        ssoConnections: ssoConnections.length,
+        ssoActive: ssoConnections.filter((c) => c && c.status === 'STATUS_ACTIVE').length,
+        usersNeverLoggedIn: users.filter((u) => u.lastActivity == null).length,
+      },
+      ssoConnections,
+      platformUsage,
+      organizations,
+      users,
+      userGroups,
+    });
+  }
+
+  const standaloneRows = await runPooled(
+    standalone,
+    6,
+    (org) => buildOrgRow(org, 'standalone', note),
+  );
+  const standaloneOrganizations = standaloneRows
+    .map((r) => ({
+      id: r.id,
+      name: r.name,
+      kind: r.kind,
+      createdAt: r.createdAt,
+      users: r.users,
+      userGroups: r.userGroups,
+      roleBindings: r.roleBindings,
+      clusters: r.clusters,
+      errors: r.errors,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
+
+  return {
+    generatedAt: new Date().toISOString(),
+    buildDurationMs: Date.now() - startedAt,
+    enterprises: enterpriseSections,
+    standaloneOrganizations,
+    errors,
+  };
+}
+
+const ORG_OVERVIEW_CACHE_KEY = '__org-overview__';
+
+let orgOverviewBuildCount = 0; // test instrumentation: real upstream rebuilds
+
+app.get('/api/org-overview', async (req, res) => {
+  if (!getCastaiApiKey()) {
+    return res.status(503).json({ error: 'CASTAI_API_KEY is not configured' });
+  }
+
+  const forceRefresh = req.query.refresh === '1' || req.query.refresh === 'true';
+  if (!forceRefresh) {
+    const cached = cacheGet(ORG_OVERVIEW_CACHE_KEY);
+    if (cached !== undefined) {
+      return res.json(cached);
+    }
+  }
+
+  try {
+    orgOverviewBuildCount += 1;
+    const payload = await buildOrgOverview();
+    cacheSet(ORG_OVERVIEW_CACHE_KEY, payload, ORG_OVERVIEW_CACHE_TTL_MS);
+    res.json(payload);
+  } catch (err) {
+    const status = err && err.status ? err.status : 502;
+    res.status(status).json({ error: 'Failed to build organization overview from CAST AI' });
+  }
+});
+
 // 404 fallback for unknown routes.
 app.use((req, res) => {
   res.status(404).json({ error: 'not found' });
@@ -913,4 +1261,5 @@ if (require.main === module) {
 module.exports = {
   app,
   resetCache,
+  getOrgOverviewBuildCount: () => orgOverviewBuildCount,
 };

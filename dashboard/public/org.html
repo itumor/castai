@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Siemens CAST AI enterprise organization overview: child organizations, users, user groups, role bindings, SSO and platform usage." />
+  <title>Org &amp; Users — Siemens CAST AI Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-header__brand">
+      <span class="app-header__logo" aria-hidden="true">SI</span>
+      <div class="app-header__titles">
+        <h1 class="app-header__title">Siemens CAST AI — Org Structure</h1>
+        <p class="app-header__subtitle">Enterprise organizations, users, groups, SSO and platform usage</p>
+      </div>
+    </div>
+    <nav class="app-nav" aria-label="Views">
+      <a class="app-nav__link" href="index.html">Fleet</a>
+      <a class="app-nav__link" href="savings.html">Savings Explorer</a>
+      <a class="app-nav__link app-nav__link--active" href="org.html" aria-current="page">Org &amp; Users</a>
+    </nav>
+    <div class="app-header__actions">
+      <span id="last-updated" class="last-updated" aria-live="polite"></span>
+      <button id="refresh-btn" class="btn btn--primary" type="button" aria-label="Refresh organization data (bypasses cache)">
+        <span class="btn__icon" aria-hidden="true">&#x21BB;</span>
+        <span class="btn__label">Refresh</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <div id="error-banner" class="error-banner" role="alert" hidden>
+      <span class="error-banner__icon" aria-hidden="true">!</span>
+      <span id="error-banner__message" class="error-banner__message"></span>
+      <button id="error-banner__dismiss" class="error-banner__dismiss" type="button" aria-label="Dismiss error">&times;</button>
+    </div>
+
+    <div id="loading" class="loading" hidden>
+      <div class="loading__spinner" aria-hidden="true"></div>
+      <span id="loading-label" class="loading__label">
+        Building organization overview&hellip; first load fans out across every
+        child organization and can take up to a minute.
+      </span>
+    </div>
+
+    <div id="overview-root" hidden>
+      <!-- KPI summary -->
+      <section aria-label="Enterprise summary">
+        <div id="kpi-grid" class="kpi-grid"></div>
+      </section>
+
+      <!-- SSO connections -->
+      <section class="org-section" aria-label="Single sign-on">
+        <h2 class="org-section__title">Single sign-on</h2>
+        <div id="sso-cards" class="sso-cards"></div>
+        <p id="sso-empty" class="org-section__note" hidden>No SSO connections configured.</p>
+      </section>
+
+      <!-- Platform usage -->
+      <section class="org-section" aria-label="Platform usage">
+        <h2 class="org-section__title">Platform usage</h2>
+        <div id="usage-cards" class="usage-cards"></div>
+        <p id="usage-empty" class="org-section__note" hidden>No platform usage data returned.</p>
+      </section>
+
+      <!-- Child organizations table -->
+      <section class="org-section" aria-label="Organizations">
+        <div class="org-section__header">
+          <h2 class="org-section__title">Organizations</h2>
+          <input id="org-filter" class="table-filter" type="search" placeholder="Filter organizations&hellip;" aria-label="Filter organizations" />
+        </div>
+        <div class="table-scroll">
+          <table id="org-table" class="org-table">
+            <thead>
+              <tr>
+                <th data-sort="name" scope="col">Organization</th>
+                <th data-sort="users" scope="col">Users</th>
+                <th data-sort="userGroups" scope="col">User groups</th>
+                <th data-sort="roleBindings" scope="col">Role bindings</th>
+                <th data-sort="clusters" scope="col">Clusters</th>
+                <th data-sort="createdAt" scope="col">Created</th>
+              </tr>
+            </thead>
+            <tbody id="org-tbody"></tbody>
+          </table>
+        </div>
+        <p id="org-table-meta" class="org-section__note"></p>
+      </section>
+
+      <!-- Users table -->
+      <section class="org-section" aria-label="Users">
+        <div class="org-section__header">
+          <h2 class="org-section__title">Users</h2>
+          <div class="org-section__tools">
+            <select id="user-auth-filter" class="table-filter" aria-label="Filter by authentication method">
+              <option value="">All auth methods</option>
+              <option value="SSO">SSO</option>
+              <option value="Email/password">Email/password</option>
+            </select>
+            <input id="user-filter" class="table-filter" type="search" placeholder="Search name or email&hellip;" aria-label="Search users" />
+            <button id="users-csv-btn" class="btn" type="button">Export CSV</button>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table id="user-table" class="org-table">
+            <thead>
+              <tr>
+                <th data-sort="name" scope="col">Name</th>
+                <th data-sort="email" scope="col">Email</th>
+                <th data-sort="auth" scope="col">Auth</th>
+                <th scope="col">Organization</th>
+                <th data-sort="lastActivity" scope="col">Last activity</th>
+              </tr>
+            </thead>
+            <tbody id="user-tbody"></tbody>
+          </table>
+        </div>
+        <p id="user-table-meta" class="org-section__note"></p>
+      </section>
+
+      <!-- User groups table -->
+      <section class="org-section" aria-label="User groups">
+        <div class="org-section__header">
+          <h2 class="org-section__title">User groups</h2>
+        </div>
+        <div class="table-scroll">
+          <table id="group-table" class="org-table">
+            <thead>
+              <tr>
+                <th data-sort="name" scope="col">Group</th>
+                <th data-sort="organizationName" scope="col">Organization</th>
+                <th data-sort="members" scope="col">Members</th>
+                <th data-sort="createdAt" scope="col">Created</th>
+              </tr>
+            </thead>
+            <tbody id="group-tbody"></tbody>
+          </table>
+        </div>
+        <p id="group-table-meta" class="org-section__note"></p>
+      </section>
+
+      <!-- Other organizations outside the enterprise -->
+      <section id="standalone-section" class="org-section" aria-label="Other organizations" hidden>
+        <h2 class="org-section__title">Other organizations accessible to this API key</h2>
+        <p class="org-section__note">Standalone organizations that are not part of the enterprise hierarchy.</p>
+        <div class="table-scroll">
+          <table id="standalone-table" class="org-table">
+            <thead>
+              <tr>
+                <th scope="col">Organization</th>
+                <th scope="col">Users</th>
+                <th scope="col">User groups</th>
+                <th scope="col">Role bindings</th>
+                <th scope="col">Clusters</th>
+                <th scope="col">Created</th>
+              </tr>
+            </thead>
+            <tbody id="standalone-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Partial-failure details -->
+      <section id="errors-section" class="org-section" aria-label="Data collection issues" hidden>
+        <h2 class="org-section__title">Data collection issues</h2>
+        <p class="org-section__note">Some upstream reads failed; the affected counts are marked as &ldquo;&mdash;&rdquo;.</p>
+        <ul id="errors-list" class="errors-list"></ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <span>Siemens CAST AI Dashboard</span>
+    <span class="app-footer__sep" aria-hidden="true">&middot;</span>
+    <span>Read-only view of CAST AI organization management data.</span>
+  </footer>
+
+  <script src="org.js" defer></script>
+</body>
+</html>

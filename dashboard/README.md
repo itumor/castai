@@ -47,6 +47,46 @@ snapshot-only) and `orgId` (single-org export). Snapshot scenario keys
 (`SpotOnly`) are normalized against history keys (`optimizedSpotOnly`) before
 medians are joined.
 
+## Org & Users (enterprise organization structure)
+
+A third view at `public/org.html` mirrors the CAST AI console's enterprise
+organization-management views
+([organization-management](https://docs.cast.ai/docs/organization-management),
+[enterprise-organizations](https://docs.cast.ai/docs/enterprise-organizations),
+[child organizations](https://docs.cast.ai/docs/how-to-manage-child-organizations),
+[enterprise users](https://docs.cast.ai/docs/how-to-manage-enterprise-users))
+for the Siemens AG enterprise (`api.eu.cast.ai`):
+
+- **KPI cards**: child organizations, unique users, user groups, role
+  bindings, connected clusters, active SSO connections, users that never
+  logged in.
+- **Single sign-on**: SSO connections (name, status, IdP type, email domains,
+  sync state, creation date). The upstream response embeds an IdP
+  `clientSecret`; the backend strips every key matching
+  `/secret|password|token|credential/i` before caching or responding, so
+  secrets never reach the browser.
+- **Platform usage**: per-feature billing usage (e.g. Node Autoscaler,
+  Workload Autoscaler CPU).
+- **Organizations table** — one row per enterprise/child org with
+  *Users, User groups, Role bindings, Clusters, Created* (same columns as
+  the CAST AI console), plus partial-data badges when an org-scoped probe
+  fails. Standalone orgs outside the hierarchy get their own table.
+- **Users table** — every user across the enterprise, deduplicated by user
+  id, with *Name, Email, Auth (SSO vs Email/password — `auth0` = database
+  accounts, anything else is an SSO connection), Organization tags, Last
+  activity* (max `loginAt` across org memberships). Search, auth filter,
+  sortable columns, CSV export. Activity older than 90 days (or never) is
+  highlighted.
+- **User groups table** — group, organization, member count, created.
+
+Backend endpoint: `GET /api/org-overview` builds the whole payload with a
+bounded fan-out (6 in flight) of read-only GETs
+(`/v1/organizations`, `/users`, `/groups`, `/role-bindings`,
+`/v1/kubernetes/external-clusters` per org, `/v1/sso-connections`,
+`/v1/billing/enterprise/platform-usage-report`). First build takes ~30–60 s
+for ~130 orgs; the payload is cached for `DASHBOARD_ORG_CACHE_TTL_MS`
+(default `300000` = 5 min); `?refresh=1` rebuilds.
+
 Backend proxy notes (verified live 2026-09-27):
 
 - The upstream history endpoint requires **RFC3339** date-times; plain

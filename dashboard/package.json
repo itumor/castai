@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "node --test test/server.test.js test/ui.test.js test/savings-ui.test.js"
+    "test": "node --test test/server.test.js test/ui.test.js test/savings-ui.test.js test/org-overview.test.js test/org-ui.test.js"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
